@@ -10,19 +10,30 @@
           "type": "text"
         },
         {
-          "name": "TipoDeTramiteApertura",
-          "label": "Apertura",
-          "type": "checkbox"
+          "name": "TipoDeTramite",
+          "label": "Tipo de Trámite",
+          "type": "button-group",
+          "options": ["Apertura", "Actualización", "Incorporación"],
+          "default": "Apertura"
         },
         {
-          "name": "TipoDeTramiteActualizacion",
-          "label": "Actualización",
-          "type": "checkbox"
+          "name": "SujetoObligado",
+          "label": "Sujeto Obligado",
+          "type": "checkbox",
+          "default": false
         },
         {
-          "name": "TipoDeTramiteIncorporacion",
-          "label": "Incorporación",
-          "type": "checkbox"
+          "name": "TramiteFecha",
+          "label": "Fecha de Trámite",
+          "type": "date",
+          "default": "today"
+        },
+        {
+          "name": "UsoDeFirma",
+          "label": "Uso de Firma",
+          "type": "button-group",
+          "options": ["Indistinta", "Conjunta"],
+          "default": "Indistinta"
         }
       ]
     },

@@ -24,9 +24,23 @@ const iconMap = {
 };
 
 function WizardForm() {
-  const [formData, setFormData] = useState({});
-  const [stepIndex, setStepIndex] = useState(0);
+  // 🔹 Inicializar formData con defaults desde JSON
+  const [formData, setFormData] = useState(() => {
+    const initial = {};
+    formConfig.steps.forEach((step) => {
+      step.fields.forEach((field) => {
+        if (field.default !== undefined) {
+          initial[field.name] =
+            field.default === "today"
+              ? new Date().toISOString().split("T")[0]
+              : field.default;
+        }
+      });
+    });
+    return initial;
+  });
 
+  const [stepIndex, setStepIndex] = useState(0);
   const currentStep = formConfig.steps[stepIndex];
 
   const handleChange = (name, value) => {
@@ -35,7 +49,8 @@ function WizardForm() {
 
   const renderField = (field) => {
     const value =
-      formData[field.name] || (field.type === "checkbox" ? false : "");
+      formData[field.name] ?? (field.type === "checkbox" ? false : "");
+
     switch (field.type) {
       case "text":
       case "email":
@@ -49,7 +64,7 @@ function WizardForm() {
               type={field.type}
               value={value}
               onChange={(e) => handleChange(field.name, e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded focus:border-allaria-blue focus:ring-1 focus:ring-gray-200"
+              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-300"
             />
           </div>
         );
@@ -63,6 +78,30 @@ function WizardForm() {
               className="h-4 w-4 text-allaria-blue border-gray-300 rounded"
             />
             <span>{field.label}</span>
+          </div>
+        );
+      case "button-group":
+        return (
+          <div className="mb-4" key={field.name}>
+            <label className="block text-allaria-light-blue mb-2">
+              {field.label}
+            </label>
+            <div className="flex space-x-2">
+              {field.options.map((option) => (
+                <button
+                  type="button"
+                  key={option}
+                  onClick={() => handleChange(field.name, option)}
+                  className={`px-4 py-2 rounded-lg border transition ${
+                    value === option
+                      ? "bg-allaria-light-blue text-white border-allaria-light-blue"
+                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
           </div>
         );
       default:
@@ -92,12 +131,11 @@ function WizardForm() {
                 <li
                   key={idx}
                   onClick={() => setStepIndex(idx)}
-                  className={`cursor-pointer px-5 py-3 mb-2 flex items-center transition
-    border-l-4 border-transparent ${
-      isActive
-        ? "bg-allaria-light-blue text-blue-100 font-semibold border-allaria-light-blue"
-        : "hover:bg-allaria-light-blue/50 text-blue-200"
-    }`}
+                  className={`cursor-pointer px-5 py-3 mb-2 flex items-center transition border-l-4 border-transparent ${
+                    isActive
+                      ? "bg-allaria-light-blue text-blue-100 font-semibold border-allaria-light-blue"
+                      : "hover:bg-allaria-light-blue/50 text-blue-200"
+                  }`}
                 >
                   {step.icon && (
                     <CIcon icon={iconMap[step.icon]} className="w-5 h-5 mr-3" />
