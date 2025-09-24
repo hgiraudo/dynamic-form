@@ -1,3 +1,5 @@
+import { formatDateDDMMYYYY } from "./utils";
+
 // Mapper para el tipo de trámite
 export const tipoDeTramiteMapper = (formData) => {
   const result = {
@@ -36,6 +38,14 @@ export const usoDeFirmaMapper = (formData) => {
   return { ...formData, ...result };
 };
 
+export const sujetoObligadoMapper = (formData) => {
+  const mapped = { ...formData };
+  if ("SujetoObligado" in formData) {
+    mapped.SujetoObligado = formData.SujetoObligado ? "/" : "";
+  }
+  return mapped;
+};
+
 export const fechaTramiteMapper = (formData) => {
   const mapped = { ...formData };
   if (formData.TramiteFecha) {
@@ -45,11 +55,21 @@ export const fechaTramiteMapper = (formData) => {
   return mapped;
 };
 
-// Función utilitaria para formatear fechas en dd-mm-yyyy
-export const formatDateDDMMYYYY = (date) => {
-  if (!(date instanceof Date)) return ""; // protección
-  const dd = String(date.getDate()).padStart(2, "0");
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
-  const yyyy = date.getFullYear();
-  return `${dd}-${mm}-${yyyy}`;
+// 📨 Mapper genérico para correos electrónicos
+export const emailMapper = (formData, fieldName) => {
+  const newData = { ...formData };
+
+  const index = fieldName.replace("CorreoElectronico", ""); // 1,2,3,...
+  const value = formData[fieldName];
+
+  if (value && value.includes("@")) {
+    const [usuario, dominio] = value.split("@");
+    newData[`CorreoElectronicoUsuario${index}`] = usuario;
+    newData[`CorreoElectronicoDominio${index}`] = dominio;
+  }
+
+  // opcional: eliminamos el campo original
+  // delete newData[fieldName];
+
+  return newData;
 };

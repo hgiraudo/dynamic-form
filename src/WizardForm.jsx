@@ -3,6 +3,7 @@ import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
 import formConfig from "./formConfig.json";
 import * as fieldMappers from "./fieldMappers";
+import { formatDateDDMMYYYY } from "./utils";
 
 function WizardForm() {
   // Inicialización de formData con valores por defecto
@@ -36,16 +37,21 @@ function WizardForm() {
 
   const getMappedFormData = () => {
     let mappedData = { ...formData };
+
     formConfig.steps.forEach((step) => {
       step.fields.forEach((field) => {
         if (field.mapper) {
           const mapperFn = fieldMappers[field.mapper];
           if (mapperFn) {
-            mappedData = mapperFn(mappedData);
+            mappedData = mapperFn(mappedData, field.name);
           }
+        } else if (field.type === "date" && mappedData[field.name]) {
+          // Solo formatear si NO hay mapper
+          mappedData[field.name] = formatDateDDMMYYYY(mappedData[field.name]);
         }
       });
     });
+
     return mappedData;
   };
 
@@ -70,11 +76,13 @@ function WizardForm() {
             <input
               type={field.type}
               value={value}
+              placeholder={field.placeholder || ""}
               onChange={(e) => handleChange(field.name, e.target.value)}
               className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-300"
             />
           </div>
         );
+
       case "checkbox":
         return (
           <div className="mb-4 flex items-center space-x-2" key={field.name}>
@@ -87,6 +95,7 @@ function WizardForm() {
             <span>{field.label}</span>
           </div>
         );
+
       case "button-group":
         return (
           <div className="mb-4" key={field.name}>
@@ -111,6 +120,7 @@ function WizardForm() {
             </div>
           </div>
         );
+
       default:
         return null;
     }

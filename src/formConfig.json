@@ -21,7 +21,8 @@
           "name": "SujetoObligado",
           "label": "Sujeto Obligado",
           "type": "checkbox",
-          "default": false
+          "default": false,
+          "mapper": "sujetoObligadoMapper"
         },
         {
           "name": "TramiteFecha",
@@ -44,15 +45,103 @@
       "title": "Razón Social",
       "icon": "cilFactory",
       "fields": [
-        { "name": "RazonSocial", "label": "Razón Social", "type": "text" },
-        { "name": "CUIT", "label": "CUIT", "type": "text" },
+        {
+          "name": "RazonSocial",
+          "label": "Razón Social",
+          "type": "text",
+          "placeholder": "ej. Arroyito S.A."
+        },
+        {
+          "name": "CUIT",
+          "label": "CUIT",
+          "type": "text",
+          "placeholder": "XX-XXXXXXXX-X"
+        },
         {
           "name": "FechaDeConstitucion",
           "label": "Fecha de Constitución",
-          "type": "date"
+          "type": "date",
+          "default": "2001-01-01"
+        },
+        {
+          "name": "FechaDeInscripcion",
+          "label": "Fecha de Inscripción",
+          "type": "date",
+          "default": "2001-01-01"
+        },
+        {
+          "name": "LugarDeInscripcion",
+          "label": "Lugar de Inscripción",
+          "type": "text"
+        },
+        {
+          "name": "NumeroDeInscripcion",
+          "label": "Número de Inscripción",
+          "type": "text"
+        },
+        {
+          "name": "DomicilioAdministracion",
+          "label": "Domicilio de Administración",
+          "type": "text"
+        },
+        {
+          "name": "DomicilioComercial",
+          "label": "Domicilio Comercial",
+          "type": "text"
+        },
+        {
+          "name": "ActividadPrincipal",
+          "label": "Actividad Principal",
+          "type": "text"
+        },
+        { "name": "Telefono", "label": "Teléfono", "type": "text" },
+        {
+          "name": "CorreoElectronico1",
+          "label": "Correo electrónico 1",
+          "type": "email",
+          "mapper": "emailMapper"
+        },
+        {
+          "name": "CorreoElectronico2",
+          "label": "Correo electrónico 2",
+          "type": "email",
+          "mapper": "emailMapper"
+        },
+        {
+          "name": "CorreoElectronico3",
+          "label": "Correo electrónico 3",
+          "type": "email",
+          "mapper": "emailMapper"
+        },
+
+        {
+          "name": "Accionistas",
+          "label": "Accionistas / Propietarios",
+          "type": "textarea"
+        },
+        {
+          "name": "BeneficiarioFinal",
+          "label": "Beneficiario Final / Controlante",
+          "type": "textarea"
+        },
+        {
+          "name": "CondicionAnteIVA",
+          "label": "Condición ante el IVA",
+          "type": "text"
+        },
+        {
+          "name": "CondicionAnteGanancias",
+          "label": "Condición ante Ganancias",
+          "type": "text"
+        },
+        {
+          "name": "CondicionAnteIIBB",
+          "label": "Condición ante IIBB",
+          "type": "text"
         }
       ]
     },
+
     {
       "title": "Datos Personales",
       "icon": "cilUser",
