@@ -351,7 +351,95 @@
     {
       "title": "Firmantes",
       "icon": "cilPeople",
-      "fields": [{ "name": "Firmante1", "label": "Firmante 1", "type": "text" }]
+      "fields": [
+        {
+          "name": "Firmante1Apellido",
+          "label": "Apellido del Representante",
+          "type": "text",
+          "disabled": true
+        },
+        {
+          "name": "Firmante1Nombre",
+          "label": "Nombre Completo del Representante",
+          "type": "text",
+          "disabled": true
+        },
+        {
+          "name": "Firmante1Email",
+          "label": "Correo del Representante",
+          "type": "email",
+          "disabled": true
+        },
+        {
+          "name": "CertificadoRep1",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox"
+        },
+        {
+          "name": "VerificacionRep1",
+          "label": "Verificar identidad con documento y prueba de vida",
+          "type": "checkbox"
+        },
+        {
+          "name": "SmsRep1",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": { "field": "SmsRep1", "value": true },
+          "placeholder": "+54 9 11 1234-5678"
+        },
+
+        {
+          "name": "Firmante2Apellido",
+          "label": "Apellido del Representante 2",
+          "type": "text",
+          "disabled": true,
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "Firmante2Nombre",
+          "label": "Nombre Completo del Representante 2",
+          "type": "text",
+          "disabled": true,
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "Firmante2Email",
+          "label": "Correo del Representante 2",
+          "type": "email",
+          "disabled": true,
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "CertificadoRep2",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "VerificacionRep2",
+          "label": "Verificar identidad con documento y prueba de vida",
+          "type": "checkbox",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "SmsRep2",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteTelefono2",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": { "field": "SmsRep2", "value": true },
+          "placeholder": "+54 9 11 1234-5678"
+        }
+      ]
     },
     {
       "title": "Revisión",
