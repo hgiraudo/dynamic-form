@@ -65,6 +65,11 @@ function WizardForm() {
   };
 
   const renderField = (field) => {
+    // Si tiene condicion de visibilidad
+    if (field.visibleIf) {
+      const { field: depField, value } = field.visibleIf;
+      if (formData[depField] !== value) return null;
+    }
     let value = formData[field.name];
     if (value === undefined) {
       value =

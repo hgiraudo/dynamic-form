@@ -142,20 +142,196 @@
         }
       ]
     },
-
     {
       "title": "Datos Personales",
       "icon": "cilUser",
       "fields": [
+        {
+          "name": "RepresentanteApellido1",
+          "label": "Apellido del Representante",
+          "type": "text"
+        },
         {
           "name": "RepresentanteNombre1",
           "label": "Nombre del Representante",
           "type": "text"
         },
         {
-          "name": "RepresentanteApellido1",
-          "label": "Apellido del Representante",
+          "name": "RepresentanteDNI1",
+          "label": "DNI / LE / LC del Representante",
           "type": "text"
+        },
+        {
+          "name": "RepresentantePasaporte1",
+          "label": "Pasaporte / CI extranjeros del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteNacionalidad1",
+          "label": "Nacionalidad del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteLugarDeNacimiento1",
+          "label": "Lugar de Nacimiento del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteFechaDeNacimiento1",
+          "label": "Fecha de Nacimiento del Representante",
+          "type": "date",
+          "default": "2001-01-01"
+        },
+        {
+          "name": "RepresentanteCUIT1",
+          "label": "CUIT / CUIL del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Teléfono del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteEmail1",
+          "label": "Correo Electrónico del Representante",
+          "type": "email"
+        },
+        {
+          "name": "RepresentanteDomicilio1",
+          "label": "Domicilio del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteActividad1",
+          "label": "Actividad / Profesión / Oficio / Industria del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteEstadoCivil1",
+          "label": "Estado Civil del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteCargo1",
+          "label": "Cargo en la Sociedad del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteVencimiento1",
+          "label": "Vencimiento en el Cargo del Representante",
+          "type": "date",
+          "default": "2001-01-01"
+        },
+        {
+          "name": "RepresentanteNuevoVencimiento1",
+          "label": "Nuevo Vencimiento en el Cargo del Representante",
+          "type": "date",
+          "default": "2001-01-01"
+        },
+        {
+          "name": "tieneRep2",
+          "label": "¿Agregar un segundo representante?",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteApellido2",
+          "label": "Apellido del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteNombre2",
+          "label": "Nombre del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteDNI2",
+          "label": "DNI / LE / LC del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentantePasaporte2",
+          "label": "Pasaporte / CI extranjeros del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteNacionalidad2",
+          "label": "Nacionalidad del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteLugarDeNacimiento2",
+          "label": "Lugar de Nacimiento del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteFechaDeNacimiento2",
+          "label": "Fecha de Nacimiento del Representante 2",
+          "type": "date",
+          "default": "2001-01-01",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteCUIT2",
+          "label": "CUIT / CUIL del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteTelefono2",
+          "label": "Teléfono del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteEmail2",
+          "label": "Correo Electrónico del Representante 2",
+          "type": "email",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteDomicilio2",
+          "label": "Domicilio del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteActividad2",
+          "label": "Actividad / Profesión / Oficio / Industria del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteEstadoCivil2",
+          "label": "Estado Civil del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteCargo2",
+          "label": "Cargo en la Sociedad del Representante 2",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteVencimiento2",
+          "label": "Vencimiento en el Cargo del Representante 2",
+          "type": "date",
+          "default": "2001-01-01",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteNuevoVencimiento2",
+          "label": "Nuevo Vencimiento en el Cargo del Representante 2",
+          "type": "date",
+          "default": "2001-01-01",
+          "visibleIf": { "field": "tieneRep2", "value": true }
         }
       ]
     },
