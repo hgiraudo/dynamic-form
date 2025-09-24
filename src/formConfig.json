@@ -55,7 +55,8 @@
           "name": "CUIT",
           "label": "CUIT",
           "type": "text",
-          "placeholder": "XX-XXXXXXXX-X"
+          "placeholder": "00-12345678-9",
+          "formatter": "cuitFormatter"
         },
         {
           "name": "FechaDeConstitucion",

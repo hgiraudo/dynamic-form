@@ -4,6 +4,7 @@ import * as Icons from "@coreui/icons";
 import formConfig from "./formConfig.json";
 import * as fieldMappers from "./fieldMappers";
 import { formatDateDDMMYYYY } from "./utils";
+import * as fieldFormatters from "./fieldFormatters";
 
 function WizardForm() {
   // Inicialización de formData con valores por defecto
@@ -33,6 +34,14 @@ function WizardForm() {
 
   const handleChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleChangeWithFormatter = (field, rawValue) => {
+    let value = rawValue;
+    if (field.formatter && fieldFormatters[field.formatter]) {
+      value = fieldFormatters[field.formatter](rawValue);
+    }
+    handleChange(field.name, value);
   };
 
   const getMappedFormData = () => {
@@ -77,7 +86,7 @@ function WizardForm() {
               type={field.type}
               value={value}
               placeholder={field.placeholder || ""}
-              onChange={(e) => handleChange(field.name, e.target.value)}
+              onChange={(e) => handleChangeWithFormatter(field, e.target.value)}
               className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-300"
             />
           </div>
