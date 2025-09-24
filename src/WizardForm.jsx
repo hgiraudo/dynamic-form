@@ -1,56 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CIcon from "@coreui/icons-react";
-import {
-  cilBolt,
-  cilUser,
-  cilList,
-  cilFactory,
-  cilPeople,
-  cilBriefcase,
-  cilTask,
-  cilFile,
-} from "@coreui/icons";
+import * as Icons from "@coreui/icons";
 import formConfig from "./formConfig.json";
-
-const iconMap = {
-  cilBolt,
-  cilUser,
-  cilList,
-  cilFactory,
-  cilPeople,
-  cilBriefcase,
-  cilTask,
-  cilFile,
-};
+import * as fieldMappers from "./fieldMappers";
 
 function WizardForm() {
-  // 🔹 Inicializar formData con defaults desde JSON
-  const [formData, setFormData] = useState(() => {
-    const initial = {};
+  // Inicializamos formData con los valores por defecto
+  const initializeFormData = () => {
+    const initialData = {};
     formConfig.steps.forEach((step) => {
       step.fields.forEach((field) => {
         if (field.default !== undefined) {
-          initial[field.name] =
-            field.default === "today"
+          initialData[field.name] =
+            field.default === "today" && field.type === "date"
               ? new Date().toISOString().split("T")[0]
               : field.default;
+        } else if (field.type === "checkbox") {
+          initialData[field.name] = false;
+        } else {
+          initialData[field.name] = "";
         }
       });
     });
-    return initial;
-  });
+    return initialData;
+  };
 
+  const [formData, setFormData] = useState(initializeFormData);
   const [stepIndex, setStepIndex] = useState(0);
+
   const currentStep = formConfig.steps[stepIndex];
 
   const handleChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const renderField = (field) => {
-    const value =
-      formData[field.name] ?? (field.type === "checkbox" ? false : "");
+  const getMappedFormData = () => {
+    let mappedData = { ...formData };
+    formConfig.steps.forEach((step) => {
+      step.fields.forEach((field) => {
+        if (field.mapper) {
+          const mapperFn = fieldMappers[field.mapper];
+          if (mapperFn) {
+            mappedData = mapperFn(mappedData);
+          }
+        }
+      });
+    });
+    return mappedData;
+  };
 
+  const renderField = (field) => {
+    const value = formData[field.name];
     switch (field.type) {
       case "text":
       case "email":
@@ -87,18 +87,18 @@ function WizardForm() {
               {field.label}
             </label>
             <div className="flex space-x-2">
-              {field.options.map((option) => (
+              {field.options.map((opt) => (
                 <button
+                  key={opt}
                   type="button"
-                  key={option}
-                  onClick={() => handleChange(field.name, option)}
-                  className={`px-4 py-2 rounded-lg border transition ${
-                    value === option
-                      ? "bg-allaria-light-blue text-white border-allaria-light-blue"
-                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                  className={`px-4 py-2 rounded border ${
+                    value === opt
+                      ? "bg-allaria-light-blue text-blue-100"
+                      : "bg-white text-allaria-light-blue border-gray-400 hover:bg-gray-100"
                   }`}
+                  onClick={() => handleChange(field.name, opt)}
                 >
-                  {option}
+                  {opt}
                 </button>
               ))}
             </div>
@@ -111,18 +111,15 @@ function WizardForm() {
 
   return (
     <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
-      {/* 🔹 Barra lateral */}
+      {/* Barra lateral */}
       <div className="w-80 bg-allaria-blue flex flex-col text-blue-200">
-        {/* Logo */}
         <div className="p-6 text-center">
           <img
             src="/img/allaria-logo-blanco.svg"
-            alt="Allaria Logo Blanco"
+            alt="Allaria Logo"
             className="h-12 mx-auto"
           />
         </div>
-
-        {/* Espacio entre logo y pasos */}
         <div className="mt-6 flex-1 overflow-y-auto">
           <ul>
             {formConfig.steps.map((step, idx) => {
@@ -131,14 +128,15 @@ function WizardForm() {
                 <li
                   key={idx}
                   onClick={() => setStepIndex(idx)}
-                  className={`cursor-pointer px-5 py-3 mb-2 flex items-center transition border-l-4 border-transparent ${
+                  className={`cursor-pointer px-5 py-3 mb-2 flex items-center transition
+                  border-l-4 border-transparent ${
                     isActive
                       ? "bg-allaria-light-blue text-blue-100 font-semibold border-allaria-light-blue"
                       : "hover:bg-allaria-light-blue/50 text-blue-200"
                   }`}
                 >
                   {step.icon && (
-                    <CIcon icon={iconMap[step.icon]} className="w-5 h-5 mr-3" />
+                    <CIcon icon={Icons[step.icon]} className="w-5 h-5 mr-3" />
                   )}
                   {step.title}
                 </li>
@@ -148,7 +146,7 @@ function WizardForm() {
         </div>
       </div>
 
-      {/* 🔹 Contenido del paso */}
+      {/* Contenido del paso */}
       <div className="flex-1 p-6 overflow-y-auto bg-gray-50">
         <div className="bg-white rounded-lg shadow-xl p-6">
           <h2 className="text-2xl font-semibold text-allaria-blue mb-6">
@@ -183,7 +181,7 @@ function WizardForm() {
 
           {stepIndex === formConfig.steps.length - 1 && (
             <pre className="mt-6 p-4 bg-gray-100 border rounded overflow-x-auto">
-              {JSON.stringify(formData, null, 2)}
+              {JSON.stringify(getMappedFormData(), null, 2)}
             </pre>
           )}
         </div>

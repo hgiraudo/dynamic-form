@@ -14,7 +14,8 @@
           "label": "Tipo de Trámite",
           "type": "button-group",
           "options": ["Apertura", "Actualización", "Incorporación"],
-          "default": "Apertura"
+          "default": "Apertura",
+          "mapper": "tipoDeTramiteMapper"
         },
         {
           "name": "SujetoObligado",
@@ -29,8 +30,8 @@
           "default": "today"
         },
         {
-          "name": "UsoDeFirma",
-          "label": "Uso de Firma",
+          "name": "TipoFirma",
+          "label": "Tipo de Firma",
           "type": "button-group",
           "options": ["Indistinta", "Conjunta"],
           "default": "Indistinta"
