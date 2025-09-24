@@ -60,7 +60,7 @@ function WizardForm() {
     if (value === undefined) {
       value =
         field.default === "today" && field.type === "date"
-          ? fieldMappers.formatDateDDMMYYYY(new Date(Date.now()))
+          ? new Date().toISOString().split("T")[0] // yyyy-mm-dd para <input type="date">
           : field.default ?? (field.type === "checkbox" ? false : "");
     }
 
@@ -77,6 +77,22 @@ function WizardForm() {
               type={field.type}
               value={value}
               placeholder={field.placeholder || ""}
+              onChange={(e) => handleChange(field.name, e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-300"
+            />
+          </div>
+        );
+
+      case "textarea":
+        return (
+          <div className="mb-4" key={field.name}>
+            <label className="block text-allaria-light-blue mb-2">
+              {field.label}
+            </label>
+            <textarea
+              value={value}
+              placeholder={field.placeholder || ""}
+              rows={field.rows || 3}
               onChange={(e) => handleChange(field.name, e.target.value)}
               className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-300"
             />
@@ -127,7 +143,7 @@ function WizardForm() {
   };
 
   return (
-    <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
+    <div className="flex max-w-7xl mx-auto p-0 h-[80vh]">
       {/* Barra lateral */}
       <div className="w-80 bg-allaria-blue flex flex-col text-blue-200">
         <div className="p-6 text-center">
@@ -146,11 +162,11 @@ function WizardForm() {
                   key={idx}
                   onClick={() => setStepIndex(idx)}
                   className={`cursor-pointer px-5 py-3 mb-2 flex items-center transition
-                  border-l-4 border-transparent ${
-                    isActive
-                      ? "bg-allaria-light-blue text-blue-100 font-semibold border-allaria-light-blue"
-                      : "hover:bg-allaria-light-blue/50 text-blue-200"
-                  }`}
+                border-l-4 border-transparent ${
+                  isActive
+                    ? "bg-allaria-light-blue text-blue-100 font-semibold border-allaria-light-blue"
+                    : "hover:bg-allaria-light-blue/50 text-blue-200"
+                }`}
                 >
                   {step.icon && (
                     <CIcon icon={Icons[step.icon]} className="w-5 h-5 mr-3" />
@@ -164,44 +180,40 @@ function WizardForm() {
       </div>
 
       {/* Contenido del paso */}
-      <div className="flex-1 p-6 overflow-y-auto bg-gray-50">
-        <div className="bg-white rounded-lg shadow-xl p-6">
-          <h2 className="text-2xl font-semibold text-allaria-blue mb-6">
-            {currentStep.title}
-          </h2>
+      <div className="flex-1 p-6 pt-12 overflow-y-auto bg-white">
+        <h2 className="text-2xl font-semibold text-allaria-blue mb-6">
+          {currentStep.title}
+        </h2>
 
-          <div className="space-y-4">
-            {currentStep.fields.map((field) => renderField(field))}
-          </div>
-
-          <div className="flex justify-between mt-6">
-            <button
-              onClick={() => setStepIndex(Math.max(stepIndex - 1, 0))}
-              disabled={stepIndex === 0}
-              className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 disabled:opacity-50"
-            >
-              Anterior
-            </button>
-
-            <button
-              onClick={() =>
-                setStepIndex(
-                  Math.min(stepIndex + 1, formConfig.steps.length - 1)
-                )
-              }
-              disabled={stepIndex === formConfig.steps.length - 1}
-              className="px-4 py-2 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue disabled:opacity-50"
-            >
-              Siguiente
-            </button>
-          </div>
-
-          {stepIndex === formConfig.steps.length - 1 && (
-            <pre className="mt-6 p-4 bg-gray-100 border rounded overflow-x-auto">
-              {JSON.stringify(getMappedFormData(), null, 2)}
-            </pre>
-          )}
+        <div className="space-y-4">
+          {currentStep.fields.map((field) => renderField(field))}
         </div>
+
+        <div className="flex justify-between mt-6">
+          <button
+            onClick={() => setStepIndex(Math.max(stepIndex - 1, 0))}
+            disabled={stepIndex === 0}
+            className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 disabled:opacity-50"
+          >
+            Anterior
+          </button>
+
+          <button
+            onClick={() =>
+              setStepIndex(Math.min(stepIndex + 1, formConfig.steps.length - 1))
+            }
+            disabled={stepIndex === formConfig.steps.length - 1}
+            className="px-4 py-2 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue disabled:opacity-50"
+          >
+            Siguiente
+          </button>
+        </div>
+
+        {stepIndex === formConfig.steps.length - 1 && (
+          <pre className="mt-6 p-4 bg-gray-100 border rounded overflow-x-auto">
+            {JSON.stringify(getMappedFormData(), null, 2)}
+          </pre>
+        )}
       </div>
     </div>
   );
