@@ -5,7 +5,7 @@ import formConfig from "./formConfig.json";
 import * as fieldMappers from "./fieldMappers";
 
 function WizardForm() {
-  // Inicializamos formData con los valores por defecto
+  // Inicialización de formData con valores por defecto
   const initializeFormData = () => {
     const initialData = {};
     formConfig.steps.forEach((step) => {
@@ -13,8 +13,8 @@ function WizardForm() {
         if (field.default !== undefined) {
           initialData[field.name] =
             field.default === "today" && field.type === "date"
-              ? new Date().toISOString().split("T")[0]
-              : field.default;
+              ? new Date().toISOString().split("T")[0] // yyyy-mm-dd
+              : field.default ?? (field.type === "checkbox" ? false : "");
         } else if (field.type === "checkbox") {
           initialData[field.name] = false;
         } else {
@@ -25,7 +25,7 @@ function WizardForm() {
     return initialData;
   };
 
-  const [formData, setFormData] = useState(initializeFormData);
+  const [formData, setFormData] = useState(initializeFormData());
   const [stepIndex, setStepIndex] = useState(0);
 
   const currentStep = formConfig.steps[stepIndex];
@@ -50,7 +50,14 @@ function WizardForm() {
   };
 
   const renderField = (field) => {
-    const value = formData[field.name];
+    let value = formData[field.name];
+    if (value === undefined) {
+      value =
+        field.default === "today" && field.type === "date"
+          ? fieldMappers.formatDateDDMMYYYY(new Date(Date.now()))
+          : field.default ?? (field.type === "checkbox" ? false : "");
+    }
+
     switch (field.type) {
       case "text":
       case "email":

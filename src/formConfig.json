@@ -27,14 +27,16 @@
           "name": "TramiteFecha",
           "label": "Fecha de Trámite",
           "type": "date",
-          "default": "today"
+          "default": "today",
+          "mapper": "fechaTramiteMapper"
         },
         {
           "name": "TipoFirma",
           "label": "Tipo de Firma",
           "type": "button-group",
           "options": ["Indistinta", "Conjunta"],
-          "default": "Indistinta"
+          "default": "Indistinta",
+          "mapper": "usoDeFirmaMapper"
         }
       ]
     },
