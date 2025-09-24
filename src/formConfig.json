@@ -1,0 +1,82 @@
+{
+  "steps": [
+    {
+      "title": "Introducción",
+      "icon": "cilBolt",
+      "fields": [
+        {
+          "name": "NumeroDeComitente",
+          "label": "Número de Comitente",
+          "type": "text"
+        },
+        {
+          "name": "TipoDeTramiteApertura",
+          "label": "Apertura",
+          "type": "checkbox"
+        },
+        {
+          "name": "TipoDeTramiteActualizacion",
+          "label": "Actualización",
+          "type": "checkbox"
+        },
+        {
+          "name": "TipoDeTramiteIncorporacion",
+          "label": "Incorporación",
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "title": "Razón Social",
+      "icon": "cilFactory",
+      "fields": [
+        { "name": "RazonSocial", "label": "Razón Social", "type": "text" },
+        { "name": "CUIT", "label": "CUIT", "type": "text" },
+        {
+          "name": "FechaDeConstitucion",
+          "label": "Fecha de Constitución",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "title": "Datos Personales",
+      "icon": "cilUser",
+      "fields": [
+        {
+          "name": "RepresentanteNombre1",
+          "label": "Nombre del Representante",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteApellido1",
+          "label": "Apellido del Representante",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "title": "Oficial de Cuenta",
+      "icon": "cilBriefcase",
+      "fields": [
+        {
+          "name": "Confecciono",
+          "label": "Datos Completados Por",
+          "type": "text"
+        },
+        { "name": "Oficial", "label": "Oficial", "type": "text" },
+        { "name": "Administrador", "label": "Administrador", "type": "text" }
+      ]
+    },
+    {
+      "title": "Firmantes",
+      "icon": "cilPeople",
+      "fields": [{ "name": "Firmante1", "label": "Firmante 1", "type": "text" }]
+    },
+    {
+      "title": "Revisión",
+      "icon": "cilTask",
+      "fields": []
+    }
+  ]
+}

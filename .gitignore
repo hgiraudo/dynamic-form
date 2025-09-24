@@ -1,0 +1,34 @@
+# Archivos de Node.js
+node_modules/
+package-lock.json
+
+# Archivos generados por Vite
+dist/
+.vite/
+
+# Archivos de caché y logs
+*.log
+npm-debug.log
+yarn-error.log
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
+
+# Archivos de IDE o editores (si usas alguno)
+.vscode/
+.idea/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos específicos de Tailwind CSS (si aplican)
+postcss.config.js  # Opcional, incluir si no quieres versionarlo
+
+# Archivos temporales de ejecucion
+/backend/saved
+#/backend/test/
+#!/backend/test/*.json
+#!/backend/test/*.bat
