@@ -44,19 +44,18 @@ export const sujetoObligadoMapper = (formData) => {
   return mapped;
 };
 
-export const fechaTramiteMapper = (formData) => {
-  const mapped = { ...formData };
-  if (formData.TramiteFecha) {
-    const [yyyy, mm, dd] = formData.TramiteFecha.split("-");
-    mapped.TramiteFecha = `${dd}-${mm}-${yyyy}`;
-  }
-  return mapped;
-};
-
 export const representanteApellido1Mapper = (formData) => {
   const mapped = { ...formData };
   if (formData.RepresentanteApellido1) {
     mapped.Firmante1Apellido = formData.RepresentanteApellido1;
+  }
+  return mapped;
+};
+
+export const representanteEmail1Mapper = (formData) => {
+  const mapped = { ...formData };
+  if (formData.RepresentanteEmail1) {
+    mapped.Firmante1Email = formData.RepresentanteEmail1;
   }
   return mapped;
 };

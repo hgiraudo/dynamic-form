@@ -205,8 +205,6 @@ function WizardForm() {
 
   const handleReset = () => setFormData(initializeFormData());
 
-  console.log(formData);
-
   return (
     <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
       {/* 🔹 Barra lateral */}
@@ -289,7 +287,7 @@ function WizardForm() {
                   .map((step, stepIdx) => (
                     <div key={stepIdx} className="mb-6">
                       {/* 🔹 Encabezado del paso */}
-                      <h3 className="text-lg font-semibold text-allaria-blue mb-2 border-b pb-1">
+                      <h3 className="text-lg font-semibold text-allaria-blue mb-2 border-b pb-1 text-center">
                         {step.title}
                       </h3>
 
