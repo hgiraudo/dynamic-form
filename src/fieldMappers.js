@@ -55,6 +55,14 @@ export const fechaTramiteMapper = (formData) => {
   return mapped;
 };
 
+export const representanteApellido1Mapper = (formData) => {
+  const mapped = { ...formData };
+  if (formData.RepresentanteApellido1) {
+    mapped.Firmante1Apellido = formData.RepresentanteApellido1;
+  }
+  return mapped;
+};
+
 // 📨 Mapper genérico para correos electrónicos
 export const emailMapper = (formData, fieldName) => {
   const newData = { ...formData };

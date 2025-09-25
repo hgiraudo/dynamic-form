@@ -143,89 +143,90 @@
       ]
     },
     {
-      "title": "Datos Personales",
+      "title": "Representante",
       "icon": "cilUser",
       "fields": [
         {
           "name": "RepresentanteApellido1",
-          "label": "Apellido del Representante",
-          "type": "text"
+          "label": "Apellido",
+          "type": "text",
+          "mapper": "representanteApellido1Mapper"
         },
         {
           "name": "RepresentanteNombre1",
-          "label": "Nombre del Representante",
+          "label": "Nombre",
           "type": "text"
         },
         {
           "name": "RepresentanteDNI1",
-          "label": "DNI / LE / LC del Representante",
+          "label": "DNI / LE / LC",
           "type": "text"
         },
         {
           "name": "RepresentantePasaporte1",
-          "label": "Pasaporte / CI extranjeros del Representante",
+          "label": "Pasaporte / CI extranjeros",
           "type": "text"
         },
         {
           "name": "RepresentanteNacionalidad1",
-          "label": "Nacionalidad del Representante",
+          "label": "Nacionalidad",
           "type": "text"
         },
         {
           "name": "RepresentanteLugarDeNacimiento1",
-          "label": "Lugar de Nacimiento del Representante",
+          "label": "Lugar de Nacimiento",
           "type": "text"
         },
         {
           "name": "RepresentanteFechaDeNacimiento1",
-          "label": "Fecha de Nacimiento del Representante",
+          "label": "Fecha de Nacimiento",
           "type": "date",
           "default": "2001-01-01"
         },
         {
           "name": "RepresentanteCUIT1",
-          "label": "CUIT / CUIL del Representante",
+          "label": "CUIT / CUIL",
           "type": "text"
         },
         {
           "name": "RepresentanteTelefono1",
-          "label": "Teléfono del Representante",
+          "label": "Teléfono",
           "type": "text"
         },
         {
           "name": "RepresentanteEmail1",
-          "label": "Correo Electrónico del Representante",
+          "label": "Correo Electrónico",
           "type": "email"
         },
         {
           "name": "RepresentanteDomicilio1",
-          "label": "Domicilio del Representante",
+          "label": "Domicilio",
           "type": "text"
         },
         {
           "name": "RepresentanteActividad1",
-          "label": "Actividad / Profesión / Oficio / Industria del Representante",
+          "label": "Actividad / Profesión / Oficio / Industria",
           "type": "text"
         },
         {
           "name": "RepresentanteEstadoCivil1",
-          "label": "Estado Civil del Representante",
+          "label": "Estado Civil",
           "type": "text"
         },
         {
           "name": "RepresentanteCargo1",
-          "label": "Cargo en la Sociedad del Representante",
+          "label": "Cargo en la Sociedad",
           "type": "text"
         },
         {
           "name": "RepresentanteVencimiento1",
-          "label": "Vencimiento en el Cargo del Representante",
+          "label": "Vencimiento en el Cargo",
           "type": "date",
           "default": "2001-01-01"
         },
         {
           "name": "RepresentanteNuevoVencimiento1",
-          "label": "Nuevo Vencimiento en el Cargo del Representante",
+          "label": "Nuevo Vencimiento en el Cargo",
           "type": "date",
           "default": "2001-01-01"
         },
@@ -354,19 +355,19 @@
       "fields": [
         {
           "name": "Firmante1Apellido",
-          "label": "Apellido del Representante",
+          "label": "Apellido",
           "type": "text",
           "disabled": true
         },
         {
           "name": "Firmante1Nombre",
-          "label": "Nombre Completo del Representante",
+          "label": "Nombre",
           "type": "text",
           "disabled": true
         },
         {
           "name": "Firmante1Email",
-          "label": "Correo del Representante",
+          "label": "Correo",
           "type": "email",
           "disabled": true
         },
@@ -442,7 +443,7 @@
       ]
     },
     {
-      "title": "Revisión",
+      "title": "Revisar y Firmar",
       "icon": "cilTask",
       "fields": []
     }
