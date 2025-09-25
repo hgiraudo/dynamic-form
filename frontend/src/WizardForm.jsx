@@ -6,6 +6,7 @@ import appConfig from "./appConfig.json"; // 🔹 Config con showJsonOnReview
 import * as fieldMappers from "./fieldMappers";
 import * as fieldFormatters from "./fieldFormatters";
 import { formatDateDDMMYYYY } from "./utils";
+import config from "../../shared/config.general.js";
 
 function WizardForm() {
   // 🔹 Inicialización de formData con valores por defecto
@@ -205,6 +206,84 @@ function WizardForm() {
 
   const handleReset = () => setFormData(initializeFormData());
 
+  const handleSign = async () => {
+    try {
+      console.log("▶️ Iniciando handleSign");
+
+      // 1. Armar JSON para completar el PDF
+      console.log("📄 formData recibido:", formData);
+      const pdfJson = buildPdfJson(formData);
+      console.log("✅ pdfJson generado:", pdfJson);
+
+      // 2. Preparar archivos para /api/fill-pdf
+      console.log("⬇️ Descargando plantilla PDF...");
+      const pdfResp = await fetch("/form/persona-juridica.pdf");
+      console.log("📡 Respuesta fetch plantilla:", pdfResp.status);
+
+      const pdfBlob = await pdfResp.blob();
+      console.log("📦 pdfBlob creado, tamaño:", pdfBlob.size);
+
+      const pdfFile = new File([pdfBlob], "persona-juridica.pdf", {
+        type: "application/pdf",
+      });
+      console.log("✅ pdfFile creado:", pdfFile);
+
+      const jsonFile = new File([JSON.stringify(pdfJson)], "datos.json", {
+        type: "application/json",
+      });
+      console.log("✅ jsonFile creado:", jsonFile);
+
+      const formDataUpload = new FormData();
+      formDataUpload.append("pdf", pdfFile);
+      formDataUpload.append("json", jsonFile);
+      formDataUpload.append("responseType", "base64");
+      console.log("📤 formDataUpload armado:", formDataUpload);
+
+      // 3. Llamar al backend para generar PDF completo
+      console.log("🚀 Enviando a backend /api/fill-pdf...");
+      const fillPdfUrl = `${config.backend.baseUrl}${config.backend.endpoints.fillPdf}`;
+      const response = await fetch(fillPdfUrl, {
+        method: "POST",
+        body: formDataUpload,
+      });
+      console.log("📡 Respuesta backend:", response.status);
+
+      if (!response.ok) throw new Error("Error en el servidor al generar PDF");
+
+      const jsonResp = await response.json();
+      console.log("📥 Respuesta JSON recibida:", jsonResp);
+
+      const { base64 } = jsonResp;
+      console.log("✅ Base64 recibido, longitud:", base64?.length);
+
+      // 4. Armar JSON de transacción con PDF embebido
+      const transactionJson = buildTransactionJson(base64);
+      console.log("✅ transactionJson generado:", transactionJson);
+
+      // 5. Enviar JSON de transacción al endpoint de firma
+      console.log("🚀 Enviando a backend /api/sign...");
+      const signUrl = `${config.backend.baseUrl}${config.backend.endpoints.sign}`;
+
+      const signResp = await fetch(signUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(transactionJson),
+      });
+
+      console.log("📡 Respuesta backend /sign:", signResp.status);
+
+      if (!signResp.ok) throw new Error("Error en firma");
+
+      const signData = await signResp.json();
+      console.log("📥 Respuesta OneSpan recibida:", signData);
+
+      alert("✅ Transacción creada y enviada correctamente");
+    } catch (err) {
+      console.error("❌ Error en handleSign:", err);
+      alert("Error al procesar la firma");
+    }
+  };
+
   return (
     <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
       {/* 🔹 Barra lateral */}
@@ -358,7 +437,7 @@ function WizardForm() {
 
                 <button
                   type="button"
-                  onClick={() => alert("Firmar 🚀")}
+                  onClick={handleSign}
                   className="flex-1 flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
                 >
                   <CIcon icon={Icons.cilFile} className="w-5 h-5 mr-2" />
