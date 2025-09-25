@@ -33,10 +33,10 @@ function WizardForm() {
 
   const [stepIndex, setStepIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false); // 🔹 indica que está creando la transacción
   const [transactionId, setTransactionId] = useState("");
   const [signingUrl, setSigningUrl] = useState("");
   const fileInputRef = useRef(null);
-
   const currentStep = formConfig.steps[stepIndex];
 
   /* ============================================================
@@ -169,9 +169,10 @@ function WizardForm() {
   ============================================================ */
   const handleSign = async () => {
     try {
-      console.log("▶️ Iniciando handleSign");
+      setShowModal(true);
+      setModalLoading(true); // 🔹 mostrar modal de espera
 
-      // 1. Generar PDF y transactionJson (igual que antes)
+      // 1. Generar PDF y transactionJson
       const pdfJson = buildPdfJson(formData);
       const pdfResp = await fetch("/form/persona-juridica.pdf");
       const pdfBlob = await pdfResp.blob();
@@ -211,15 +212,16 @@ function WizardForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ packageId: signData.id }),
       });
-
       if (!urlResp.ok) throw new Error("Error al obtener la URL de firma");
       const urlData = await urlResp.json();
 
+      // 4. Mostrar modal final
       setTransactionId(signData.id);
       setSigningUrl(urlData.signingUrl);
-      setShowModal(true);
+      setModalLoading(false); // 🔹 ya no está cargando
     } catch (err) {
       console.error("❌ Error en handleSign:", err);
+      setShowModal(false);
       alert("Error al procesar la firma");
     }
   };
@@ -397,42 +399,64 @@ function WizardForm() {
       {/* MODAL */}
       <AnimatePresence>
         {showModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50"
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            onClick={() => setShowModal(false)} // 🔹 cerrar al click fuera
           >
-            <motion.div
-              initial={{ y: "-100vh" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-100vh" }}
-              transition={{ type: "spring", stiffness: 100 }}
-              className="bg-white rounded-2xl p-8 max-w-md w-full shadow-lg text-center"
+            <div
+              className="bg-white rounded-2xl p-10 w-96 max-w-full text-center relative shadow-lg"
+              onClick={(e) => e.stopPropagation()} // 🔹 evitar que el click dentro cierre
             >
-              <h2 className="text-2xl font-bold text-allaria-blue mb-4">
-                Transacción creada con éxito ✅
-              </h2>
-              <p className="mb-4">
-                ID de transacción: <strong>{transactionId}</strong>
-              </p>
-              <p className="mb-6">
-                Al hacer click en el botón serás redirigido al sitio de firma.
-              </p>
-              <button
-                onClick={() => window.open(signingUrl, "_blank")}
-                className="px-6 py-3 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue"
-              >
-                Ir a firmar
-              </button>
-              <button
-                onClick={() => setShowModal(false)}
-                className="mt-4 px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400"
-              >
-                Cerrar
-              </button>
-            </motion.div>
-          </motion.div>
+              {modalLoading ? (
+                <>
+                  <div className="flex flex-col items-center">
+                    <svg
+                      className="animate-spin h-16 w-16 text-allaria-blue mb-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      ></path>
+                    </svg>
+                    <p className="text-allaria-blue font-semibold text-lg">
+                      Creando transacción, por favor espere...
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <img
+                    src="/public/img/allaria-logo-color.svg"
+                    alt="Allaria Logo"
+                    className="h-16 mx-auto mb-4"
+                  />
+                  <br />
+                  <h3 className="text-2xl font-bold text-allaria-blue mb-6">
+                    Transacción creada correctamente
+                  </h3>
+                  <br />
+                  <button
+                    onClick={() => window.open(signingUrl, "_blank")}
+                    className="px-8 py-4 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue text-lg font-semibold"
+                  >
+                    Ir a Firmar!
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
         )}
       </AnimatePresence>
     </div>
