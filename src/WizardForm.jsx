@@ -205,6 +205,8 @@ function WizardForm() {
 
   const handleReset = () => setFormData(initializeFormData());
 
+  console.log(formData);
+
   return (
     <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
       {/* 🔹 Barra lateral */}
@@ -312,9 +314,12 @@ function WizardForm() {
               </div>
 
               {appConfig.showJsonOnReview && (
-                <pre className="mt-6 p-4 bg-gray-100 border rounded overflow-x-auto text-xs">
-                  {JSON.stringify(getMappedFormData(), null, 2)}
-                </pre>
+                <>
+                  {console.log("📄 JSON en revisión:", getMappedFormData())}
+                  <pre className="mt-6 p-4 bg-gray-100 border rounded overflow-x-auto text-xs">
+                    {JSON.stringify(getMappedFormData(), null, 2)}
+                  </pre>
+                </>
               )}
 
               {/* 🔹 Botones acciones */}
