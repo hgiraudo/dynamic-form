@@ -2,7 +2,16 @@
 import sys
 import json
 import os
+import unicodedata
 from pdfrw import PdfReader, PdfWriter, PdfDict, PdfName, PdfString
+
+def normalize_text(value):
+    """Elimina acentos y reemplaza 'ñ' por 'n'."""
+    if not isinstance(value, str):
+        return value
+    value = value.replace("ñ", "n").replace("Ñ", "N")
+    nfkd_form = unicodedata.normalize('NFKD', value)
+    return "".join([c for c in nfkd_form if not unicodedata.combining(c)])
 
 def generate_appearance(annot, value, field_type):
     """Genera un flujo de apariencia con texto en color negro para los campos de formulario."""
@@ -44,41 +53,34 @@ def generate_appearance(annot, value, field_type):
     else:  # Campo de texto
         font_size = min(12, max(8, height * 0.6))
         y_pos = (height - font_size) / 2
-        escaped_value = str(value).replace('(', r'\(').replace(')', r'\)').replace('\\', r'\\')
+        value_norm = normalize_text(value)
+        escaped_value = str(value_norm).replace('(', r'\(').replace(')', r'\)').replace('\\', r'\\')
         stream = f"q 0 0 0 rg BT /F1 {font_size} Tf 2 {y_pos} Td ({escaped_value}) Tj ET Q".encode()
         appearance.stream = stream
         appearance.Length = len(stream)
-        annot.V = PdfString.encode(value)
+        annot.V = PdfString.encode(value_norm)
 
     annot.AP = PdfDict(N=appearance)
     annot.F = 4  # Bandera de impresión
 
 def fill_and_flatten_pdf(input_pdf, input_json, output_pdf, flatten=False):
     try:
-        print(f"[DEBUG] Directorio actual: {os.getcwd()}")
         print(f"[DEBUG] PDF entrada: {os.path.abspath(input_pdf)}")
         print(f"[DEBUG] JSON entrada: {os.path.abspath(input_json)}")
         print(f"[DEBUG] PDF salida: {os.path.abspath(output_pdf)}")
 
         with open(input_json, "r", encoding="utf-8") as f:
             data = json.load(f)
-        
-        print(f"Datos a rellenar: {len(data)} campos cargados.")
 
         reader = PdfReader(input_pdf)
         writer = PdfWriter()
-
-        fields_in_pdf = set()
-        fields_filled = set()
 
         for page in reader.pages:
             if page.Annots:
                 for annot in page.Annots:
                     if annot.Subtype == PdfName.Widget and annot.T:
                         field_name = annot.T[1:-1]
-                        fields_in_pdf.add(field_name)
                         if field_name in data:
-                            fields_filled.add(field_name)
                             value = data[field_name]
                             field_type = annot.FT
                             if field_type == PdfName.Btn:
@@ -89,7 +91,8 @@ def fill_and_flatten_pdf(input_pdf, input_json, output_pdf, flatten=False):
                                     annot.V = PdfName.Off
                                     annot.AS = PdfName.Off
                             else:
-                                annot.V = PdfString.encode(str(value))
+                                value_norm = normalize_text(value)
+                                annot.V = PdfString.encode(str(value_norm))
                             generate_appearance(annot, value, field_type)
                             if flatten:
                                 annot.F = 4
@@ -107,34 +110,9 @@ def fill_and_flatten_pdf(input_pdf, input_json, output_pdf, flatten=False):
 
         if flatten and hasattr(reader, 'Root') and hasattr(reader.Root, 'AcroForm'):
             reader.Root.AcroForm = None
-        
+
         writer.write(output_pdf)
-
-        # 🔹 Generar log comparativo
-        fields_in_input_only = set(data.keys()) - fields_in_pdf
-        fields_in_pdf_only = fields_in_pdf - set(data.keys())
-        fields_in_both = fields_in_pdf & set(data.keys())
-
-        log = {
-            "fields_in_json_and_pdf": sorted(list(fields_in_both)),
-            "fields_in_json_not_in_pdf": sorted(list(fields_in_input_only)),
-            "fields_in_pdf_not_in_json": sorted(list(fields_in_pdf_only))
-        }
-
-        # 🔹 Guardar log en un archivo JSON en la misma carpeta que el PDF de salida
-        log_path = os.path.splitext(output_pdf)[0] + "_log.json"
-        with open(log_path, "w", encoding="utf-8") as log_file:
-            json.dump(log, log_file, indent=4, ensure_ascii=False)
-
-        print(f"Log generado en {log_path}")
-        print("\n===== LOG DE CAMPOS =====")
-        print(json.dumps(log, indent=4, ensure_ascii=False))
-        print("=========================\n")
-
-        if flatten:
-            print(f"PDF aplanado generado en {output_pdf}")
-        else:
-            print(f"PDF editable generado en {output_pdf}")
+        print(f"PDF generado: {output_pdf}")
 
     except Exception as e:
         print(f"Error al procesar el PDF: {e}")

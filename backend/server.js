@@ -7,7 +7,7 @@ import path from "path";
 import cors from "cors";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
-import sharedConfig from "../shared/config.general.js"; // endpoints compartidos
+import config from "../shared/config.general.js";
 
 dotenv.config();
 
@@ -15,34 +15,26 @@ const app = express();
 const upload = multer({ dest: "uploads/" });
 const __dirname = path.resolve();
 
-// 🔹 Configuración
-const PORT = process.env.PORT || 4000;
-const SAVED_DIR = path.join(__dirname, "saved");
-if (!fs.existsSync(SAVED_DIR)) fs.mkdirSync(SAVED_DIR, { recursive: true });
-
-// 🔹 Middleware
-app.use(cors());
+// Limite de request
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(cors());
 
-// 🔹 Función timestamp
+// Carpeta donde se guardan los PDFs y JSON
+const SAVED_DIR = path.join(__dirname, config.server.savedDir);
+if (!fs.existsSync(SAVED_DIR)) fs.mkdirSync(SAVED_DIR, { recursive: true });
+
 function getTimestamp() {
   const now = new Date();
   const pad = (n) => String(n).padStart(2, "0");
-  const year = now.getFullYear();
-  const month = pad(now.getMonth() + 1);
-  const day = pad(now.getDate());
-  const hours = pad(now.getHours());
-  const minutes = pad(now.getMinutes());
-  const seconds = pad(now.getSeconds());
-  return `${year}-${month}-${day} ${hours}.${minutes}.${seconds}`;
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}.${pad(now.getMinutes())}.${pad(now.getSeconds())}`;
 }
 
 /* ============================================================
-   📌 ENDPOINT: /api/fill-pdf
-   ============================================================ */
+   ENDPOINT: /api/fill-pdf
+============================================================ */
 app.post(
-  "/api/fill-pdf",
+  config.backend.fillPdfEndpoint,
   upload.fields([{ name: "pdf" }, { name: "json" }]),
   async (req, res) => {
     try {
@@ -62,10 +54,15 @@ app.post(
 
       const responseType = req.body.responseType || "pdf";
 
-      // 🔹 Ejecutar script Python
+      // Ejecutar script Python
       await new Promise((resolve, reject) => {
-        const scriptPath = path.join(__dirname, "fill.py");
-        const py = spawn("python", [scriptPath, inputPdf, jsonPath, outputPdf, "flatten"]);
+        const py = spawn(config.python.executable, [
+          path.join(__dirname, config.python.script),
+          inputPdf,
+          jsonPath,
+          outputPdf,
+          config.python.flattenMode,
+        ]);
 
         py.stdout.on("data", (data) => console.log(`[PY-OUT]: ${data.toString()}`));
         py.stderr.on("data", (data) => console.error(`[PY-ERR]: ${data.toString()}`));
@@ -75,14 +72,16 @@ app.post(
       const pdfBuffer = fs.readFileSync(outputPdf);
 
       if (responseType === "base64") {
-        res.json({ base64: pdfBuffer.toString("base64"), files: { inputPdf, jsonPath, outputPdf } });
+        res.json({
+          base64: pdfBuffer.toString("base64"),
+          files: { inputPdf, jsonPath, outputPdf },
+        });
       } else {
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader("Content-Disposition", `attachment; filename=${timestamp}-output.pdf`);
         res.send(pdfBuffer);
       }
 
-      // 🧹 Eliminar temporales
       fs.unlinkSync(tmpPdf);
       fs.unlinkSync(tmpJson);
     } catch (err) {
@@ -93,14 +92,15 @@ app.post(
 );
 
 /* ============================================================
-   📌 ENDPOINT: /api/sign
-   ============================================================ */
-app.post("/api/sign", async (req, res) => {
+   ENDPOINT: /api/sign  (OneSpan)
+============================================================ */
+app.post(config.backend.signEndpoint, async (req, res) => {
   try {
     const transactionJson = req.body;
     console.log("📨 JSON recibido en /api/sign:", transactionJson);
 
-    const response = await fetch(sharedConfig.endpoints.sign, {
+    // ⚠️ Usar URL absoluta de OneSpan desde config
+    const response = await fetch(config.esignlive.url, {
       method: "POST",
       headers: {
         Authorization: process.env.ONESPAN_API_KEY,
@@ -120,10 +120,11 @@ app.post("/api/sign", async (req, res) => {
 });
 
 /* ============================================================
-   🚀 Iniciar servidor
-   ============================================================ */
+   SERVIDOR
+============================================================ */
+const PORT = process.env.PORT || config.server.port;
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
-  console.log("   - POST /api/fill-pdf");
-  console.log("   - POST /api/sign");
+  console.log(`🚀 Servidor en ${config.backend.baseUrl}`);
+  console.log(`   - POST ${config.backend.fillPdfEndpoint}`);
+  console.log(`   - POST ${config.backend.signEndpoint}`);
 });

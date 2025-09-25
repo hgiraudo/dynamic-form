@@ -7,6 +7,8 @@ import * as fieldMappers from "./fieldMappers";
 import * as fieldFormatters from "./fieldFormatters";
 import { formatDateDDMMYYYY } from "./utils";
 import config from "../../shared/config.general.js";
+import { buildPdfJson } from "./utils/buildPdfJson";
+import { buildTransactionJson } from "./utils/buildTransactionJson.js";
 
 function WizardForm() {
   // 🔹 Inicialización de formData con valores por defecto
@@ -241,7 +243,7 @@ function WizardForm() {
 
       // 3. Llamar al backend para generar PDF completo
       console.log("🚀 Enviando a backend /api/fill-pdf...");
-      const fillPdfUrl = `${config.backend.baseUrl}${config.backend.endpoints.fillPdf}`;
+      const fillPdfUrl = `${config.backend.baseUrl}${config.backend.fillPdfEndpoint}`;
       const response = await fetch(fillPdfUrl, {
         method: "POST",
         body: formDataUpload,
@@ -262,7 +264,7 @@ function WizardForm() {
 
       // 5. Enviar JSON de transacción al endpoint de firma
       console.log("🚀 Enviando a backend /api/sign...");
-      const signUrl = `${config.backend.baseUrl}${config.backend.endpoints.sign}`;
+      const signUrl = `${config.backend.baseUrl}${config.backend.signEndpoint}`;
 
       const signResp = await fetch(signUrl, {
         method: "POST",

@@ -4,9 +4,10 @@ export default {
     port: 4000,
     savedDir: "saved",
   },
-  endpoints: {
-    fillPdf: "/api/fill-pdf",
-    sign: "/api/sign",
+  backend: {
+    baseUrl: "http://localhost:4000",
+    fillPdfEndpoint: "/api/fill-pdf",
+    signEndpoint: "/api/sign",
   },
   python: {
     executable: "python",

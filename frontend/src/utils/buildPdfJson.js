@@ -1,6 +1,10 @@
+// src/utils/buildPdfJson.js
 import { splitEmail, formatDate, boolToSlash } from "./utils";
 
-// 🔹 Arma el JSON que el backend necesita para rellenar el PDF
+/**
+ * 🔹 Arma el JSON que el backend necesita para rellenar el PDF
+ * Solo para frontend.
+ */
 export const buildPdfJson = (formData) => {
   const email1 = splitEmail(
     formData.CorreoElectronicoUsuario1 +
