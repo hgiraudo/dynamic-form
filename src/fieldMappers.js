@@ -1,5 +1,3 @@
-import { formatDateDDMMYYYY } from "./utils";
-
 // Mapper para el tipo de trámite
 export const tipoDeTramiteMapper = (formData) => {
   const result = {

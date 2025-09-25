@@ -282,31 +282,33 @@ function WizardForm() {
           {stepIndex === formConfig.steps.length - 1 && (
             <>
               <div className="rounded-lg overflow-hidden text-sm">
-                {formConfig.steps.map((step, stepIdx) => (
-                  <div key={stepIdx} className="mb-6">
-                    {/* 🔹 Encabezado del paso */}
-                    <h3 className="text-lg font-semibold text-allaria-blue mb-2 border-b pb-1">
-                      {step.title}
-                    </h3>
+                {formConfig.steps
+                  .slice(0, -1) // 👈 excluimos el último paso
+                  .map((step, stepIdx) => (
+                    <div key={stepIdx} className="mb-6">
+                      {/* 🔹 Encabezado del paso */}
+                      <h3 className="text-lg font-semibold text-allaria-blue mb-2 border-b pb-1">
+                        {step.title}
+                      </h3>
 
-                    {/* 🔹 Campos del paso */}
-                    {step.fields.map((field, idx) => (
-                      <div
-                        key={field.name}
-                        className={`grid grid-cols-2 gap-4 px-4 py-2 items-center ${
-                          idx % 2 === 0 ? "bg-gray-50" : "bg-white"
-                        }`}
-                      >
-                        <span className="font-medium text-allaria-blue text-right pr-4">
-                          {field.label}
-                        </span>
-                        <span className="text-gray-700 break-words">
-                          {String(getMappedFormData()[field.name] ?? "")}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                ))}
+                      {/* 🔹 Campos del paso */}
+                      {step.fields.map((field, idx) => (
+                        <div
+                          key={field.name}
+                          className={`grid grid-cols-2 gap-4 px-4 py-2 items-center ${
+                            idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+                          }`}
+                        >
+                          <span className="font-medium text-allaria-blue text-right pr-4">
+                            {field.label}
+                          </span>
+                          <span className="text-gray-700 break-words">
+                            {String(getMappedFormData()[field.name] ?? "")}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
               </div>
 
               {appConfig.showJsonOnReview && (
@@ -316,11 +318,11 @@ function WizardForm() {
               )}
 
               {/* 🔹 Botones acciones */}
-              <div className="flex justify-between gap-4 pt-6 border-t">
+              <div className="flex justify-between gap-4 pt-6">
                 <button
                   type="button"
                   onClick={handleExport}
-                  className="flex-1 flex items-center justify-center px-4 py-2 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue"
+                  className="flex-1 flex items-center justify-center px-4 py-3 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue"
                 >
                   <CIcon icon={Icons.cilSave} className="w-5 h-5 mr-2" />
                   Descargar JSON
@@ -329,7 +331,7 @@ function WizardForm() {
                 <button
                   type="button"
                   onClick={handleImportClick}
-                  className="flex-1 flex items-center justify-center px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+                  className="flex-1 flex items-center justify-center px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
                 >
                   <CIcon icon={Icons.cilCloudUpload} className="w-5 h-5 mr-2" />
                   Importar JSON
@@ -345,7 +347,7 @@ function WizardForm() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 flex items-center justify-center px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
+                  className="flex-1 flex items-center justify-center px-4 py-3 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
                 >
                   <CIcon icon={Icons.cilTrash} className="w-5 h-5 mr-2" />
                   Borrar Todo
@@ -354,7 +356,7 @@ function WizardForm() {
                 <button
                   type="button"
                   onClick={() => alert("Firmar 🚀")}
-                  className="flex-1 flex items-center justify-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                  className="flex-1 flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
                 >
                   <CIcon icon={Icons.cilFile} className="w-5 h-5 mr-2" />
                   Firmar
