@@ -259,7 +259,7 @@ function WizardForm() {
       console.log("✅ Base64 recibido, longitud:", base64?.length);
 
       // 4. Armar JSON de transacción con PDF embebido
-      const transactionJson = buildTransactionJson(base64);
+      const transactionJson = buildTransactionJson(base64, formData);
       console.log("✅ transactionJson generado:", transactionJson);
 
       // 5. Enviar JSON de transacción al endpoint de firma
