@@ -1,4 +1,3 @@
-// backend/config.general.js
 export default {
   server: {
     port: 4000,
@@ -8,6 +7,7 @@ export default {
     baseUrl: "http://localhost:4000",
     fillPdfEndpoint: "/api/fill-pdf",
     signEndpoint: "/api/sign",
+    getSigningUrlEndpoint: "/api/getSigningUrl",
   },
   python: {
     executable: "python",

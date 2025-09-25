@@ -4,7 +4,7 @@ export const buildTransactionJson = (pdfBase64, formData) => {
   const firstSignerEmail = formData.Firmante1Email || "email@example.com";
 
   return {
-    status: "DRAFT",
+    status: "SENT",
     name: "Persona Juridica",
     description: "Alta Persona Juridica",
     roles: [

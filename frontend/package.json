@@ -15,6 +15,7 @@
     "@coreui/react": "^5.8.0",
     "@tailwindcss/vite": "^4.1.13",
     "autoprefixer": "^10.4.21",
+    "framer-motion": "^12.23.22",
     "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

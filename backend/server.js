@@ -27,7 +27,9 @@ if (!fs.existsSync(SAVED_DIR)) fs.mkdirSync(SAVED_DIR, { recursive: true });
 function getTimestamp() {
   const now = new Date();
   const pad = (n) => String(n).padStart(2, "0");
-  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}.${pad(now.getMinutes())}.${pad(now.getSeconds())}`;
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(
+    now.getDate()
+  )} ${pad(now.getHours())}.${pad(now.getMinutes())}.${pad(now.getSeconds())}`;
 }
 
 /* ============================================================
@@ -64,9 +66,15 @@ app.post(
           config.python.flattenMode,
         ]);
 
-        py.stdout.on("data", (data) => console.log(`[PY-OUT]: ${data.toString()}`));
-        py.stderr.on("data", (data) => console.error(`[PY-ERR]: ${data.toString()}`));
-        py.on("close", (code) => (code === 0 ? resolve() : reject(new Error(`Python exited ${code}`))));
+        py.stdout.on("data", (data) =>
+          console.log(`[PY-OUT]: ${data.toString()}`)
+        );
+        py.stderr.on("data", (data) =>
+          console.error(`[PY-ERR]: ${data.toString()}`)
+        );
+        py.on("close", (code) =>
+          code === 0 ? resolve() : reject(new Error(`Python exited ${code}`))
+        );
       });
 
       const pdfBuffer = fs.readFileSync(outputPdf);
@@ -78,7 +86,10 @@ app.post(
         });
       } else {
         res.setHeader("Content-Type", "application/pdf");
-        res.setHeader("Content-Disposition", `attachment; filename=${timestamp}-output.pdf`);
+        res.setHeader(
+          "Content-Disposition",
+          `attachment; filename=${timestamp}-output.pdf`
+        );
         res.send(pdfBuffer);
       }
 
@@ -120,6 +131,40 @@ app.post(config.backend.signEndpoint, async (req, res) => {
 });
 
 /* ============================================================
+   ENDPOINT: /api/getSigningUrl  (OneSpan)
+============================================================ */
+app.post(config.backend.getSigningUrlEndpoint, async (req, res) => {
+  try {
+    const { packageId } = req.body;
+    if (!packageId)
+      return res.status(400).json({ error: "packageId is required" });
+
+    // ⚠️ URL de OneSpan
+    const url = `${config.esignlive.url}/${packageId}/roles/Signer1/signingUrl`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: process.env.ONESPAN_API_KEY,
+      },
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("❌ Error OneSpan /signingUrl:", text);
+      return res.status(response.status).send(text);
+    }
+
+    const data = await response.json();
+    res.json({ signingUrl: data.url });
+  } catch (err) {
+    console.error("❌ Error en /api/getSigningUrl:", err);
+    res.status(500).json({ error: "Error obteniendo URL de firma" });
+  }
+});
+
+/* ============================================================
    SERVIDOR
 ============================================================ */
 const PORT = process.env.PORT || config.server.port;
@@ -127,4 +172,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Servidor en ${config.backend.baseUrl}`);
   console.log(`   - POST ${config.backend.fillPdfEndpoint}`);
   console.log(`   - POST ${config.backend.signEndpoint}`);
+  console.log(`   - POST ${config.backend.getSigningUrlEndpoint}`);
 });
