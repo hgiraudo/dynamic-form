@@ -7,7 +7,6 @@ import * as fieldMappers from "./fieldMappers";
 import * as fieldFormatters from "./fieldFormatters";
 import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "./utils/utils";
 import config from "../../shared/config.general.js";
-import { buildPdfJson } from "./utils/buildPdfJson";
 import { buildTransactionJson } from "./utils/buildTransactionJson.js";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -220,7 +219,7 @@ function WizardForm() {
       setModalLoading(true); // 🔹 mostrar modal de espera
 
       // 1. Generar PDF y transactionJson
-      const pdfJson = buildPdfJson(formData);
+      const pdfJson = getMappedFormData();
       const pdfResp = await fetch("/form/persona-juridica.pdf");
       const pdfBlob = await pdfResp.blob();
       const pdfFile = new File([pdfBlob], "persona-juridica.pdf", {
@@ -263,7 +262,6 @@ function WizardForm() {
       const urlData = await urlResp.json();
 
       // 4. Mostrar modal final
-      setTransactionId(signData.id);
       setSigningUrl(urlData.signingUrl);
       setModalLoading(false); // 🔹 ya no está cargando
     } catch (err) {
