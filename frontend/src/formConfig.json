@@ -33,27 +33,10 @@
           "hideOnRevision": true
         },
         {
-          "_comentario": "Valor para el Formulario",
-          "name": "SujetoObligadoBoolean",
+          "name": "SujetoObligado",
           "label": "Sujeto Obligado",
           "type": "checkbox",
-          "default": false,
-          "mapper": "sujetoObligadoMapper",
-          "hideOnRevision": true
-        },
-        {
-          "_comentario": "Valor para la hoja de Revisión",
-          "name": "SujetoObligadoDesc",
-          "label": "Sujeto Obligado",
-          "type": "hidden",
-          "default": "No"
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "SujetoObligado",
-          "type": "hidden",
-          "default": false,
-          "hideOnRevision": true
+          "default": false
         },
         {
           "name": "TramiteFecha",
@@ -193,7 +176,8 @@
         {
           "name": "RepresentanteNombre1",
           "label": "Nombre",
-          "type": "text"
+          "type": "text",
+          "mapper": "representanteNombre1Mapper"
         },
         {
           "name": "RepresentanteDNI1",
@@ -275,13 +259,15 @@
           "name": "RepresentanteApellido2",
           "label": "Apellido ",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "tieneRep2", "value": true },
+          "mapper": "representanteApellido2Mapper"
         },
         {
           "name": "RepresentanteNombre2",
           "label": "Nombre ",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "tieneRep2", "value": true },
+          "mapper": "representanteNombre2Mapper"
         },
         {
           "name": "RepresentanteDNI2",
@@ -329,7 +315,8 @@
           "name": "RepresentanteEmail2",
           "label": "Correo Electrónico ",
           "type": "email",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "tieneRep2", "value": true },
+          "mapper": "representanteEmail2Mapper"
         },
         {
           "name": "RepresentanteDomicilio2",

@@ -36,11 +36,10 @@ export const usoDeFirmaMapper = (formData) => {
   return { ...formData, ...result };
 };
 
-export const sujetoObligadoMapper = (formData) => {
+export const representanteNombre1Mapper = (formData) => {
   const mapped = { ...formData };
-  if ("SujetoObligadoBoolean" in formData) {
-    mapped.SujetoObligadoDesc = formData.SujetoObligadoBoolean ? "Sí" : "No";
-    mapped.SujetoObligado = formData.SujetoObligadoBoolean ? "/" : "";
+  if (formData.RepresentanteNombre1) {
+    mapped.Firmante1Nombre = formData.RepresentanteNombre1;
   }
   return mapped;
 };
@@ -61,6 +60,30 @@ export const representanteEmail1Mapper = (formData) => {
   return mapped;
 };
 
+export const representanteApellido2Mapper = (formData) => {
+  const mapped = { ...formData };
+  if (formData.RepresentanteApellido2) {
+    mapped.Firmante2Apellido = formData.RepresentanteApellido2;
+  }
+  return mapped;
+};
+
+export const representanteNombre2Mapper = (formData) => {
+  const mapped = { ...formData };
+  if (formData.RepresentanteNombre2) {
+    mapped.Firmante2Nombre = formData.RepresentanteNombre2;
+  }
+  return mapped;
+};
+
+export const representanteEmail2Mapper = (formData) => {
+  const mapped = { ...formData };
+  if (formData.RepresentanteEmail2) {
+    mapped.Firmante2Email = formData.RepresentanteEmail2;
+  }
+  return mapped;
+};
+
 // 📨 Mapper genérico para correos electrónicos
 export const emailMapper = (formData, fieldName) => {
   const newData = { ...formData };
@@ -73,9 +96,6 @@ export const emailMapper = (formData, fieldName) => {
     newData[`CorreoElectronicoUsuario${index}`] = usuario;
     newData[`CorreoElectronicoDominio${index}`] = dominio;
   }
-
-  // opcional: eliminamos el campo original
-  // delete newData[fieldName];
 
   return newData;
 };

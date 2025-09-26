@@ -68,6 +68,9 @@ function WizardForm() {
           mappedData = fieldMappers[field.mapper](mappedData, field.name);
         } else if (field.type === "date" && mappedData[field.name]) {
           mappedData[field.name] = formatDateDDMMYYYY(mappedData[field.name]);
+        } else if (field.type === "checkbox") {
+          // 👇 exportar como "/" o ""
+          mappedData[field.name] = mappedData[field.name] ? "/" : "";
         }
       });
     });
@@ -82,7 +85,7 @@ function WizardForm() {
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = "form-data.json"; // 👈 nombre del archivo
+      a.download = "persona-juridica-allaria.json";
       a.click();
 
       URL.revokeObjectURL(url);
@@ -329,21 +332,30 @@ function WizardForm() {
 
                     {step.fields
                       .filter((field) => !field.hideOnRevision)
-                      .map((field, idx) => (
-                        <div
-                          key={field.name}
-                          className={`grid grid-cols-2 gap-4 px-4 py-2 items-center ${
-                            idx % 2 === 0 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          <span className="font-medium text-allaria-blue text-right pr-4">
-                            {field.label}
-                          </span>
-                          <span className="text-gray-700 break-words">
-                            {String(getMappedFormData()[field.name] ?? "")}
-                          </span>
-                        </div>
-                      ))}
+                      .map((field, idx) => {
+                        let displayValue =
+                          getMappedFormData()[field.name] ?? "";
+                        // 👇 Mostrar Sí/No en la revisión si es checkbox
+                        if (field.type === "checkbox") {
+                          displayValue = formData[field.name] ? "Sí" : "No";
+                        }
+
+                        return (
+                          <div
+                            key={field.name}
+                            className={`grid grid-cols-2 gap-4 px-4 py-2 items-center ${
+                              idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+                            }`}
+                          >
+                            <span className="font-medium text-allaria-blue text-right pr-4">
+                              {field.label}
+                            </span>
+                            <span className="text-gray-700 break-words">
+                              {displayValue}
+                            </span>
+                          </div>
+                        );
+                      })}
                   </div>
                 ))}
               </div>
