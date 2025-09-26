@@ -496,7 +496,7 @@ function WizardForm() {
               ) : (
                 <>
                   <img
-                    src="/public/img/allaria-logo-color.svg"
+                    src="/img/allaria-logo-color.svg"
                     alt="Allaria Logo"
                     className="h-16 mx-auto mb-4"
                   />
