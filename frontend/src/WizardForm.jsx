@@ -309,21 +309,23 @@ function WizardForm() {
                       {step.title}
                     </h3>
 
-                    {step.fields.map((field, idx) => (
-                      <div
-                        key={field.name}
-                        className={`grid grid-cols-2 gap-4 px-4 py-2 items-center ${
-                          idx % 2 === 0 ? "bg-gray-50" : "bg-white"
-                        }`}
-                      >
-                        <span className="font-medium text-allaria-blue text-right pr-4">
-                          {field.label}
-                        </span>
-                        <span className="text-gray-700 break-words">
-                          {String(getMappedFormData()[field.name] ?? "")}
-                        </span>
-                      </div>
-                    ))}
+                    {step.fields
+                      .filter((field) => !field.hideOnRevision)
+                      .map((field, idx) => (
+                        <div
+                          key={field.name}
+                          className={`grid grid-cols-2 gap-4 px-4 py-2 items-center ${
+                            idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+                          }`}
+                        >
+                          <span className="font-medium text-allaria-blue text-right pr-4">
+                            {field.label}
+                          </span>
+                          <span className="text-gray-700 break-words">
+                            {String(getMappedFormData()[field.name] ?? "")}
+                          </span>
+                        </div>
+                      ))}
                   </div>
                 ))}
               </div>

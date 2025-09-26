@@ -18,11 +18,42 @@
           "mapper": "tipoDeTramiteMapper"
         },
         {
-          "name": "SujetoObligado",
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "TipoDeTramiteApertura",
+          "hideOnRevision": true
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "TipoDeTramiteActualizacion",
+          "hideOnRevision": true
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "TipoDeTramiteIncorporacion",
+          "hideOnRevision": true
+        },
+        {
+          "_comentario": "Valor para el Formulario",
+          "name": "SujetoObligadoBoolean",
           "label": "Sujeto Obligado",
           "type": "checkbox",
           "default": false,
-          "mapper": "sujetoObligadoMapper"
+          "mapper": "sujetoObligadoMapper",
+          "hideOnRevision": true
+        },
+        {
+          "_comentario": "Valor para la hoja de Revisión",
+          "name": "SujetoObligadoDesc",
+          "label": "Sujeto Obligado",
+          "type": "hidden",
+          "default": "No"
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "SujetoObligado",
+          "type": "hidden",
+          "default": false,
+          "hideOnRevision": true
         },
         {
           "name": "TramiteFecha",
@@ -37,6 +68,16 @@
           "options": ["Indistinta", "Conjunta"],
           "default": "Indistinta",
           "mapper": "usoDeFirmaMapper"
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "UsoDeFirmaIndistinta",
+          "hideOnRevision": true
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "UsoDeFirmaConjunta",
+          "hideOnRevision": true
         }
       ]
     },
@@ -60,14 +101,12 @@
         {
           "name": "FechaDeConstitucion",
           "label": "Fecha de Constitución",
-          "type": "date",
-          "default": "2001-01-01"
+          "type": "date"
         },
         {
           "name": "FechaDeInscripcion",
           "label": "Fecha de Inscripción",
-          "type": "date",
-          "default": "2001-01-01"
+          "type": "date"
         },
         {
           "name": "LugarDeInscripcion",
@@ -179,8 +218,7 @@
         {
           "name": "RepresentanteFechaDeNacimiento1",
           "label": "Fecha de Nacimiento",
-          "type": "date",
-          "default": "2001-01-01"
+          "type": "date"
         },
         {
           "name": "RepresentanteCUIT1",
@@ -221,14 +259,12 @@
         {
           "name": "RepresentanteVencimiento1",
           "label": "Vencimiento en el Cargo",
-          "type": "date",
-          "default": "2001-01-01"
+          "type": "date"
         },
         {
           "name": "RepresentanteNuevoVencimiento1",
           "label": "Nuevo Vencimiento en el Cargo",
-          "type": "date",
-          "default": "2001-01-01"
+          "type": "date"
         },
         {
           "name": "tieneRep2",
@@ -275,7 +311,6 @@
           "name": "RepresentanteFechaDeNacimiento2",
           "label": "Fecha de Nacimiento ",
           "type": "date",
-          "default": "2001-01-01",
           "visibleIf": { "field": "tieneRep2", "value": true }
         },
         {
@@ -324,14 +359,12 @@
           "name": "RepresentanteVencimiento2",
           "label": "Vencimiento en el Cargo ",
           "type": "date",
-          "default": "2001-01-01",
           "visibleIf": { "field": "tieneRep2", "value": true }
         },
         {
           "name": "RepresentanteNuevoVencimiento2",
           "label": "Nuevo Vencimiento en el Cargo ",
           "type": "date",
-          "default": "2001-01-01",
           "visibleIf": { "field": "tieneRep2", "value": true }
         }
       ]

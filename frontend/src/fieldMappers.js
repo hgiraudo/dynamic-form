@@ -38,8 +38,9 @@ export const usoDeFirmaMapper = (formData) => {
 
 export const sujetoObligadoMapper = (formData) => {
   const mapped = { ...formData };
-  if ("SujetoObligado" in formData) {
-    mapped.SujetoObligado = formData.SujetoObligado ? "/" : "";
+  if ("SujetoObligadoBoolean" in formData) {
+    mapped.SujetoObligadoDesc = formData.SujetoObligadoBoolean ? "Sí" : "No";
+    mapped.SujetoObligado = formData.SujetoObligadoBoolean ? "/" : "";
   }
   return mapped;
 };
