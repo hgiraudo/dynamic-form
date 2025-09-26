@@ -328,7 +328,7 @@ function WizardForm() {
                 ))}
               </div>
 
-              {appConfig.showJsonOnReview && (
+              {appConfig.showJsonOnRevision && (
                 <pre className="mt-6 p-4 bg-gray-100 border rounded overflow-x-auto text-xs">
                   {JSON.stringify(getMappedFormData(), null, 2)}
                 </pre>
