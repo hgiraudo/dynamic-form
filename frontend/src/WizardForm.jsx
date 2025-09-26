@@ -5,7 +5,7 @@ import formConfig from "./formConfig.json";
 import appConfig from "./appConfig.json";
 import * as fieldMappers from "./fieldMappers";
 import * as fieldFormatters from "./fieldFormatters";
-import { formatDateDDMMYYYY } from "./utils";
+import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "./utils/utils";
 import config from "../../shared/config.general.js";
 import { buildPdfJson } from "./utils/buildPdfJson";
 import { buildTransactionJson } from "./utils/buildTransactionJson.js";
@@ -34,7 +34,6 @@ function WizardForm() {
   const [stepIndex, setStepIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [modalLoading, setModalLoading] = useState(false); // 🔹 indica que está creando la transacción
-  const [transactionId, setTransactionId] = useState("");
   const [signingUrl, setSigningUrl] = useState("");
   const fileInputRef = useRef(null);
   const currentStep = formConfig.steps[stepIndex];
@@ -60,20 +59,47 @@ function WizardForm() {
     });
   };
 
+  // 🔹 Importar JSON y normalizar
+  const handleImport = (importedData) => {
+    let normalizedData = { ...importedData };
+
+    formConfig.steps.forEach((step) => {
+      step.fields.forEach((field) => {
+        // Si el campo es tipo "date", convertirlo a formato válido HTML5 (YYYY-MM-DD)
+        if (field.type === "date" && normalizedData[field.name]) {
+          normalizedData[field.name] = parseDateDDMMYYYY(
+            normalizedData[field.name]
+          );
+        }
+
+        // Si es checkbox, convertir "/" → true y "" → false
+        if (field.type === "checkbox") {
+          normalizedData[field.name] = normalizedData[field.name] === "/";
+        }
+      });
+    });
+
+    setFormData(normalizedData);
+  };
+
   const getMappedFormData = () => {
     let mappedData = { ...formData };
+
     formConfig.steps.forEach((step) => {
       step.fields.forEach((field) => {
         if (field.mapper && fieldMappers[field.mapper]) {
+          // 🔹 Aplica mapper si está definido
           mappedData = fieldMappers[field.mapper](mappedData, field.name);
         } else if (field.type === "date" && mappedData[field.name]) {
+          // 🔹 Exportar fecha en formato DD-MM-YYYY
           mappedData[field.name] = formatDateDDMMYYYY(mappedData[field.name]);
         } else if (field.type === "checkbox") {
-          // 👇 exportar como "/" o ""
+          // 🔹 Exportar checkbox como "/" o ""
           mappedData[field.name] = mappedData[field.name] ? "/" : "";
         }
       });
     });
+
     return mappedData;
   };
 
@@ -385,6 +411,7 @@ function WizardForm() {
                   <CIcon icon={Icons.cilCloudUpload} className="w-5 h-5 mr-2" />
                   Importar JSON
                 </button>
+
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -394,7 +421,8 @@ function WizardForm() {
                     const reader = new FileReader();
                     reader.onload = (ev) => {
                       try {
-                        setFormData(JSON.parse(ev.target.result));
+                        const importedData = JSON.parse(ev.target.result);
+                        handleImport(importedData); // 🔹 ahora usa tu función
                       } catch {
                         alert("Archivo JSON inválido ❌");
                       }
