@@ -164,6 +164,10 @@ app.post(config.backend.getSigningUrlEndpoint, async (req, res) => {
   }
 });
 
+app.get(config.backend.healthEndpoint, (req, res) => {
+  res.json({ status: "ok" });
+});
+
 /* ============================================================
    SERVIDOR
 ============================================================ */
@@ -173,4 +177,5 @@ app.listen(PORT, () => {
   console.log(`   - POST ${config.backend.fillPdfEndpoint}`);
   console.log(`   - POST ${config.backend.signEndpoint}`);
   console.log(`   - POST ${config.backend.getSigningUrlEndpoint}`);
+  console.log(`   - POST ${config.backend.healthEndpoint}`);
 });

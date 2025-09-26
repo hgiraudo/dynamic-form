@@ -8,6 +8,7 @@ export default {
     fillPdfEndpoint: "/api/fill-pdf",
     signEndpoint: "/api/sign",
     getSigningUrlEndpoint: "/api/getSigningUrl",
+    healthEndpoint: "/api/health",
   },
   python: {
     executable: "python",
