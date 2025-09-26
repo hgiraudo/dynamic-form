@@ -74,6 +74,24 @@ function WizardForm() {
     return mappedData;
   };
 
+  const handleExport = () => {
+    try {
+      const dataStr = JSON.stringify(getMappedFormData(), null, 2);
+      const blob = new Blob([dataStr], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "form-data.json"; // 👈 nombre del archivo
+      a.click();
+
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("❌ Error exportando JSON:", err);
+      alert("No se pudo exportar el JSON");
+    }
+  };
+
   const renderField = (field) => {
     if (field.visibleIf) {
       const { field: depField, value } = field.visibleIf;
@@ -340,7 +358,7 @@ function WizardForm() {
               <div className="flex justify-between gap-4 pt-6">
                 <button
                   type="button"
-                  onClick={() => window.alert("Función de descarga JSON")}
+                  onClick={handleExport} // 👈 ahora usa la función real
                   className="flex-1 flex items-center justify-center px-4 py-3 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue"
                 >
                   <CIcon icon={Icons.cilSave} className="w-5 h-5 mr-2" />
