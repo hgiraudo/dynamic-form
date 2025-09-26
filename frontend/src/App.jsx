@@ -1,5 +1,5 @@
 import React from "react";
-import WizardForm from "./WizardForm";
+import WizardForm from "./components/forms/WizardForm";
 
 function App() {
   return (

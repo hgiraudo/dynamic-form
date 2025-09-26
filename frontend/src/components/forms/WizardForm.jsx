@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
 import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
-import formConfig from "./formConfig.json";
-import appConfig from "./appConfig.json";
-import * as fieldMappers from "./fieldMappers";
-import * as fieldFormatters from "./fieldFormatters";
-import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "./utils/utils";
-import config from "../../shared/config.general.js";
-import { buildTransactionJson } from "./utils/buildTransactionJson.js";
-import { motion, AnimatePresence } from "framer-motion";
+import formConfig from "../../config/formConfig.json";
+import appConfig from "../../config/appConfig.json";
+import * as fieldMappers from "../../utils/fieldMappers";
+import * as fieldFormatters from "../../utils/fieldFormatters";
+import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "../../utils/utils";
+import config from "../../../../shared/config.general.js";
+import { buildTransactionJson } from "../../utils/buildTransactionJson.js";
+import { AnimatePresence } from "framer-motion";
 
 function WizardForm() {
   const [formData, setFormData] = useState(() => {
