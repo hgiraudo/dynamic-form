@@ -1,0 +1,471 @@
+{
+  "steps": [
+    {
+      "title": "Introducción",
+      "icon": "cilBolt",
+      "fields": [
+        {
+          "name": "NumeroDeComitente",
+          "label": "Número de Comitente",
+          "type": "text"
+        },
+        {
+          "name": "TipoDeTramite",
+          "label": "Tipo de Trámite",
+          "type": "button-group",
+          "options": ["Apertura", "Actualización", "Incorporación"],
+          "default": "Apertura",
+          "mapper": "tipoDeTramiteMapper"
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "TipoDeTramiteApertura",
+          "hideOnRevision": true
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "TipoDeTramiteActualizacion",
+          "hideOnRevision": true
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "TipoDeTramiteIncorporacion",
+          "hideOnRevision": true
+        },
+        {
+          "name": "SujetoObligado",
+          "label": "Sujeto Obligado",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "name": "TramiteFecha",
+          "label": "Fecha de Trámite",
+          "type": "date",
+          "default": "today"
+        },
+        {
+          "name": "TipoFirma",
+          "label": "Tipo de Firma",
+          "type": "button-group",
+          "options": ["Indistinta", "Conjunta"],
+          "default": "Indistinta",
+          "mapper": "usoDeFirmaMapper"
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "UsoDeFirmaIndistinta",
+          "hideOnRevision": true
+        },
+        {
+          "_comentario": "Valor especial para el PDF: /",
+          "name": "UsoDeFirmaConjunta",
+          "hideOnRevision": true
+        }
+      ]
+    },
+    {
+      "title": "Razón Social",
+      "icon": "cilFactory",
+      "fields": [
+        {
+          "name": "RazonSocial",
+          "label": "Razón Social",
+          "type": "text",
+          "placeholder": "ej. Arroyito S.A."
+        },
+        {
+          "name": "CUIT",
+          "label": "CUIT",
+          "type": "text",
+          "placeholder": "00-12345678-9",
+          "formatter": "cuitFormatter"
+        },
+        {
+          "name": "FechaDeConstitucion",
+          "label": "Fecha de Constitución",
+          "type": "date"
+        },
+        {
+          "name": "FechaDeInscripcion",
+          "label": "Fecha de Inscripción",
+          "type": "date"
+        },
+        {
+          "name": "LugarDeInscripcion",
+          "label": "Lugar de Inscripción",
+          "type": "text"
+        },
+        {
+          "name": "NumeroDeInscripcion",
+          "label": "Número de Inscripción",
+          "type": "text"
+        },
+        {
+          "name": "DomicilioAdministracion",
+          "label": "Domicilio de Administración",
+          "type": "text"
+        },
+        {
+          "name": "DomicilioComercial",
+          "label": "Domicilio Comercial",
+          "type": "text"
+        },
+        {
+          "name": "ActividadPrincipal",
+          "label": "Actividad Principal",
+          "type": "text"
+        },
+        { "name": "Telefono", "label": "Teléfono", "type": "text" },
+        {
+          "name": "CorreoElectronico1",
+          "label": "Correo electrónico 1",
+          "type": "email",
+          "mapper": "emailMapper"
+        },
+        {
+          "name": "CorreoElectronico2",
+          "label": "Correo electrónico 2",
+          "type": "email",
+          "mapper": "emailMapper"
+        },
+        {
+          "name": "CorreoElectronico3",
+          "label": "Correo electrónico 3",
+          "type": "email",
+          "mapper": "emailMapper"
+        },
+
+        {
+          "name": "Accionistas",
+          "label": "Accionistas / Propietarios",
+          "type": "textarea"
+        },
+        {
+          "name": "BeneficiarioFinal",
+          "label": "Beneficiario Final / Controlante",
+          "type": "textarea"
+        },
+        {
+          "name": "CondicionAnteIVA",
+          "label": "Condición ante el IVA",
+          "type": "text"
+        },
+        {
+          "name": "CondicionAnteGanancias",
+          "label": "Condición ante Ganancias",
+          "type": "text"
+        },
+        {
+          "name": "CondicionAnteIIBB",
+          "label": "Condición ante IIBB",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "title": "Representantes",
+      "icon": "cilUser",
+      "fields": [
+        {
+          "name": "RepresentanteApellido1",
+          "label": "Apellido",
+          "type": "text",
+          "mapper": "representanteApellido1Mapper"
+        },
+        {
+          "name": "RepresentanteNombre1",
+          "label": "Nombre",
+          "type": "text",
+          "mapper": "representanteNombre1Mapper"
+        },
+        {
+          "name": "RepresentanteDNI1",
+          "label": "DNI / LE / LC",
+          "type": "text"
+        },
+        {
+          "name": "RepresentantePasaporte1",
+          "label": "Pasaporte / CI extranjeros",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteNacionalidad1",
+          "label": "Nacionalidad",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteLugarDeNacimiento1",
+          "label": "Lugar de Nacimiento",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteFechaDeNacimiento1",
+          "label": "Fecha de Nacimiento",
+          "type": "date"
+        },
+        {
+          "name": "RepresentanteCUIT1",
+          "label": "CUIT / CUIL",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Teléfono",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteEmail1",
+          "label": "Correo Electrónico",
+          "type": "email",
+          "mapper": "representanteEmail1Mapper"
+        },
+        {
+          "name": "RepresentanteDomicilio1",
+          "label": "Domicilio",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteActividad1",
+          "label": "Actividad / Profesión / Oficio / Industria",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteEstadoCivil1",
+          "label": "Estado Civil",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteCargo1",
+          "label": "Cargo en la Sociedad",
+          "type": "text"
+        },
+        {
+          "name": "RepresentanteVencimiento1",
+          "label": "Vencimiento en el Cargo",
+          "type": "date"
+        },
+        {
+          "name": "RepresentanteNuevoVencimiento1",
+          "label": "Nuevo Vencimiento en el Cargo",
+          "type": "date"
+        },
+        {
+          "name": "tieneRep2",
+          "label": "¿Agregar un segundo representante?",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteApellido2",
+          "label": "Apellido ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true },
+          "mapper": "representanteApellido2Mapper"
+        },
+        {
+          "name": "RepresentanteNombre2",
+          "label": "Nombre ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true },
+          "mapper": "representanteNombre2Mapper"
+        },
+        {
+          "name": "RepresentanteDNI2",
+          "label": "DNI / LE / LC ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentantePasaporte2",
+          "label": "Pasaporte / CI extranjeros ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteNacionalidad2",
+          "label": "Nacionalidad ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteLugarDeNacimiento2",
+          "label": "Lugar de Nacimiento ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteFechaDeNacimiento2",
+          "label": "Fecha de Nacimiento ",
+          "type": "date",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteCUIT2",
+          "label": "CUIT / CUIL ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteTelefono2",
+          "label": "Teléfono ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteEmail2",
+          "label": "Correo Electrónico ",
+          "type": "email",
+          "visibleIf": { "field": "tieneRep2", "value": true },
+          "mapper": "representanteEmail2Mapper"
+        },
+        {
+          "name": "RepresentanteDomicilio2",
+          "label": "Domicilio ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteActividad2",
+          "label": "Actividad / Profesión / Oficio / Industria ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteEstadoCivil2",
+          "label": "Estado Civil ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteCargo2",
+          "label": "Cargo en la Sociedad ",
+          "type": "text",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteVencimiento2",
+          "label": "Vencimiento en el Cargo ",
+          "type": "date",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteNuevoVencimiento2",
+          "label": "Nuevo Vencimiento en el Cargo ",
+          "type": "date",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        }
+      ]
+    },
+    {
+      "title": "Oficial de Cuenta",
+      "icon": "cilBriefcase",
+      "fields": [
+        {
+          "name": "Confecciono",
+          "label": "Datos Completados Por",
+          "type": "text"
+        },
+        { "name": "Oficial", "label": "Oficial", "type": "text" },
+        { "name": "Administrador", "label": "Administrador", "type": "text" }
+      ]
+    },
+    {
+      "title": "Firmantes",
+      "icon": "cilPeople",
+      "fields": [
+        {
+          "name": "Firmante1Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "disabled": true
+        },
+        {
+          "name": "Firmante1Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "disabled": true
+        },
+        {
+          "name": "Firmante1Email",
+          "label": "Correo",
+          "type": "email",
+          "disabled": true
+        },
+        {
+          "name": "CertificadoRep1",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox"
+        },
+        {
+          "name": "VerificacionRep1",
+          "label": "Verificar identidad con documento y prueba de vida",
+          "type": "checkbox"
+        },
+        {
+          "name": "SmsRep1",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": { "field": "SmsRep1", "value": true },
+          "placeholder": "+54 9 11 1234-5678"
+        },
+
+        {
+          "name": "Firmante2Apellido",
+          "label": "Apellido ",
+          "type": "text",
+          "disabled": true,
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "Firmante2Nombre",
+          "label": "Nombre Completo ",
+          "type": "text",
+          "disabled": true,
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "Firmante2Email",
+          "label": "Correo ",
+          "type": "email",
+          "disabled": true,
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "CertificadoRep2",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "VerificacionRep2",
+          "label": "Verificar identidad con documento y prueba de vida",
+          "type": "checkbox",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "SmsRep2",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox",
+          "visibleIf": { "field": "tieneRep2", "value": true }
+        },
+        {
+          "name": "RepresentanteTelefono2",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": { "field": "SmsRep2", "value": true },
+          "placeholder": "+54 9 11 1234-5678"
+        }
+      ]
+    },
+    {
+      "title": "Revisar y Firmar",
+      "icon": "cilTask",
+      "fields": []
+    }
+  ]
+}

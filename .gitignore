@@ -10,11 +10,16 @@ dist/
 *.log
 npm-debug.log
 yarn-error.log
+logs/*.log
+logs/*.pid
+logs
+*.pid
 
 # Archivos de entorno
 .env
 .env.local
 .env.*.local
+.env.*
 
 # Archivos de IDE o editores (si usas alguno)
 .vscode/
