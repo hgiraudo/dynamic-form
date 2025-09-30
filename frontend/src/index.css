@@ -1,6 +1,2 @@
 @import "tailwindcss";
-
-@theme {
-  --color-allaria-blue: #0A2D5E;
-  --color-allaria-light-blue: #154284;
-}
+@import "./branding/brandColors.css";

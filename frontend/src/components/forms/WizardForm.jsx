@@ -9,6 +9,7 @@ import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "../../utils/utils";
 import config from "../../../../shared/config.general.js";
 import { buildTransactionJson } from "../../utils/buildTransactionJson.js";
 import { AnimatePresence } from "framer-motion";
+import { brandConfig } from "../../branding/brandConfig";
 
 function WizardForm() {
   const [formData, setFormData] = useState(() => {
@@ -111,7 +112,7 @@ function WizardForm() {
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = "persona-juridica-allaria.json";
+      a.download = `persona-juridica-${brandConfig.name.toLowerCase()}.json`;
       a.click();
 
       URL.revokeObjectURL(url);
@@ -290,8 +291,8 @@ function WizardForm() {
       <div className="w-80 bg-allaria-blue flex flex-col text-blue-200 p-2 pl-4">
         <div className="p-6 text-center">
           <img
-            src="/img/allaria-logo-blanco.svg"
-            alt="Allaria Logo"
+            src={brandConfig.logos.white}
+            alt={`${brandConfig.name} Logo`}
             className="h-12 mx-auto"
           />
         </div>
@@ -507,8 +508,8 @@ function WizardForm() {
               ) : modalError ? (
                 <div>
                   <img
-                    src="/img/allaria-logo-color.svg"
-                    alt="Allaria Logo"
+                    src={brandConfig.logos.color}
+                    alt={`${brandConfig.name} Logo`}
                     className="h-16 mx-auto mb-4"
                   />
                   <h3 className="text-2xl font-bold text-orange-800 mb-4 p-4">
@@ -527,8 +528,8 @@ function WizardForm() {
               ) : (
                 <div>
                   <img
-                    src="/img/allaria-logo-color.svg"
-                    alt="Allaria Logo"
+                    src={brandConfig.logos.color}
+                    alt={`${brandConfig.name} Logo`}
                     className="h-16 mx-auto mb-4"
                   />
                   <h3 className="text-2xl font-bold text-allaria-blue mb-6">
