@@ -1,0 +1,1084 @@
+{
+    "fields": [
+        {
+            "field": "TipoDeTramiteActualizacion",
+            "page": 1,
+            "x": 375.475,
+            "y": 794.374,
+            "width": 16.129999999999995,
+            "height": 12.750999999999976,
+            "type": "/Btn"
+        },
+        {
+            "field": "TipoDeTramiteIncorporacion",
+            "page": 1,
+            "x": 469.256,
+            "y": 793.999,
+            "width": 16.130000000000052,
+            "height": 13.125999999999976,
+            "type": "/Btn"
+        },
+        {
+            "field": "SujetoObligado",
+            "page": 1,
+            "x": 548.032,
+            "y": 793.999,
+            "width": 16.129999999999995,
+            "height": 13.125999999999976,
+            "type": "/Btn"
+        },
+        {
+            "field": "TramiteFecha",
+            "page": 1,
+            "x": 189.414,
+            "y": 765.123,
+            "width": 44.640000000000015,
+            "height": 10.500999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "UsoDeFirmaIndistinta",
+            "page": 1,
+            "x": 375.85,
+            "y": 763.998,
+            "width": 16.129999999999995,
+            "height": 13.125999999999976,
+            "type": "/Btn"
+        },
+        {
+            "field": "NumeroDeComitente",
+            "page": 1,
+            "x": 501.891,
+            "y": 740.371,
+            "width": 54.01799999999997,
+            "height": 24.752000000000066,
+            "type": "/Tx"
+        },
+        {
+            "field": "RazonSocial",
+            "page": 1,
+            "x": 177.035,
+            "y": 692.743,
+            "width": 386.75200000000007,
+            "height": 24.751999999999953,
+            "type": "/Tx"
+        },
+        {
+            "field": "FechaDeConstitucion",
+            "page": 1,
+            "x": 173.659,
+            "y": 670.618,
+            "width": 115.16300000000001,
+            "height": 12.375,
+            "type": "/Tx"
+        },
+        {
+            "field": "CUIT",
+            "page": 1,
+            "x": 472.257,
+            "y": 670.993,
+            "width": 97.90699999999998,
+            "height": 12.0,
+            "type": "/Tx"
+        },
+        {
+            "field": "FechaDeInscripcion",
+            "page": 1,
+            "x": 174.034,
+            "y": 655.616,
+            "width": 114.78800000000001,
+            "height": 12.002000000000066,
+            "type": "/Tx"
+        },
+        {
+            "field": "LugarDeInscripcion",
+            "page": 1,
+            "x": 471.882,
+            "y": 655.616,
+            "width": 99.03199999999998,
+            "height": 12.002000000000066,
+            "type": "/Tx"
+        },
+        {
+            "field": "NumeroDeInscripcion",
+            "page": 1,
+            "x": 170.658,
+            "y": 640.616,
+            "width": 399.506,
+            "height": 12.75,
+            "type": "/Tx"
+        },
+        {
+            "field": "DomicilioAdministracion",
+            "page": 1,
+            "x": 170.283,
+            "y": 625.99,
+            "width": 399.131,
+            "height": 12.750999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "DomicilioComercial",
+            "page": 1,
+            "x": 170.283,
+            "y": 612.115,
+            "width": 399.131,
+            "height": 12.75,
+            "type": "/Tx"
+        },
+        {
+            "field": "ActividadPrincipal",
+            "page": 1,
+            "x": 171.033,
+            "y": 598.988,
+            "width": 399.131,
+            "height": 11.251999999999953,
+            "type": "/Tx"
+        },
+        {
+            "field": "Telefono",
+            "page": 1,
+            "x": 171.033,
+            "y": 586.238,
+            "width": 399.131,
+            "height": 12.0,
+            "type": "/Tx"
+        },
+        {
+            "field": "CorreoElectronicoUsuario1",
+            "page": 1,
+            "x": 171.408,
+            "y": 570.113,
+            "width": 202.56700000000004,
+            "height": 12.0,
+            "type": "/Tx"
+        },
+        {
+            "field": "CorreoElectronicoDominio1",
+            "page": 1,
+            "x": 387.854,
+            "y": 571.238,
+            "width": 182.31,
+            "height": 12.0,
+            "type": "/Tx"
+        },
+        {
+            "field": "CorreoElectronicoUsuario2",
+            "page": 1,
+            "x": 171.033,
+            "y": 554.737,
+            "width": 202.566,
+            "height": 12.0,
+            "type": "/Tx"
+        },
+        {
+            "field": "CorreoElectronicoDominio2",
+            "page": 1,
+            "x": 388.229,
+            "y": 555.112,
+            "width": 183.81,
+            "height": 12.0,
+            "type": "/Tx"
+        },
+        {
+            "field": "CorreoElectronicoUsuario3",
+            "page": 1,
+            "x": 171.783,
+            "y": 539.736,
+            "width": 202.56700000000004,
+            "height": 12.0,
+            "type": "/Tx"
+        },
+        {
+            "field": "CorreoElectronicoDominio3",
+            "page": 1,
+            "x": 388.604,
+            "y": 539.361,
+            "width": 182.685,
+            "height": 12.0,
+            "type": "/Tx"
+        },
+        {
+            "field": "Accionistas",
+            "page": 1,
+            "x": 171.408,
+            "y": 509.359,
+            "width": 397.63,
+            "height": 26.62700000000001,
+            "type": "/Tx"
+        },
+        {
+            "field": "BeneficiarioFinal",
+            "page": 1,
+            "x": 171.408,
+            "y": 480.858,
+            "width": 397.63,
+            "height": 27.000999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "CondicionAnteIVA",
+            "page": 1,
+            "x": 170.658,
+            "y": 464.732,
+            "width": 126.04100000000003,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "CondicionAnteGanancias",
+            "page": 1,
+            "x": 470.006,
+            "y": 465.482,
+            "width": 100.15800000000002,
+            "height": 10.875,
+            "type": "/Tx"
+        },
+        {
+            "field": "CondicionAnteIIBB",
+            "page": 1,
+            "x": 170.658,
+            "y": 445.98,
+            "width": 126.04100000000003,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteApellido1",
+            "page": 1,
+            "x": 169.533,
+            "y": 406.229,
+            "width": 204.066,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteNombre1",
+            "page": 1,
+            "x": 169.157,
+            "y": 390.478,
+            "width": 204.06699999999998,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteDNI1",
+            "page": 1,
+            "x": 169.533,
+            "y": 376.227,
+            "width": 204.066,
+            "height": 11.251000000000033,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentantePasaporte1",
+            "page": 1,
+            "x": 170.283,
+            "y": 360.476,
+            "width": 204.06700000000004,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteNacionalidad1",
+            "page": 1,
+            "x": 170.283,
+            "y": 345.476,
+            "width": 204.06700000000004,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteLugarDeNacimiento1",
+            "page": 1,
+            "x": 170.658,
+            "y": 328.975,
+            "width": 204.06700000000004,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteFechaDeNacimiento1",
+            "page": 1,
+            "x": 169.908,
+            "y": 313.599,
+            "width": 204.06700000000004,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteCUIT1",
+            "page": 1,
+            "x": 170.283,
+            "y": 298.598,
+            "width": 204.06700000000004,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteTelefono1",
+            "page": 1,
+            "x": 170.283,
+            "y": 282.097,
+            "width": 204.06700000000004,
+            "height": 11.251000000000033,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteDomicilio1",
+            "page": 1,
+            "x": 170.283,
+            "y": 266.721,
+            "width": 204.06700000000004,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteActividad1",
+            "page": 1,
+            "x": 169.533,
+            "y": 244.97,
+            "width": 204.066,
+            "height": 11.251000000000005,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteEstadoCivil1",
+            "page": 1,
+            "x": 169.908,
+            "y": 222.094,
+            "width": 204.06700000000004,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteCargo1",
+            "page": 1,
+            "x": 169.533,
+            "y": 204.468,
+            "width": 204.066,
+            "height": 11.251000000000005,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteVencimiento1",
+            "page": 1,
+            "x": 169.908,
+            "y": 189.467,
+            "width": 204.06700000000004,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteNuevoVencimiento1",
+            "page": 1,
+            "x": 169.908,
+            "y": 174.466,
+            "width": 204.06700000000004,
+            "height": 11.251000000000005,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteApellido2",
+            "page": 1,
+            "x": 377.351,
+            "y": 406.604,
+            "width": 192.063,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteNombre2",
+            "page": 1,
+            "x": 377.351,
+            "y": 391.228,
+            "width": 192.063,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteDNI2",
+            "page": 1,
+            "x": 378.101,
+            "y": 375.852,
+            "width": 192.063,
+            "height": 11.251000000000033,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentantePasaporte2",
+            "page": 1,
+            "x": 377.726,
+            "y": 359.726,
+            "width": 192.063,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteNacionalidad2",
+            "page": 1,
+            "x": 377.726,
+            "y": 344.35,
+            "width": 192.063,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteLugarDeNacimiento2",
+            "page": 1,
+            "x": 378.101,
+            "y": 329.35,
+            "width": 192.063,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteFechaDeNacimiento2",
+            "page": 1,
+            "x": 379.226,
+            "y": 314.349,
+            "width": 192.063,
+            "height": 10.875,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteCUIT2",
+            "page": 1,
+            "x": 377.726,
+            "y": 297.473,
+            "width": 192.063,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteTelefono2",
+            "page": 1,
+            "x": 378.101,
+            "y": 282.472,
+            "width": 192.063,
+            "height": 11.251000000000033,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteDomicilio2",
+            "page": 1,
+            "x": 378.476,
+            "y": 266.346,
+            "width": 192.063,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteActividad2",
+            "page": 1,
+            "x": 377.726,
+            "y": 244.595,
+            "width": 192.063,
+            "height": 11.251000000000005,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteEstadoCivil2",
+            "page": 1,
+            "x": 377.726,
+            "y": 222.094,
+            "width": 192.063,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteCargo2",
+            "page": 1,
+            "x": 377.351,
+            "y": 204.093,
+            "width": 192.063,
+            "height": 11.25,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteVencimiento2",
+            "page": 1,
+            "x": 377.726,
+            "y": 189.467,
+            "width": 192.063,
+            "height": 11.250999999999976,
+            "type": "/Tx"
+        },
+        {
+            "field": "RepresentanteNuevoVencimiento2",
+            "page": 1,
+            "x": 377.726,
+            "y": 174.841,
+            "width": 192.063,
+            "height": 11.251000000000005,
+            "type": "/Tx"
+        },
+        {
+            "field": "Confecciono",
+            "page": 1,
+            "x": 31.1123,
+            "y": 66.0851,
+            "width": 127.91669999999999,
+            "height": 18.751000000000005,
+            "type": "/Tx"
+        },
+        {
+            "field": "Oficial",
+            "page": 1,
+            "x": 169.908,
+            "y": 66.0851,
+            "width": 124.91600000000003,
+            "height": 18.751000000000005,
+            "type": "/Tx"
+        },
+        {
+            "field": "Administrador",
+            "page": 1,
+            "x": 307.203,
+            "y": 66.8351,
+            "width": 168.43,
+            "height": 18.751000000000005,
+            "type": "/Tx"
+        },
+        {
+            "field": "TipoDeTramiteApertura",
+            "page": 1,
+            "x": 222.546,
+            "y": 791.165,
+            "width": 18.0,
+            "height": 18.0,
+            "type": "/Btn"
+        },
+        {
+            "field": "UsoDeFirmaConjunta",
+            "page": 1,
+            "x": 468.657,
+            "y": 761.71,
+            "width": 18.0,
+            "height": 18.0,
+            "type": "/Btn"
+        }
+    ],
+    "labels": [
+        {
+            "text": "Aoertura  1",
+            "page": 1,
+            "x": 189.09,
+            "y": 792.208,
+            "width": 38.72200000000001,
+            "height": 8.0
+        },
+        {
+            "text": "Actualización",
+            "page": 1,
+            "x": 284.73,
+            "y": 792.208,
+            "width": 49.11200000000002,
+            "height": 8.0
+        },
+        {
+            "text": "1",
+            "page": 1,
+            "x": 388.66,
+            "y": 790.458,
+            "width": 5.5120000000000005,
+            "height": 8.0
+        },
+        {
+            "text": "USO DE FIRMA",
+            "page": 1,
+            "x": 335.19000000000005,
+            "y": 778.578,
+            "width": 57.69400000000002,
+            "height": 8.0
+        },
+        {
+            "text": "Suieto Ob.  1",
+            "page": 1,
+            "x": 496.44000000000005,
+            "y": 792.208,
+            "width": 49.111999999999966,
+            "height": 8.0
+        },
+        {
+            "text": "COMITENTE Nº",
+            "page": 1,
+            "x": 493.5800000000001,
+            "y": 779.0699999999999,
+            "width": 71.83699999999993,
+            "height": 11.043999999999983
+        },
+        {
+            "text": "lncorooración",
+            "page": 1,
+            "x": 407.19000000000005,
+            "y": 792.208,
+            "width": 47.61919999999998,
+            "height": 8.0
+        },
+        {
+            "text": "Conjunta",
+            "page": 1,
+            "x": 403.4000000000001,
+            "y": 761.7979999999998,
+            "width": 32.322400000000016,
+            "height": 8.0
+        },
+        {
+            "text": ".",
+            "page": 1,
+            "x": 414.1800000000001,
+            "y": 732.5189999999997,
+            "width": 9.613999999999976,
+            "height": 23.0
+        },
+        {
+            "text": ".",
+            "page": 1,
+            "x": 440.3900000000001,
+            "y": 731.1189999999997,
+            "width": 8.211000000000013,
+            "height": 23.0
+        },
+        {
+            "text": "L",
+            "page": 1,
+            "x": 468.3500000000001,
+            "y": 753.1144999999998,
+            "width": 17.569500000000005,
+            "height": 26.5
+        },
+        {
+            "text": "□",
+            "page": 1,
+            "x": 374.68000000000006,
+            "y": 750.8979999999998,
+            "width": 16.848000000000013,
+            "height": 36.0
+        },
+        {
+            "text": ".",
+            "page": 1,
+            "x": 386.5700000000001,
+            "y": 731.1189999999997,
+            "width": 8.211000000000013,
+            "height": 23.0
+        },
+        {
+            "text": "Indistinta",
+            "page": 1,
+            "x": 299.1900000000001,
+            "y": 761.7979999999998,
+            "width": 33.309000000000026,
+            "height": 8.0
+        },
+        {
+            "text": ".  -",
+            "page": 1,
+            "x": 344.9700000000001,
+            "y": 732.5189999999997,
+            "width": 17.153999999999996,
+            "height": 23.0
+        },
+        {
+            "text": ";�",
+            "page": 1,
+            "x": 63.960000000000036,
+            "y": 761.0989999999999,
+            "width": 20.3018,
+            "height": 13.0
+        },
+        {
+            "text": "11 Allaria",
+            "page": 1,
+            "x": 37.40000000000009,
+            "y": 730.7899999999998,
+            "width": 121.48849999999999,
+            "height": 40.0
+        },
+        {
+            "text": "FECHA",
+            "page": 1,
+            "x": 198.72000000000003,
+            "y": 772.5479999999999,
+            "width": 27.875,
+            "height": 8.0
+        },
+        {
+            "text": ".... .! ..... .l .....",
+            "page": 1,
+            "x": 189.4400000000001,
+            "y": 762.3269999999998,
+            "width": 46.172,
+            "height": 9.0
+        },
+        {
+            "text": ". .  .",
+            "page": 1,
+            "x": 218.10000000000008,
+            "y": 731.1189999999997,
+            "width": 28.831000000000017,
+            "height": 23.0
+        },
+        {
+            "text": "RAZÓN SOCIAL",
+            "page": 1,
+            "x": 60.62000000000012,
+            "y": 697.7499999999998,
+            "width": 74.53,
+            "height": 10.0
+        },
+        {
+            "text": "Fecha de Constitución:",
+            "page": 1,
+            "x": 26.570000000000107,
+            "y": 670.3199999999998,
+            "width": 97.2465,
+            "height": 10.0
+        },
+        {
+            "text": "Fecha de I nscripción:",
+            "page": 1,
+            "x": 26.920000000000073,
+            "y": 655.9899999999998,
+            "width": 89.527,
+            "height": 10.0
+        },
+        {
+            "text": "Nº lnscripc./ Tº / Fº / Lº:",
+            "page": 1,
+            "x": 26.320000000000164,
+            "y": 641.2199999999998,
+            "width": 95.08999999999999,
+            "height": 10.992500000000177
+        },
+        {
+            "text": "Domicilio Administración:",
+            "page": 1,
+            "x": 26.920000000000144,
+            "y": 626.3700000000001,
+            "width": 108.0645,
+            "height": 10.0
+        },
+        {
+            "text": "Domicilio Comercial:",
+            "page": 1,
+            "x": 26.920000000000144,
+            "y": 612.6500000000001,
+            "width": 88.497,
+            "height": 10.0
+        },
+        {
+            "text": "Actividad Principal:",
+            "page": 1,
+            "x": 25.87000000000014,
+            "y": 598.9300000000001,
+            "width": 81.99700000000001,
+            "height": 10.0
+        },
+        {
+            "text": "Teléfonos:",
+            "page": 1,
+            "x": 25.870000000000147,
+            "y": 586.0000000000001,
+            "width": 45.49900000000001,
+            "height": 10.0
+        },
+        {
+            "text": "Correo Electrónico:",
+            "page": 1,
+            "x": 26.850000000000193,
+            "y": 556.2400000000001,
+            "width": 81.91040000000001,
+            "height": 10.0
+        },
+        {
+            "text": "Accionistas/Propietarios:",
+            "page": 1,
+            "x": 26.01000000000022,
+            "y": 516.8800000000001,
+            "width": 107.06,
+            "height": 10.0
+        },
+        {
+            "text": "B eneficiario Final/",
+            "page": 1,
+            "x": 24.250000000000217,
+            "y": 496.2600000000001,
+            "width": 81.74000000000001,
+            "height": 10.0
+        },
+        {
+            "text": "Controlante de la cuenta:",
+            "page": 1,
+            "x": 26.50000000000022,
+            "y": 481.9300000000001,
+            "width": 104.9964,
+            "height": 10.0
+        },
+        {
+            "text": "Condición ante IVA:",
+            "page": 1,
+            "x": 26.500000000000227,
+            "y": 464.72000000000014,
+            "width": 84.76680000000002,
+            "height": 10.0
+        },
+        {
+            "text": "Condición ante IIBB",
+            "page": 1,
+            "x": 26.500000000000227,
+            "y": 445.5800000000001,
+            "width": 82.4976,
+            "height": 10.0
+        },
+        {
+            "text": "CUIT:",
+            "page": 1,
+            "x": 372.1700000000001,
+            "y": 670.3199999999998,
+            "width": 26.023500000000013,
+            "height": 10.0
+        },
+        {
+            "text": "Lugar de Inscripción:",
+            "page": 1,
+            "x": 338.7700000000001,
+            "y": 655.9899999999998,
+            "width": 90.18000000000006,
+            "height": 10.0
+        },
+        {
+            "text": "@",
+            "page": 1,
+            "x": 375.0300000000002,
+            "y": 568.6600000000001,
+            "width": 11.629999999999995,
+            "height": 10.0
+        },
+        {
+            "text": "@",
+            "page": 1,
+            "x": 375.0300000000002,
+            "y": 553.1000000000001,
+            "width": 11.629999999999995,
+            "height": 10.0
+        },
+        {
+            "text": "@",
+            "page": 1,
+            "x": 375.3800000000002,
+            "y": 537.3800000000001,
+            "width": 11.629999999999995,
+            "height": 10.0
+        },
+        {
+            "text": "Condición ante Ganancias:",
+            "page": 1,
+            "x": 328.1300000000002,
+            "y": 464.8100000000001,
+            "width": 113.71900000000005,
+            "height": 10.0
+        },
+        {
+            "text": "DATOS PERSONALES",
+            "page": 1,
+            "x": 45.09000000000024,
+            "y": 424.57000000000005,
+            "width": 105.03100000000003,
+            "height": 10.0
+        },
+        {
+            "text": "REPRESENTANTE",
+            "page": 1,
+            "x": 232.08000000000024,
+            "y": 424.57000000000005,
+            "width": 88.6428,
+            "height": 10.0
+        },
+        {
+            "text": "REPRESENTANTE",
+            "page": 1,
+            "x": 433.9000000000002,
+            "y": 424.57000000000005,
+            "width": 89.22969999999998,
+            "height": 10.0
+        },
+        {
+            "text": "Apellido:",
+            "page": 1,
+            "x": 25.870000000000232,
+            "y": 407.1400000000001,
+            "width": 39.2299,
+            "height": 10.0
+        },
+        {
+            "text": "Nombre completo:",
+            "page": 1,
+            "x": 26.32000000000023,
+            "y": 391.7600000000001,
+            "width": 78.52989999999998,
+            "height": 10.0
+        },
+        {
+            "text": "DNI /LE/LC:",
+            "page": 1,
+            "x": 26.920000000000236,
+            "y": 376.2900000000001,
+            "width": 58.109000000000016,
+            "height": 10.0
+        },
+        {
+            "text": "Extranjeros-CI/Pasaporte:",
+            "page": 1,
+            "x": 26.920000000000236,
+            "y": 360.6500000000001,
+            "width": 109.48249999999999,
+            "height": 10.0
+        },
+        {
+            "text": "Nacionalidad:",
+            "page": 1,
+            "x": 26.320000000000235,
+            "y": 345.2700000000001,
+            "width": 59.32600000000002,
+            "height": 10.0
+        },
+        {
+            "text": "Lugar de Nacimiento:",
+            "page": 1,
+            "x": 26.920000000000236,
+            "y": 329.2000000000001,
+            "width": 90.2226,
+            "height": 10.0
+        },
+        {
+            "text": "Fecha de Nacimiento:",
+            "page": 1,
+            "x": 26.920000000000243,
+            "y": 313.8200000000001,
+            "width": 92.41260000000001,
+            "height": 10.0
+        },
+        {
+            "text": "CUIT/CUIL:",
+            "page": 1,
+            "x": 26.50000000000024,
+            "y": 298.4400000000001,
+            "width": 49.86699999999999,
+            "height": 10.0
+        },
+        {
+            "text": "Teléfono Particular:",
+            "page": 1,
+            "x": 25.870000000000243,
+            "y": 283.0600000000001,
+            "width": 82.542,
+            "height": 10.0
+        },
+        {
+            "text": "Domicilio Particular:",
+            "page": 1,
+            "x": 26.92000000000025,
+            "y": 267.5100000000001,
+            "width": 84.99310000000003,
+            "height": 10.0
+        },
+        {
+            "text": "Actividad principal, profesión,",
+            "page": 1,
+            "x": 25.87000000000026,
+            "y": 251.95000000000007,
+            "width": 125.28,
+            "height": 10.000000000000028
+        },
+        {
+            "text": "oficio o industria:",
+            "page": 1,
+            "x": 26.630000000000265,
+            "y": 240.07000000000008,
+            "width": 72.66000000000001,
+            "height": 10.0
+        },
+        {
+            "text": "Estado Civil:",
+            "page": 1,
+            "x": 26.570000000000263,
+            "y": 222.94000000000008,
+            "width": 54.2162,
+            "height": 10.0
+        },
+        {
+            "text": "Cargo en la Sociedad:",
+            "page": 1,
+            "x": 26.50000000000027,
+            "y": 205.82000000000008,
+            "width": 95.5236,
+            "height": 10.0
+        },
+        {
+            "text": "Vencimiento del cargo:",
+            "page": 1,
+            "x": 24.46000000000027,
+            "y": 190.22000000000008,
+            "width": 99.28999999999999,
+            "height": 10.0
+        },
+        {
+            "text": "Nuevo vencim.del cargo:",
+            "page": 1,
+            "x": 26.67000000000027,
+            "y": 174.76000000000008,
+            "width": 103.32360000000003,
+            "height": 10.0
+        },
+        {
+            "text": "FIRMA REPRESENTANTES:",
+            "page": 1,
+            "x": 45.44000000000028,
+            "y": 133.76300000000006,
+            "width": 103.0325,
+            "height": 9.5
+        },
+        {
+            "text": "CONFECCIONÓ",
+            "page": 1,
+            "x": 67.16000000000028,
+            "y": 93.61800000000007,
+            "width": 58.89760000000001,
+            "height": 8.0
+        },
+        {
+            "text": "OFICIAL",
+            "page": 1,
+            "x": 218.36000000000027,
+            "y": 93.52800000000006,
+            "width": 30.851200000000006,
+            "height": 8.0
+        },
+        {
+            "text": "ADMINISTRADOR",
+            "page": 1,
+            "x": 360.0000000000002,
+            "y": 93.52800000000006,
+            "width": 64.63240000000002,
+            "height": 8.0
+        },
+        {
+            "text": "AUTORIZÓ",
+            "page": 1,
+            "x": 510.30000000000024,
+            "y": 93.58800000000006,
+            "width": 40.09840000000003,
+            "height": 8.0
+        },
+        {
+            "text": "Allaria S.A. ALyC y AN Integral registrado bajo el N' 24 de la CNV.",
+            "page": 1,
+            "x": 25.08000000000021,
+            "y": 37.582000000000065,
+            "width": 191.49740000000003,
+            "height": 7.0
+        }
+    ]
+}

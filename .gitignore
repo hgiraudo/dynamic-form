@@ -39,3 +39,5 @@ postcss.config.js  # Opcional, incluir si no quieres versionarlo
 #!/backend/test/*.bat
 backend/uploads
 backend/test/formulario_completado.pdf
+list-fields/*.json
+list-fields/output.pdf
