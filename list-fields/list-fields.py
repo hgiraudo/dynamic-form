@@ -4,7 +4,7 @@ import json
 from pypdf import PdfReader
 from pypdf.generic import IndirectObject, NameObject
 from pdfminer.high_level import extract_pages
-from pdfminer.layout import LTTextContainer, LTChar
+from pdfminer.layout import LTTextContainer, LTTextLine
 
 # Valores por defecto
 DEFAULT_INPUT_PDF = "input.pdf"
@@ -66,8 +66,9 @@ def extract_form_fields_and_labels(input_pdf):
     for page_number, layout in enumerate(extract_pages(input_pdf), start=1):
         for element in layout:
             if isinstance(element, LTTextContainer):
+                # Filtrar solo líneas de texto
                 for text_line in element:
-                    if any(isinstance(obj, LTChar) for obj in text_line):
+                    if isinstance(text_line, LTTextLine):
                         text = text_line.get_text().strip()
                         if text:
                             labels_info.append({
