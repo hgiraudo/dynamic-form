@@ -4,7 +4,14 @@
       "Bash(npm run lint)",
       "Bash(npm run build:*)",
       "Bash(cat:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "WebFetch(domain:www.ficohsa.hn)",
+      "Bash(if [ -f allaria-logo-blanco.svg ])",
+      "Bash(then mv allaria-logo-blanco.svg logo-white-alt.svg)",
+      "Bash(fi)",
+      "Bash(if [ -f allaria-logo-color.svg ])",
+      "Bash(then mv allaria-logo-color.svg logo-color-alt.svg)",
+      "WebFetch(domain:brandfetch.com)"
     ],
     "deny": [],
     "ask": []
