@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Navbar */}
-      <header className="bg-allaria-blue text-white shadow-md">
+      <header className="bg-brand-primary text-white shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-xl font-bold">{brandConfig.name} Form</h1>
           <nav className="space-x-6">

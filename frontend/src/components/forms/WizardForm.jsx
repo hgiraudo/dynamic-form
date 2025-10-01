@@ -143,7 +143,7 @@ function WizardForm() {
       case "tel":
         return (
           <div className="mb-2" key={field.name}>
-            <label className="block text-allaria-light-blue mb-1">
+            <label className="block text-brand-secondary mb-1">
               {field.label}
             </label>
             <input
@@ -159,7 +159,7 @@ function WizardForm() {
       case "textarea":
         return (
           <div className="mb-2" key={field.name}>
-            <label className="block text-allaria-light-blue mb-1">
+            <label className="block text-brand-secondary mb-1">
               {field.label}
             </label>
             <textarea
@@ -178,7 +178,7 @@ function WizardForm() {
               type="checkbox"
               checked={value}
               onChange={(e) => handleChange(field.name, e.target.checked)}
-              className="h-4 w-4 text-allaria-blue border-gray-300 rounded"
+              className="h-4 w-4 text-brand-primary border-gray-300 rounded"
             />
             <span>{field.label}</span>
           </div>
@@ -186,7 +186,7 @@ function WizardForm() {
       case "button-group":
         return (
           <div className="mb-2" key={field.name}>
-            <label className="block text-allaria-light-blue mb-1">
+            <label className="block text-brand-secondary mb-1">
               {field.label}
             </label>
             <div className="flex space-x-2">
@@ -196,8 +196,8 @@ function WizardForm() {
                   type="button"
                   className={`px-4 py-2 rounded border ${
                     value === opt
-                      ? "bg-allaria-light-blue text-blue-100"
-                      : "bg-white text-allaria-light-blue border-gray-400 hover:bg-gray-100"
+                      ? "bg-brand-secondary text-blue-100"
+                      : "bg-white text-brand-secondary border-gray-400 hover:bg-gray-100"
                   }`}
                   onClick={() => handleChange(field.name, opt)}
                 >
@@ -288,7 +288,7 @@ function WizardForm() {
   return (
     <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
       {/* Sidebar */}
-      <div className="w-80 bg-allaria-blue flex flex-col text-blue-200 p-2 pl-4">
+      <div className="w-80 bg-brand-primary flex flex-col text-blue-200 p-2 pl-4">
         <div className="p-6 text-center">
           <img
             src={brandConfig.logos.white}
@@ -306,8 +306,8 @@ function WizardForm() {
                   onClick={() => setStepIndex(idx)}
                   className={`cursor-pointer px-6 py-3 mb-2 flex items-center transition border-l-4 border-transparent ${
                     isActive
-                      ? "bg-allaria-light-blue text-blue-100 font-semibold border-allaria-light-blue"
-                      : "hover:bg-allaria-light-blue/50 text-blue-200"
+                      ? "bg-brand-secondary text-blue-100 font-semibold border-brand-secondary"
+                      : "hover:bg-brand-secondary/50 text-blue-200"
                   }`}
                 >
                   {step.icon && (
@@ -324,7 +324,7 @@ function WizardForm() {
       {/* Contenido */}
       <div className="flex-1 overflow-y-auto bg-white p-4">
         <div className="p-8">
-          <h2 className="text-2xl font-semibold text-allaria-blue mb-6">
+          <h2 className="text-2xl font-semibold text-brand-primary mb-6">
             {currentStep.title}
           </h2>
 
@@ -351,7 +351,7 @@ function WizardForm() {
                     Math.min(stepIndex + 1, formConfig.steps.length - 1)
                   )
                 }
-                className="px-4 py-2 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue"
+                className="px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary"
               >
                 Siguiente
               </button>
@@ -364,7 +364,7 @@ function WizardForm() {
               <div className="rounded-lg overflow-hidden text-sm">
                 {formConfig.steps.slice(0, -1).map((step, stepIdx) => (
                   <div key={stepIdx} className="mb-6">
-                    <h3 className="text-lg font-semibold text-allaria-blue mb-2 border-b pb-1 text-center">
+                    <h3 className="text-lg font-semibold text-brand-primary mb-2 border-b pb-1 text-center">
                       {step.title}
                     </h3>
 
@@ -385,7 +385,7 @@ function WizardForm() {
                               idx % 2 === 0 ? "bg-gray-50" : "bg-white"
                             }`}
                           >
-                            <span className="font-medium text-allaria-blue text-right pr-4">
+                            <span className="font-medium text-brand-primary text-right pr-4">
                               {field.label}
                             </span>
                             <span className="text-gray-700 break-words">
@@ -409,7 +409,7 @@ function WizardForm() {
                 <button
                   type="button"
                   onClick={handleExport} // 👈 ahora usa la función real
-                  className="flex-1 flex items-center justify-center px-4 py-3 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue"
+                  className="flex-1 flex items-center justify-center px-4 py-3 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary"
                 >
                   <CIcon icon={Icons.cilSave} className="w-5 h-5 mr-2" />
                   Descargar JSON
@@ -482,7 +482,7 @@ function WizardForm() {
               {modalLoading ? (
                 <div className="flex flex-col items-center">
                   <svg
-                    className="animate-spin h-16 w-16 text-allaria-blue mb-4"
+                    className="animate-spin h-16 w-16 text-brand-primary mb-4"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -501,7 +501,7 @@ function WizardForm() {
                       d="M4 12a8 8 0 018-8v8H4z"
                     ></path>
                   </svg>
-                  <p className="text-allaria-blue font-semibold text-lg">
+                  <p className="text-brand-primary font-semibold text-lg">
                     Creando transacción, por favor espere...
                   </p>
                 </div>
@@ -532,12 +532,12 @@ function WizardForm() {
                     alt={`${brandConfig.name} Logo`}
                     className="h-16 mx-auto mb-4"
                   />
-                  <h3 className="text-2xl font-bold text-allaria-blue mb-6">
+                  <h3 className="text-2xl font-bold text-brand-primary mb-6">
                     Transacción creada correctamente
                   </h3>
                   <button
                     onClick={() => window.open(signingUrl, "_blank")}
-                    className="px-8 py-4 bg-allaria-blue text-white rounded-lg hover:bg-allaria-light-blue text-lg font-semibold"
+                    className="px-8 py-4 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary text-lg font-semibold"
                   >
                     Ir a Firmar!
                   </button>

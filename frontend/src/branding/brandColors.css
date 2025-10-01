@@ -1,15 +1,16 @@
 /**
- * Colores corporativos - TailwindCSS theme variables
+ * Brand Colors - TailwindCSS theme variables
  *
  * Define los colores de marca como variables de tema de Tailwind.
  * Para cambiar los colores, edite los valores hexadecimales aquí.
  *
  * Uso en componentes:
- * - bg-allaria-blue, text-allaria-blue, border-allaria-blue
- * - bg-allaria-light-blue, text-allaria-light-blue, etc.
+ * - bg-brand-primary, text-brand-primary, border-brand-primary
+ * - bg-brand-secondary, text-brand-secondary, border-brand-secondary
  */
 
 @theme {
-  --color-allaria-blue: #0A2D5E;
-  --color-allaria-light-blue: #154284;
+  /* Brand colors */
+  --color-brand-primary: #0058cb; /* science blue */
+  --color-brand-secondary: #122142; /* bunting */
 }
