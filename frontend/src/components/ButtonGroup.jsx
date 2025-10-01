@@ -10,7 +10,7 @@ function ButtonGroup({ options, value, onChange }) {
           onClick={() => onChange(option)}
           className={`px-4 py-2 rounded-lg border transition ${
             value === option
-              ? "bg-allaria-blue text-white"
+              ? "bg-brand-secondary text-white"
               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
         >

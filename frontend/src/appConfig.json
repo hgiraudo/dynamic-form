@@ -1,3 +1,5 @@
 {
-  "showJsonOnRevision": false
+  "showJsonOnRevision": false,
+  "pdfTemplate": "/form/persona-juridica.pdf",
+  "pdfFilename": "persona-juridica.pdf"
 }
