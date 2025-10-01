@@ -1,22 +1,26 @@
 @echo off
-REM === Script para extraer campos y llenar PDF ===
-REM Ajustá la ruta a python.exe si no está en el PATH
+REM === Script para extraer campos, generar JSON y llenar PDF ===
+REM Este script ejecuta todo el proceso automaticamente
 
-REM 1) Extraer campos y generar JSON
-python list-fields.py input.pdf combined.json fields_example.json
+echo ========================================
+echo Procesando PDF con extraccion y llenado
+echo ========================================
+
+python list-fields.py
 IF ERRORLEVEL 1 (
-    echo Error al extraer campos del PDF
+    echo Error al procesar el PDF
     pause
     exit /b 1
 )
 
-REM 2) Llenar PDF usando fill.py del backend
-python ..\backend\fill.py input.pdf fields_example.json output.pdf
-IF ERRORLEVEL 1 (
-    echo Error al llenar el PDF con los valores
-    pause
-    exit /b 1
-)
-
-echo PDF generado exitosamente: output.pdf
+echo.
+echo ========================================
+echo Proceso completado exitosamente
+echo ========================================
+echo Archivos generados:
+echo - fields_and_labels.json (informacion completa de campos y etiquetas)
+echo - fields_example.json (valores de ejemplo)
+echo - output.pdf (PDF con valores de ejemplo)
+echo - unfilled_fields.log (reporte de verificacion)
+echo ========================================
 pause

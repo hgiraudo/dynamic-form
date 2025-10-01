@@ -1,90 +1,55 @@
 import sys
 import os
 import json
-import re
-from pypdf import PdfReader, PdfWriter
-from pypdf.generic import IndirectObject, TextStringObject, NameObject
+import subprocess
+from pypdf import PdfReader
+from pypdf.generic import IndirectObject, NameObject
+from pdfminer.high_level import extract_pages
+from pdfminer.layout import LTTextContainer, LTTextLine
 
 # Valores por defecto
 DEFAULT_INPUT_PDF = "input.pdf"
-DEFAULT_MODIFIED_PDF = "input-modified.pdf"
 DEFAULT_OUTPUT_PDF = "output.pdf"
-DEFAULT_COMBINED_JSON = "combined.json"
+DEFAULT_COMBINED_JSON = "fields_and_labels.json"
 DEFAULT_FIELDS_EXAMPLE_JSON = "fields_example.json"
-DEFAULT_LOG_FILE = "field_verification.log"
-DEFAULT_SANITIZE_NAMES = False  # Controla si se modifican o no los nombres de campos
+DEFAULT_UNFILLED_LOG = "unfilled_fields.log"
 
-def sanitize_field_name(name):
-    if not name:
-        return None
-    name = re.sub(r'#\d+$', '', name)
-    name = re.sub(r'[^a-zA-Z0-9_]', '_', name)
-    return name
-
-def sanitize_pdf_fields(input_pdf, output_pdf, sanitize_names=True):
-    reader = PdfReader(input_pdf)
-    writer = PdfWriter()
-    field_values = {}
-
-    for page_number, page in enumerate(reader.pages, start=1):
-        annots = page.get("/Annots")
-        if not annots:
-            writer.add_page(page)
-            continue
-        if isinstance(annots, IndirectObject):
-            annots = annots.get_object()
-
-        for annot_index, annot in enumerate(annots, start=1):
-            if isinstance(annot, IndirectObject):
-                annot = annot.get_object()
-            field_name = annot.get("/T")
-            field_type = annot.get("/FT")
-            rect = annot.get("/Rect")
-
-            if field_name:
-                original_name = str(field_name)
-                if sanitize_names:
-                    sanitized_name = sanitize_field_name(original_name)
-                    annot.update({"/T": TextStringObject(sanitized_name)})
-                    field_key = sanitized_name
-                else:
-                    field_key = original_name
-
-                if field_type == "/Tx":
-                    field_values[field_key] = f"Ejemplo de {field_key}"
-                elif field_type == "/Btn":
-                    field_values[field_key] = "/"
-
-        writer.add_page(page)
-
-    if "/AcroForm" in reader.trailer["/Root"]:
-        writer._root_object.update({
-            NameObject("/AcroForm"): reader.trailer["/Root"]["/AcroForm"]
-        })
-
-    with open(output_pdf, "wb") as f:
-        writer.write(f)
-
-    return field_values
-
-def extract_form_fields(input_pdf):
+def extract_form_fields_and_labels(input_pdf):
     reader = PdfReader(input_pdf)
     fields_info = []
     fields_example = {}
 
+    # Iterar páginas para localizar widgets
+    global_tab_index = 0  # Contador global para todos los campos
+
     for page_number, page in enumerate(reader.pages, start=1):
         annots = page.get("/Annots")
         if not annots:
             continue
+
         if isinstance(annots, IndirectObject):
             annots = annots.get_object()
 
-        for annot in annots:
+        for annot_index, annot in enumerate(annots):
             if isinstance(annot, IndirectObject):
                 annot = annot.get_object()
+
             field_name = annot.get("/T")
-            field_type = annot.get("/FT")
             rect = annot.get("/Rect")
+            field_type = annot.get("/FT")
+
+            # Obtener tab index
+            tab_index = None
+            if "/StructParent" in annot:
+                # Si tiene StructParent, usarlo
+                tab_index = int(annot.get("/StructParent"))
+            elif field_type:
+                # Si es un campo de formulario, asignar índice secuencial
+                tab_index = global_tab_index
+                global_tab_index += 1
+
+            if rect is not None and isinstance(rect, IndirectObject):
+                rect = rect.get_object()
 
             if rect and isinstance(rect, list) and len(rect) == 4:
                 x0, y0, x1, y1 = [float(v) for v in rect]
@@ -93,6 +58,7 @@ def extract_form_fields(input_pdf):
             else:
                 x = y = width = height = None
 
+            # Info completa para el JSON combinado
             fields_info.append({
                 "field": str(field_name) if field_name else None,
                 "page": page_number,
@@ -100,95 +66,167 @@ def extract_form_fields(input_pdf):
                 "y": y,
                 "width": width,
                 "height": height,
-                "type": str(field_type) if field_type else None
+                "type": str(field_type) if field_type else None,
+                "tabIndex": tab_index
             })
 
+            # Valor de ejemplo para fields_example.json
             if field_name:
-                if field_type == "/Btn":
+                if field_type == "/Btn":  # checkbox o radio
                     fields_example[str(field_name)] = "/"
                 else:
-                    fields_example[str(field_name)] = f"Ejemplo de {field_name}"
+                    fields_example[str(field_name)] = f"{field_name}"
 
-    return fields_info, fields_example
+    # Extraer etiquetas de texto con pdfminer
+    labels_info = []
+    for page_number, layout in enumerate(extract_pages(input_pdf), start=1):
+        for element in layout:
+            if isinstance(element, LTTextContainer):
+                # Filtrar solo líneas de texto
+                for text_line in element:
+                    if isinstance(text_line, LTTextLine):
+                        text = text_line.get_text().strip()
+                        if text:
+                            labels_info.append({
+                                "text": text,
+                                "page": page_number,
+                                "x": text_line.bbox[0],
+                                "y": text_line.bbox[1],
+                                "width": text_line.bbox[2] - text_line.bbox[0],
+                                "height": text_line.bbox[3] - text_line.bbox[1]
+                            })
 
-def verify_fields(output_pdf, expected_values, log_file):
+    return fields_info, labels_info, fields_example
+
+
+def verify_filled_fields(output_pdf, expected_values, log_file):
+    """Verifica qué campos no se llenaron correctamente en el PDF de salida."""
+    if not os.path.exists(output_pdf):
+        print(f"[ADVERTENCIA] No se encontró {output_pdf} para verificar")
+        return
+
     reader = PdfReader(output_pdf)
-    log_lines = []
+    unfilled_fields = []
+    total_fields = 0
 
     for page_number, page in enumerate(reader.pages, start=1):
         annots = page.get("/Annots")
         if not annots:
             continue
+
         if isinstance(annots, IndirectObject):
             annots = annots.get_object()
 
         for annot in annots:
             if isinstance(annot, IndirectObject):
                 annot = annot.get_object()
+
             field_name = annot.get("/T")
-            field_value = annot.get("/V")  # valor guardado en el PDF
+            field_value = annot.get("/V")  # Valor actual en el PDF
 
-            expected_value = expected_values.get(field_name)
-            status = "OK" if field_value == expected_value else "MISMATCH"
-            log_lines.append(f"Page {page_number}, Field '{field_name}': "
-                             f"Expected='{expected_value}', Actual='{field_value}' --> {status}")
+            if field_name:
+                field_name_str = str(field_name)
+                total_fields += 1
 
+                # Verificar si el campo debería tener un valor
+                if field_name_str in expected_values:
+                    expected = expected_values[field_name_str]
+
+                    # Comparar valores
+                    actual = str(field_value) if field_value else None
+
+                    # Campo no llenado o vacío
+                    if not actual or actual == "None" or actual == "":
+                        unfilled_fields.append({
+                            "page": page_number,
+                            "field": field_name_str,
+                            "expected": expected,
+                            "actual": actual
+                        })
+
+    # Escribir log
     with open(log_file, "w", encoding="utf-8") as f:
-        f.write("\n".join(log_lines))
-    print(f"[OK] Verificación de campos guardada en {log_file}")
+        f.write("=" * 80 + "\n")
+        f.write("REPORTE DE CAMPOS NO LLENADOS CORRECTAMENTE\n")
+        f.write("=" * 80 + "\n\n")
+        f.write(f"Total de campos procesados: {total_fields}\n")
+        f.write(f"Campos no llenados: {len(unfilled_fields)}\n\n")
+
+        if unfilled_fields:
+            f.write("CAMPOS QUE REQUIEREN ATENCIÓN:\n")
+            f.write("-" * 80 + "\n\n")
+
+            for field in unfilled_fields:
+                f.write(f"Página: {field['page']}\n")
+                f.write(f"Campo: {field['field']}\n")
+                f.write(f"Valor esperado: {field['expected']}\n")
+                f.write(f"Valor actual: {field['actual']}\n")
+                f.write(f"Sugerencia: Verificar que el nombre del campo coincida exactamente\n")
+                f.write("-" * 80 + "\n\n")
+        else:
+            f.write("¡Todos los campos se llenaron correctamente!\n")
+
+    if unfilled_fields:
+        print(f"[ADVERTENCIA] {len(unfilled_fields)} campos no se llenaron correctamente")
+        print(f"[INFO] Ver detalles en {log_file}")
+    else:
+        print(f"[OK] Todos los campos se llenaron correctamente")
+
 
 def main():
-    # Leer argumentos de línea de comandos
-    sanitize_names = DEFAULT_SANITIZE_NAMES
-    if len(sys.argv) > 1:
-        arg = sys.argv[1].lower()
-        if arg in ['true', '1', 'yes', 'sanitize']:
-            sanitize_names = True
-        elif arg in ['false', '0', 'no', 'nossanitize']:
-            sanitize_names = False
+    # Parámetros opcionales
+    args = sys.argv[1:]
+    input_pdf = args[0] if len(args) > 0 else DEFAULT_INPUT_PDF
+    combined_json = args[1] if len(args) > 1 else DEFAULT_COMBINED_JSON
+    fields_example_json = args[2] if len(args) > 2 else DEFAULT_FIELDS_EXAMPLE_JSON
 
-    input_pdf = DEFAULT_INPUT_PDF
-    combined_json = DEFAULT_COMBINED_JSON
-    fields_example_json = DEFAULT_FIELDS_EXAMPLE_JSON
+    if not os.path.isfile(input_pdf):
+        print(f"[ERROR] El archivo {input_pdf} no existe.")
+        sys.exit(1)
 
-    print(f"[INFO] Sanitizar nombres de campos: {sanitize_names}")
+    print(f"[INFO] Procesando {input_pdf} ...")
 
-    # Paso 1: sanitizar nombres (o no) y generar dict de valores
-    field_values = sanitize_pdf_fields(input_pdf, DEFAULT_MODIFIED_PDF, sanitize_names)
+    fields, labels, fields_example = extract_form_fields_and_labels(input_pdf)
 
-    # Paso 2: abrir PDF modificado y actualizar valores campo por campo
-    reader = PdfReader(DEFAULT_MODIFIED_PDF)
-    writer = PdfWriter()
-
-    for page in reader.pages:
-        writer.add_page(page)
-
-    # Copiar AcroForm si existe
-    if "/AcroForm" in reader.trailer["/Root"]:
-        writer._root_object.update({
-            NameObject("/AcroForm"): reader.trailer["/Root"]["/AcroForm"]
-        })
-
-    # Actualizar cada página individualmente
-    for page_num, page in enumerate(writer.pages):
-        try:
-            writer.update_page_form_field_values(page, field_values)
-        except Exception as e:
-            print(f"Advertencia al actualizar página {page_num + 1}: {e}")
-
-    with open(DEFAULT_OUTPUT_PDF, "wb") as f:
-        writer.write(f)
-
-    # Paso 3: extraer campos para JSON
-    fields_info, fields_example = extract_form_fields(DEFAULT_OUTPUT_PDF)
-    combined_data = {"fields": fields_info, "labels": []}
+    # Guardar JSON de campos y etiquetas
+    combined_data = {"fields": fields, "labels": labels}
     with open(combined_json, "w", encoding="utf-8") as f:
         json.dump(combined_data, f, indent=4, ensure_ascii=False)
+    print(f"[OK] JSON combinado exportado a {combined_json} (fields: {len(fields)}, labels: {len(labels)})")
+
+    # Guardar JSON de valores de ejemplo de campos
     with open(fields_example_json, "w", encoding="utf-8") as f:
         json.dump(fields_example, f, indent=4, ensure_ascii=False)
+    print(f"[OK] JSON de ejemplo exportado a {fields_example_json} (campos: {len(fields_example)})")
 
-    # Paso 4: verificar valores guardados
-    verify_fields(DEFAULT_OUTPUT_PDF, field_values, DEFAULT_LOG_FILE)
+    # Generar PDF de salida con fill.py
+    print(f"\n[INFO] Generando PDF de salida con valores de ejemplo...")
+    fill_script = os.path.join(os.path.dirname(__file__), "..", "backend", "fill.py")
+
+    try:
+        result = subprocess.run(
+            ["python", fill_script, input_pdf, fields_example_json, DEFAULT_OUTPUT_PDF],
+            capture_output=True,
+            text=True,
+            timeout=60
+        )
+
+        if result.returncode == 0:
+            print(f"[OK] PDF de salida generado: {DEFAULT_OUTPUT_PDF}")
+
+            # Verificar campos no llenados
+            print(f"\n[INFO] Verificando campos llenados...")
+            verify_filled_fields(DEFAULT_OUTPUT_PDF, fields_example, DEFAULT_UNFILLED_LOG)
+        else:
+            print(f"[ERROR] Error al generar PDF: {result.stderr}")
+
+    except subprocess.TimeoutExpired:
+        print(f"[ERROR] Timeout al generar PDF")
+    except FileNotFoundError:
+        print(f"[ERROR] No se encontró el script fill.py en {fill_script}")
+    except Exception as e:
+        print(f"[ERROR] Error inesperado: {e}")
+
 
 if __name__ == "__main__":
     main()
