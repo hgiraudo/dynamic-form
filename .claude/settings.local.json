@@ -11,7 +11,10 @@
       "Bash(fi)",
       "Bash(if [ -f allaria-logo-color.svg ])",
       "Bash(then mv allaria-logo-color.svg logo-color-alt.svg)",
-      "WebFetch(domain:brandfetch.com)"
+      "WebFetch(domain:brandfetch.com)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []
