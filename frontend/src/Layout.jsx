@@ -4,9 +4,9 @@ function Layout({ children }) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Navbar */}
-      <header className="bg-allaria-blue text-white shadow-md">
+      <header className="bg-brand-primary text-white shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <h1 className="text-xl font-bold">Allaria Form</h1>
+          <h1 className="text-xl font-bold">Form</h1>
           <nav className="space-x-6">
             <a href="/" className="hover:underline">
               Inicio
@@ -30,7 +30,7 @@ function Layout({ children }) {
       <footer className="bg-gray-800 text-gray-300 py-6 mt-10">
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <span>
-            © {new Date().getFullYear()} Allaria. Todos los derechos reservados.
+            © {new Date().getFullYear()} Todos los derechos reservados.
           </span>
           <div className="space-x-4">
             <a href="/privacy" className="hover:underline">

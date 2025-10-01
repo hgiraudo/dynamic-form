@@ -11,7 +11,7 @@
 
 export const brandConfig = {
   // Nombre de la empresa
-  name: "Company",
+  name: "Allaria",
 
   // Logos
   logos: {
