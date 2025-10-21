@@ -94,18 +94,19 @@ Node.js script that reads `config.general.js` and exports values in bash-compati
 
 ### Private Configuration (`backend/config.private.js`)
 
-Contains sensitive credentials (NOT committed to git):
-- OneSpan API keys
+**DEPRECATED**: This file is no longer used for OneSpan API keys. OneSpan API keys are now managed in the frontend.
 
 ### Environment Variables
 
 Backend uses `.env` file:
 - `PORT` - Server port (default: 4000)
 - `HOST` - Server host (default: 0.0.0.0 or EC2 internal IP)
-- `ONESPAN_API_KEY` - OneSpan API authorization key
 
 Frontend uses `.env` file:
 - `VITE_BACKEND_URL` - Backend API URL (required for API calls)
+- `VITE_ONESPAN_API_KEY` - OneSpan API authorization key (passed to backend in request headers)
+
+**Important**: The OneSpan API key is now configured in the frontend and passed to the backend via the `X-OneSpan-API-Key` header. This allows multiple frontend instances to share a single backend while using different API keys.
 
 ## Core Architecture
 
@@ -147,10 +148,13 @@ Three primary endpoints:
 
 2. `POST /api/sign` - Create OneSpan signature transaction
    - Forwards transaction JSON to OneSpan API
-   - Requires ONESPAN_API_KEY in headers
+   - Requires `X-OneSpan-API-Key` header (provided by frontend)
+   - Returns 401 if API key header is missing
 
 3. `POST /api/getSigningUrl` - Get signing URL for a package
    - Fetches signing URL from OneSpan for specific packageId
+   - Requires `X-OneSpan-API-Key` header (provided by frontend)
+   - Returns 401 if API key header is missing
    - Returns URL for signer to access signature interface
 
 4. `GET /api/health` - Health check endpoint
@@ -169,9 +173,9 @@ Three primary endpoints:
 3. Frontend sends PDF template + JSON data to `/api/fill-pdf`
 4. Backend spawns Python script to fill PDF
 5. Filled PDF returned to frontend
-6. Frontend sends transaction data to `/api/sign` (OneSpan)
-7. Backend receives packageId from OneSpan
-8. Frontend requests signing URL via `/api/getSigningUrl`
+6. Frontend sends transaction data + OneSpan API key to `/api/sign` (via `X-OneSpan-API-Key` header)
+7. Backend forwards request to OneSpan and receives packageId
+8. Frontend requests signing URL via `/api/getSigningUrl` (with API key in header)
 9. User redirected to OneSpan signing interface
 
 ## Key Technical Patterns
@@ -212,6 +216,37 @@ Mappers transform form data before PDF generation. They receive `(formData, fiel
 - Use `start-production.sh` for persistent deployment on EC2
 - Use `start-*-dev.sh` for development with hot-reload
 - Always stop production services with `stop-production.sh` before redeploying
+
+## Multi-Frontend Architecture
+
+This application supports multiple frontend instances sharing a single backend server. Each frontend can use a different OneSpan API key.
+
+**Setup**:
+1. Deploy one backend instance using `start-backend-prod.sh` or `start-production.sh`
+2. Deploy multiple frontend instances in different directories
+3. Each frontend should:
+   - Configure `VITE_BACKEND_URL` to point to the shared backend
+   - Configure `VITE_ONESPAN_API_KEY` with their specific API key
+   - Be built/started using `start-frontend-prod.sh` or similar
+
+**Example**:
+```bash
+# Backend (single instance)
+cd /path/to/backend
+./start-backend-prod.sh
+
+# Frontend 1 (e.g., for Ficohsa)
+cd /path/to/frontend-ficohsa
+# Edit .env: VITE_ONESPAN_API_KEY=ficohsa_key
+./start-frontend-prod.sh
+
+# Frontend 2 (e.g., for another client)
+cd /path/to/frontend-client2
+# Edit .env: VITE_ONESPAN_API_KEY=client2_key
+./start-frontend-prod.sh
+```
+
+**Security Note**: Each frontend passes its API key to the backend via the `X-OneSpan-API-Key` header. The backend validates that the header is present before forwarding requests to OneSpan.
 
 ## File Locations
 

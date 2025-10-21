@@ -81,9 +81,8 @@ if [ ! -f ".env" ]; then
 PORT=$PORT
 HOST=$HOST
 NODE_ENV=production
-ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
-    echo "⚠️  IMPORTANTE: Configura ONESPAN_API_KEY en backend/.env"
+    echo "✅ Archivo .env del backend creado"
 fi
 
 # Verificar Python y pdfrw
@@ -152,7 +151,9 @@ cat > .env << EOF
 PORT=$PORT
 HOST=$HOST
 VITE_BACKEND_URL=$VITE_BACKEND_URL
+VITE_ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
+echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
 
 # Limpiar caché
 if [ -d "node_modules/.vite" ]; then

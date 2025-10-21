@@ -60,7 +60,9 @@ if [ ! -f ".env" ]; then
 PORT=$PORT
 HOST=$HOST
 VITE_BACKEND_URL=$VITE_BACKEND_URL
+VITE_ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
+    echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
 else
     # Actualizar VITE_BACKEND_URL en .env existente para usar IP de EC2
     echo "⚙️ Actualizando VITE_BACKEND_URL en .env..."
@@ -68,6 +70,11 @@ else
         sed -i "s|VITE_BACKEND_URL=.*|VITE_BACKEND_URL=$VITE_BACKEND_URL|g" .env
     else
         echo "VITE_BACKEND_URL=$VITE_BACKEND_URL" >> .env
+    fi
+    # Agregar VITE_ONESPAN_API_KEY si no existe
+    if ! grep -q "VITE_ONESPAN_API_KEY" .env; then
+        echo "VITE_ONESPAN_API_KEY=your_onespan_api_key_here" >> .env
+        echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
     fi
 fi
 

@@ -54,9 +54,8 @@ if [ ! -f ".env" ]; then
 PORT=$PORT
 HOST=$HOST
 NODE_ENV=production
-ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
-    echo "⚠️  IMPORTANTE: Configura ONESPAN_API_KEY en backend/.env"
+    echo "✅ Archivo .env del backend creado"
 fi
 
 # Verificar que Python esté disponible

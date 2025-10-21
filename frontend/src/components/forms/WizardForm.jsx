@@ -348,7 +348,10 @@ function WizardForm() {
       const signUrl = `${config.backend.baseUrl}${config.backend.signEndpoint}`;
       const signResp = await fetch(signUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY
+        },
         body: JSON.stringify(transactionJson),
       });
       if (!signResp.ok) throw new Error("Error al enviar transacción");
@@ -358,7 +361,10 @@ function WizardForm() {
       const getUrl = `${config.backend.baseUrl}${config.backend.getSigningUrlEndpoint}`;
       const urlResp = await fetch(getUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY
+        },
         body: JSON.stringify({ packageId: signData.id }),
       });
       if (!urlResp.ok) throw new Error("Error al obtener la URL de firma");

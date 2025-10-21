@@ -58,7 +58,9 @@ cat > .env << EOF
 PORT=$PORT
 HOST=$HOST
 VITE_BACKEND_URL=$VITE_BACKEND_URL
+VITE_ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
+echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
 
 # Limpiar caché de Vite y dist para forzar rebuild con nuevas variables
 if [ -d "node_modules/.vite" ]; then

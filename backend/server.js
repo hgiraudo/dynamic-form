@@ -108,13 +108,21 @@ app.post(
 app.post(config.backend.signEndpoint, async (req, res) => {
   try {
     const transactionJson = req.body;
+    const apiKey = req.headers["x-onespan-api-key"];
+
+    if (!apiKey) {
+      return res
+        .status(401)
+        .json({ error: "X-OneSpan-API-Key header is required" });
+    }
+
     console.log("📨 JSON recibido en /api/sign:", transactionJson);
 
     // ⚠️ Usar URL absoluta de OneSpan desde config
     const response = await fetch(config.esignlive.url, {
       method: "POST",
       headers: {
-        Authorization: process.env.ONESPAN_API_KEY,
+        Authorization: apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(transactionJson),
@@ -136,6 +144,14 @@ app.post(config.backend.signEndpoint, async (req, res) => {
 app.post(config.backend.getSigningUrlEndpoint, async (req, res) => {
   try {
     const { packageId } = req.body;
+    const apiKey = req.headers["x-onespan-api-key"];
+
+    if (!apiKey) {
+      return res
+        .status(401)
+        .json({ error: "X-OneSpan-API-Key header is required" });
+    }
+
     if (!packageId)
       return res.status(400).json({ error: "packageId is required" });
 
@@ -146,7 +162,7 @@ app.post(config.backend.getSigningUrlEndpoint, async (req, res) => {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: process.env.ONESPAN_API_KEY,
+        Authorization: apiKey,
       },
     });
 

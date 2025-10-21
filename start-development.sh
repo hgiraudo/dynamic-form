@@ -64,9 +64,8 @@ if [ ! -f ".env" ]; then
 PORT=$BACKEND_PORT
 HOST=$INTERNAL_IP
 NODE_ENV=development
-ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
-    echo "⚠️  IMPORTANTE: Configura ONESPAN_API_KEY en backend/.env"
+    echo "✅ Archivo .env del backend creado"
 fi
 
 # Verificar Python y pdfrw
@@ -111,7 +110,9 @@ cat > .env << EOF
 PORT=$FRONTEND_PORT
 HOST=0.0.0.0
 VITE_BACKEND_URL=http://$BACKEND_URL:$BACKEND_PORT
+VITE_ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
+echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
 
 # Iniciar frontend en segundo plano
 echo "🏃 Iniciando servidor frontend con Vite..."
