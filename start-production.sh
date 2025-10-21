@@ -144,16 +144,21 @@ if [ ! -d "node_modules" ]; then
     npm ci --production
 fi
 
-# Crear .env
-echo "⚙️ Configurando archivo .env del frontend..."
-cat > .env << EOF
+# Crear .env solo si no existe
+if [ ! -f ".env" ]; then
+    echo "⚙️ Creando archivo .env del frontend..."
+    cat > .env << EOF
 # Frontend Environment Variables
 PORT=$PORT
 HOST=$HOST
 VITE_BACKEND_URL=$VITE_BACKEND_URL
 VITE_ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
-echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
+    echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
+else
+    echo "✅ Archivo .env del frontend ya existe, no se sobrescribirá"
+    echo "ℹ️  Para aplicar cambios de VITE_BACKEND_URL, edita manualmente frontend/.env"
+fi
 
 # Limpiar caché
 if [ -d "node_modules/.vite" ]; then

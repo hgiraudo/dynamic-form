@@ -52,9 +52,9 @@ if [ ! -d "node_modules" ]; then
     npm install
 fi
 
-# Verificar si existe .env y crear uno con la IP de EC2
+# Verificar si existe .env y crear uno solo si no existe
 if [ ! -f ".env" ]; then
-    echo "⚙️ Creando archivo .env con IP de EC2..."
+    echo "⚙️ Creando archivo .env..."
     cat > .env << EOF
 # Frontend Environment Variables
 PORT=$PORT
@@ -64,18 +64,8 @@ VITE_ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
     echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
 else
-    # Actualizar VITE_BACKEND_URL en .env existente para usar IP de EC2
-    echo "⚙️ Actualizando VITE_BACKEND_URL en .env..."
-    if grep -q "VITE_BACKEND_URL" .env; then
-        sed -i "s|VITE_BACKEND_URL=.*|VITE_BACKEND_URL=$VITE_BACKEND_URL|g" .env
-    else
-        echo "VITE_BACKEND_URL=$VITE_BACKEND_URL" >> .env
-    fi
-    # Agregar VITE_ONESPAN_API_KEY si no existe
-    if ! grep -q "VITE_ONESPAN_API_KEY" .env; then
-        echo "VITE_ONESPAN_API_KEY=your_onespan_api_key_here" >> .env
-        echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
-    fi
+    echo "✅ Archivo .env del frontend ya existe, no se sobrescribirá"
+    echo "ℹ️  Para aplicar cambios de configuración, edita manualmente frontend/.env"
 fi
 
 # Iniciar el servidor de desarrollo con Vite

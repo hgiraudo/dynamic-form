@@ -103,16 +103,21 @@ if [ ! -d "node_modules" ]; then
     npm install
 fi
 
-# Crear/actualizar .env para frontend
-echo "⚙️ Creando/actualizando archivo .env para frontend..."
-cat > .env << EOF
+# Crear .env solo si no existe
+if [ ! -f ".env" ]; then
+    echo "⚙️ Creando archivo .env para frontend..."
+    cat > .env << EOF
 # Frontend Environment Variables
 PORT=$FRONTEND_PORT
 HOST=0.0.0.0
 VITE_BACKEND_URL=http://$BACKEND_URL:$BACKEND_PORT
 VITE_ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
-echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
+    echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
+else
+    echo "✅ Archivo .env del frontend ya existe, no se sobrescribirá"
+    echo "ℹ️  Para aplicar cambios de VITE_BACKEND_URL, edita manualmente frontend/.env"
+fi
 
 # Iniciar frontend en segundo plano
 echo "🏃 Iniciando servidor frontend con Vite..."

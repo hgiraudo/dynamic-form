@@ -51,16 +51,21 @@ if [ ! -d "node_modules" ]; then
     npm ci --production
 fi
 
-# Siempre recrear .env con los valores correctos
-echo "⚙️ Configurando archivo .env..."
-cat > .env << EOF
+# Crear .env solo si no existe
+if [ ! -f ".env" ]; then
+    echo "⚙️ Creando archivo .env..."
+    cat > .env << EOF
 # Frontend Environment Variables
 PORT=$PORT
 HOST=$HOST
 VITE_BACKEND_URL=$VITE_BACKEND_URL
 VITE_ONESPAN_API_KEY=your_onespan_api_key_here
 EOF
-echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env"
+    echo "⚠️  IMPORTANTE: Configura VITE_ONESPAN_API_KEY en frontend/.env antes de continuar"
+else
+    echo "✅ Archivo .env del frontend ya existe, no se sobrescribirá"
+    echo "ℹ️  Asegúrate de que las variables en frontend/.env sean correctas antes de hacer build"
+fi
 
 # Limpiar caché de Vite y dist para forzar rebuild con nuevas variables
 if [ -d "node_modules/.vite" ]; then
