@@ -1,470 +1,703 @@
 {
   "steps": [
     {
-      "title": "Introducción",
-      "icon": "cilBolt",
-      "fields": [
-        {
-          "name": "NumeroDeComitente",
-          "label": "Número de Comitente",
-          "type": "text"
-        },
-        {
-          "name": "TipoDeTramite",
-          "label": "Tipo de Trámite",
-          "type": "button-group",
-          "options": ["Apertura", "Actualización", "Incorporación"],
-          "default": "Apertura",
-          "mapper": "tipoDeTramiteMapper"
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "TipoDeTramiteApertura",
-          "hideOnRevision": true
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "TipoDeTramiteActualizacion",
-          "hideOnRevision": true
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "TipoDeTramiteIncorporacion",
-          "hideOnRevision": true
-        },
-        {
-          "name": "SujetoObligado",
-          "label": "Sujeto Obligado",
-          "type": "checkbox",
-          "default": false
-        },
-        {
-          "name": "TramiteFecha",
-          "label": "Fecha de Trámite",
-          "type": "date",
-          "default": "today"
-        },
-        {
-          "name": "TipoFirma",
-          "label": "Tipo de Firma",
-          "type": "button-group",
-          "options": ["Indistinta", "Conjunta"],
-          "default": "Indistinta",
-          "mapper": "usoDeFirmaMapper"
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "UsoDeFirmaIndistinta",
-          "hideOnRevision": true
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "UsoDeFirmaConjunta",
-          "hideOnRevision": true
-        }
-      ]
-    },
-    {
-      "title": "Razón Social",
-      "icon": "cilFactory",
-      "fields": [
-        {
-          "name": "RazonSocial",
-          "label": "Razón Social",
-          "type": "text",
-          "placeholder": "ej. Arroyito S.A."
-        },
-        {
-          "name": "CUIT",
-          "label": "CUIT",
-          "type": "text",
-          "placeholder": "00-12345678-9",
-          "formatter": "cuitFormatter"
-        },
-        {
-          "name": "FechaDeConstitucion",
-          "label": "Fecha de Constitución",
-          "type": "date"
-        },
-        {
-          "name": "FechaDeInscripcion",
-          "label": "Fecha de Inscripción",
-          "type": "date"
-        },
-        {
-          "name": "LugarDeInscripcion",
-          "label": "Lugar de Inscripción",
-          "type": "text"
-        },
-        {
-          "name": "NumeroDeInscripcion",
-          "label": "Número de Inscripción",
-          "type": "text"
-        },
-        {
-          "name": "DomicilioAdministracion",
-          "label": "Domicilio de Administración",
-          "type": "text"
-        },
-        {
-          "name": "DomicilioComercial",
-          "label": "Domicilio Comercial",
-          "type": "text"
-        },
-        {
-          "name": "ActividadPrincipal",
-          "label": "Actividad Principal",
-          "type": "text"
-        },
-        { "name": "Telefono", "label": "Teléfono", "type": "text" },
-        {
-          "name": "CorreoElectronico1",
-          "label": "Correo electrónico 1",
-          "type": "email",
-          "mapper": "emailMapper"
-        },
-        {
-          "name": "CorreoElectronico2",
-          "label": "Correo electrónico 2",
-          "type": "email",
-          "mapper": "emailMapper"
-        },
-        {
-          "name": "CorreoElectronico3",
-          "label": "Correo electrónico 3",
-          "type": "email",
-          "mapper": "emailMapper"
-        },
-
-        {
-          "name": "Accionistas",
-          "label": "Accionistas / Propietarios",
-          "type": "textarea"
-        },
-        {
-          "name": "BeneficiarioFinal",
-          "label": "Beneficiario Final / Controlante",
-          "type": "textarea"
-        },
-        {
-          "name": "CondicionAnteIVA",
-          "label": "Condición ante el IVA",
-          "type": "text"
-        },
-        {
-          "name": "CondicionAnteGanancias",
-          "label": "Condición ante Ganancias",
-          "type": "text"
-        },
-        {
-          "name": "CondicionAnteIIBB",
-          "label": "Condición ante IIBB",
-          "type": "text"
-        }
-      ]
-    },
-    {
-      "title": "Representantes",
+      "title": "Información Personal",
       "icon": "cilUser",
       "fields": [
+        { "name": "Primer nombre", "label": "Primer Nombre", "type": "text" },
+        { "name": "SegundoNombre", "label": "Segundo Nombre", "type": "text" },
         {
-          "name": "RepresentanteApellido1",
-          "label": "Apellido",
-          "type": "text",
-          "mapper": "representanteApellido1Mapper"
-        },
-        {
-          "name": "RepresentanteNombre1",
-          "label": "Nombre",
-          "type": "text",
-          "mapper": "representanteNombre1Mapper"
-        },
-        {
-          "name": "RepresentanteDNI1",
-          "label": "DNI / LE / LC",
+          "name": "Primer apellido",
+          "label": "Primer Apellido",
           "type": "text"
         },
         {
-          "name": "RepresentantePasaporte1",
-          "label": "Pasaporte / CI extranjeros",
+          "name": "Segundo apellido",
+          "label": "Segundo Apellido",
           "type": "text"
         },
         {
-          "name": "RepresentanteNacionalidad1",
-          "label": "Nacionalidad",
+          "name": "Apellido de casada",
+          "label": "Apellido de Casada",
           "type": "text"
         },
         {
-          "name": "RepresentanteLugarDeNacimiento1",
-          "label": "Lugar de Nacimiento",
+          "name": "CiudadDeNacimiento",
+          "label": "Ciudad de Nacimiento",
           "type": "text"
         },
         {
-          "name": "RepresentanteFechaDeNacimiento1",
+          "name": "PaisDeNacimiento",
+          "label": "País de Nacimiento",
+          "type": "text"
+        },
+        {
+          "name": "FechaNacimiento",
           "label": "Fecha de Nacimiento",
           "type": "date"
         },
         {
-          "name": "RepresentanteCUIT1",
-          "label": "CUIT / CUIL",
+          "name": "Sexo",
+          "label": "Sexo / Género",
+          "type": "button-group",
+          "options": ["Femenino", "Masculino"]
+        },
+        {
+          "name": "País residencia",
+          "label": "País de residencia",
           "type": "text"
         },
         {
-          "name": "RepresentanteTelefono1",
-          "label": "Teléfono",
+          "name": "Domicilio actual",
+          "label": "Domicilio actual",
           "type": "text"
         },
         {
-          "name": "RepresentanteEmail1",
-          "label": "Correo Electrónico",
-          "type": "email",
-          "mapper": "representanteEmail1Mapper"
+          "name": "Profesion u oficio",
+          "label": "Profesión u Oficio",
+          "type": "tel"
         },
+        { "name": "NumeroDeCelular", "label": "Nº Celular", "type": "tel" },
         {
-          "name": "RepresentanteDomicilio1",
-          "label": "Domicilio",
-          "type": "text"
-        },
-        {
-          "name": "RepresentanteActividad1",
-          "label": "Actividad / Profesión / Oficio / Industria",
-          "type": "text"
-        },
-        {
-          "name": "RepresentanteEstadoCivil1",
+          "name": "EstadoCivil",
           "label": "Estado Civil",
+          "type": "button-group",
+          "options": ["Soltero", "Casado", "Unión libre"],
+          "default": "Soltero"
+        },
+        {
+          "name": "TipoIdentificacion",
+          "label": "Tipo de Identificación",
+          "type": "button-group",
+          "options": ["DNI", "Pasaporte", "Carnet de Extranjero"],
+          "default": "DNI"
+        },
+        {
+          "name": "Número",
+          "label": "Número de Identificación",
           "type": "text"
         },
         {
-          "name": "RepresentanteCargo1",
-          "label": "Cargo en la Sociedad",
+          "name": "FechaVencimientoId",
+          "label": "Vencimiento Identificación",
+          "type": "date"
+        },
+        {
+          "name": " Seguro Social",
+          "label": "Número de Seguro Social",
           "type": "text"
         },
         {
-          "name": "RepresentanteVencimiento1",
-          "label": "Vencimiento en el Cargo",
-          "type": "date"
+          "name": "groupContactoEmergencia",
+          "label": "Contacto de Emergencia",
+          "description": "Proporcione un número telefónico alterno a su domicilio",
+          "type": "group"
         },
         {
-          "name": "RepresentanteNuevoVencimiento1",
-          "label": "Nuevo Vencimiento en el Cargo",
-          "type": "date"
+          "name": "ContactoEmergenciaNombre",
+          "label": "Nombre",
+          "type": "text"
         },
         {
-          "name": "tieneRep2",
-          "label": "¿Agregar un segundo representante?",
-          "type": "checkbox"
+          "name": "ContactoEmergenciaParentesco",
+          "label": "Parentesco",
+          "type": "text"
         },
         {
-          "name": "RepresentanteApellido2",
-          "label": "Apellido ",
+          "name": "ContactoEmergenciaTelefono",
+          "label": "Teléfono",
+          "type": "tel"
+        },
+        {
+          "name": "Correo electrónico",
+          "label": "Correo electrónico",
+          "type": "text"
+        },
+        {
+          "name": "groupRedesSociales",
+          "label": "Como me encuentro en redes sociales",
+          "type": "group"
+        },
+        { "name": "Facebook", "label": "Facebook", "type": "text" },
+        { "name": "Istagram", "label": "Instagram", "type": "text" },
+        { "name": "Twitter", "label": "X", "type": "text" },
+        { "name": "Linkedin", "label": "LinkedIn", "type": "text" }
+      ]
+    },
+    {
+      "title": "Familia",
+      "icon": "cilPeople",
+      "fields": [
+        { "label": "Padre", "type": "group" },
+        { "name": "Nombre de su padre", "label": "Nombre", "type": "text" },
+        { "name": "Ocupación 1", "label": "Ocupación", "type": "text" },
+        {
+          "name": "Lugar de trabajo_1",
+          "label": "Lugar de Trabajo",
+          "type": "text"
+        },
+        { "name": "Ce ular 1", "label": "Celular", "type": "tel" },
+        { "name": "Ce ular Tel", "label": "Teléfono", "type": "tel" },
+
+        { "label": "Madre", "type": "group" },
+        { "name": "Nombre de su madre", "label": "Nombre", "type": "text" },
+        { "name": "Ocupación 2", "label": "Ocupación", "type": "text" },
+        {
+          "name": "Lugar de trabajo_2",
+          "label": "Lugar de Trabajo",
+          "type": "text"
+        },
+        { "name": "Ce ular 2", "label": "Celular", "type": "tel" },
+        { "name": "Ce ular Tel_2", "label": "Teléfono", "type": "tel" },
+
+        { "label": "Cónyuge", "type": "group" },
+        { "name": "Nombre", "label": "Nombre", "type": "text" },
+        { "name": "Ocupación 3", "label": "Ocupación", "type": "text" },
+        {
+          "name": "Lugar de trabajo_3",
+          "label": "Lugar de Trabajo",
+          "type": "text"
+        },
+        { "name": "Ce ular 3", "label": "Celular", "type": "tel" },
+        { "name": "Celular Tel", "label": "Teléfono", "type": "tel" },
+
+        { "label": "Hijo(a) 1", "type": "group" },
+        { "name": "Nombre desu hijoa", "label": "Nombre", "type": "text" },
+        { "name": "Ocupación 4", "label": "Ocupación", "type": "text" },
+        {
+          "name": "Lugar de trabajo_4",
+          "label": "Lugar de Trabajo",
+          "type": "text"
+        },
+        { "name": "Ce ular 4", "label": "Celular", "type": "tel" },
+        { "name": "Celular Tel 6", "label": "Teléfono", "type": "tel" },
+
+        {
+          "label": "Hijo(a) 2",
+          "type": "group",
+          "visibleIf": { "field": "Nombre desu hijoa", "value": "" }
+        },
+        {
+          "name": "Nombre desu hijoa_2",
+          "label": "Nombre",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true },
-          "mapper": "representanteApellido2Mapper"
+          "visibleIf": { "field": "Nombre desu hijoa", "value": "" }
         },
         {
-          "name": "RepresentanteNombre2",
-          "label": "Nombre ",
+          "name": "Ocupación 5",
+          "label": "Ocupación",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true },
-          "mapper": "representanteNombre2Mapper"
+          "visibleIf": { "field": "Nombre desu hijoa", "value": "" }
         },
         {
-          "name": "RepresentanteDNI2",
-          "label": "DNI / LE / LC ",
+          "name": "Lugar de trabajo_5",
+          "label": "Lugar de Trabajo",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre desu hijoa", "value": "" }
         },
         {
-          "name": "RepresentantePasaporte2",
-          "label": "Pasaporte / CI extranjeros ",
+          "name": "Ce ular 5",
+          "label": "Celular",
+          "type": "tel",
+          "visibleIf": { "field": "Nombre desu hijoa", "value": "" }
+        },
+        {
+          "name": "Celular Tel 5",
+          "label": "Teléfono",
+          "type": "tel",
+          "visibleIf": { "field": "Nombre desu hijoa", "value": "" }
+        },
+
+        {
+          "label": "Hijo(a) 3",
+          "type": "group",
+          "visibleIf": { "field": "Nombre desu hijoa_2", "value": "" }
+        },
+        {
+          "name": "Nombre desu hijoa_3",
+          "label": "Nombre",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre desu hijoa_2", "value": "" }
         },
         {
-          "name": "RepresentanteNacionalidad2",
-          "label": "Nacionalidad ",
+          "name": "Ocupación 6",
+          "label": "Ocupación",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre desu hijoa_2", "value": "" }
         },
         {
-          "name": "RepresentanteLugarDeNacimiento2",
-          "label": "Lugar de Nacimiento ",
+          "name": "Lugar de trabajo_6",
+          "label": "Lugar de Trabajo",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre desu hijoa_2", "value": "" }
         },
         {
-          "name": "RepresentanteFechaDeNacimiento2",
-          "label": "Fecha de Nacimiento ",
-          "type": "date",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "name": "Ce ular 6",
+          "label": "Celular",
+          "type": "tel",
+          "visibleIf": { "field": "Nombre desu hijoa_2", "value": "" }
         },
         {
-          "name": "RepresentanteCUIT2",
-          "label": "CUIT / CUIL ",
+          "name": "Celular Tel 4",
+          "label": "Teléfono",
+          "type": "tel",
+          "visibleIf": { "field": "Nombre desu hijoa_2", "value": "" }
+        },
+
+        { "label": "Hermano(a) 1", "type": "group" },
+        { "name": "Nombre de su hermanoa", "label": "Nombre", "type": "text" },
+        { "name": "Ocupación 7", "label": "Ocupación", "type": "text" },
+        {
+          "name": "Lugar de trabajo_7",
+          "label": "Lugar de Trabajo",
+          "type": "text"
+        },
+        { "name": "Ce ular 7", "label": "Celular", "type": "tel" },
+        { "name": "Celular Tel 7", "label": "Teléfono", "type": "tel" },
+
+        {
+          "label": "Hermano(a) 2",
+          "type": "group",
+          "visibleIf": { "field": "Nombre de su hermanoa", "value": "" }
+        },
+        {
+          "name": "Nombre de su hermanoa_2",
+          "label": "Nombre",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre de su hermanoa", "value": "" }
         },
         {
-          "name": "RepresentanteTelefono2",
-          "label": "Teléfono ",
+          "name": "Ocupación 8",
+          "label": "Ocupación",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre de su hermanoa", "value": "" }
         },
         {
-          "name": "RepresentanteEmail2",
-          "label": "Correo Electrónico ",
-          "type": "email",
-          "visibleIf": { "field": "tieneRep2", "value": true },
-          "mapper": "representanteEmail2Mapper"
-        },
-        {
-          "name": "RepresentanteDomicilio2",
-          "label": "Domicilio ",
+          "name": "Lugar de trabajo_8",
+          "label": "Lugar de Trabajo",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre de su hermanoa", "value": "" }
         },
         {
-          "name": "RepresentanteActividad2",
-          "label": "Actividad / Profesión / Oficio / Industria ",
+          "name": "Ce ular 8",
+          "label": "Celular",
+          "type": "tel",
+          "visibleIf": { "field": "Nombre de su hermanoa", "value": "" }
+        },
+        {
+          "name": "Celular Tel 8",
+          "label": "Teléfono",
+          "type": "tel",
+          "visibleIf": { "field": "Nombre de su hermanoa", "value": "" }
+        },
+
+        {
+          "label": "Hermano(a) 3",
+          "type": "group",
+          "visibleIf": { "field": "Nombre de su hermanoa_2", "value": "" }
+        },
+        {
+          "name": "Nombre de su hermanoa_3",
+          "label": "Nombre",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre de su hermanoa_2", "value": "" }
         },
         {
-          "name": "RepresentanteEstadoCivil2",
-          "label": "Estado Civil ",
+          "name": "Ocupación 9",
+          "label": "Ocupación",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre de su hermanoa_2", "value": "" }
         },
         {
-          "name": "RepresentanteCargo2",
-          "label": "Cargo en la Sociedad ",
+          "name": "Lugar de trabajo_9",
+          "label": "Lugar de Trabajo",
           "type": "text",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": { "field": "Nombre de su hermanoa_2", "value": "" }
         },
         {
-          "name": "RepresentanteVencimiento2",
-          "label": "Vencimiento en el Cargo ",
-          "type": "date",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "name": "Ce ular 9",
+          "label": "Celular",
+          "type": "tel",
+          "visibleIf": { "field": "Nombre de su hermanoa_2", "value": "" }
         },
         {
-          "name": "RepresentanteNuevoVencimiento2",
-          "label": "Nuevo Vencimiento en el Cargo ",
-          "type": "date",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "name": "Celular Tel 9",
+          "label": "Teléfono",
+          "type": "tel",
+          "visibleIf": { "field": "Nombre de su hermanoa_2", "value": "" }
         }
       ]
     },
     {
-      "title": "Oficial de Cuenta",
-      "icon": "cilBriefcase",
+      "title": "Formación y Competencias",
+      "icon": "cilEducation",
       "fields": [
         {
-          "name": "Confecciono",
-          "label": "Datos Completados Por",
+          "label": "Secundaria",
+          "type": "group"
+        },
+        {
+          "name": "Fecha de inicioSecundaria",
+          "label": "Fecha de Inicio",
+          "type": "date"
+        },
+        {
+          "name": "Fecha de FinalizaciónSecundaria",
+          "label": "Fecha de Finalización",
+          "type": "date"
+        },
+        {
+          "name": "Centro EducativoSecundaria",
+          "label": "Institución que emite el título",
           "type": "text"
         },
-        { "name": "Oficial", "label": "Oficial", "type": "text" },
-        { "name": "Administrador", "label": "Administrador", "type": "text" }
-      ]
-    },
-    {
-      "title": "Firmantes",
-      "icon": "cilPeople",
-      "fields": [
         {
-          "name": "Firmante1Apellido",
-          "label": "Apellido",
-          "type": "text",
-          "disabled": true
+          "name": "NivelSecundaria",
+          "label": "Nivel Educativo",
+          "type": "text"
         },
         {
-          "name": "Firmante1Nombre",
-          "label": "Nombre",
-          "type": "text",
-          "disabled": true
-        },
-        {
-          "name": "Firmante1Email",
-          "label": "Correo",
-          "type": "email",
-          "disabled": true
-        },
-        {
-          "name": "CertificadoRep1",
-          "label": "Utiliza un certificado personal (Ley 27446)",
-          "type": "checkbox"
-        },
-        {
-          "name": "VerificacionRep1",
-          "label": "Verificar identidad con documento y prueba de vida",
-          "type": "checkbox"
-        },
-        {
-          "name": "SmsRep1",
-          "label": "Enviar código de autorización por SMS",
-          "type": "checkbox"
-        },
-        {
-          "name": "RepresentanteTelefono1",
-          "label": "Número de celular",
-          "type": "tel",
-          "visibleIf": { "field": "SmsRep1", "value": true },
-          "placeholder": "+54 9 11 1234-5678"
+          "name": "Título obtenidoSecundaria",
+          "label": "Título Obtenido",
+          "type": "text"
         },
 
         {
-          "name": "Firmante2Apellido",
-          "label": "Apellido ",
+          "label": "Universidad",
+          "type": "group"
+        },
+        {
+          "name": "Fecha de inicioUniversidad",
+          "label": "Fecha de Inicio",
+          "type": "date"
+        },
+        {
+          "name": "Fecha de FinalizaciónUniversidad",
+          "label": "Fecha de Finalización",
+          "type": "date"
+        },
+        {
+          "name": "Centro EducativoUniversidad",
+          "label": "Institución que emite el título",
+          "type": "text"
+        },
+        {
+          "name": "NivelUniversidad",
+          "label": "Nivel Educativo",
+          "type": "text"
+        },
+        {
+          "name": "Título obtenidoUniversidad",
+          "label": "Título Obtenido",
+          "type": "text"
+        },
+
+        {
+          "label": "Maestría",
+          "type": "group"
+        },
+        {
+          "name": "Fecha de inicioMaestría",
+          "label": "Fecha de Inicio",
+          "type": "date"
+        },
+        {
+          "name": "Fecha de FinalizaciónMaestría",
+          "label": "Fecha de Finalización",
+          "type": "date"
+        },
+        {
+          "name": "Centro EducativoMaestría",
+          "label": "Institución que emite el título",
+          "type": "text"
+        },
+        {
+          "name": "NivelMaestría",
+          "label": "Nivel Educativo",
+          "type": "text"
+        },
+        {
+          "name": "Título obtenidoMaestría",
+          "label": "Título Obtenido",
+          "type": "text"
+        },
+
+        {
+          "label": "Estudios Actuales",
+          "type": "group"
+        },
+        {
+          "name": "Centro Educativo",
+          "label": "Centro Educativo",
+          "type": "text"
+        },
+        {
+          "name": "Carrera o curso",
+          "label": "Carrera o Curso",
+          "type": "text"
+        },
+        {
+          "name": "Horario",
+          "label": "Horario",
+          "type": "text"
+        },
+        {
+          "name": "Fecha de culminación",
+          "label": "Fecha de Culminación",
+          "type": "date"
+        }
+      ]
+    },
+
+    {
+      "title": "Historial Laboral",
+      "icon": "cilBriefcase",
+      "fields": [
+        {
+          "label": "Último Empleo / Actual",
+          "type": "group"
+        },
+        {
+          "name": "Empleo actual o recienteNombre de la empresa",
+          "label": "Empresa",
+          "type": "text"
+        },
+        {
+          "name": "Empleo actual o recientePuesto desempeñado",
+          "label": "Puesto desempeñado",
+          "type": "text"
+        },
+        {
+          "name": "HistorialLaboralFechaDeInicio",
+          "label": "Fecha de Inicio",
+          "type": "date"
+        },
+        {
+          "name": "HistorialLaboralFechaFinal",
+          "label": "Fecha final",
+          "type": "date"
+        },
+        {
+          "name": "puestojefe",
+          "label": "Puesto del Jefe",
+          "type": "text"
+        },
+        {
+          "name": "telefonojefe",
+          "label": "Teléfono del Jefe",
+          "type": "tel"
+        },
+        {
+          "name": "motivoretiro",
+          "label": "Motivo de su retiro",
+          "type": "text"
+        },
+
+        {
+          "label": "Empleo Anterior",
+          "type": "group"
+        },
+        {
+          "name": "Empleo anteriorNombre de la empresa",
+          "label": "Empresa",
+          "type": "text"
+        },
+        {
+          "name": "puestodesempenado",
+          "label": "Puesto desempeñado",
+          "type": "text"
+        },
+        {
+          "name": "EmpleoAnteriorFechaInicio",
+          "label": "Fecha de Inicio",
+          "type": "date"
+        },
+        {
+          "name": "fechafinal2",
+          "label": "Fecha final",
+          "type": "date"
+        },
+        {
+          "name": "Empleo anteriorPuesto del Jefe",
+          "label": "Puesto del Jefe",
+          "type": "text"
+        },
+        {
+          "name": "EmpleoAnteriorTelefonoJefe",
+          "label": "Teléfono del Jefe",
+          "type": "tel"
+        },
+        {
+          "name": "Empleo anteriorSi actualmente tiene emp eo Por qué desea retirarse",
+          "label": "Motivo de su retiro",
+          "type": "text"
+        }
+      ]
+    },
+
+    {
+      "title": "Referencias",
+      "icon": "cilContact",
+      "fields": [
+        {
+          "label": "Referencia Laboral 1",
+          "type": "group"
+        },
+        {
+          "name": "Nombre_2",
+          "label": "Nombre",
+          "type": "text"
+        },
+        {
+          "name": "Lugar de trabajo y teléfono",
+          "label": "Lugar de trabajo",
+          "type": "text"
+        },
+        {
+          "name": "ReferenciaCelular1",
+          "label": "Celular",
+          "type": "tel"
+        },
+        {
+          "name": "ocupación 1",
+          "label": "Ocupación",
+          "type": "text"
+        },
+
+        {
+          "label": "Referencia Laboral 2",
+          "type": "group"
+        },
+        {
+          "name": "Nombre_3",
+          "label": "Nombre",
+          "type": "text"
+        },
+        {
+          "name": "Lugar de trabajo y teléfono_2",
+          "label": "Lugar de trabajo",
+          "type": "text"
+        },
+        {
+          "name": "ReferenciaCelular2",
+          "label": "Celular",
+          "type": "tel"
+        },
+        {
+          "name": "ocupación_2",
+          "label": "Ocupación",
+          "type": "text"
+        },
+
+        {
+          "label": "Referencia Personal 1",
+          "type": "group"
+        },
+        {
+          "name": "Nombre_4",
+          "label": "Nombre",
+          "type": "text"
+        },
+        {
+          "name": "Lugar de trabajo y teléfono_3",
+          "label": "Lugar de trabajo",
+          "type": "text"
+        },
+        {
+          "name": "ReferenciaCelular3",
+          "label": "Celular",
+          "type": "tel"
+        },
+        {
+          "name": "ocupación 3",
+          "label": "Ocupación",
+          "type": "text"
+        },
+
+        {
+          "label": "Referencia Personal 2",
+          "type": "group"
+        },
+        {
+          "name": "Nombre_5",
+          "label": "Nombre",
+          "type": "text"
+        },
+        {
+          "name": "Lugar de trabajo y teléfono_4",
+          "label": "Lugar de trabajo",
+          "type": "text"
+        },
+        {
+          "name": "ReferenciaCelular4",
+          "label": "Celular",
+          "type": "tel"
+        },
+        {
+          "name": "Nombre_6",
+          "label": "Ocupación",
+          "type": "text"
+        }
+      ]
+    },
+
+    {
+      "title": "Grupo Ficohsa y Usted",
+      "icon": "cilBuilding",
+      "fields": [
+        {
+          "name": "ParienteGrupo",
+          "label": "¿Tiene algún pariente en Grupo Ficohsa?",
+          "type": "button-group",
+          "options": ["Sí", "No"]
+        },
+        {
+          "name": "Nombre",
+          "label": "Nombre del Pariente",
           "type": "text",
-          "disabled": true,
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "ParienteGrupo",
+            "value": "Sí"
+          }
         },
         {
-          "name": "Firmante2Nombre",
-          "label": "Nombre Completo ",
+          "name": "FamiliarParentesco",
+          "label": "Relación con el Pariente",
           "type": "text",
-          "disabled": true,
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "ParienteGrupo",
+            "value": "Sí"
+          }
         },
         {
-          "name": "Firmante2Email",
-          "label": "Correo ",
-          "type": "email",
-          "disabled": true,
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "name": "areaocargo",
+          "label": "Puesto del Pariente",
+          "type": "text",
+          "visibleIf": {
+            "field": "ParienteGrupo",
+            "value": "Sí"
+          }
         },
         {
-          "name": "CertificadoRep2",
-          "label": "Utiliza un certificado personal (Ley 27446)",
-          "type": "checkbox",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "name": "SolicitudAnterior",
+          "label": "¿Ha solicitado antes empleo en Grupo Ficohsa o sus empresas afiliadas?",
+          "type": "button-group",
+          "options": ["Sí", "No"]
         },
         {
-          "name": "VerificacionRep2",
-          "label": "Verificar identidad con documento y prueba de vida",
-          "type": "checkbox",
-          "visibleIf": { "field": "tieneRep2", "value": true }
-        },
-        {
-          "name": "SmsRep2",
-          "label": "Enviar código de autorización por SMS",
-          "type": "checkbox",
-          "visibleIf": { "field": "tieneRep2", "value": true }
-        },
-        {
-          "name": "RepresentanteTelefono2",
-          "label": "Número de celular",
-          "type": "tel",
-          "visibleIf": { "field": "SmsRep2", "value": true },
-          "placeholder": "+54 9 11 1234-5678"
+          "name": "FechaSolicitudAnterior",
+          "label": "Fecha de la solicitud anterior",
+          "type": "date",
+          "visibleIf": {
+            "field": "SolicitudAnterior",
+            "value": "Sí"
+          }
         }
       ]
     },
     {
       "title": "Revisar y Firmar",
-      "icon": "cilTask",
+      "icon": "cilCheck",
       "fields": []
     }
   ]

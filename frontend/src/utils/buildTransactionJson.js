@@ -33,10 +33,10 @@ export const buildTransactionJson = (pdfBase64, formData) => {
             fields: [
               {
                 width: 252.0,
-                top: 880.0,
+                top: 755.0,
                 height: 62.0,
-                left: 225.0,
-                page: 0,
+                left: 248.0,
+                page: 1,
                 type: "SIGNATURE",
                 subtype: "FULLNAME",
               },

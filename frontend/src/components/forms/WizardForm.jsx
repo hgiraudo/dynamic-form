@@ -7,6 +7,48 @@ import * as fieldMappers from "../../utils/fieldMappers";
 import * as fieldFormatters from "../../utils/fieldFormatters";
 import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "../../utils/utils";
 import config from "../../../../shared/config.general.js";
+import pdfConfig from "../../config/pdfConfig.json";
+
+/**
+ * Genera los archivos PDF y JSON a partir del formulario mapeado.
+ * Usa las rutas configuradas en pdfConfig.json
+ */
+export async function generatePdfFiles(getMappedFormData) {
+  console.log("[PDF Helper] Iniciando generación de archivos...");
+
+  const pdfJson = getMappedFormData();
+  const pdfUrl = `${pdfConfig.templatePath}${pdfConfig.templatePdf}`;
+  console.log("[PDF Helper] Descargando template PDF:", pdfUrl);
+
+  const pdfResp = await fetch(pdfUrl);
+
+  if (!pdfResp.ok) {
+    const errorText = await pdfResp.text();
+    console.error(
+      "[PDF Helper] Error al descargar template PDF:",
+      pdfResp.status,
+      errorText.slice(0, 200)
+    );
+    throw new Error(`Error al descargar template PDF: ${pdfResp.statusText}`);
+  }
+
+  const pdfBlob = await pdfResp.blob();
+  const pdfFile = new File([pdfBlob], pdfConfig.templatePdf, {
+    type: "application/pdf",
+  });
+
+  const jsonFile = new File([JSON.stringify(pdfJson)], pdfConfig.jsonFileName, {
+    type: "application/json",
+  });
+
+  console.log("[PDF Helper] Archivos generados:", {
+    pdfFile: pdfFile.name,
+    jsonFile: jsonFile.name,
+  });
+
+  return { pdfFile, jsonFile, pdfJson };
+}
+
 import { buildTransactionJson } from "../../utils/buildTransactionJson.js";
 import { AnimatePresence } from "framer-motion";
 import { brandConfig } from "../../branding/brandConfig";
@@ -62,24 +104,39 @@ function WizardForm() {
 
   // 🔹 Importar JSON y normalizar
   const handleImport = (importedData) => {
+    console.log("handleImport recibido:", importedData);
+
     let normalizedData = { ...importedData };
 
     formConfig.steps.forEach((step) => {
       step.fields.forEach((field) => {
         // Si el campo es tipo "date", convertirlo a formato válido HTML5 (YYYY-MM-DD)
         if (field.type === "date" && normalizedData[field.name]) {
+          const oldValue = normalizedData[field.name];
           normalizedData[field.name] = parseDateDDMMYYYY(
             normalizedData[field.name]
+          );
+          console.log(
+            `Campo date '${field.name}': '${oldValue}' → '${
+              normalizedData[field.name]
+            }'`
           );
         }
 
         // Si es checkbox, convertir "/" → true y "" → false
         if (field.type === "checkbox") {
+          const oldValue = normalizedData[field.name];
           normalizedData[field.name] = normalizedData[field.name] === "/";
+          console.log(
+            `Campo checkbox '${field.name}': '${oldValue}' → ${
+              normalizedData[field.name]
+            }`
+          );
         }
       });
     });
 
+    console.log("Datos normalizados finales:", normalizedData);
     setFormData(normalizedData);
   };
 
@@ -112,7 +169,7 @@ function WizardForm() {
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = `persona-juridica-${brandConfig.name.toLowerCase()}.json`;
+      a.download = `${brandConfig.downloadFilename.toLowerCase()}.json`;
       a.click();
 
       URL.revokeObjectURL(url);
@@ -125,15 +182,26 @@ function WizardForm() {
   const renderField = (field) => {
     if (field.visibleIf) {
       const { field: depField, value } = field.visibleIf;
-      if (formData[depField] !== value) return null;
+      const depValue = formData[depField];
+
+      // Si value es cadena vacía, interpretamos "mostrar si el otro campo NO está vacío"
+      if (value === "") {
+        if (!depValue) return null;
+      } else {
+        if (depValue !== value) return null;
+      }
     }
 
-    let value = formData[field.name];
-    if (value === undefined) {
-      value =
-        field.default === "today" && field.type === "date"
-          ? new Date().toISOString().split("T")[0]
-          : field.default ?? (field.type === "checkbox" ? false : "");
+    // Solo calculamos value si el campo tiene "name"
+    let value = undefined;
+    if (field.name) {
+      value = formData[field.name];
+      if (value === undefined) {
+        value =
+          field.default === "today" && field.type === "date"
+            ? new Date().toISOString().split("T")[0]
+            : field.default ?? (field.type === "checkbox" ? false : "");
+      }
     }
 
     switch (field.type) {
@@ -156,6 +224,7 @@ function WizardForm() {
             />
           </div>
         );
+
       case "textarea":
         return (
           <div className="mb-2" key={field.name}>
@@ -171,6 +240,7 @@ function WizardForm() {
             />
           </div>
         );
+
       case "checkbox":
         return (
           <div className="mb-2 flex items-center space-x-2" key={field.name}>
@@ -183,6 +253,7 @@ function WizardForm() {
             <span>{field.label}</span>
           </div>
         );
+
       case "button-group":
         return (
           <div className="mb-2" key={field.name}>
@@ -190,12 +261,12 @@ function WizardForm() {
               {field.label}
             </label>
             <div className="flex space-x-2">
-              {field.options.map((opt) => (
+              {field.options.map((opt, i) => (
                 <button
                   key={opt}
                   type="button"
                   className={`px-4 py-2 rounded border ${
-                    value === opt
+                    (value ?? field.options[0]) === opt
                       ? "bg-brand-secondary text-blue-100"
                       : "bg-white text-brand-secondary border-gray-400 hover:bg-gray-100"
                   }`}
@@ -207,6 +278,22 @@ function WizardForm() {
             </div>
           </div>
         );
+
+      case "group":
+        return (
+          <div
+            key={field.label}
+            className="mt-6 mb-4 p-4 bg-gray-100 border border-gray-300 rounded-xl shadow-sm"
+          >
+            <h3 className="text-lg font-semibold text-brand-secondary mb-1">
+              {field.label}
+            </h3>
+            {field.description && (
+              <p className="text-sm text-gray-600">{field.description}</p>
+            )}
+          </div>
+        );
+
       default:
         return null;
     }
@@ -223,6 +310,7 @@ function WizardForm() {
 
       // 🔹 0. Chequear que el backend está levantado
       const healthUrl = `${config.backend.baseUrl}${config.backend.healthEndpoint}`;
+      console.log("healthUrl: " + healthUrl);
       const healthResp = await fetch(healthUrl);
       if (!healthResp.ok) throw new Error("Servidor no disponible");
       const healthData = await healthResp.json();
@@ -231,9 +319,11 @@ function WizardForm() {
 
       // 🔹 1. Generar PDF y transactionJson
       const pdfJson = getMappedFormData();
-      const pdfResp = await fetch("/form/persona-juridica.pdf");
+      const pdfTemplate = pdfConfig.templatePdf; // nombre dinámico
+      console.log("pdfTemplate:" + pdfTemplate);
+      const pdfResp = await fetch(`/form/${pdfTemplate}`);
       const pdfBlob = await pdfResp.blob();
-      const pdfFile = new File([pdfBlob], "persona-juridica.pdf", {
+      const pdfFile = new File([pdfBlob], pdfTemplate, {
         type: "application/pdf",
       });
       const jsonFile = new File([JSON.stringify(pdfJson)], "datos.json", {
@@ -363,7 +453,7 @@ function WizardForm() {
             <>
               <div className="rounded-lg overflow-hidden text-sm">
                 {formConfig.steps.slice(0, -1).map((step, stepIdx) => (
-                  <div key={stepIdx} className="mb-6">
+                  <div key={`${step.title}-${stepIdx}`} className="mb-6">
                     <h3 className="text-lg font-semibold text-brand-primary mb-2 border-b pb-1 text-center">
                       {step.title}
                     </h3>
@@ -371,19 +461,34 @@ function WizardForm() {
                     {step.fields
                       .filter((field) => !field.hideOnRevision)
                       .map((field, idx) => {
+                        // zebra strip
+                        const rowBg = idx % 2 === 0 ? "bg-gray-50" : "bg-white";
+
+                        // 🟦 Mostrar encabezado para los type=group
+                        if (field.type === "group") {
+                          return (
+                            <div
+                              key={`${step.title}-${field.label}-${idx}`}
+                              className={`px-4 py-2 ${rowBg}`}
+                            >
+                              <span className="font-semibold text-center w-full block text-gray-800">
+                                {field.label}
+                              </span>
+                            </div>
+                          );
+                        }
+
+                        // 🔸 Campos normales
                         let displayValue =
                           getMappedFormData()[field.name] ?? "";
-                        // 👇 Mostrar Sí/No en la revisión si es checkbox
                         if (field.type === "checkbox") {
                           displayValue = formData[field.name] ? "Sí" : "No";
                         }
 
                         return (
                           <div
-                            key={field.name}
-                            className={`grid grid-cols-2 gap-4 px-4 py-2 items-center ${
-                              idx % 2 === 0 ? "bg-gray-50" : "bg-white"
-                            }`}
+                            key={`${step.title}-${field.name}-${idx}`}
+                            className={`grid grid-cols-2 gap-4 px-4 py-2 items-center ${rowBg}`}
                           >
                             <span className="font-medium text-brand-primary text-right pr-4">
                               {field.label}
@@ -408,7 +513,7 @@ function WizardForm() {
               <div className="flex justify-between gap-4 pt-6">
                 <button
                   type="button"
-                  onClick={handleExport} // 👈 ahora usa la función real
+                  onClick={handleExport}
                   className="flex-1 flex items-center justify-center px-4 py-3 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary"
                 >
                   <CIcon icon={Icons.cilSave} className="w-5 h-5 mr-2" />
@@ -434,7 +539,7 @@ function WizardForm() {
                     reader.onload = (ev) => {
                       try {
                         const importedData = JSON.parse(ev.target.result);
-                        handleImport(importedData); // 🔹 ahora usa tu función
+                        handleImport(importedData);
                       } catch {
                         alert("Archivo JSON inválido ❌");
                       }

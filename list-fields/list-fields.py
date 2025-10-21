@@ -72,10 +72,15 @@ def extract_form_fields_and_labels(input_pdf):
 
             # Valor de ejemplo para fields_example.json
             if field_name:
-                if field_type == "/Btn":  # checkbox o radio
-                    fields_example[str(field_name)] = "/"
+                field_name_str = str(field_name)
+                # Si el campo incluye la palabra "fecha" → poner ejemplo de fecha
+                if "fecha" in field_name_str.lower():
+                    fields_example[field_name_str] = "01-01-2001"
+                elif field_type == "/Btn":  # checkbox o radio
+                    fields_example[field_name_str] = "/"
                 else:
-                    fields_example[str(field_name)] = f"{field_name}"
+                    fields_example[field_name_str] = field_name_str
+
 
     # Extraer etiquetas de texto con pdfminer
     labels_info = []
