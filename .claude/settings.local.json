@@ -14,7 +14,8 @@
       "WebFetch(domain:brandfetch.com)",
       "Bash(netstat:*)",
       "Bash(findstr:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []
