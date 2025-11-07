@@ -11,12 +11,12 @@
 
 export const brandConfig = {
   // Nombre de la empresa
-  name: "Ficohsa",
-  downloadFilename: "solicitud-empleo",
+  name: "Allaria",
+
   // Logos
   logos: {
-    white: "/img/logo-white.svg", // Logo para fondos oscuros
-    color: "/img/logo-color.svg", // Logo para fondos claros
+    white: "/img/logo-white.svg",  // Logo para fondos oscuros
+    color: "/img/logo-color.svg",   // Logo para fondos claros
   },
 };
 
