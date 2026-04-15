@@ -204,10 +204,23 @@ function WizardForm() {
       }
     }
 
+    let isEnabled = true;
+
+    if (field.enabledIf) {
+      const { field: depField, value } = field.enabledIf;
+      const depValue = formData[depField];
+
+      if (value === "") {
+        isEnabled = !!depValue;
+      } else {
+        isEnabled = depValue === value;
+      }
+    }
+
     switch (field.type) {
-      case "text":
       case "email":
       case "date":
+      case "text":
       case "tel":
         return (
           <div className="mb-2" key={field.name}>
@@ -216,11 +229,15 @@ function WizardForm() {
             </label>
             <input
               type={field.type}
-              value={value}
+              value={isEnabled ? value : ""}
               placeholder={field.placeholder || ""}
               onChange={(e) => handleChangeWithFormatter(field, e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-300"
-              disabled={field.disabled}
+              className={`w-full p-3 border rounded focus:outline-none focus:ring-2 ${
+                field.disabled || !isEnabled
+                  ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                  : "bg-white border-gray-300 focus:ring-gray-300"
+              }`}
+              disabled={field.disabled || !isEnabled}
             />
           </div>
         );
@@ -254,6 +271,23 @@ function WizardForm() {
           </div>
         );
 
+      case "info":
+        return (
+          <div
+            className="mb-4 p-4 bg-gray-50 border border-gray-200 rounded"
+            key={field.name}
+          >
+            {field.label && (
+              <h3 className="text-md font-semibold text-brand-secondary mb-2">
+                {field.label}
+              </h3>
+            )}
+            <div className="text-sm text-gray-700 whitespace-pre-line">
+              {field.content}
+            </div>
+          </div>
+        );
+
       case "button-group":
         return (
           <div className="mb-2" key={field.name}>
@@ -276,6 +310,24 @@ function WizardForm() {
                 </button>
               ))}
             </div>
+          </div>
+        );
+
+      case "subtitle":
+        return (
+          <div className="mt-4 mb-2" key={field.name || field.label}>
+            <h4 className="text-base font-semibold text-brand-secondary whitespace-pre-line">
+              {field.content}
+            </h4>
+          </div>
+        );
+
+      case "comment":
+        return (
+          <div className="mt-4 mb-2" key={field.name || field.label}>
+            <h4 className="text-base text-brand-secondary whitespace-pre-line">
+              {field.content}
+            </h4>
           </div>
         );
 
@@ -350,7 +402,7 @@ function WizardForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY
+          "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY,
         },
         body: JSON.stringify(transactionJson),
       });
@@ -363,7 +415,7 @@ function WizardForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY
+          "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY,
         },
         body: JSON.stringify({ packageId: signData.id }),
       });
@@ -421,7 +473,7 @@ function WizardForm() {
       <div className="flex-1 overflow-y-auto bg-white p-4">
         <div className="p-8">
           <h2 className="text-2xl font-semibold text-brand-primary mb-6">
-            {currentStep.title}
+            {currentStep.description}
           </h2>
 
           {/* Render dinámico de campos */}
