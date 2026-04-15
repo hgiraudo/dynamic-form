@@ -475,7 +475,8 @@
         {
           "type": "info",
           "name": "CuentaComitenteTexto",
-          "content": "El/los firmantes al pie de la presente solicita/n la apertura o actualización de una cuenta comitente, quedando sujeta a aprobación por parte de Allaria S.A. La cuenta comitente operará bajo las siguientes condiciones:\n\n1) Las firmas, domicilios y demás datos que se encuentran en este registro de clientes se consideran válidos y vigentes hasta tanto Allaria S.A. reciba notificación en forma fehaciente de la modificación requerida.\n\n2) Allaria S.A. podrá realizar operaciones conforme Normas N.T. 2013.\n\n3) Las operaciones bilaterales no garantizadas se ajustarán a normativa vigente.\n\n4) Las operaciones del exterior se realizarán bajo normativa CNV, a través de brokers externos, sin garantía de mercados locales y solo para inversores calificados.\n\n5) Clientes entre 13 y 17 años operarán con restricciones y bajo responsabilidad de su representante legal.\n\n6) El cliente deberá definir su perfil de riesgo y autorizar operaciones fuera del mismo.\n\n7) Las instrucciones podrán impartirse por múltiples canales habilitados.\n\n8) El cliente podrá otorgar o revocar mandato discrecional.\n\n9) Se autorizan recargos por saldos deudores y ejecución de activos.\n\n10) Los fondos solo se reinvertirán por instrucción o mandato.\n\n11) El cliente podrá retirar fondos según normativa vigente.\n\n12) Allaria presta servicios sobre eventos corporativos sin responsabilidad por omisiones externas.\n\n13) El cliente podrá consultar garantías de operaciones.\n\n14) No se garantizan rendimientos ni capital.\n\n15) Se enviarán notificaciones automáticas de operaciones.\n\n16) El cliente declara origen lícito de fondos.\n\n17) Autoriza compartir información con organismos y entidades.\n\n18) El cliente o Allaria podrán cerrar la cuenta bajo condiciones establecidas.\n\n19) El cliente conoce riesgos por incumplimientos del Agente.\n\n20) Podrá realizar consultas y reclamos.\n\n21) Los costos están disponibles en la web.\n\n22) Allaria cumplirá normativa CNV vigente.\n\n23) Se autoriza compartir legajo con agentes relacionados.\n\n24) Se autoriza validación de identidad con RENAPER.\n\n25) El cliente manifiesta que suscribió convenio con un AAGI.\n\n26) El cliente deberá integrar garantías requeridas.\n\n27) Se podrá acceder a normativa en sitios oficiales.\n\n28) El cliente declara conocer riesgos de instrumentos específicos.\n\n29) La relación se regirá por leyes vigentes y tribunales de CABA.\n\n30) El cliente podrá operar con cuentas CVU en Allaria+ bajo condiciones establecidas."
+          "content": "El/los firmantes al pie de la presente solicita/n la apertura o actualización de una cuenta comitente, quedando sujeta a aprobación por parte de Allaria S.A. La cuenta comitente operará bajo las siguientes condiciones:\n\n1) Las firmas, domicilios y demás datos que se encuentran en este registro de clientes se consideran válidos y vigentes hasta tanto Allaria S.A. reciba notificación en forma fehaciente de la modificación requerida.\n\n2) Allaria S.A. podrá realizar operaciones conforme Normas N.T. 2013.\n\n3) Las operaciones bilaterales no garantizadas se ajustarán a normativa vigente.\n\n4) Las operaciones del exterior se realizarán bajo normativa CNV, a través de brokers externos, sin garantía de mercados locales y solo para inversores calificados.\n\n5) Clientes entre 13 y 17 años operarán con restricciones y bajo responsabilidad de su representante legal.\n\n6) El cliente deberá definir su perfil de riesgo y autorizar operaciones fuera del mismo.\n\n7) Las instrucciones podrán impartirse por múltiples canales habilitados.\n\n8) El cliente podrá otorgar o revocar mandato discrecional.\n\n9) Se autorizan recargos por saldos deudores y ejecución de activos.\n\n10) Los fondos solo se reinvertirán por instrucción o mandato.\n\n11) El cliente podrá retirar fondos según normativa vigente.\n\n12) Allaria presta servicios sobre eventos corporativos sin responsabilidad por omisiones externas.\n\n13) El cliente podrá consultar garantías de operaciones.\n\n14) No se garantizan rendimientos ni capital.\n\n15) Se enviarán notificaciones automáticas de operaciones.\n\n16) El cliente declara origen lícito de fondos.\n\n17) Autoriza compartir información con organismos y entidades.\n\n18) El cliente o Allaria podrán cerrar la cuenta bajo condiciones establecidas.\n\n19) El cliente conoce riesgos por incumplimientos del Agente.\n\n20) Podrá realizar consultas y reclamos.\n\n21) Los costos están disponibles en la web.\n\n22) Allaria cumplirá normativa CNV vigente.\n\n23) Se autoriza compartir legajo con agentes relacionados.\n\n24) Se autoriza validación de identidad con RENAPER.\n\n25) El cliente manifiesta que suscribió convenio con un AAGI.\n\n26) El cliente deberá integrar garantías requeridas.\n\n27) Se podrá acceder a normativa en sitios oficiales.\n\n28) El cliente declara conocer riesgos de instrumentos específicos.\n\n29) La relación se regirá por leyes vigentes y tribunales de CABA.\n\n30) El cliente podrá operar con cuentas CVU en Allaria+ bajo condiciones establecidas.",
+          "hideOnRevision": true
         },
         {
           "name": "AAGI",
@@ -493,38 +494,20 @@
         {
           "type": "comment",
           "name": "PerfilRiesgoTexto0",
-          "content": "A fin de clarificar las diferentes alternativas de inversión y los riesgos que conllevan las mismas, enumeramos los instrumentos plausibles de ser operados a través de Allaria S.A. con un criterio de menor a mayor riesgo para el inversor"
+          "content": "A fin de clarificar las diferentes alternativas de inversión y los riesgos que conllevan las mismas, enumeramos los instrumentos plausibles de ser operados a través de Allaria S.A. con un criterio de menor a mayor riesgo para el inversor",
+          "hideOnRevision": true
         },
         {
           "type": "info",
           "name": "PerfilRiesgoTexto1",
-          "content": "1. Compra y/o Venta de Títulos Públicos Nacionales, Provinciales y Municipales (incluye Letras y Bonos)\n2. Compra y/o Venta de Letras del Banco Central de la República Argentina\n3. Compra y/o Venta de Fideicomisos Financieros\n4. Compra y/o Venta de Obligaciones Negociables\n5. Colocaciones en Fondos Comunes de Inversión de Renta Fija\n6. Caución Colocadora\n7. Compra y/o Venta de Cheques de pago diferido\n8. Préstamo Colocador\n9. Compra y/o Venta de Acciones ordinarias y preferidas\n10. Colocaciones en Fondos Comunes de Inversión de Renta Variable\n11. Compra y/o Venta de Acciones en mercados del exterior\n12. Préstamo Tomador\n13. Compra y/o Venta de Futuros\n14. Compra y/o Venta de Opciones\n15. Caución Tomadora y compra con apalancamiento\n16. Préstamo Tomador con Venta en Corto\n17. Fondos Comunes de Inversión Cerrados"
+          "content": "1. Compra y/o Venta de Títulos Públicos Nacionales, Provinciales y Municipales (incluye Letras y Bonos)\n2. Compra y/o Venta de Letras del Banco Central de la República Argentina\n3. Compra y/o Venta de Fideicomisos Financieros\n4. Compra y/o Venta de Obligaciones Negociables\n5. Colocaciones en Fondos Comunes de Inversión de Renta Fija\n6. Caución Colocadora\n7. Compra y/o Venta de Cheques de pago diferido\n8. Préstamo Colocador\n9. Compra y/o Venta de Acciones ordinarias y preferidas\n10. Colocaciones en Fondos Comunes de Inversión de Renta Variable\n11. Compra y/o Venta de Acciones en mercados del exterior\n12. Préstamo Tomador\n13. Compra y/o Venta de Futuros\n14. Compra y/o Venta de Opciones\n15. Caución Tomadora y compra con apalancamiento\n16. Préstamo Tomador con Venta en Corto\n17. Fondos Comunes de Inversión Cerrados",
+          "hideOnRevision": true
         },
         {
           "type": "comment",
           "name": "PerfilRiesgoTexto2",
-          "content": "RB: Riesgo Bajo (1 a 8)\nRM: Riesgo Medio (1 a 12)\nRA: Riesgo Alto (1 a 17)\n"
-        },
-        {
-          "name": "PRI_Conocimiento",
-          "label": "¿Qué conocimiento y experiencia tenés en Mercado de Capitales?",
-          "type": "radio",
-          "options": ["Nada", "Poco", "Mucho", "Profesional en finanzas"]
-        },
-        {
-          "name": "PRI_Objetivo",
-          "label": "¿Cuál es tu objetivo de inversión?",
-          "type": "radio",
-          "options": [
-            "Conservar el valor de los activos",
-            "Obtener una renta superior"
-          ]
-        },
-        {
-          "name": "PRI_Horizonte",
-          "label": "¿Cuál es tu horizonte de inversión?",
-          "type": "radio",
-          "options": ["Corto plazo", "Mediano plazo", "Largo plazo"]
+          "content": "RB: Riesgo Bajo (1 a 8)\nRM: Riesgo Medio (1 a 12)\nRA: Riesgo Alto (1 a 17)\n",
+          "hideOnRevision": true
         },
         {
           "name": "PRI_Porcentaje",
@@ -541,7 +524,8 @@
         {
           "type": "info",
           "name": "PerfilRiesgoDisclaimer",
-          "content": "El perfil seleccionado no garantiza rendimientos ni protección del capital. Las inversiones están sujetas a fluctuaciones de mercado."
+          "content": "El perfil seleccionado no garantiza rendimientos ni protección del capital. Las inversiones están sujetas a fluctuaciones de mercado.",
+          "hideOnRevision": true
         },
         {
           "name": "InversorCalificado",
@@ -563,7 +547,8 @@
         {
           "type": "info",
           "name": "MandatoTexto",
-          "content": "Declaro que las operaciones en mi cuenta comitente serán instruidas en forma específica por mí por alguno de los medios o modalidades de contacto habilitados por Allaria a tal fin -presencial, internet, teléfono, correo electrónico, redes privadas de comunicación y cualquier otro que pudiera surgir en el futuro.\n\nSerán válidas como instrucciones específicas aquellas que indiquen al menos los siguientes parámetros: especie/instrumento, cantidad, precio o rango de precio, incluida la referencia a “precio de mercado”. También será considerada como instrucción precisa una confirmación específica posterior, otorgada dentro de las 24 hs. de notificada la operación.\n\nAsimismo, autorizo al personal idóneo de Allaria S.A. a que ejecute para mi cuenta comitente en mi nombre e interés, decisiones de inversión y/o tenencia cuando advierta una oportunidad que encuadre dentro del perfil de riesgo elegido por mí.\n\nEste Mandato comprende la posibilidad de que el Agente actúe sin necesidad de que yo imparta orden o instrucción específica previa, dentro de las limitaciones normativas vigentes.\n\nDeclaro conocer que Allaria S.A. no asegura rendimientos ni protección del capital invertido.\n\nEl cliente recibirá notificaciones automáticas por correo electrónico con el detalle de operaciones realizadas y podrá acceder a su cuenta en cualquier momento.\n\nEste mandato permanecerá vigente hasta su revocación expresa por escrito."
+          "content": "Declaro que las operaciones en mi cuenta comitente serán instruidas en forma específica por mí por alguno de los medios o modalidades de contacto habilitados por Allaria a tal fin -presencial, internet, teléfono, correo electrónico, redes privadas de comunicación y cualquier otro que pudiera surgir en el futuro.\n\nSerán válidas como instrucciones específicas aquellas que indiquen al menos los siguientes parámetros: especie/instrumento, cantidad, precio o rango de precio, incluida la referencia a “precio de mercado”. También será considerada como instrucción precisa una confirmación específica posterior, otorgada dentro de las 24 hs. de notificada la operación.\n\nAsimismo, autorizo al personal idóneo de Allaria S.A. a que ejecute para mi cuenta comitente en mi nombre e interés, decisiones de inversión y/o tenencia cuando advierta una oportunidad que encuadre dentro del perfil de riesgo elegido por mí.\n\nEste Mandato comprende la posibilidad de que el Agente actúe sin necesidad de que yo imparta orden o instrucción específica previa, dentro de las limitaciones normativas vigentes.\n\nDeclaro conocer que Allaria S.A. no asegura rendimientos ni protección del capital invertido.\n\nEl cliente recibirá notificaciones automáticas por correo electrónico con el detalle de operaciones realizadas y podrá acceder a su cuenta en cualquier momento.\n\nEste mandato permanecerá vigente hasta su revocación expresa por escrito.",
+          "hideOnRevision": true
         },
         {
           "name": "MandatoAceptacion",
@@ -628,21 +613,29 @@
       "fields": [
         {
           "type": "comment",
-          "content": "Señores\nAllaria S.A.\nPresente."
+          "content": "Señores\nAllaria S.A.\nPresente.",
+          "hideOnRevision": true
         },
         {
           "type": "comment",
-          "content": "De mi consideración:"
+          "content": "De mi consideración:",
+          "hideOnRevision": true
         },
         {
           "type": "comment",
-          "content": "Por la presente solicito a Uds. tengan a bien transferir desde mi cuenta comitente cada vez que lo solicite, los fondos que estarán disponibles y según el monto requerido, mediante carta firmada o desde correo electrónico registrado a la cuenta que detallo a continuación:"
+          "content": "Por la presente solicito a Uds. tengan a bien transferir desde mi cuenta comitente cada vez que lo solicite, los fondos que estarán disponibles y según el monto requerido, mediante carta firmada o desde correo electrónico registrado a la cuenta que detallo a continuación:",
+          "hideOnRevision": true
         },
-        { "name": "InstructivoBanco", "label": "Banco", "type": "text" },
+        {
+          "name": "InstructivoBanco",
+          "label": "Banco",
+          "type": "text"
+        },
         {
           "name": "InstructivoNumeroDeCuenta",
           "label": "Número de cuenta",
-          "type": "text"
+          "type": "text",
+          "hideOnRevision": true
         },
         { "name": "Moneda", "label": "Moneda", "type": "text" },
         { "name": "Titular", "label": "Titular", "type": "text" },
@@ -666,12 +659,14 @@
         {
           "type": "comment",
           "name": "EA_Intro",
-          "content": "Por medio de la presente, y en cumplimiento con la Resolución 78/2023 de la Unidad de Información Financiera, declaramos bajo juramento que los datos indicados a continuación son correctos, completos y verdaderos."
+          "content": "Por medio de la presente, y en cumplimiento con la Resolución 78/2023 de la Unidad de Información Financiera, declaramos bajo juramento que los datos indicados a continuación son correctos, completos y verdaderos.",
+          "hideOnRevision": true
         },
         {
           "type": "subtitle",
           "name": "EA1_Title",
-          "content": "Accionista"
+          "content": "Accionista",
+          "hideOnRevision": true
         },
         {
           "name": "EA_Nombre1",
@@ -734,13 +729,15 @@
         {
           "name": "EA_Add2",
           "label": "\n\nAgregar otro accionista",
-          "type": "checkbox"
+          "type": "checkbox",
+          "hideOnRevision": true
         },
         {
           "type": "subtitle",
           "name": "EA2_Title",
           "content": "\n\nAccionista 2",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": { "field": "EA_Add2", "value": true },
+          "hideOnRevision": true
         },
         {
           "name": "EA_Nombre2",
@@ -825,13 +822,15 @@
           "name": "EA_Add3",
           "label": "Agregar otro accionista",
           "type": "checkbox",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": { "field": "EA_Add2", "value": true },
+          "hideOnRevision": true
         },
         {
           "type": "subtitle",
           "name": "EA3_Title",
           "content": "\n\nAccionista 3",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": { "field": "EA_Add3", "value": true },
+          "hideOnRevision": true
         },
         {
           "name": "EA_Nombre3",
@@ -922,7 +921,8 @@
         {
           "type": "comment",
           "content": "Indicar a las personas humanas que, directa o indirectamente, posean un porcentaje igual o mayor al 10% del capital o derechos de voto de la persona jurídica, o que por otros medios ejerzan el control de la misma",
-          "name": "BFintro"
+          "name": "BFintro",
+          "hideOnRevision": true
         },
         {
           "name": "BF_Nombre1",
@@ -994,13 +994,15 @@
         {
           "name": "BF_Add2",
           "label": "Agregar otro beneficiario",
-          "type": "checkbox"
+          "type": "checkbox",
+          "hideOnRevision": true
         },
         {
           "type": "subtitle",
           "name": "BF2_Title",
           "content": "\n\nBeneficiario Final 2",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": { "field": "BF_Add2", "value": true },
+          "hideOnRevision": true
         },
         {
           "name": "BF_Nombre2",
@@ -1086,14 +1088,16 @@
           "name": "BF_Add3",
           "label": "Agregar otro beneficiario",
           "type": "checkbox",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": { "field": "BF_Add2", "value": true },
+          "hideOnRevision": true
         },
 
         {
           "type": "subtitle",
           "name": "BF3_Title",
           "content": "\n\nBeneficiario Final 3",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": { "field": "BF_Add3", "value": true },
+          "hideOnRevision": true
         },
         {
           "name": "BF_Nombre3",
@@ -1184,13 +1188,14 @@
         {
           "type": "comment",
           "name": "RF_Intro",
-          "content": "A los efectos del intercambio de información de cuentas financieras establecido por la Organización para la Cooperación y el Desarrollo Económico (OCDE) y la Resolución General Nº 4056/2017 de la AFIP y sus modificatorias, y en cumplimiento de la Ley Foreign Account Tax Compliance Act (FATCA) de los Estados Unidos (EEUU), el Cliente declara tener residencia fiscal en el (los) país(es) detallado(s) a continuación:"
+          "content": "A los efectos del intercambio de información de cuentas financieras establecido por la Organización para la Cooperación y el Desarrollo Económico (OCDE) y la Resolución General Nº 4056/2017 de la AFIP y sus modificatorias, y en cumplimiento de la Ley Foreign Account Tax Compliance Act (FATCA) de los Estados Unidos (EEUU), el Cliente declara tener residencia fiscal en el (los) país(es) detallado(s) a continuación:",
+          "hideOnRevision": true
         },
-
         {
           "type": "subtitle",
           "name": "RF1_Title",
-          "content": "Residencia Fiscal"
+          "content": "Residencia Fiscal",
+          "hideOnRevision": true
         },
         {
           "name": "ResidenciaFiscal1_Pais",
@@ -1207,18 +1212,18 @@
           "label": "NIT",
           "type": "text"
         },
-
         {
           "name": "RF_Add2",
           "label": "Agregar otro país",
-          "type": "checkbox"
+          "type": "checkbox",
+          "hideOnRevision": true
         },
-
         {
           "type": "subtitle",
           "name": "RF2_Title",
           "content": "\n\nResidencia Fiscal 2",
-          "visibleIf": { "field": "RF_Add2", "value": true }
+          "visibleIf": { "field": "RF_Add2", "value": true },
+          "hideOnRevision": true
         },
         {
           "name": "ResidenciaFiscal2_Pais",
@@ -1243,14 +1248,15 @@
           "name": "RF_Add3",
           "label": "Agregar otro país",
           "type": "checkbox",
-          "visibleIf": { "field": "RF_Add2", "value": true }
+          "visibleIf": { "field": "RF_Add2", "value": true },
+          "hideOnRevision": true
         },
-
         {
           "type": "subtitle",
           "name": "RF3_Title",
           "content": "\n\nResidencia Fiscal 3",
-          "visibleIf": { "field": "RF_Add3", "value": true }
+          "visibleIf": { "field": "RF_Add3", "value": true },
+          "hideOnRevision": true
         },
         {
           "name": "ResidenciaFiscal3_Pais",
@@ -1274,13 +1280,14 @@
         {
           "type": "comment",
           "name": "RF_NIT_Info",
-          "content": "NIT: Número de Identificación Tributaria. Por ejemplo, si tributa en Argentina sería CUIT y si tributa en EEUU sería Employer Identification Number (EIN)."
+          "content": "NIT: Número de Identificación Tributaria. Por ejemplo, si tributa en Argentina sería CUIT y si tributa en EEUU sería Employer Identification Number (EIN).",
+          "hideOnRevision": true
         },
-
         {
           "type": "subtitle",
           "name": "FATCA_Title",
-          "content": "\n\nAsimismo, el Cliente declara y garantiza que es una Entidad del tipo seleccionado a continuación: marcar solo una de las 6 siguientes opciones"
+          "content": "\n\nAsimismo, el Cliente declara y garantiza que es una Entidad del tipo seleccionado a continuación: marcar solo una de las 6 siguientes opciones",
+          "hideOnRevision": true
         },
         {
           "type": "checkbox",
@@ -1290,21 +1297,29 @@
         {
           "type": "comment",
           "name": "FATCA_InstitucionFinanciera_desc",
-          "content": "Entidades depositarias, entidades de custodia, entidades de inversión y las compañías financieras que ofrecen productos que incluye activos financieros, con la excepción de entidades de inversión de países que no firmaron el Acuerdo OCDE.\n\n"
+          "content": "Entidades depositarias, entidades de custodia, entidades de inversión y las compañías financieras que ofrecen productos que incluye activos financieros, con la excepción de entidades de inversión de países que no firmaron el Acuerdo OCDE.\n\n",
+          "hideOnRevision": true
         },
         {
           "type": "comment",
           "name": "FATCA_GIIN_Intro",
           "content": "En el caso de ser a su vez Institución Financiera Extranjera a los efectos indicados de la Ley FATCA indique su número de GIIN en el Status que corresponda.",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          },
+          "hideOnRevision": true
         },
         {
           "type": "subtitle",
           "name": "FATCA_GIIN_Title",
           "content": "STATUS - SIGLA - Nº GIIN",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          },
+          "hideOnRevision": true
         },
-
         {
           "name": "FATCA_GIIN_PFFI",
           "label": "Institución Financiera Extranjera Participante (PFFI)",
@@ -1343,9 +1358,9 @@
         {
           "type": "comment",
           "name": "FATCA_SinFinesDeLucro_desc",
-          "content": "Entidad con fines exclusivos religiosos, caritativos, científicos, artísticos, culturales o educativos que: a) no está sujeta al impuesto a las ganancias, b) no tiene accionistas o miembros con derechos propietarios sobre sus activos o ingresos. Incluye entidades de Sección 501 (C) del IRS.\n\n"
+          "content": "Entidad con fines exclusivos religiosos, caritativos, científicos, artísticos, culturales o educativos que: a) no está sujeta al impuesto a las ganancias, b) no tiene accionistas o miembros con derechos propietarios sobre sus activos o ingresos. Incluye entidades de Sección 501 (C) del IRS.\n\n",
+          "hideOnRevision": true
         },
-
         {
           "type": "checkbox",
           "name": "FATCA_BeneficiarioExento",
@@ -1354,9 +1369,9 @@
         {
           "type": "comment",
           "name": "FATCA_BeneficiarioExento_desc",
-          "content": "Gobierno Nacional, Provincial, Municipal, Organismos internacionales, Bancos Centrales.\n\n"
+          "content": "Gobierno Nacional, Provincial, Municipal, Organismos internacionales, Bancos Centrales.\n\n",
+          "hideOnRevision": true
         },
-
         {
           "type": "checkbox",
           "name": "FATCA_CotizaBolsa",
@@ -1365,7 +1380,8 @@
         {
           "type": "comment",
           "name": "FATCA_CotizaBolsa_desc",
-          "content": "Las acciones cotizantes deben representar más del 50% del poder de voto de la entidad.\n\n"
+          "content": "Las acciones cotizantes deben representar más del 50% del poder de voto de la entidad.\n\n",
+          "hideOnRevision": true
         },
 
         {
@@ -1376,9 +1392,9 @@
         {
           "type": "comment",
           "name": "FATCA_NoFinanciera_SinExterior_desc",
-          "content": "\n"
+          "content": "\n",
+          "hideOnRevision": true
         },
-
         {
           "type": "checkbox",
           "name": "FATCA_NoFinanciera_ConExterior",
@@ -1387,7 +1403,8 @@
         {
           "type": "comment",
           "name": "FATCA_NoFinanciera_ConExterior_desc",
-          "content": "\n"
+          "content": "\n",
+          "hideOnRevision": true
         }
       ]
     },
