@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import path from 'path'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
@@ -14,5 +15,10 @@ export default defineConfig({
     // se sirve detrás de un proxy/reverse-proxy (nginx/ELB), por lo que
     // no representa un riesgo.
     allowedHosts: true,
+  },
+  resolve: {
+    alias: {
+      '@shared': path.resolve(__dirname, '../shared')
+    }
   },
 })

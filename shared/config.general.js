@@ -35,7 +35,8 @@ const getBackendUrl = () => {
   const env = detectEnvironment();
 
   // En el navegador, si existe variable de entorno de Vite, usarla
-  if (env.isBrowser && typeof import.meta !== 'undefined' && import.meta.env?.VITE_BACKEND_URL) {
+  // (incluso si es string vacío, que indica rutas relativas detrás de un reverse proxy)
+  if (env.isBrowser && typeof import.meta !== 'undefined' && import.meta.env?.VITE_BACKEND_URL !== undefined) {
     return import.meta.env.VITE_BACKEND_URL;
   }
 

@@ -6,8 +6,8 @@ import appConfig from "../../config/appConfig.json";
 import * as fieldMappers from "../../utils/fieldMappers";
 import * as fieldFormatters from "../../utils/fieldFormatters";
 import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "../../utils/utils";
-import config from "../../../../shared/config.general.js";
 import pdfConfig from "../../config/pdfConfig.json";
+import config from '@shared/config.general.js'
 
 /**
  * Genera los archivos PDF y JSON a partir del formulario mapeado.

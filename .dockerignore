@@ -1,0 +1,43 @@
+# 🔹 Git
+.git
+.gitignore
+
+# 🔹 Node
+node_modules
+npm-debug.log
+yarn.lock
+pnpm-lock.yaml
+
+# 🔹 Logs
+logs
+*.log
+
+# 🔹 OS
+.DS_Store
+Thumbs.db
+
+# 🔹 Env files (ajustar si necesitás alguno)
+.env
+.env.*
+!.env.example
+
+# 🔹 Build outputs
+dist
+build
+
+# 🔹 Editor / IDE
+.vscode
+.idea
+
+# 🔹 Claude / tooling
+.claude
+
+# 🔹 Scripts locales (opcional)
+start-*.sh
+stop-*.sh
+
+# 🔹 Docker (evitar recursión rara)
+docker-compose.yml
+
+# 🔹 Otros dirs que no usás en build
+list-fields
