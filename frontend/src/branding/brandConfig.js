@@ -13,6 +13,9 @@ export const brandConfig = {
   // Nombre de la empresa
   name: "Allaria",
 
+  // Nombre del archivo a generar cuando se exporta el JSON
+  downloadFilename: "persona-juridica-allaria",
+
   // Logos
   logos: {
     white: "/img/logo-white.svg",  // Logo para fondos oscuros

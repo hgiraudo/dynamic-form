@@ -161,23 +161,51 @@ function WizardForm() {
     return mappedData;
   };
 
-  const handleExport = () => {
-    try {
-      const dataStr = JSON.stringify(getMappedFormData(), null, 2);
-      const blob = new Blob([dataStr], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
+const handleExport = () => {
+  console.log("▶️ handleExport iniciado");
 
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${brandConfig.downloadFilename.toLowerCase()}.json`;
-      a.click();
+  try {
+    const mappedData = getMappedFormData();
+    console.log("🧩 getMappedFormData output:", mappedData);
 
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("❌ Error exportando JSON:", err);
-      alert("No se pudo exportar el JSON");
+    if (!mappedData) {
+      throw new Error("getMappedFormData devolvió null/undefined");
     }
-  };
+
+    const dataStr = JSON.stringify(mappedData, null, 2);
+    console.log("📦 JSON generado:", dataStr);
+
+    const blob = new Blob([dataStr], { type: "application/json" });
+    console.log("📄 Blob creado:", blob);
+
+    const url = URL.createObjectURL(blob);
+    console.log("🔗 URL generada:", url);
+
+    const filename = `${brandConfig.downloadFilename?.toLowerCase()}.json`;
+    console.log("📁 Filename:", filename);
+
+    if (!filename || filename === "undefined.json") {
+      throw new Error("brandConfig.downloadFilename es inválido");
+    }
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+
+    console.log("🖱️ Disparando descarga...");
+    a.click();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+      console.log("♻️ URL revocada");
+    }, 1000);
+
+    console.log("✅ Export finalizado correctamente");
+  } catch (err) {
+    console.error("❌ Error exportando JSON:", err);
+    alert(`No se pudo exportar el JSON: ${err.message}`);
+  }
+};
 
   const renderField = (field) => {
     if (field.visibleIf) {
@@ -396,18 +424,51 @@ function WizardForm() {
       const fillData = await fillResp.json();
       const transactionJson = buildTransactionJson(fillData.base64, formData);
 
-      // 🔹 2. Enviar transacción al backend
-      const signUrl = `${config.backend.baseUrl}${config.backend.signEndpoint}`;
-      const signResp = await fetch(signUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY,
-        },
-        body: JSON.stringify(transactionJson),
-      });
-      if (!signResp.ok) throw new Error("Error al enviar transacción");
-      const signData = await signResp.json();
+const signUrl = `${config.backend.baseUrl}${config.backend.signEndpoint}`;
+
+console.log("🌐 URL:", signUrl);
+console.log("📦 transactionJson:", transactionJson);
+
+// 👇 DEBUG de API KEY
+console.log("🔑 VITE_ONESPAN_API_KEY (raw):", import.meta.env.VITE_ONESPAN_API_KEY);
+
+if (!import.meta.env.VITE_ONESPAN_API_KEY) {
+  console.warn("⚠️ API KEY no definida en import.meta.env");
+}
+
+  let signData;
+try {
+  const signResp = await fetch(signUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY || "",
+    },
+    body: JSON.stringify(transactionJson),
+  });
+
+  console.log("📡 Response status:", signResp.status);
+  console.log("📡 Response ok:", signResp.ok);
+
+  const text = await signResp.text();
+  console.log("📨 Raw response:", text);
+
+  try {
+    signData = JSON.parse(text);
+  } catch (e) {
+    console.error("❌ No es JSON válido");
+  }
+
+  if (!signResp.ok) {
+    throw new Error(`Error backend (${signResp.status}): ${text}`);
+  }
+
+  console.log("✅ Parsed response:", signData);
+
+} catch (err) {
+  console.error("❌ Error en request:", err);
+  alert(err.message);
+}
 
       // 🔹 3. Solicitar URL de firma al backend
       const getUrl = `${config.backend.baseUrl}${config.backend.getSigningUrlEndpoint}`;
@@ -449,20 +510,20 @@ function WizardForm() {
             {formConfig.steps.map((step, idx) => {
               const isActive = idx === stepIndex;
               return (
-                <li
-                  key={idx}
-                  onClick={() => setStepIndex(idx)}
-                  className={`cursor-pointer px-6 py-3 mb-2 flex items-center transition border-l-4 border-transparent ${
-                    isActive
-                      ? "bg-brand-secondary text-blue-100 font-semibold border-brand-secondary"
-                      : "hover:bg-brand-secondary/50 text-blue-200"
-                  }`}
-                >
-                  {step.icon && (
-                    <CIcon icon={Icons[step.icon]} className="w-5 h-5 mr-3" />
-                  )}
-                  {step.title}
-                </li>
+<li
+  key={idx}
+  onClick={() => setStepIndex(idx)}
+  className={`cursor-pointer px-4 py-1.5 mb-1 flex items-center transition border-l-4 border-transparent ${
+    isActive
+      ? "bg-brand-secondary text-blue-100 font-semibold border-brand-secondary"
+      : "hover:bg-brand-secondary/50 text-blue-200"
+  }`}
+>
+  {step.icon && (
+    <CIcon icon={Icons[step.icon]} className="w-4 h-4 mr-2" />
+  )}
+  {step.title}
+</li>
               );
             })}
           </ul>

@@ -467,78 +467,72 @@
         }
       ]
     },
+{
+  "title": "Convenio de Apertura",
+  "description": "Convenio de Apertura de Cuenta Comitente",
+  "icon": "cilDescription",
+  "fields": [
     {
-      "title": "Convenio de Apertura",
-      "description": "Convenio de Apertura de Cuenta Comitente",
-      "icon": "cilDescription",
-      "fields": [
-        {
-          "type": "info",
-          "name": "CuentaComitenteTexto",
-          "content": "El/los firmantes al pie de la presente solicita/n la apertura o actualización de una cuenta comitente, quedando sujeta a aprobación por parte de Allaria S.A. La cuenta comitente operará bajo las siguientes condiciones:\n\n1) Las firmas, domicilios y demás datos que se encuentran en este registro de clientes se consideran válidos y vigentes hasta tanto Allaria S.A. reciba notificación en forma fehaciente de la modificación requerida.\n\n2) Allaria S.A. podrá realizar operaciones conforme Normas N.T. 2013.\n\n3) Las operaciones bilaterales no garantizadas se ajustarán a normativa vigente.\n\n4) Las operaciones del exterior se realizarán bajo normativa CNV, a través de brokers externos, sin garantía de mercados locales y solo para inversores calificados.\n\n5) Clientes entre 13 y 17 años operarán con restricciones y bajo responsabilidad de su representante legal.\n\n6) El cliente deberá definir su perfil de riesgo y autorizar operaciones fuera del mismo.\n\n7) Las instrucciones podrán impartirse por múltiples canales habilitados.\n\n8) El cliente podrá otorgar o revocar mandato discrecional.\n\n9) Se autorizan recargos por saldos deudores y ejecución de activos.\n\n10) Los fondos solo se reinvertirán por instrucción o mandato.\n\n11) El cliente podrá retirar fondos según normativa vigente.\n\n12) Allaria presta servicios sobre eventos corporativos sin responsabilidad por omisiones externas.\n\n13) El cliente podrá consultar garantías de operaciones.\n\n14) No se garantizan rendimientos ni capital.\n\n15) Se enviarán notificaciones automáticas de operaciones.\n\n16) El cliente declara origen lícito de fondos.\n\n17) Autoriza compartir información con organismos y entidades.\n\n18) El cliente o Allaria podrán cerrar la cuenta bajo condiciones establecidas.\n\n19) El cliente conoce riesgos por incumplimientos del Agente.\n\n20) Podrá realizar consultas y reclamos.\n\n21) Los costos están disponibles en la web.\n\n22) Allaria cumplirá normativa CNV vigente.\n\n23) Se autoriza compartir legajo con agentes relacionados.\n\n24) Se autoriza validación de identidad con RENAPER.\n\n25) El cliente manifiesta que suscribió convenio con un AAGI.\n\n26) El cliente deberá integrar garantías requeridas.\n\n27) Se podrá acceder a normativa en sitios oficiales.\n\n28) El cliente declara conocer riesgos de instrumentos específicos.\n\n29) La relación se regirá por leyes vigentes y tribunales de CABA.\n\n30) El cliente podrá operar con cuentas CVU en Allaria+ bajo condiciones establecidas.",
-          "hideOnRevision": true
-        },
-        {
-          "name": "AAGI",
-          "label": "AAGI con el que suscribió convenio",
-          "type": "text",
-          "placeholder": "Ingrese el AAGI"
-        }
-      ]
+      "type": "info",
+      "name": "CuentaComitenteTexto",
+      "content": "El/los firmantes al pie de la presente solicita/n la apertura o actualización de una cuenta comitente, quedando sujeta a aprobación por parte de Allaria S.A. La cuenta comitente operará bajo las siguientes condiciones:\n\n1) Las firmas, domicilios y demás datos que se encuentran en este registro de clientes se consideran válidos y vigentes hasta tanto Allaria S.A. reciba notificación en forma fehaciente de la modificación requerida.\n\n2) Allaria S.A. podrá realizar operaciones conforme Normas N.T. 2013.\n\n3) Las operaciones bilaterales no garantizadas se ajustarán a normativa vigente.\n\n4) Las operaciones del exterior se realizarán bajo normativa CNV, a través de brokers externos, sin garantía de mercados locales y solo para inversores calificados.\n\n5) Clientes entre 13 y 17 años operarán con restricciones y bajo responsabilidad de su representante legal.\n\n6) El cliente deberá definir su perfil de riesgo y autorizar operaciones fuera del mismo.\n\n7) Las instrucciones podrán impartirse por múltiples canales habilitados.\n\n8) El cliente podrá otorgar o revocar mandato discrecional.\n\n9) Se autorizan recargos por saldos deudores y ejecución de activos.\n\n10) Los fondos solo se reinvertirán por instrucción o mandato.\n\n11) El cliente podrá retirar fondos según normativa vigente.\n\n12) Allaria presta servicios sobre eventos corporativos sin responsabilidad por omisiones externas.\n\n13) El cliente podrá consultar garantías de operaciones.\n\n14) No se garantizan rendimientos ni capital.\n\n15) Se enviarán notificaciones automáticas de operaciones.\n\n16) El cliente declara origen lícito de fondos.\n\n17) Autoriza compartir información con organismos y entidades.\n\n18) El cliente o Allaria podrán cerrar la cuenta bajo condiciones establecidas.\n\n19) El cliente conoce riesgos por incumplimientos del Agente.\n\n20) Podrá realizar consultas y reclamos.\n\n21) Los costos están disponibles en la web.\n\n22) Allaria cumplirá normativa CNV vigente.\n\n23) Se autoriza compartir legajo con agentes relacionados.\n\n24) Se autoriza validación de identidad con RENAPER.\n\n25) El cliente manifiesta que suscribió convenio con un AAGI.\n\n26) El cliente deberá integrar garantías requeridas.\n\n27) Se podrá acceder a normativa en sitios oficiales.\n\n28) El cliente declara conocer riesgos de instrumentos específicos.\n\n29) La relación se regirá por leyes vigentes y tribunales de CABA.\n\n30) El cliente podrá operar con cuentas CVU en Allaria+ bajo condiciones establecidas.",
+      "hideOnRevision": true
     },
     {
-      "title": "Perfil de Riesgo",
-      "description": "Perfil de Riesgo del Inversor",
-      "icon": "cilChartLine",
-      "fields": [
-        {
-          "type": "comment",
-          "name": "PerfilRiesgoTexto0",
-          "content": "A fin de clarificar las diferentes alternativas de inversión y los riesgos que conllevan las mismas, enumeramos los instrumentos plausibles de ser operados a través de Allaria S.A. con un criterio de menor a mayor riesgo para el inversor",
-          "hideOnRevision": true
-        },
-        {
-          "type": "info",
-          "name": "PerfilRiesgoTexto1",
-          "content": "1. Compra y/o Venta de Títulos Públicos Nacionales, Provinciales y Municipales (incluye Letras y Bonos)\n2. Compra y/o Venta de Letras del Banco Central de la República Argentina\n3. Compra y/o Venta de Fideicomisos Financieros\n4. Compra y/o Venta de Obligaciones Negociables\n5. Colocaciones en Fondos Comunes de Inversión de Renta Fija\n6. Caución Colocadora\n7. Compra y/o Venta de Cheques de pago diferido\n8. Préstamo Colocador\n9. Compra y/o Venta de Acciones ordinarias y preferidas\n10. Colocaciones en Fondos Comunes de Inversión de Renta Variable\n11. Compra y/o Venta de Acciones en mercados del exterior\n12. Préstamo Tomador\n13. Compra y/o Venta de Futuros\n14. Compra y/o Venta de Opciones\n15. Caución Tomadora y compra con apalancamiento\n16. Préstamo Tomador con Venta en Corto\n17. Fondos Comunes de Inversión Cerrados",
-          "hideOnRevision": true
-        },
-        {
-          "type": "comment",
-          "name": "PerfilRiesgoTexto2",
-          "content": "RB: Riesgo Bajo (1 a 8)\nRM: Riesgo Medio (1 a 12)\nRA: Riesgo Alto (1 a 17)\n",
-          "hideOnRevision": true
-        },
-        {
-          "name": "PRI_Porcentaje",
-          "label": "¿Qué porcentaje de tus ahorros invertirías?",
-          "type": "radio",
-          "options": ["Hasta 25%", "25% - 50%", "50% - 90%", "Más de 90%"]
-        },
-        {
-          "name": "PerfilRiesgo",
-          "label": "Perfil de riesgo resultante",
-          "type": "button-group",
-          "options": ["RB - Bajo", "RM - Medio", "RA - Alto"]
-        },
-        {
-          "type": "info",
-          "name": "PerfilRiesgoDisclaimer",
-          "content": "El perfil seleccionado no garantiza rendimientos ni protección del capital. Las inversiones están sujetas a fluctuaciones de mercado.",
-          "hideOnRevision": true
-        },
-        {
-          "name": "InversorCalificado",
-          "label": "Declaro que soy Inversor Calificado",
-          "type": "checkbox"
-        },
-        {
-          "name": "InversorCalificadoInterno",
-          "label": "Uso interno - Cliente calificado",
-          "type": "checkbox"
-        }
-      ]
+      "name": "ConvenioAperturaAAGI",
+      "label": "AAGI con el que suscribió convenio",
+      "type": "text",
+      "placeholder": "Ingrese el AAGI"
+    }
+  ]
+}, 
+{
+  "title": "Perfil de Riesgo",
+  "description": "Perfil de Riesgo del Inversor",
+  "icon": "cilChartLine",
+  "fields": [
+    {
+      "type": "comment",
+      "name": "PerfilRiesgoTexto0",
+      "content": "A fin de clarificar las diferentes alternativas de inversión y los riesgos que conllevan las mismas, enumeramos los instrumentos plausibles de ser operados a través de Allaria S.A. con un criterio de menor a mayor riesgo para el inversor",
+      "hideOnRevision": true
     },
+    {
+      "type": "info",
+      "name": "PerfilRiesgoTexto1",
+      "content": "1. Compra y/o Venta de Títulos Públicos Nacionales, Provinciales y Municipales (incluye Letras y Bonos)\n2. Compra y/o Venta de Letras del Banco Central de la República Argentina\n3. Compra y/o Venta de Fideicomisos Financieros\n4. Compra y/o Venta de Obligaciones Negociables\n5. Colocaciones en Fondos Comunes de Inversión de Renta Fija\n6. Caución Colocadora\n7. Compra y/o Venta de Cheques de pago diferido\n8. Préstamo Colocador\n9. Compra y/o Venta de Acciones ordinarias y preferidas\n10. Colocaciones en Fondos Comunes de Inversión de Renta Variable\n11. Compra y/o Venta de Acciones en mercados del exterior\n12. Préstamo Tomador\n13. Compra y/o Venta de Futuros\n14. Compra y/o Venta de Opciones\n15. Caución Tomadora y compra con apalancamiento\n16. Préstamo Tomador con Venta en Corto\n17. Fondos Comunes de Inversión Cerrados",
+      "hideOnRevision": true
+    },
+    {
+      "type": "comment",
+      "name": "PerfilRiesgoTexto2",
+      "content": "RB: Riesgo Bajo (1 a 8)\nRM: Riesgo Medio (1 a 12)\nRA: Riesgo Alto (1 a 17)\n",
+      "hideOnRevision": true
+    },
+    {
+      "name": "PerfilRiesgo",
+      "label": "Perfil de riesgo resultante",
+      "type": "button-group",
+      "options": ["RB - Bajo", "RM - Medio", "RA - Alto"]
+    },
+    {
+      "type": "info",
+      "name": "PerfilRiesgoDisclaimer",
+      "content": "El perfil seleccionado no garantiza rendimientos ni protección del capital. Las inversiones están sujetas a fluctuaciones de mercado.",
+      "hideOnRevision": true
+    },
+    {
+      "name": "PerfilRiesgoInversorCalificado",
+      "label": "Declaro que soy Inversor Calificado",
+      "type": "checkbox"
+    },
+    {
+      "name": "InversorCalificadoInterno",
+      "label": "Uso interno - Cliente calificado",
+      "type": "checkbox"
+    }
+  ]
+},
     {
       "title": "Administración",
       "description": "Mandato de Administración",
@@ -606,809 +600,788 @@
         }
       ]
     },
+{
+  "title": "Instructivo Bancario",
+  "description": "Instructivo Bancario Permanente",
+  "icon": "cilBank",
+  "fields": [
     {
-      "title": "Instructivo Bancario",
-      "description": "Instructivo Bancario Permanente",
-      "icon": "cilBank",
-      "fields": [
-        {
-          "type": "comment",
-          "content": "Señores\nAllaria S.A.\nPresente.",
-          "hideOnRevision": true
-        },
-        {
-          "type": "comment",
-          "content": "De mi consideración:",
-          "hideOnRevision": true
-        },
-        {
-          "type": "comment",
-          "content": "Por la presente solicito a Uds. tengan a bien transferir desde mi cuenta comitente cada vez que lo solicite, los fondos que estarán disponibles y según el monto requerido, mediante carta firmada o desde correo electrónico registrado a la cuenta que detallo a continuación:",
-          "hideOnRevision": true
-        },
-        {
-          "name": "InstructivoBanco",
-          "label": "Banco",
-          "type": "text"
-        },
-        {
-          "name": "InstructivoNumeroDeCuenta",
-          "label": "Número de cuenta",
-          "type": "text",
-          "hideOnRevision": true
-        },
-        { "name": "Moneda", "label": "Moneda", "type": "text" },
-        { "name": "Titular", "label": "Titular", "type": "text" },
-        {
-          "name": "InstructivoCBU",
-          "label": "CBU/CVU",
-          "type": "text"
-        },
-        {
-          "name": "InstructivoCUIT",
-          "label": "CUIT/CUIL",
-          "type": "text"
-        }
-      ]
+      "type": "comment",
+      "content": "Señores\nAllaria S.A.\nPresente.",
+      "hideOnRevision": true
     },
     {
-      "title": "Estructura Accionaria",
-      "description": "Declaración Jurada de Estructura Accionaria",
-      "icon": "cilSitemap",
-      "fields": [
-        {
-          "type": "comment",
-          "name": "EA_Intro",
-          "content": "Por medio de la presente, y en cumplimiento con la Resolución 78/2023 de la Unidad de Información Financiera, declaramos bajo juramento que los datos indicados a continuación son correctos, completos y verdaderos.",
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "EA1_Title",
-          "content": "Accionista",
-          "hideOnRevision": true
-        },
-        {
-          "name": "EA_Nombre1",
-          "label": "Razón Social / Apellido y Nombre",
-          "type": "text"
-        },
-        {
-          "name": "EA_Fecha1",
-          "label": "Fecha de Constitución / Nacimiento",
-          "type": "date"
-        },
-        {
-          "name": "EA_Lugar1",
-          "label": "Lugar de Constitución / Nacionalidad",
-          "type": "text"
-        },
-        {
-          "name": "EA_Documento1",
-          "label": "Número de Inscripción / DNI - Pasaporte",
-          "type": "text"
-        },
-        { "name": "EA_Domicilio1", "label": "Domicilio Real", "type": "text" },
-        { "name": "EA_EstadoCivil1", "label": "Estado Civil", "type": "text" },
-        {
-          "name": "EA_Actividad1",
-          "label": "Actividad / Profesión",
-          "type": "text"
-        },
-        {
-          "name": "EA_Pais1_1",
-          "label": "País de Residencia Fiscal",
-          "type": "text"
-        },
-        {
-          "name": "EA_NIT1_1",
-          "label": "Número de Identificación Fiscal",
-          "type": "text"
-        },
-        {
-          "name": "EA_Pais1_2",
-          "label": "País Residencia Fiscal 2",
-          "type": "text"
-        },
-        {
-          "name": "EA_NIT1_2",
-          "label": "Número de Identificación Fiscal 2",
-          "type": "text"
-        },
-        {
-          "name": "EA_PEP1",
-          "label": "¿Es Persona Expuesta Políticamente?",
-          "type": "button-group",
-          "options": ["Sí", "No"]
-        },
-        {
-          "name": "EA_Participacion1",
-          "label": "% Participación",
-          "type": "text"
-        },
-        {
-          "name": "EA_Add2",
-          "label": "\n\nAgregar otro accionista",
-          "type": "checkbox",
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "EA2_Title",
-          "content": "\n\nAccionista 2",
-          "visibleIf": { "field": "EA_Add2", "value": true },
-          "hideOnRevision": true
-        },
-        {
-          "name": "EA_Nombre2",
-          "label": "Razón Social / Apellido y Nombre",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Fecha2",
-          "label": "Fecha de Constitución / Nacimiento",
-          "type": "date",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Lugar2",
-          "label": "Lugar de Constitución / Nacionalidad",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Documento2",
-          "label": "Número de Inscripción / DNI - Pasaporte",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Domicilio2",
-          "label": "Domicilio Real",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_EstadoCivil2",
-          "label": "Estado Civil",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Actividad2",
-          "label": "Actividad / Profesión",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Pais2_1",
-          "label": "País de Residencia Fiscal",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_NIT2_1",
-          "label": "Número de Identificación Fiscal",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Pais2_2",
-          "label": "País Residencia Fiscal 2",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_NIT2_2",
-          "label": "Número de Identificación Fiscal 2",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_PEP2",
-          "label": "¿Es Persona Expuesta Políticamente?",
-          "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Participacion2",
-          "label": "% Participación",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add2", "value": true }
-        },
-        {
-          "name": "EA_Add3",
-          "label": "Agregar otro accionista",
-          "type": "checkbox",
-          "visibleIf": { "field": "EA_Add2", "value": true },
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "EA3_Title",
-          "content": "\n\nAccionista 3",
-          "visibleIf": { "field": "EA_Add3", "value": true },
-          "hideOnRevision": true
-        },
-        {
-          "name": "EA_Nombre3",
-          "label": "Razón Social / Apellido y Nombre",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_Fecha3",
-          "label": "Fecha de Constitución / Nacimiento",
-          "type": "date",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_Lugar3",
-          "label": "Lugar de Constitución / Nacionalidad",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_Documento3",
-          "label": "Número de Inscripción / DNI - Pasaporte",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_Domicilio3",
-          "label": "Domicilio Real",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_EstadoCivil3",
-          "label": "Estado Civil",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_Actividad3",
-          "label": "Actividad / Profesión",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_Pais3_1",
-          "label": "País de Residencia Fiscal",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_NIT3_1",
-          "label": "Número de Identificación Fiscal",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_Pais3_2",
-          "label": "País Residencia Fiscal 2",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_NIT3_2",
-          "label": "Número de Identificación Fiscal 2",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_PEP3",
-          "label": "¿Es Persona Expuesta Políticamente?",
-          "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        },
-        {
-          "name": "EA_Participacion3",
-          "label": "% Participación",
-          "type": "text",
-          "visibleIf": { "field": "EA_Add3", "value": true }
-        }
-      ]
+      "type": "comment",
+      "content": "De mi consideración:",
+      "hideOnRevision": true
     },
     {
-      "title": "Beneficiarios Finales",
-      "description": "Declaración Jurada de Beneficiarios Finales",
-      "icon": "cilAddressBook",
-      "fields": [
-        {
-          "type": "comment",
-          "content": "Indicar a las personas humanas que, directa o indirectamente, posean un porcentaje igual o mayor al 10% del capital o derechos de voto de la persona jurídica, o que por otros medios ejerzan el control de la misma",
-          "name": "BFintro",
-          "hideOnRevision": true
-        },
-        {
-          "name": "BF_Nombre1",
-          "label": "Apellido y Nombre",
-          "type": "text"
-        },
-        {
-          "name": "BF_Fecha1",
-          "label": "Fecha de Nacimiento",
-          "type": "date"
-        },
-        {
-          "name": "BF_Lugar1",
-          "label": "Nacionalidad",
-          "type": "text"
-        },
-        {
-          "name": "BF_Documento1",
-          "label": "DNI / Pasaporte",
-          "type": "text"
-        },
-        {
-          "name": "BF_Domicilio1",
-          "label": "Domicilio Real",
-          "type": "text"
-        },
-        {
-          "name": "BF_EstadoCivil1",
-          "label": "Estado Civil",
-          "type": "text"
-        },
-        {
-          "name": "BF_Actividad1",
-          "label": "Profesión / Ocupación",
-          "type": "text"
-        },
-        {
-          "name": "BF_Pais1_1",
-          "label": "País de Residencia Fiscal",
-          "type": "text"
-        },
-        {
-          "name": "BF_NIT1_1",
-          "label": "Número de Identificación Fiscal",
-          "type": "text"
-        },
-        {
-          "name": "BF_Pais1_2",
-          "label": "País Residencia Fiscal 2",
-          "type": "text"
-        },
-        {
-          "name": "BF_NIT1_2",
-          "label": "Número de Identificación Fiscal 2",
-          "type": "text"
-        },
-        {
-          "name": "BF_PEP1",
-          "label": "¿Es Persona Expuesta Políticamente?",
-          "type": "button-group",
-          "options": ["Sí", "No"]
-        },
-        {
-          "name": "BF_Participacion1",
-          "label": "% Participación",
-          "type": "text"
-        },
-
-        {
-          "name": "BF_Add2",
-          "label": "Agregar otro beneficiario",
-          "type": "checkbox",
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "BF2_Title",
-          "content": "\n\nBeneficiario Final 2",
-          "visibleIf": { "field": "BF_Add2", "value": true },
-          "hideOnRevision": true
-        },
-        {
-          "name": "BF_Nombre2",
-          "label": "Apellido y Nombre",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_Fecha2",
-          "label": "Fecha de Nacimiento",
-          "type": "date",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_Lugar2",
-          "label": "Nacionalidad",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_Documento2",
-          "label": "DNI / Pasaporte",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_Domicilio2",
-          "label": "Domicilio Real",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_EstadoCivil2",
-          "label": "Estado Civil",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_Actividad2",
-          "label": "Profesión / Ocupación",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_Pais2_1",
-          "label": "País de Residencia Fiscal",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_NIT2_1",
-          "label": "Número de Identificación Fiscal",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_Pais2_2",
-          "label": "País Residencia Fiscal 2",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_NIT2_2",
-          "label": "Número de Identificación Fiscal 2",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_PEP2",
-          "label": "¿Es Persona Expuesta Políticamente?",
-          "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-        {
-          "name": "BF_Participacion2",
-          "label": "% Participación",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add2", "value": true }
-        },
-
-        {
-          "name": "BF_Add3",
-          "label": "Agregar otro beneficiario",
-          "type": "checkbox",
-          "visibleIf": { "field": "BF_Add2", "value": true },
-          "hideOnRevision": true
-        },
-
-        {
-          "type": "subtitle",
-          "name": "BF3_Title",
-          "content": "\n\nBeneficiario Final 3",
-          "visibleIf": { "field": "BF_Add3", "value": true },
-          "hideOnRevision": true
-        },
-        {
-          "name": "BF_Nombre3",
-          "label": "Apellido y Nombre",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_Fecha3",
-          "label": "Fecha Nacimiento",
-          "type": "date",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_Lugar3",
-          "label": "Nacionalidad",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_Documento3",
-          "label": "DNI / Pasaporte",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_Domicilio3",
-          "label": "Domicilio Real",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_EstadoCivil3",
-          "label": "Estado Civil",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_Actividad3",
-          "label": "Profesión / Ocupación",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_Pais3_1",
-          "label": "País de Residencia Fiscal",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_NIT3_1",
-          "label": "Número de Identificación Fiscal",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_Pais3_2",
-          "label": "País Residencia Fiscal 2",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_NIT3_2",
-          "label": "Número de Identificación Fiscal 2",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_PEP3",
-          "label": "¿Es Persona Expuesta Políticamente?",
-          "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        },
-        {
-          "name": "BF_Participacion3",
-          "label": "% Participación",
-          "type": "text",
-          "visibleIf": { "field": "BF_Add3", "value": true }
-        }
-      ]
+      "type": "comment",
+      "content": "Por la presente solicito a Uds. tengan a bien transferir desde mi cuenta comitente cada vez que lo solicite, los fondos que estarán disponibles y según el monto requerido, mediante carta firmada o desde correo electrónico registrado a la cuenta que detallo a continuación:",
+      "hideOnRevision": true
     },
     {
-      "title": "FATCA / OCDE",
-      "description": "FATCA / OCDE",
-      "icon": "cilGlobeAlt",
-      "fields": [
-        {
-          "type": "comment",
-          "name": "RF_Intro",
-          "content": "A los efectos del intercambio de información de cuentas financieras establecido por la Organización para la Cooperación y el Desarrollo Económico (OCDE) y la Resolución General Nº 4056/2017 de la AFIP y sus modificatorias, y en cumplimiento de la Ley Foreign Account Tax Compliance Act (FATCA) de los Estados Unidos (EEUU), el Cliente declara tener residencia fiscal en el (los) país(es) detallado(s) a continuación:",
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "RF1_Title",
-          "content": "Residencia Fiscal",
-          "hideOnRevision": true
-        },
-        {
-          "name": "ResidenciaFiscal1_Pais",
-          "label": "País",
-          "type": "text"
-        },
-        {
-          "name": "ResidenciaFiscal1_Direccion",
-          "label": "Dirección",
-          "type": "text"
-        },
-        {
-          "name": "ResidenciaFiscal1_NIT",
-          "label": "NIT",
-          "type": "text"
-        },
-        {
-          "name": "RF_Add2",
-          "label": "Agregar otro país",
-          "type": "checkbox",
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "RF2_Title",
-          "content": "\n\nResidencia Fiscal 2",
-          "visibleIf": { "field": "RF_Add2", "value": true },
-          "hideOnRevision": true
-        },
-        {
-          "name": "ResidenciaFiscal2_Pais",
-          "label": "País",
-          "type": "text",
-          "visibleIf": { "field": "RF_Add2", "value": true }
-        },
-        {
-          "name": "ResidenciaFiscal2_Direccion",
-          "label": "Dirección",
-          "type": "text",
-          "visibleIf": { "field": "RF_Add2", "value": true }
-        },
-        {
-          "name": "ResidenciaFiscal2_NIT",
-          "label": "NIT",
-          "type": "text",
-          "visibleIf": { "field": "RF_Add2", "value": true }
-        },
-
-        {
-          "name": "RF_Add3",
-          "label": "Agregar otro país",
-          "type": "checkbox",
-          "visibleIf": { "field": "RF_Add2", "value": true },
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "RF3_Title",
-          "content": "\n\nResidencia Fiscal 3",
-          "visibleIf": { "field": "RF_Add3", "value": true },
-          "hideOnRevision": true
-        },
-        {
-          "name": "ResidenciaFiscal3_Pais",
-          "label": "País",
-          "type": "text",
-          "visibleIf": { "field": "RF_Add3", "value": true }
-        },
-        {
-          "name": "ResidenciaFiscal3_Direccion",
-          "label": "Dirección",
-          "type": "text",
-          "visibleIf": { "field": "RF_Add3", "value": true }
-        },
-        {
-          "name": "ResidenciaFiscal3_NIT",
-          "label": "NIT",
-          "type": "text",
-          "visibleIf": { "field": "RF_Add3", "value": true }
-        },
-
-        {
-          "type": "comment",
-          "name": "RF_NIT_Info",
-          "content": "NIT: Número de Identificación Tributaria. Por ejemplo, si tributa en Argentina sería CUIT y si tributa en EEUU sería Employer Identification Number (EIN).",
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "FATCA_Title",
-          "content": "\n\nAsimismo, el Cliente declara y garantiza que es una Entidad del tipo seleccionado a continuación: marcar solo una de las 6 siguientes opciones",
-          "hideOnRevision": true
-        },
-        {
-          "type": "checkbox",
-          "name": "FATCA_InstitucionFinanciera",
-          "label": "Institución Financiera"
-        },
-        {
-          "type": "comment",
-          "name": "FATCA_InstitucionFinanciera_desc",
-          "content": "Entidades depositarias, entidades de custodia, entidades de inversión y las compañías financieras que ofrecen productos que incluye activos financieros, con la excepción de entidades de inversión de países que no firmaron el Acuerdo OCDE.\n\n",
-          "hideOnRevision": true
-        },
-        {
-          "type": "comment",
-          "name": "FATCA_GIIN_Intro",
-          "content": "En el caso de ser a su vez Institución Financiera Extranjera a los efectos indicados de la Ley FATCA indique su número de GIIN en el Status que corresponda.",
-          "visibleIf": {
-            "field": "FATCA_InstitucionFinanciera",
-            "value": true
-          },
-          "hideOnRevision": true
-        },
-        {
-          "type": "subtitle",
-          "name": "FATCA_GIIN_Title",
-          "content": "STATUS - SIGLA - Nº GIIN",
-          "visibleIf": {
-            "field": "FATCA_InstitucionFinanciera",
-            "value": true
-          },
-          "hideOnRevision": true
-        },
-        {
-          "name": "FATCA_GIIN_PFFI",
-          "label": "Institución Financiera Extranjera Participante (PFFI)",
-          "type": "text",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
-        },
-        {
-          "name": "FATCA_GIIN_IGA",
-          "label": "Institución Financiera Extranjera en Cumplimiento - IGA (IGA FFI)",
-          "type": "text",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
-        },
-        {
-          "name": "FATCA_GIIN_RDCFFI",
-          "label": "Institución Financiera Extranjera en Cumplimiento Registrada (RDCFFI)",
-          "type": "text",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
-        },
-        {
-          "name": "FATCA_GIIN_CDCFFI",
-          "label": "Institución Financiera Extranjera en Cumplimiento Certificada (CDCFFI)",
-          "type": "text",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
-        },
-        {
-          "name": "FATCA_GIIN_ODFFI",
-          "label": "Institución Financiera Extranjera Propietario Documentado (ODFFI)",
-          "type": "text",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
-        },
-        {
-          "type": "checkbox",
-          "name": "FATCA_SinFinesDeLucro",
-          "label": "Entidad Sin Fines de Lucro"
-        },
-        {
-          "type": "comment",
-          "name": "FATCA_SinFinesDeLucro_desc",
-          "content": "Entidad con fines exclusivos religiosos, caritativos, científicos, artísticos, culturales o educativos que: a) no está sujeta al impuesto a las ganancias, b) no tiene accionistas o miembros con derechos propietarios sobre sus activos o ingresos. Incluye entidades de Sección 501 (C) del IRS.\n\n",
-          "hideOnRevision": true
-        },
-        {
-          "type": "checkbox",
-          "name": "FATCA_BeneficiarioExento",
-          "label": "Beneficiario Final Exento"
-        },
-        {
-          "type": "comment",
-          "name": "FATCA_BeneficiarioExento_desc",
-          "content": "Gobierno Nacional, Provincial, Municipal, Organismos internacionales, Bancos Centrales.\n\n",
-          "hideOnRevision": true
-        },
-        {
-          "type": "checkbox",
-          "name": "FATCA_CotizaBolsa",
-          "label": "Entidad que Cotiza en Bolsa y/o Afiliada"
-        },
-        {
-          "type": "comment",
-          "name": "FATCA_CotizaBolsa_desc",
-          "content": "Las acciones cotizantes deben representar más del 50% del poder de voto de la entidad.\n\n",
-          "hideOnRevision": true
-        },
-
-        {
-          "type": "checkbox",
-          "name": "FATCA_NoFinanciera_SinExterior",
-          "label": "Entidad No Financiera SIN beneficiarios finales en el exterior"
-        },
-        {
-          "type": "comment",
-          "name": "FATCA_NoFinanciera_SinExterior_desc",
-          "content": "\n",
-          "hideOnRevision": true
-        },
-        {
-          "type": "checkbox",
-          "name": "FATCA_NoFinanciera_ConExterior",
-          "label": "Entidad No Financiera CON beneficiarios finales en el exterior"
-        },
-        {
-          "type": "comment",
-          "name": "FATCA_NoFinanciera_ConExterior_desc",
-          "content": "\n",
-          "hideOnRevision": true
-        }
-      ]
+      "name": "InstructivoBanco",
+      "label": "Banco",
+      "type": "text"
     },
     {
+      "name": "InstructivoNumeroDeCuenta",
+      "label": "Número de cuenta",
+      "type": "text",
+      "hideOnRevision": true
+    },
+    {
+      "name": "InstructivoMoneda",
+      "label": "Moneda",
+      "type": "text"
+    },
+    {
+      "name": "InstructivoTitular",
+      "label": "Titular",
+      "type": "text"
+    },
+    {
+      "name": "InstructivoCBU",
+      "label": "CBU/CVU",
+      "type": "text"
+    },
+    {
+      "name": "InstructivoCUIT",
+      "label": "CUIT/CUIL",
+      "type": "text"
+    }
+  ]
+},
+{
+  "title": "Estructura Accionaria",
+  "description": "Declaración Jurada de Estructura Accionaria",
+  "icon": "cilSitemap",
+  "fields": [
+    {
+      "type": "comment",
+      "name": "EA_Intro",
+      "content": "Por medio de la presente, y en cumplimiento con la Resolución 78/2023 de la Unidad de Información Financiera, declaramos bajo juramento que los datos indicados a continuación son correctos, completos y verdaderos.",
+      "hideOnRevision": true
+    },
+    {
+      "type": "subtitle",
+      "name": "EA1_Title",
+      "content": "Accionista",
+      "hideOnRevision": true
+    },
+
+    {
+      "name": "EstructuraAccionariaAccionista1Nombre",
+      "label": "Razón Social / Apellido y Nombre",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1Fecha",
+      "label": "Fecha de Constitución / Nacimiento",
+      "type": "date"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1Lugar",
+      "label": "Lugar de Constitución / Nacionalidad",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1DNI",
+      "label": "Número de Inscripción / DNI - Pasaporte",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1Domicilio",
+      "label": "Domicilio Real",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1EstadoCivil",
+      "label": "Estado Civil",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1Actividad",
+      "label": "Actividad / Profesión",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1PaisFiscal1",
+      "label": "País de Residencia Fiscal",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1IdentificacionFiscal1",
+      "label": "Número de Identificación Fiscal",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1PaisFiscal2",
+      "label": "País Residencia Fiscal 2",
+      "type": "text"
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1IdentificacionFiscal2",
+      "label": "Número de Identificación Fiscal 2",
+      "type": "text"
+    },
+    {
+      "name": "EA_PEP1",
+      "label": "¿Es Persona Expuesta Políticamente?",
+      "type": "button-group",
+      "options": ["Sí", "No"]
+    },
+    {
+      "name": "EstructuraAccionariaAccionista1PorcentajeParticipacion",
+      "label": "% Participación",
+      "type": "text"
+    },
+
+    {
+      "name": "EA_Add2",
+      "label": "\n\nAgregar otro accionista",
+      "type": "checkbox",
+      "hideOnRevision": true
+    },
+
+    {
+      "type": "subtitle",
+      "name": "EA2_Title",
+      "content": "\n\nAccionista 2",
+      "visibleIf": { "field": "EA_Add2", "value": true },
+      "hideOnRevision": true
+    },
+
+    {
+      "name": "EstructuraAccionariaAccionista2Nombre",
+      "label": "Razón Social / Apellido y Nombre",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2Fecha",
+      "label": "Fecha de Constitución / Nacimiento",
+      "type": "date",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2Lugar",
+      "label": "Lugar de Constitución / Nacionalidad",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2DNI",
+      "label": "Número de Inscripción / DNI - Pasaporte",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2Domicilio",
+      "label": "Domicilio Real",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2EstadoCivil",
+      "label": "Estado Civil",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2Actividad",
+      "label": "Actividad / Profesión",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2PaisFiscal1",
+      "label": "País de Residencia Fiscal",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2IdentificacionFiscal1",
+      "label": "Número de Identificación Fiscal",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2PaisFiscal2",
+      "label": "País Residencia Fiscal 2",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2IdentificacionFiscal2",
+      "label": "Número de Identificación Fiscal 2",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EA_PEP2",
+      "label": "¿Es Persona Expuesta Políticamente?",
+      "type": "button-group",
+      "options": ["Sí", "No"],
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista2PorcentajeParticipacion",
+      "label": "% Participación",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add2", "value": true }
+    },
+
+    {
+      "name": "EA_Add3",
+      "label": "Agregar otro accionista",
+      "type": "checkbox",
+      "visibleIf": { "field": "EA_Add2", "value": true },
+      "hideOnRevision": true
+    },
+
+    {
+      "type": "subtitle",
+      "name": "EA3_Title",
+      "content": "\n\nAccionista 3",
+      "visibleIf": { "field": "EA_Add3", "value": true },
+      "hideOnRevision": true
+    },
+
+    {
+      "name": "EstructuraAccionariaAccionista3Nombre",
+      "label": "Razón Social / Apellido y Nombre",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3Fecha",
+      "label": "Fecha de Constitución / Nacimiento",
+      "type": "date",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3Lugar",
+      "label": "Lugar de Constitución / Nacionalidad",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3DNI",
+      "label": "Número de Inscripción / DNI - Pasaporte",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3Domicilio",
+      "label": "Domicilio Real",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3EstadoCivil",
+      "label": "Estado Civil",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3Actividad",
+      "label": "Actividad / Profesión",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3PaisFiscal1",
+      "label": "País de Residencia Fiscal",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3IdentificacionFiscal1",
+      "label": "Número de Identificación Fiscal",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3PaisFiscal2",
+      "label": "País Residencia Fiscal 2",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3IdentificacionFiscal3",
+      "label": "Número de Identificación Fiscal 2",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EA_PEP3",
+      "label": "¿Es Persona Expuesta Políticamente?",
+      "type": "button-group",
+      "options": ["Sí", "No"],
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    },
+    {
+      "name": "EstructuraAccionariaAccionista3PorcentajeParticipacion",
+      "label": "% Participación",
+      "type": "text",
+      "visibleIf": { "field": "EA_Add3", "value": true }
+    }
+  ]
+},
+{
+  "title": "Beneficiarios Finales",
+  "description": "Declaración Jurada de Beneficiarios Finales",
+  "icon": "cilAddressBook",
+  "fields": [
+    {
+      "type": "comment",
+      "content": "Indicar a las personas humanas que, directa o indirectamente, posean un porcentaje igual o mayor al 10% del capital o derechos de voto de la persona jurídica, o que por otros medios ejerzan el control de la misma",
+      "name": "BFintro",
+      "hideOnRevision": true
+    },
+
+    {
+      "name": "BeneficiarioFinal1Nombre",
+      "label": "Apellido y Nombre",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1FechaDeNacimiento",
+      "label": "Fecha de Nacimiento",
+      "type": "date"
+    },
+    {
+      "name": "BeneficiarioFinal1Nacionalidad",
+      "label": "Nacionalidad",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1DNIPasaporte",
+      "label": "DNI / Pasaporte",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1DomicilioReal",
+      "label": "Domicilio Real",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1EstadoCivil",
+      "label": "Estado Civil",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1ProfesionOcupacion",
+      "label": "Profesión / Ocupación",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1PaisDeResidenciaFiscal1",
+      "label": "País de Residencia Fiscal",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1NumeroDeIdentificacionFiscal1",
+      "label": "Número de Identificación Fiscal",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1PaisDeResidenciaFiscal2",
+      "label": "País Residencia Fiscal 2",
+      "type": "text"
+    },
+    {
+      "name": "BeneficiarioFinal1NumeroDeIdentificacionFiscal2",
+      "label": "Número de Identificación Fiscal 2",
+      "type": "text"
+    },
+    {
+      "name": "BF_PEP1",
+      "label": "¿Es Persona Expuesta Políticamente?",
+      "type": "button-group",
+      "options": ["Sí", "No"]
+    },
+    {
+      "name": "BeneficiarioFinal1PorcentajeDeParticipacion",
+      "label": "% Participación",
+      "type": "text"
+    },
+
+    {
+      "name": "BF_Add2",
+      "label": "Agregar otro beneficiario",
+      "type": "checkbox",
+      "hideOnRevision": true
+    },
+    {
+      "type": "subtitle",
+      "name": "BF2_Title",
+      "content": "\n\nBeneficiario Final 2",
+      "visibleIf": { "field": "BF_Add2", "value": true },
+      "hideOnRevision": true
+    },
+
+    {
+      "name": "BeneficiarioFinal2Nombre",
+      "label": "Apellido y Nombre",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2FechaDeNacimiento",
+      "label": "Fecha de Nacimiento",
+      "type": "date",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2Nacionalidad",
+      "label": "Nacionalidad",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2DNIPasaporte",
+      "label": "DNI / Pasaporte",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2DomicilioReal",
+      "label": "Domicilio Real",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2EstadoCivil",
+      "label": "Estado Civil",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2ProfesionOcupacion",
+      "label": "Profesión / Ocupación",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2PaisDeResidenciaFiscal1",
+      "label": "País de Residencia Fiscal",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2NumeroDeIdentificacionFiscal1",
+      "label": "Número de Identificación Fiscal",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2PaisDeResidenciaFiscal2",
+      "label": "País Residencia Fiscal 2",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2NumeroDeIdentificacionFiscal2",
+      "label": "Número de Identificación Fiscal 2",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BF_PEP2",
+      "label": "¿Es Persona Expuesta Políticamente?",
+      "type": "button-group",
+      "options": ["Sí", "No"],
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal2PorcentajeDeParticipacion",
+      "label": "% Participación",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add2", "value": true }
+    },
+
+    {
+      "name": "BF_Add3",
+      "label": "Agregar otro beneficiario",
+      "type": "checkbox",
+      "visibleIf": { "field": "BF_Add2", "value": true },
+      "hideOnRevision": true
+    },
+    {
+      "type": "subtitle",
+      "name": "BF3_Title",
+      "content": "\n\nBeneficiario Final 3",
+      "visibleIf": { "field": "BF_Add3", "value": true },
+      "hideOnRevision": true
+    },
+
+    {
+      "name": "BeneficiarioFinal3Nombre",
+      "label": "Apellido y Nombre",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3FechaDeNacimiento",
+      "label": "Fecha Nacimiento",
+      "type": "date",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3Nacionalidad",
+      "label": "Nacionalidad",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3DNIPasaporte",
+      "label": "DNI / Pasaporte",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3DomicilioReal",
+      "label": "Domicilio Real",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3EstadoCivil",
+      "label": "Estado Civil",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3ProfesionOcupacion",
+      "label": "Profesión / Ocupación",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3PaisDeResidenciaFiscal1",
+      "label": "País de Residencia Fiscal",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3NumeroDeIdentificacionFiscal1",
+      "label": "Número de Identificación Fiscal",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3PaisDeResidenciaFiscal2",
+      "label": "País Residencia Fiscal 2",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3NumeroDeIdentificacionFiscal2",
+      "label": "Número de Identificación Fiscal 2",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BF_PEP3",
+      "label": "¿Es Persona Expuesta Políticamente?",
+      "type": "button-group",
+      "options": ["Sí", "No"],
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    },
+    {
+      "name": "BeneficiarioFinal3PorcentajeDeParticipacion",
+      "label": "% Participación",
+      "type": "text",
+      "visibleIf": { "field": "BF_Add3", "value": true }
+    }
+  ]
+},
+{
+  "title": "FATCA / OCDE",
+  "description": "FATCA / OCDE",
+  "icon": "cilGlobeAlt",
+  "fields": [
+    {
+      "type": "comment",
+      "name": "RF_Intro",
+      "content": "A los efectos del intercambio de información de cuentas financieras establecido por la Organización para la Cooperación y el Desarrollo Económico (OCDE) y la Resolución General Nº 4056/2017 de la AFIP y sus modificatorias, y en cumplimiento de la Ley Foreign Account Tax Compliance Act (FATCA) de los Estados Unidos (EEUU), el Cliente declara tener residencia fiscal en el (los) país(es) detallado(s) a continuación:",
+      "hideOnRevision": true
+    },
+    {
+      "type": "subtitle",
+      "name": "RF1_Title",
+      "content": "Residencia Fiscal",
+      "hideOnRevision": true
+    },
+
+    {
+      "name": "OCDEFATCAResidenciaFiscal1Pais",
+      "label": "País",
+      "type": "text"
+    },
+    {
+      "name": "ResidenciaFiscal1_Direccion",
+      "label": "Dirección",
+      "type": "text"
+    },
+    {
+      "name": "OCDEFATCAResidenciaFiscal1NIT",
+      "label": "NIT",
+      "type": "text"
+    },
+
+    {
+      "name": "RF_Add2",
+      "label": "Agregar otro país",
+      "type": "checkbox",
+      "hideOnRevision": true
+    },
+    {
+      "type": "subtitle",
+      "name": "RF2_Title",
+      "content": "\n\nResidencia Fiscal 2",
+      "visibleIf": { "field": "RF_Add2", "value": true },
+      "hideOnRevision": true
+    },
+    {
+      "name": "OCDEFATCAResidenciaFiscal2Pais",
+      "label": "País",
+      "type": "text",
+      "visibleIf": { "field": "RF_Add2", "value": true }
+    },
+    {
+      "name": "OCDEFATCAResidenciaFiscal2Direccion",
+      "label": "Dirección",
+      "type": "text",
+      "visibleIf": { "field": "RF_Add2", "value": true }
+    },
+    {
+      "name": "OCDEFATCAResidenciaFiscal2NIT",
+      "label": "NIT",
+      "type": "text",
+      "visibleIf": { "field": "RF_Add2", "value": true }
+    },
+
+    {
+      "name": "RF_Add3",
+      "label": "Agregar otro país",
+      "type": "checkbox",
+      "visibleIf": { "field": "RF_Add2", "value": true },
+      "hideOnRevision": true
+    },
+    {
+      "type": "subtitle",
+      "name": "RF3_Title",
+      "content": "\n\nResidencia Fiscal 3",
+      "visibleIf": { "field": "RF_Add3", "value": true },
+      "hideOnRevision": true
+    },
+    {
+      "name": "OCDEFATCAResidenciaFiscal3Pais",
+      "label": "País",
+      "type": "text",
+      "visibleIf": { "field": "RF_Add3", "value": true }
+    },
+    {
+      "name": "OCDEFATCAResidenciaFiscal3Direccion",
+      "label": "Dirección",
+      "type": "text",
+      "visibleIf": { "field": "RF_Add3", "value": true }
+    },
+    {
+      "name": "OCDEFATCAResidenciaFiscal3NIT",
+      "label": "NIT",
+      "type": "text",
+      "visibleIf": { "field": "RF_Add3", "value": true }
+    },
+
+    {
+      "type": "comment",
+      "name": "RF_NIT_Info",
+      "content": "NIT: Número de Identificación Tributaria. Por ejemplo, si tributa en Argentina sería CUIT y si tributa en EEUU sería Employer Identification Number (EIN).",
+      "hideOnRevision": true
+    },
+
+    {
+      "type": "subtitle",
+      "name": "FATCA_Title",
+      "content": "\n\nAsimismo, el Cliente declara y garantiza que es una Entidad del tipo seleccionado a continuación: marcar solo una de las 6 siguientes opciones",
+      "hideOnRevision": true
+    },
+
+    {
+      "type": "checkbox",
+      "name": "FATCA_InstitucionFinanciera",
+      "label": "Institución Financiera"
+    },
+    {
+      "type": "comment",
+      "name": "FATCA_InstitucionFinanciera_desc",
+      "content": "Entidades depositarias, entidades de custodia, entidades de inversión y las compañías financieras que ofrecen productos que incluye activos financieros, con la excepción de entidades de inversión de países que no firmaron el Acuerdo OCDE.\n\n",
+      "hideOnRevision": true
+    },
+
+    {
+      "name": "OCDEFATCAInstitucionFinancieraGIIN1",
+      "label": "Institución Financiera Extranjera Participante (PFFI)",
+      "type": "text",
+      "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+    },
+    {
+      "name": "OCDEFATCAInstitucionFinancieraGIIN2",
+      "label": "Institución Financiera Extranjera en Cumplimiento - IGA (IGA FFI)",
+      "type": "text",
+      "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+    },
+    {
+      "name": "OCDEFATCAInstitucionFinancieraGIIN3",
+      "label": "Institución Financiera Extranjera en Cumplimiento Registrada (RDCFFI)",
+      "type": "text",
+      "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+    },
+    {
+      "name": "OCDEFATCAInstitucionFinancieraGIIN4",
+      "label": "Institución Financiera Extranjera en Cumplimiento Certificada (CDCFFI)",
+      "type": "text",
+      "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+    },
+    {
+      "name": "OCDEFATCAInstitucionFinancieraGIIN5",
+      "label": "Institución Financiera Extranjera Propietario Documentado (ODFFI)",
+      "type": "text",
+      "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+    },
+
+    {
+      "type": "checkbox",
+      "name": "FATCA_SinFinesDeLucro",
+      "label": "Entidad Sin Fines de Lucro"
+    },
+    {
+      "type": "checkbox",
+      "name": "FATCA_BeneficiarioExento",
+      "label": "Beneficiario Final Exento"
+    },
+    {
+      "type": "checkbox",
+      "name": "FATCA_CotizaBolsa",
+      "label": "Entidad que Cotiza en Bolsa y/o Afiliada"
+    },
+    {
+      "type": "checkbox",
+      "name": "FATCA_NoFinanciera_SinExterior",
+      "label": "Entidad No Financiera SIN beneficiarios finales en el exterior"
+    },
+    {
+      "type": "checkbox",
+      "name": "FATCA_NoFinanciera_ConExterior",
+      "label": "Entidad No Financiera CON beneficiarios finales en el exterior"
+    }
+  ]
+},    {
       "title": "Revisar y Firmar",
       "icon": "cilTask",
       "fields": []
