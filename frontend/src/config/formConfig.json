@@ -16,22 +16,11 @@
           "type": "button-group",
           "options": ["Apertura", "Actualización", "Incorporación"],
           "default": "Apertura",
-          "mapper": "tipoDeTramiteMapper"
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "TipoDeTramiteApertura",
-          "hideOnRevision": true
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "TipoDeTramiteActualizacion",
-          "hideOnRevision": true
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "TipoDeTramiteIncorporacion",
-          "hideOnRevision": true
+          "optionFields": [
+            { "TipoDeTramiteApertura": "/" },
+            { "TipoDeTramiteActualizacion": "/" },
+            { "TipoDeTramiteIncorporacion": "/" }
+          ]
         },
         {
           "name": "SujetoObligado",
@@ -51,17 +40,10 @@
           "type": "button-group",
           "options": ["Indistinta", "Conjunta"],
           "default": "Indistinta",
-          "mapper": "usoDeFirmaMapper"
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "UsoDeFirmaIndistinta",
-          "hideOnRevision": true
-        },
-        {
-          "_comentario": "Valor especial para el PDF: /",
-          "name": "UsoDeFirmaConjunta",
-          "hideOnRevision": true
+          "optionFields": [
+            { "UsoDeFirmaIndistinta": "/" },
+            { "UsoDeFirmaConjunta": "/" }
+          ]
         }
       ]
     },
@@ -123,19 +105,34 @@
           "name": "CorreoElectronico1",
           "label": "Correo electrónico 1",
           "type": "email",
-          "mapper": "emailMapper"
+          "derivedFields": [
+            {
+              "name": "CorreoElectronico1usuario",
+              "value": "email.split(\"@\")[0]"
+            },
+            {
+              "name": "CorreoElectronico1dominio",
+              "value": "email.split(\"@\")[1]"
+            }
+          ]
         },
         {
           "name": "CorreoElectronico2",
           "label": "Correo electrónico 2",
           "type": "email",
-          "mapper": "emailMapper"
+          "derivedFields": [
+            { "name": "CorreoElectronico2usuario", "value": "email.split(\"@\")[0]" },
+            { "name": "CorreoElectronico2dominio", "value": "email.split(\"@\")[1]" }
+          ]
         },
         {
           "name": "CorreoElectronico3",
           "label": "Correo electrónico 3",
           "type": "email",
-          "mapper": "emailMapper"
+          "derivedFields": [
+            { "name": "CorreoElectronico3usuario", "value": "email.split(\"@\")[0]" },
+            { "name": "CorreoElectronico3dominio", "value": "email.split(\"@\")[1]" }
+          ]
         },
 
         {
@@ -174,13 +171,13 @@
           "name": "RepresentanteApellido1",
           "label": "Apellido",
           "type": "text",
-          "mapper": "representanteApellido1Mapper"
+          "syncTo": "Firmante1Apellido"
         },
         {
           "name": "RepresentanteNombre1",
           "label": "Nombre",
           "type": "text",
-          "mapper": "representanteNombre1Mapper"
+          "syncTo": "Firmante1Nombre"
         },
         {
           "name": "RepresentanteDNI1",
@@ -221,7 +218,7 @@
           "name": "RepresentanteEmail1",
           "label": "Correo Electrónico",
           "type": "email",
-          "mapper": "representanteEmail1Mapper"
+          "syncTo": "Firmante1Email"
         },
         {
           "name": "RepresentanteDomicilio1",
@@ -263,14 +260,14 @@
           "label": "Apellido ",
           "type": "text",
           "visibleIf": { "field": "tieneRep2", "value": true },
-          "mapper": "representanteApellido2Mapper"
+          "syncTo": "Firmante2Apellido"
         },
         {
           "name": "RepresentanteNombre2",
           "label": "Nombre ",
           "type": "text",
           "visibleIf": { "field": "tieneRep2", "value": true },
-          "mapper": "representanteNombre2Mapper"
+          "syncTo": "Firmante2Nombre"
         },
         {
           "name": "RepresentanteDNI2",
@@ -319,7 +316,7 @@
           "label": "Correo Electrónico ",
           "type": "email",
           "visibleIf": { "field": "tieneRep2", "value": true },
-          "mapper": "representanteEmail2Mapper"
+          "syncTo": "Firmante2Email"
         },
         {
           "name": "RepresentanteDomicilio2",

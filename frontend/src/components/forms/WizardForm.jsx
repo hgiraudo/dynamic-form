@@ -3,7 +3,6 @@ import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
 import formConfig from "../../config/formConfig.json";
 import appConfig from "../../config/appConfig.json";
-import * as fieldMappers from "../../utils/fieldMappers";
 import * as fieldFormatters from "../../utils/fieldFormatters";
 import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "../../utils/utils";
 import pdfConfig from "../../config/pdfConfig.json";
@@ -47,6 +46,19 @@ export async function generatePdfFiles(getMappedFormData) {
   });
 
   return { pdfFile, jsonFile, pdfJson };
+}
+
+/**
+ * Evalúa una expresión de derivedFields con el valor del campo.
+ * La variable disponible en la expresión es `email` (valor del campo).
+ */
+function evalDerivedField(expr, fieldValue) {
+  try {
+    // eslint-disable-next-line no-new-func
+    return new Function("email", `"use strict"; return (${expr});`)(fieldValue) ?? "";
+  } catch {
+    return "";
+  }
 }
 
 import { buildTransactionJson } from "../../utils/buildTransactionJson.js";
@@ -95,8 +107,13 @@ function WizardForm() {
     }
     setFormData((prev) => {
       let updated = { ...prev, [field.name]: value };
-      if (field.mapper && fieldMappers[field.mapper]) {
-        updated = fieldMappers[field.mapper](updated, field.name);
+      if (field.syncTo) {
+        updated[field.syncTo] = value;
+      }
+      if (field.derivedFields) {
+        field.derivedFields.forEach(({ name, value: expr }) => {
+          updated[name] = evalDerivedField(expr, value);
+        });
       }
       return updated;
     });
@@ -145,9 +162,23 @@ function WizardForm() {
 
     formConfig.steps.forEach((step) => {
       step.fields.forEach((field) => {
-        if (field.mapper && fieldMappers[field.mapper]) {
-          // 🔹 Aplica mapper si está definido
-          mappedData = fieldMappers[field.mapper](mappedData, field.name);
+        if (field.syncTo) {
+          // 🔹 Sincroniza el valor con otro campo
+          mappedData[field.syncTo] = mappedData[field.name];
+        } else if (field.derivedFields) {
+          // 🔹 Calcula campos derivados a partir del valor del campo
+          field.derivedFields.forEach(({ name, value: expr }) => {
+            mappedData[name] = evalDerivedField(expr, mappedData[field.name]);
+          });
+        } else if (field.optionFields) {
+          // 🔹 Aplica optionFields: setea los campos del índice seleccionado
+          const selectedIndex = field.options?.indexOf(mappedData[field.name]) ?? -1;
+          field.optionFields.forEach(opt => {
+            Object.keys(opt).forEach(key => { mappedData[key] = ""; });   // limpia todas las keys posibles
+          });
+          if (selectedIndex >= 0 && field.optionFields[selectedIndex]) {
+            Object.assign(mappedData, field.optionFields[selectedIndex]); // setea solo la seleccionada
+          }
         } else if (field.type === "date" && mappedData[field.name]) {
           // 🔹 Exportar fecha en formato DD-MM-YYYY
           mappedData[field.name] = formatDateDDMMYYYY(mappedData[field.name]);
