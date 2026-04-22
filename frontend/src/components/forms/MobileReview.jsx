@@ -27,9 +27,9 @@ function MobileReview({
   const mappedData = getMappedFormData();
 
   const quickActions = [
-    { icon: Icons.cilCloud,       label: "Guardar en la nube", action: handleSave },
-    { icon: Icons.cilSave,        label: "Descargar JSON",     action: handleExport },
-    { icon: Icons.cilCloudUpload, label: "Importar JSON",      action: () => fileInputRef.current?.click() },
+    { icon: Icons.cilSave,          label: "Guardar en la nube", action: handleSave },
+    { icon: Icons.cilCloudDownload, label: "Descargar JSON",     action: handleExport },
+    { icon: Icons.cilCloudUpload,   label: "Importar JSON",      action: () => fileInputRef.current?.click() },
     { icon: Icons.cilTrash,       label: "Borrar formulario",  action: () => setFormData({}) },
     { icon: Icons.cilPenNib,      label: "Firmar",             action: handleSign },
   ];

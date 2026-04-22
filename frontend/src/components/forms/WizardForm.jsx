@@ -696,9 +696,9 @@ try {
         {/* Barra de acciones rápidas */}
         <div className="shrink-0 flex justify-end items-center gap-0.5 px-3 py-1.5 border-b border-gray-100">
           {[
-            { icon: Icons.cilCloud,       label: "Guardar en la nube", action: handleSave },
-            { icon: Icons.cilSave,        label: "Descargar JSON",     action: handleExport },
-            { icon: Icons.cilCloudUpload, label: "Importar JSON",      action: () => fileInputRef.current.click() },
+            { icon: Icons.cilSave,         label: "Guardar en la nube",  action: handleSave },
+            { icon: Icons.cilCloudDownload,label: "Descargar JSON",     action: handleExport },
+            { icon: Icons.cilCloudUpload,  label: "Importar JSON",      action: () => fileInputRef.current.click() },
             { icon: Icons.cilTrash,       label: "Borrar formulario",  action: () => setFormData({}) },
             { icon: Icons.cilPenNib,      label: "Firmar",             action: handleSign },
           ].map(({ icon, label, action }) => (
