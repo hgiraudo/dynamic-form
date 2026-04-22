@@ -638,6 +638,8 @@ try {
         <MobileReview
           formData={formData}
           getMappedFormData={getMappedFormData}
+          handleChange={handleChange}
+          handleChangeWithFormatter={handleChangeWithFormatter}
           handleSign={handleSign}
           handleSave={handleSave}
           handleExport={handleExport}
@@ -646,12 +648,6 @@ try {
           saveStatus={saveStatus}
           urlCopied={urlCopied}
           handleCopyUrl={handleCopyUrl}
-          loadIdInput={loadIdInput}
-          setLoadIdInput={setLoadIdInput}
-          loadError={loadError}
-          loadApplicationById={loadApplicationById}
-          updateUrl={updateUrl}
-          setApplicationId={setApplicationId}
           setFormData={setFormData}
         />
       ) : (
