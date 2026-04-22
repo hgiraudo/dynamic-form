@@ -3,8 +3,6 @@ import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
 import formConfig from "../../config/formConfig.json";
 import { brandConfig } from "../../branding/brandConfig";
-import * as fieldFormatters from "../../utils/fieldFormatters";
-
 function MobileReview({
   formData,
   getMappedFormData,
@@ -22,15 +20,15 @@ function MobileReview({
 }) {
   const [openStep, setOpenStep] = useState(0);
 
-  const quickActions = [
-    { icon: Icons.cilSave,          label: "Guardar en la nube", action: handleSave },
-    { icon: Icons.cilCloudDownload, label: "Descargar JSON",     action: handleExport },
-    { icon: Icons.cilCloudUpload,   label: "Importar JSON",      action: () => fileInputRef.current?.click() },
-    { icon: Icons.cilTrash,         label: "Borrar formulario",  action: () => setFormData({}) },
-    { icon: Icons.cilPenNib,        label: "Firmar",             action: handleSign },
-  ];
-
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(window.location.href)}`;
+
+  const quickActions = [
+    { icon: Icons.cilSave,    label: "Guardar en la nube", action: handleSave,          href: null },
+    { icon: Icons.cilTrash,   label: "Borrar formulario",  action: () => setFormData({}), href: null },
+    { icon: Icons.cilPenNib,  label: "Firmar",             action: handleSign,          href: null },
+    { icon: Icons.cilLink,    label: urlCopied ? "¡Copiada!" : "Copiar URL", action: handleCopyUrl, href: null },
+    { icon: Icons.cibWhatsapp,label: "Enviar por WhatsApp", action: null,               href: whatsappUrl },
+  ];
 
   const isFieldVisible = (field) => {
     if (!field.visibleIf) return true;
@@ -144,20 +142,28 @@ function MobileReview({
       <div className="sticky top-0 z-20 bg-brand-primary px-4 py-3 flex items-center justify-between shadow-md">
         <img src={brandConfig.logos.white} alt={brandConfig.name} className="h-8" />
         <div className="flex items-center">
-          {quickActions.map(({ icon, label, action }) => (
-            <div key={label} className="group relative">
-              <button
-                type="button"
-                onClick={action}
-                className="p-2 rounded-lg text-white/75 hover:text-white hover:bg-white/15 active:bg-white/25 transition-colors"
-              >
-                <CIcon icon={icon} className="w-5 h-5" />
-              </button>
+          {quickActions.map(({ icon, label, action, href }) => {
+            const cls = "p-2 rounded-lg text-white/75 hover:text-white hover:bg-white/15 active:bg-white/25 transition-colors";
+            const tooltip = (
               <div className="absolute top-full right-0 mt-1.5 px-2 py-1 text-xs bg-gray-900 text-white rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-30 shadow">
                 {label}
               </div>
-            </div>
-          ))}
+            );
+            return (
+              <div key={label} className="group relative">
+                {href ? (
+                  <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+                    <CIcon icon={icon} className="w-5 h-5" />
+                  </a>
+                ) : (
+                  <button type="button" onClick={action} className={cls}>
+                    <CIcon icon={icon} className="w-5 h-5" />
+                  </button>
+                )}
+                {tooltip}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -178,35 +184,6 @@ function MobileReview({
         <h1 className="text-xl font-bold text-brand-primary">Revisión de datos</h1>
         <p className="text-sm text-gray-500 mt-0.5">Verificá y editá los datos antes de firmar</p>
       </div>
-
-      {/* Botones de compartir */}
-      <div className="mx-4 flex gap-2 mb-4">
-        <button
-          type="button"
-          onClick={handleCopyUrl}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 font-medium shadow-sm active:bg-gray-50"
-        >
-          <CIcon icon={Icons.cilLink} className="w-4 h-4" />
-          {urlCopied ? "¡Copiada!" : "Copiar URL"}
-        </button>
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#25D366] rounded-xl text-sm text-white font-semibold shadow-sm active:bg-[#1ebe5d]"
-        >
-          <CIcon icon={Icons.cibWhatsapp} className="w-4 h-4" />
-          Enviar por WhatsApp
-        </a>
-      </div>
-
-      {/* App ID */}
-      {applicationId && (
-        <div className="mx-4 mb-4 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2.5 flex items-center gap-2">
-          <CIcon icon={Icons.cilCloud} className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-          <code className="flex-1 text-xs text-blue-700 truncate">{applicationId}</code>
-        </div>
-      )}
 
       {/* Acordeón editable */}
       <div className="mx-4 rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
