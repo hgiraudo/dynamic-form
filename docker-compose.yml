@@ -16,6 +16,9 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
+    volumes:
+      - ./backend/applications:/app/backend/applications
+      - ./backend/saved:/app/backend/saved
 
   nginx:
     image: nginx:alpine
