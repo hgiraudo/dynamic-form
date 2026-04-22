@@ -181,7 +181,9 @@ def verify_filled_fields(output_pdf, expected_values, log_file):
 def main():
     # Parámetros opcionales
     args = sys.argv[1:]
-    input_pdf = args[0] if len(args) > 0 else DEFAULT_INPUT_PDF
+    input_pdf = args[0] if len(args) > 0 else (
+        "input-fixed.pdf" if os.path.isfile("input-fixed.pdf") else DEFAULT_INPUT_PDF
+    )
     combined_json = args[1] if len(args) > 1 else DEFAULT_COMBINED_JSON
     fields_example_json = args[2] if len(args) > 2 else DEFAULT_FIELDS_EXAMPLE_JSON
 

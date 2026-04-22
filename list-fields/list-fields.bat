@@ -1,12 +1,20 @@
 @echo off
 REM === Script para extraer campos, generar JSON y llenar PDF ===
-REM Este script ejecuta todo el proceso automaticamente
+REM Usa input-fixed.pdf si existe (reparado), si no usa input.pdf
 
 echo ========================================
 echo Procesando PDF con extraccion y llenado
 echo ========================================
 
-python list-fields.py
+REM Usar input-fixed.pdf si existe, si no input.pdf
+IF EXIST input-fixed.pdf (
+    echo Usando: input-fixed.pdf
+    python list-fields.py input-fixed.pdf
+) ELSE (
+    echo Usando: input.pdf  ^(ejecuta fix-input.bat para repararlo^)
+    python list-fields.py input.pdf
+)
+
 IF ERRORLEVEL 1 (
     echo Error al procesar el PDF
     pause

@@ -58,7 +58,7 @@ function evalDerivedField(expr, fieldValue) {
     return new Function("email", `"use strict"; return (${expr});`)(fieldValue) ?? "";
   } catch {
     return "";
-  }
+  } 
 }
 
 import { buildTransactionJson } from "../../utils/buildTransactionJson.js";

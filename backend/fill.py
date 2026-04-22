@@ -23,7 +23,9 @@ def generate_appearance(annot, value, field_type):
     rect = annot.Rect or [0, 0, 100, 20]
     try:
         x1, y1, x2, y2 = [float(x) for x in rect]
-        width, height = x2 - x1, y2 - y1
+        width, height = abs(x2 - x1), abs(y2 - y1)  # abs() por si las coords vienen invertidas
+        if width < 1 or height < 1:
+            raise ValueError(f"Rect demasiado pequeño: {width}x{height}")
         appearance.BBox = [0, 0, width, height]
     except Exception as e:
         print(f"Advertencia: No se pudo procesar el rectángulo de {annot.T or 'desconocido'}: {e}")
