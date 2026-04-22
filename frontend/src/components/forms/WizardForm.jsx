@@ -96,6 +96,7 @@ function WizardForm() {
   const [loadIdInput, setLoadIdInput] = useState("");
   const [loadError, setLoadError] = useState(null);
   const [urlCopied, setUrlCopied] = useState(false);
+  const [saveConfirmPending, setSaveConfirmPending] = useState(false);
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== "undefined" && window.innerWidth < 768
   );
@@ -454,11 +455,20 @@ const handleExport = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSave = async () => {
+  const handleClear = () => {
+    setFormData({});
+    setApplicationId(null);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("app");
+    window.history.replaceState({}, "", url.toString());
+  };
+
+  const doSave = async (existingId) => {
     setSaveStatus("saving");
+    setSaveConfirmPending(false);
     try {
       const baseUrl = `${config.backend.baseUrl}${config.backend.applicationsEndpoint}`;
-      let id = applicationId;
+      let id = existingId;
       if (id) {
         const resp = await fetch(`${baseUrl}/${id}`, {
           method: "PUT",
@@ -483,6 +493,14 @@ const handleExport = () => {
     } catch {
       setSaveStatus("error");
       setTimeout(() => setSaveStatus(null), 3000);
+    }
+  };
+
+  const handleSave = () => {
+    if (applicationId) {
+      setSaveConfirmPending(true);
+    } else {
+      doSave(null);
     }
   };
 
@@ -648,7 +666,7 @@ try {
           saveStatus={saveStatus}
           urlCopied={urlCopied}
           handleCopyUrl={handleCopyUrl}
-          setFormData={setFormData}
+          onClear={handleClear}
         />
       ) : (
       <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
@@ -695,7 +713,7 @@ try {
             { icon: Icons.cilSave,         label: "Guardar en la nube",  action: handleSave },
             { icon: Icons.cilCloudDownload,label: "Descargar JSON",     action: handleExport },
             { icon: Icons.cilCloudUpload,  label: "Importar JSON",      action: () => fileInputRef.current.click() },
-            { icon: Icons.cilTrash,       label: "Borrar formulario",  action: () => setFormData({}) },
+            { icon: Icons.cilTrash,       label: "Borrar formulario",  action: handleClear },
             { icon: Icons.cilPenNib,      label: "Firmar",             action: handleSign },
           ].map(({ icon, label, action }) => (
             <div key={label} className="group relative">
@@ -929,7 +947,7 @@ try {
 
                 <button
                   type="button"
-                  onClick={() => setFormData({})}
+                  onClick={handleClear}
                   className="flex-1 flex items-center justify-center px-4 py-3 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
                 >
                   <CIcon icon={Icons.cilTrash} className="w-5 h-5 mr-2" />
@@ -961,6 +979,43 @@ try {
         accept="application/json"
         className="hidden"
       />
+
+      {/* Modal: confirmar sobrescribir o crear nuevo */}
+      {saveConfirmPending && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl p-6 w-80 text-center shadow-lg">
+            <h3 className="text-lg font-semibold text-brand-primary mb-2">¿Qué deseas hacer?</h3>
+            <p className="text-sm text-gray-500 mb-5">
+              Ya existe un borrador guardado
+              <br />
+              <code className="text-xs font-mono text-gray-400">{applicationId.slice(0, 8)}…</code>
+            </p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => doSave(applicationId)}
+                className="flex-1 py-2 bg-brand-primary text-white rounded-lg text-sm font-medium hover:bg-brand-secondary"
+              >
+                Sobrescribir
+              </button>
+              <button
+                type="button"
+                onClick={() => doSave(null)}
+                className="flex-1 py-2 bg-gray-500 text-white rounded-lg text-sm font-medium hover:bg-gray-600"
+              >
+                Crear nuevo
+              </button>
+            </div>
+            <button
+              type="button"
+              onClick={() => setSaveConfirmPending(false)}
+              className="mt-3 text-xs text-gray-400 hover:text-gray-600"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* MODAL */}
       <AnimatePresence>

@@ -42,3 +42,4 @@ backend/test/formulario_completado.pdf
 list-fields/*.json
 list-fields/output.pdf
 backend/test/formulario_completado.base64.txt
+backend/applications/

@@ -16,15 +16,15 @@ function MobileReview({
   saveStatus,
   urlCopied,
   handleCopyUrl,
-  setFormData,
+  onClear,
 }) {
   const [openStep, setOpenStep] = useState(0);
 
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(window.location.href)}`;
 
   const quickActions = [
-    { icon: Icons.cilSave,     label: "Guardar en la nube",  action: handleSave,            href: null },
-    { icon: Icons.cilTrash,    label: "Borrar formulario",   action: () => setFormData({}), href: null },
+    { icon: Icons.cilSave,     label: "Guardar en la nube",  action: handleSave,  href: null },
+    { icon: Icons.cilTrash,    label: "Borrar formulario",   action: onClear,     href: null },
     { icon: Icons.cilPenNib,   label: "Firmar",              action: handleSign,            href: null },
     { icon: Icons.cilLink,     label: urlCopied ? "¡Copiada!" : "Copiar URL", action: handleCopyUrl, href: null },
     { icon: Icons.cibWhatsapp, label: "Enviar por WhatsApp", action: null, href: whatsappUrl,

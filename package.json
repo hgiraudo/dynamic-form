@@ -2,5 +2,8 @@
   "type": "module",
   "dependencies": {
     "lucide-react": "^0.546.0"
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.10.21"
   }
 }
