@@ -71,6 +71,7 @@ export default {
     getSigningUrlEndpoint: "/api/getSigningUrl",
     healthEndpoint: "/api/health",
     applicationsEndpoint: "/api/applications",
+    deviceTypeEndpoint: "/api/device-type",
   },
 
   // Configuración de Python

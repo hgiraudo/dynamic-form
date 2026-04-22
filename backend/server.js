@@ -236,6 +236,12 @@ app.get(`${config.backend.applicationsEndpoint}/:id`, async (req, res) => {
   }
 });
 
+app.get(config.backend.deviceTypeEndpoint, (req, res) => {
+  const ua = req.headers["user-agent"] || "";
+  const isMobile = /Mobile|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+  res.json({ isMobile });
+});
+
 app.get(config.backend.healthEndpoint, (req, res) => {
   res.json({ status: "ok" });
 });

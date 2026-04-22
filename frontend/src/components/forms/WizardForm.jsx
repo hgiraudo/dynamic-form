@@ -64,6 +64,7 @@ function evalDerivedField(expr, fieldValue) {
 import { buildTransactionJson } from "../../utils/buildTransactionJson.js";
 import { AnimatePresence } from "framer-motion";
 import { brandConfig } from "../../branding/brandConfig";
+import MobileReview from "./MobileReview";
 
 function WizardForm() {
   const [formData, setFormData] = useState(() => {
@@ -95,6 +96,9 @@ function WizardForm() {
   const [loadIdInput, setLoadIdInput] = useState("");
   const [loadError, setLoadError] = useState(null);
   const [urlCopied, setUrlCopied] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.innerWidth < 768
+  );
   const fileInputRef = useRef(null);
   const currentStep = formConfig.steps[stepIndex];
 
@@ -488,6 +492,31 @@ const handleExport = () => {
     setTimeout(() => setUrlCopied(false), 2000);
   };
 
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    fetch(`${config.backend.baseUrl}${config.backend.deviceTypeEndpoint}`)
+      .then(r => r.json())
+      .then(d => setIsMobile(d.isMobile))
+      .catch(() => {});
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleImportFile = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        handleImport(JSON.parse(ev.target.result));
+      } catch {
+        alert("Archivo JSON inválido ❌");
+      }
+    };
+    reader.readAsText(file);
+  };
+
   /* ============================================================
      HANDLE SIGN
   ============================================================ */
@@ -604,7 +633,29 @@ try {
   };
 
   return (
-    <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
+    <>
+      {isMobile ? (
+        <MobileReview
+          formData={formData}
+          getMappedFormData={getMappedFormData}
+          handleSign={handleSign}
+          handleSave={handleSave}
+          handleExport={handleExport}
+          fileInputRef={fileInputRef}
+          applicationId={applicationId}
+          saveStatus={saveStatus}
+          urlCopied={urlCopied}
+          handleCopyUrl={handleCopyUrl}
+          loadIdInput={loadIdInput}
+          setLoadIdInput={setLoadIdInput}
+          loadError={loadError}
+          loadApplicationById={loadApplicationById}
+          updateUrl={updateUrl}
+          setApplicationId={setApplicationId}
+          setFormData={setFormData}
+        />
+      ) : (
+      <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
       {/* Sidebar */}
       <div className="w-80 bg-brand-primary flex flex-col text-blue-200 p-2 pl-4">
         <div className="p-6 text-center">
@@ -880,27 +931,6 @@ try {
                   Importar JSON
                 </button>
 
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={(e) => {
-                    const file = e.target.files[0];
-                    if (!file) return;
-                    const reader = new FileReader();
-                    reader.onload = (ev) => {
-                      try {
-                        const importedData = JSON.parse(ev.target.result);
-                        handleImport(importedData);
-                      } catch {
-                        alert("Archivo JSON inválido ❌");
-                      }
-                    };
-                    reader.readAsText(file);
-                  }}
-                  accept="application/json"
-                  className="hidden"
-                />
-
                 <button
                   type="button"
                   onClick={() => setFormData({})}
@@ -924,6 +954,16 @@ try {
         </div>
         </div>
       </div>
+      )}
+
+      {/* Input oculto para importar JSON - siempre en el DOM */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleImportFile}
+        accept="application/json"
+        className="hidden"
+      />
 
       {/* MODAL */}
       <AnimatePresence>
@@ -1004,7 +1044,7 @@ try {
           </div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 }
 
