@@ -640,7 +640,33 @@ try {
       </div>
 
       {/* Contenido */}
-      <div className="flex-1 overflow-y-auto bg-white p-4">
+      <div className="flex-1 flex flex-col overflow-hidden bg-white">
+
+        {/* Barra de acciones rápidas */}
+        <div className="shrink-0 flex justify-end items-center gap-0.5 px-3 py-1.5 border-b border-gray-100">
+          {[
+            { icon: Icons.cilCloud,       label: "Guardar en la nube", action: handleSave },
+            { icon: Icons.cilSave,        label: "Descargar JSON",     action: handleExport },
+            { icon: Icons.cilCloudUpload, label: "Importar JSON",      action: () => fileInputRef.current.click() },
+            { icon: Icons.cilTrash,       label: "Borrar formulario",  action: () => setFormData({}) },
+            { icon: Icons.cilPenNib,      label: "Firmar",             action: handleSign },
+          ].map(({ icon, label, action }) => (
+            <div key={label} className="group relative">
+              <button
+                type="button"
+                onClick={action}
+                className="p-1.5 rounded-lg text-brand-primary hover:bg-blue-50 transition-colors"
+              >
+                <CIcon icon={icon} className="w-5 h-5" />
+              </button>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1.5 px-2 py-1 text-xs bg-gray-800 text-white rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-30">
+                {label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-4">
         <div className="p-8">
           <h2 className="text-2xl font-semibold text-brand-primary mb-6">
             {currentStep.description}
@@ -895,6 +921,7 @@ try {
               </div>
             </>
           )}
+        </div>
         </div>
       </div>
 
