@@ -70,6 +70,7 @@ export default {
     signEndpoint: "/api/sign",
     getSigningUrlEndpoint: "/api/getSigningUrl",
     healthEndpoint: "/api/health",
+    applicationsEndpoint: "/api/applications",
   },
 
   // Configuración de Python

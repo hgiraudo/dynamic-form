@@ -18,7 +18,8 @@
       "Bash(rm:*)",
       "Bash(ls C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\setup*.sh)",
       "Bash(python3 -c ' *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(cmd *)"
     ],
     "deny": [],
     "ask": []

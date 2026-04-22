@@ -1,4 +1,4 @@
 {
   "watch": ["server.js"],
-  "ignore": ["outputs/*"]
+  "ignore": ["outputs/*", "applications/*"]
 }

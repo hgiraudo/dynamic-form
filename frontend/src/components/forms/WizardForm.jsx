@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
 import formConfig from "../../config/formConfig.json";
@@ -87,9 +87,14 @@ function WizardForm() {
 
   const [stepIndex, setStepIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [modalLoading, setModalLoading] = useState(false); // 🔹 indica que está creando la transacción
+  const [modalLoading, setModalLoading] = useState(false);
   const [signingUrl, setSigningUrl] = useState("");
-  const [modalError, setModalError] = useState(null); // 🆕 para guardar el mensaje de error
+  const [modalError, setModalError] = useState(null);
+  const [applicationId, setApplicationId] = useState(null);
+  const [saveStatus, setSaveStatus] = useState(null); // null | 'saving' | 'saved' | 'error'
+  const [loadIdInput, setLoadIdInput] = useState("");
+  const [loadError, setLoadError] = useState(null);
+  const [urlCopied, setUrlCopied] = useState(false);
   const fileInputRef = useRef(null);
   const currentStep = formConfig.steps[stepIndex];
 
@@ -411,6 +416,79 @@ const handleExport = () => {
   };
 
   /* ============================================================
+     APLICACIONES — GUARDAR / CARGAR
+  ============================================================ */
+
+  const updateUrl = (id) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("app", id);
+    window.history.replaceState({}, "", url.toString());
+  };
+
+  const loadApplicationById = async (id) => {
+    setLoadError(null);
+    try {
+      const resp = await fetch(
+        `${config.backend.baseUrl}${config.backend.applicationsEndpoint}/${id}`
+      );
+      if (resp.status === 404) { setLoadError("ID no encontrado"); return; }
+      if (!resp.ok) { setLoadError("Error al cargar la solicitud"); return; }
+      const data = await resp.json();
+      setFormData(data);
+    } catch {
+      setLoadError("No se pudo conectar al servidor");
+    }
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const appId = params.get("app");
+    if (appId && /^[a-f0-9]{32}$/.test(appId)) {
+      setApplicationId(appId);
+      loadApplicationById(appId);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSave = async () => {
+    setSaveStatus("saving");
+    try {
+      const baseUrl = `${config.backend.baseUrl}${config.backend.applicationsEndpoint}`;
+      let id = applicationId;
+      if (id) {
+        const resp = await fetch(`${baseUrl}/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        if (!resp.ok) throw new Error();
+      } else {
+        const resp = await fetch(baseUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        if (!resp.ok) throw new Error();
+        const result = await resp.json();
+        id = result.id;
+        setApplicationId(id);
+        updateUrl(id);
+      }
+      setSaveStatus("saved");
+      setTimeout(() => setSaveStatus(null), 3000);
+    } catch {
+      setSaveStatus("error");
+      setTimeout(() => setSaveStatus(null), 3000);
+    }
+  };
+
+  const handleCopyUrl = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setUrlCopied(true);
+    setTimeout(() => setUrlCopied(false), 2000);
+  };
+
+  /* ============================================================
      HANDLE SIGN
   ============================================================ */
   const handleSign = async () => {
@@ -659,6 +737,103 @@ try {
                 </pre>
               )}
 
+              {/* Panel: Guardar / Cargar borrador */}
+              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <h3 className="text-sm font-semibold text-brand-secondary mb-3 flex items-center gap-2">
+                  <CIcon icon={Icons.cilCloud} className="w-4 h-4" />
+                  Guardar progreso
+                </h3>
+
+                {applicationId ? (
+                  <div className="space-y-2">
+                    <p className="text-xs text-gray-500">ID de solicitud:</p>
+                    <div className="flex items-center gap-2">
+                      <code className="flex-1 truncate text-xs font-mono bg-white border border-gray-200 px-2 py-1 rounded">
+                        {applicationId}
+                      </code>
+                      <button
+                        type="button"
+                        onClick={handleCopyUrl}
+                        className="shrink-0 px-3 py-1 text-xs bg-brand-primary text-white rounded hover:bg-brand-secondary"
+                      >
+                        {urlCopied ? "¡Copiada!" : "Copiar URL"}
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleSave}
+                      disabled={saveStatus === "saving"}
+                      className={`w-full py-2 text-sm rounded text-white disabled:opacity-50 ${
+                        saveStatus === "saved"
+                          ? "bg-green-600"
+                          : saveStatus === "error"
+                          ? "bg-red-600"
+                          : "bg-brand-primary hover:bg-brand-secondary"
+                      }`}
+                    >
+                      {saveStatus === "saving"
+                        ? "Guardando..."
+                        : saveStatus === "saved"
+                        ? "Actualizado"
+                        : saveStatus === "error"
+                        ? "Error al guardar"
+                        : "Actualizar datos guardados"}
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleSave}
+                    disabled={saveStatus === "saving"}
+                    className={`w-full py-2 text-sm rounded text-white disabled:opacity-50 ${
+                      saveStatus === "saved"
+                        ? "bg-green-600"
+                        : saveStatus === "error"
+                        ? "bg-red-600"
+                        : "bg-brand-primary hover:bg-brand-secondary"
+                    }`}
+                  >
+                    <CIcon icon={Icons.cilCloudUpload} className="w-4 h-4 inline mr-2" />
+                    {saveStatus === "saving"
+                      ? "Guardando..."
+                      : saveStatus === "saved"
+                      ? "Guardado"
+                      : saveStatus === "error"
+                      ? "Error al guardar"
+                      : "Guardar en la nube"}
+                  </button>
+                )}
+
+                <div className="mt-3 pt-3 border-t border-blue-200">
+                  <p className="text-xs text-gray-500 mb-2">Cargar solicitud guardada:</p>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={loadIdInput}
+                      onChange={(e) => setLoadIdInput(e.target.value)}
+                      placeholder="Pegá el ID aquí..."
+                      className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-300"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const id = loadIdInput.trim();
+                        if (!id) return;
+                        setApplicationId(id);
+                        updateUrl(id);
+                        loadApplicationById(id);
+                      }}
+                      className="shrink-0 px-3 py-1.5 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
+                    >
+                      Cargar
+                    </button>
+                  </div>
+                  {loadError && (
+                    <p className="text-xs text-red-500 mt-1">{loadError}</p>
+                  )}
+                </div>
+              </div>
+
               {/* Botones acciones */}
               <div className="flex justify-between gap-4 pt-6">
                 <button
@@ -714,7 +889,7 @@ try {
                   onClick={handleSign}
                   className="flex-1 flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
                 >
-                  <CIcon icon={Icons.cilFile} className="w-5 h-5 mr-2" />
+                  <CIcon icon={Icons.cilPenNib} className="w-5 h-5 mr-2" />
                   Firmar
                 </button>
               </div>

@@ -7,6 +7,7 @@ import path from "path";
 import cors from "cors";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import { randomBytes } from "crypto";
 import config from "../shared/config.general.js";
 
 dotenv.config();
@@ -23,6 +24,12 @@ app.use(cors());
 // Carpeta donde se guardan los PDFs y JSON
 const SAVED_DIR = path.join(__dirname, config.server.savedDir);
 if (!fs.existsSync(SAVED_DIR)) fs.mkdirSync(SAVED_DIR, { recursive: true });
+
+// Carpeta de borradores de formulario
+const APPLICATIONS_DIR = path.join(__dirname, "applications");
+if (!fs.existsSync(APPLICATIONS_DIR)) fs.mkdirSync(APPLICATIONS_DIR, { recursive: true });
+
+const VALID_APP_ID = /^[a-f0-9]{32}$/;
 
 function getTimestamp() {
   const now = new Date();
@@ -177,6 +184,55 @@ app.post(config.backend.getSigningUrlEndpoint, async (req, res) => {
   } catch (err) {
     console.error("❌ Error en /api/getSigningUrl:", err);
     res.status(500).json({ error: "Error obteniendo URL de firma" });
+  }
+});
+
+/* ============================================================
+   ENDPOINTS: /api/applications  (guardar/cargar borradores)
+============================================================ */
+
+// Crear nuevo borrador → devuelve id hex de 32 chars (128 bits)
+app.post(config.backend.applicationsEndpoint, async (req, res) => {
+  try {
+    const id = randomBytes(16).toString("hex");
+    await fs.promises.writeFile(
+      path.join(APPLICATIONS_DIR, `${id}.json`),
+      JSON.stringify(req.body)
+    );
+    res.json({ id });
+  } catch (err) {
+    console.error("❌ Error creando aplicación:", err);
+    res.status(500).json({ error: "Error al guardar" });
+  }
+});
+
+// Actualizar borrador existente
+app.put(`${config.backend.applicationsEndpoint}/:id`, async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!VALID_APP_ID.test(id)) return res.status(400).json({ error: "ID inválido" });
+    const filePath = path.join(APPLICATIONS_DIR, `${id}.json`);
+    if (!fs.existsSync(filePath)) return res.status(404).json({ error: "No encontrado" });
+    await fs.promises.writeFile(filePath, JSON.stringify(req.body));
+    res.json({ id });
+  } catch (err) {
+    console.error("❌ Error actualizando aplicación:", err);
+    res.status(500).json({ error: "Error al actualizar" });
+  }
+});
+
+// Cargar borrador
+app.get(`${config.backend.applicationsEndpoint}/:id`, async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!VALID_APP_ID.test(id)) return res.status(400).json({ error: "ID inválido" });
+    const filePath = path.join(APPLICATIONS_DIR, `${id}.json`);
+    if (!fs.existsSync(filePath)) return res.status(404).json({ error: "No encontrado" });
+    const data = JSON.parse(await fs.promises.readFile(filePath, "utf-8"));
+    res.json(data);
+  } catch (err) {
+    console.error("❌ Error cargando aplicación:", err);
+    res.status(500).json({ error: "Error al cargar" });
   }
 });
 
