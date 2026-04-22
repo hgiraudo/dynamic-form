@@ -870,7 +870,7 @@ try {
                         : "bg-brand-primary hover:bg-brand-secondary"
                     }`}
                   >
-                    <CIcon icon={Icons.cilCloudUpload} className="w-4 h-4 inline mr-2" />
+                    <CIcon icon={Icons.cilSave} className="w-4 h-4 inline mr-2" />
                     {saveStatus === "saving"
                       ? "Guardando..."
                       : saveStatus === "saved"
@@ -918,7 +918,7 @@ try {
                   onClick={handleExport}
                   className="flex-1 flex items-center justify-center px-4 py-3 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary"
                 >
-                  <CIcon icon={Icons.cilSave} className="w-5 h-5 mr-2" />
+                  <CIcon icon={Icons.cilCloudDownload} className="w-5 h-5 mr-2" />
                   Descargar JSON
                 </button>
 
