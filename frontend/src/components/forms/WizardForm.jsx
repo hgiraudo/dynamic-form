@@ -954,6 +954,7 @@ try {
         </div>
         </div>
       </div>
+      </div>
       )}
 
       {/* Input oculto para importar JSON - siempre en el DOM */}
