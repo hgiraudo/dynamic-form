@@ -23,11 +23,12 @@ function MobileReview({
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(window.location.href)}`;
 
   const quickActions = [
-    { icon: Icons.cilSave,    label: "Guardar en la nube", action: handleSave,          href: null },
-    { icon: Icons.cilTrash,   label: "Borrar formulario",  action: () => setFormData({}), href: null },
-    { icon: Icons.cilPenNib,  label: "Firmar",             action: handleSign,          href: null },
-    { icon: Icons.cilLink,    label: urlCopied ? "¡Copiada!" : "Copiar URL", action: handleCopyUrl, href: null },
-    { icon: Icons.cibWhatsapp,label: "Enviar por WhatsApp", action: null,               href: whatsappUrl },
+    { icon: Icons.cilSave,     label: "Guardar en la nube",  action: handleSave,            href: null },
+    { icon: Icons.cilTrash,    label: "Borrar formulario",   action: () => setFormData({}), href: null },
+    { icon: Icons.cilPenNib,   label: "Firmar",              action: handleSign,            href: null },
+    { icon: Icons.cilLink,     label: urlCopied ? "¡Copiada!" : "Copiar URL", action: handleCopyUrl, href: null },
+    { icon: Icons.cibWhatsapp, label: "Enviar por WhatsApp", action: null, href: whatsappUrl,
+      iconClass: "w-5 h-5 brightness-0 invert", wrapperClass: "ml-3 pl-3 border-l border-white/30" },
   ];
 
   const isFieldVisible = (field) => {
@@ -142,23 +143,20 @@ function MobileReview({
       <div className="sticky top-0 z-20 bg-brand-primary px-4 py-3 flex items-center justify-between shadow-md">
         <img src={brandConfig.logos.white} alt={brandConfig.name} className="h-8" />
         <div className="flex items-center">
-          {quickActions.map(({ icon, label, action, href }) => {
+          {quickActions.map(({ icon, label, action, href, iconClass, wrapperClass }) => {
             const cls = "p-2 rounded-lg text-white/75 hover:text-white hover:bg-white/15 active:bg-white/25 transition-colors";
+            const ic = <CIcon icon={icon} className={iconClass ?? "w-5 h-5"} />;
             const tooltip = (
               <div className="absolute top-full right-0 mt-1.5 px-2 py-1 text-xs bg-gray-900 text-white rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-30 shadow">
                 {label}
               </div>
             );
             return (
-              <div key={label} className="group relative">
+              <div key={label} className={`group relative ${wrapperClass ?? ""}`}>
                 {href ? (
-                  <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
-                    <CIcon icon={icon} className="w-5 h-5" />
-                  </a>
+                  <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>{ic}</a>
                 ) : (
-                  <button type="button" onClick={action} className={cls}>
-                    <CIcon icon={icon} className="w-5 h-5" />
-                  </button>
+                  <button type="button" onClick={action} className={cls}>{ic}</button>
                 )}
                 {tooltip}
               </div>
