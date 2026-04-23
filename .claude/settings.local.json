@@ -19,7 +19,12 @@
       "Bash(ls C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\setup*.sh)",
       "Bash(python3 -c ' *)",
       "Bash(node *)",
-      "Bash(cmd *)"
+      "Bash(cmd *)",
+      "Bash(npm install *)",
+      "PowerShell(New-Item *)",
+      "PowerShell(Copy-Item *)",
+      "WebFetch(domain:www.bancodeoccidente.hn)",
+      "Bash(python3 *)"
     ],
     "deny": [],
     "ask": []

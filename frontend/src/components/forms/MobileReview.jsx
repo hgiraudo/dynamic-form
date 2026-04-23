@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
-import formConfig from "../../config/formConfig.json";
-import { brandConfig } from "../../branding/brandConfig";
 function MobileReview({
   formData,
   getMappedFormData,
@@ -17,6 +15,8 @@ function MobileReview({
   urlCopied,
   handleCopyUrl,
   onClear,
+  formConfig,
+  brandConfig,
 }) {
   const [openStep, setOpenStep] = useState(0);
 
@@ -66,6 +66,23 @@ function MobileReview({
     const baseClass = "border-b border-gray-100 last:border-0";
 
     if (field.type === "checkbox") {
+      if (field.exclusiveGroup) {
+        return (
+          <div key={fIdx} className={`py-3 ${baseClass}`}>
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="radio"
+                name={field.exclusiveGroup}
+                checked={!!value}
+                onChange={() => handleChange(field.name, true, field)}
+                disabled={!enabled}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-brand-primary cursor-pointer"
+              />
+              <span className="text-sm text-gray-700 leading-snug">{field.label}</span>
+            </label>
+          </div>
+        );
+      }
       return (
         <div key={fIdx} className={`flex items-center justify-between py-3 ${baseClass}`}>
           <span className="text-sm text-gray-600">{field.label}</span>

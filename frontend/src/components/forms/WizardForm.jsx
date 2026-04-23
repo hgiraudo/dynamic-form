@@ -1,52 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
-import formConfig from "../../config/formConfig.json";
-import appConfig from "../../config/appConfig.json";
 import * as fieldFormatters from "../../utils/fieldFormatters";
 import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "../../utils/utils";
-import pdfConfig from "../../config/pdfConfig.json";
 import config from '@shared/config.general.js'
-
-/**
- * Genera los archivos PDF y JSON a partir del formulario mapeado.
- * Usa las rutas configuradas en pdfConfig.json
- */
-export async function generatePdfFiles(getMappedFormData) {
-  console.log("[PDF Helper] Iniciando generación de archivos...");
-
-  const pdfJson = getMappedFormData();
-  const pdfUrl = `${pdfConfig.templatePath}${pdfConfig.templatePdf}`;
-  console.log("[PDF Helper] Descargando template PDF:", pdfUrl);
-
-  const pdfResp = await fetch(pdfUrl);
-
-  if (!pdfResp.ok) {
-    const errorText = await pdfResp.text();
-    console.error(
-      "[PDF Helper] Error al descargar template PDF:",
-      pdfResp.status,
-      errorText.slice(0, 200)
-    );
-    throw new Error(`Error al descargar template PDF: ${pdfResp.statusText}`);
-  }
-
-  const pdfBlob = await pdfResp.blob();
-  const pdfFile = new File([pdfBlob], pdfConfig.templatePdf, {
-    type: "application/pdf",
-  });
-
-  const jsonFile = new File([JSON.stringify(pdfJson)], pdfConfig.jsonFileName, {
-    type: "application/json",
-  });
-
-  console.log("[PDF Helper] Archivos generados:", {
-    pdfFile: pdfFile.name,
-    jsonFile: jsonFile.name,
-  });
-
-  return { pdfFile, jsonFile, pdfJson };
-}
 
 /**
  * Evalúa una expresión de derivedFields con el valor del campo.
@@ -63,10 +20,10 @@ function evalDerivedField(expr, fieldValue) {
 
 import { buildTransactionJson } from "../../utils/buildTransactionJson.js";
 import { AnimatePresence } from "framer-motion";
-import { brandConfig } from "../../branding/brandConfig";
+import { Link } from "react-router-dom";
 import MobileReview from "./MobileReview";
 
-function WizardForm() {
+function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, form }) {
   const [formData, setFormData] = useState(() => {
     const initialData = {};
     formConfig.steps.forEach((step) => {
@@ -106,8 +63,19 @@ function WizardForm() {
   /* ============================================================
      HANDLE CHANGE
   ============================================================ */
-  const handleChange = (name, value) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (name, value, field = null) => {
+    setFormData((prev) => {
+      const updated = { ...prev, [name]: value };
+      if (field?.exclusiveGroup && value === true) {
+        formConfig.steps.forEach((step) =>
+          step.fields.forEach((f) => {
+            if (f.exclusiveGroup === field.exclusiveGroup && f.name !== name)
+              updated[f.name] = false;
+          })
+        );
+      }
+      return updated;
+    });
   };
 
   const handleChangeWithFormatter = (field, rawValue) => {
@@ -328,6 +296,24 @@ const handleExport = () => {
         );
 
       case "checkbox":
+        if (field.exclusiveGroup) {
+          return (
+            <div className="mb-1" key={field.name}>
+              <label className="flex items-start gap-2.5 cursor-pointer group">
+                <input
+                  type="radio"
+                  name={field.exclusiveGroup}
+                  checked={!!value}
+                  onChange={() => handleChange(field.name, true, field)}
+                  className="mt-0.5 h-4 w-4 shrink-0 text-brand-primary border-gray-300 cursor-pointer accent-brand-primary"
+                />
+                <span className="text-sm text-gray-700 group-hover:text-brand-primary transition-colors leading-snug">
+                  {field.label}
+                </span>
+              </label>
+            </div>
+          );
+        }
         return (
           <div className="mb-2 flex items-center space-x-2" key={field.name}>
             <input
@@ -555,9 +541,9 @@ const handleExport = () => {
 
       // 🔹 1. Generar PDF y transactionJson
       const pdfJson = getMappedFormData();
-      const pdfTemplate = pdfConfig.templatePdf; // nombre dinámico
+      const pdfTemplate = pdfConfig.templatePdf;
       console.log("pdfTemplate:" + pdfTemplate);
-      const pdfResp = await fetch(`/form/${pdfTemplate}`);
+      const pdfResp = await fetch(`/forms/${company}/${form}/${pdfTemplate}`);
       const pdfBlob = await pdfResp.blob();
       const pdfFile = new File([pdfBlob], pdfTemplate, {
         type: "application/pdf",
@@ -667,8 +653,14 @@ try {
           urlCopied={urlCopied}
           handleCopyUrl={handleCopyUrl}
           onClear={handleClear}
+          formConfig={formConfig}
+          brandConfig={brandConfig}
         />
       ) : (
+      <>
+      <h1 className="text-3xl font-bold text-center text-brand-primary mt-8 mb-8">
+        {pdfConfig.title}
+      </h1>
       <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
       {/* Sidebar */}
       <div className="w-80 bg-brand-primary flex flex-col text-blue-200 p-2 pl-4">
@@ -729,6 +721,18 @@ try {
               </div>
             </div>
           ))}
+          {/* Docs link */}
+          <div className="group relative ml-1 pl-1 border-l border-gray-200">
+            <Link
+              to={`/${company}/${form}/docs`}
+              className="p-1.5 rounded-lg text-brand-primary hover:bg-blue-50 transition-colors flex items-center"
+            >
+              <CIcon icon={Icons.cilNotes} className="w-5 h-5" />
+            </Link>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1.5 px-2 py-1 text-xs bg-gray-800 text-white rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-30">
+              Documentación API
+            </div>
+          </div>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
@@ -969,6 +973,7 @@ try {
         </div>
       </div>
       </div>
+      </>
       )}
 
       {/* Input oculto para importar JSON - siempre en el DOM */}

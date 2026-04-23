@@ -1,0 +1,60 @@
+{
+  "steps": [
+    {
+      "title": "Datos personales",
+      "description": "Datos personales del solicitante",
+      "icon": "cilUser",
+      "fields": [
+        { "name": "nombres",         "label": "Nombres",           "type": "text",  "placeholder": "Ej: Juan Carlos" },
+        { "name": "apellidos",       "label": "Apellidos",         "type": "text",  "placeholder": "Ej: García López" },
+        { "name": "tipoDocumento",   "label": "Tipo de documento", "type": "button-group", "options": ["DUI", "Pasaporte", "NIT"] },
+        { "name": "numeroDocumento", "label": "Número de documento","type": "text", "placeholder": "Ej: 01234567-8" },
+        { "name": "fechaNacimiento", "label": "Fecha de nacimiento","type": "date" },
+        { "name": "nacionalidad",    "label": "Nacionalidad",      "type": "text",  "placeholder": "Ej: Salvadoreña" },
+        { "name": "estadoCivil",     "label": "Estado civil",      "type": "button-group", "options": ["Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a"] }
+      ]
+    },
+    {
+      "title": "Contacto y domicilio",
+      "description": "Datos de contacto y domicilio",
+      "icon": "cilHome",
+      "fields": [
+        { "name": "telefono",        "label": "Teléfono celular",  "type": "tel",   "placeholder": "Ej: 7000-0000" },
+        { "name": "email",           "label": "Correo electrónico","type": "email", "placeholder": "Ej: juan@email.com" },
+        { "name": "departamento",    "label": "Departamento",      "type": "text",  "placeholder": "Ej: San Salvador" },
+        { "name": "municipio",       "label": "Municipio",         "type": "text",  "placeholder": "Ej: Santa Tecla" },
+        { "name": "direccion",       "label": "Dirección",         "type": "textarea", "placeholder": "Calle, colonia, número de casa..." }
+      ]
+    },
+    {
+      "title": "Datos laborales",
+      "description": "Información laboral y fuente de ingresos",
+      "icon": "cilBriefcase",
+      "fields": [
+        { "name": "ocupacion",       "label": "Ocupación / Profesión", "type": "text", "placeholder": "Ej: Ingeniero Civil" },
+        { "name": "nombreEmpresa",   "label": "Nombre del empleador",  "type": "text", "placeholder": "Ej: Empresa S.A. de C.V." },
+        { "name": "telefonoEmpresa", "label": "Teléfono del empleador","type": "tel",  "placeholder": "Ej: 2200-0000" },
+        { "name": "ingresoMensual",  "label": "Ingreso mensual (USD)", "type": "text", "placeholder": "Ej: 1500.00" },
+        { "name": "otrasFuentes",    "label": "Otras fuentes de ingresos", "type": "textarea", "placeholder": "Describí brevemente si aplica..." }
+      ]
+    },
+    {
+      "title": "Tipo de cuenta",
+      "description": "Selección del producto bancario",
+      "icon": "cilCreditCard",
+      "fields": [
+        { "name": "tipoCuenta",      "label": "Tipo de cuenta",    "type": "button-group", "options": ["Ahorro", "Corriente"] },
+        { "name": "moneda",          "label": "Moneda",            "type": "button-group", "options": ["USD", "Colones"] },
+        { "name": "tarjetaDebito",   "label": "Solicitar tarjeta de débito", "type": "checkbox" },
+        { "name": "bancaEnLinea",    "label": "Activar banca en línea",      "type": "checkbox" },
+        { "name": "observaciones",   "label": "Observaciones",     "type": "textarea", "placeholder": "Cualquier información adicional..." }
+      ]
+    },
+    {
+      "title": "Revisión y firma",
+      "description": "Revisión y firma del formulario",
+      "icon": "cilPenNib",
+      "fields": []
+    }
+  ]
+}

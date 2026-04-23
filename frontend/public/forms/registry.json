@@ -1,0 +1,18 @@
+{
+  "companies": [
+    {
+      "id": "allaria",
+      "name": "Allaria",
+      "forms": [
+        { "id": "persona-juridica", "title": "Persona Jurídica" }
+      ]
+    },
+    {
+      "id": "banco-occidente",
+      "name": "Banco Occidente",
+      "forms": [
+        { "id": "apertura-de-cuenta", "title": "Apertura de Cuenta" }
+      ]
+    }
+  ]
+}

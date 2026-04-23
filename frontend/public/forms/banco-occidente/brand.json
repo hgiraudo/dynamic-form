@@ -1,0 +1,9 @@
+{
+  "name": "Banco Occidente",
+  "downloadFilename": "apertura-de-cuenta-banco-occidente",
+  "logos": {
+    "white": "/forms/banco-occidente/logo-white.svg",
+    "color": "/forms/banco-occidente/logo-color.svg"
+  },
+  "favicon": "/forms/banco-occidente/favicon.svg"
+}

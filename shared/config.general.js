@@ -71,6 +71,7 @@ export default {
     getSigningUrlEndpoint: "/api/getSigningUrl",
     healthEndpoint: "/api/health",
     applicationsEndpoint: "/api/applications",
+    prefillEndpoint: "/api/prefill",
     deviceTypeEndpoint: "/api/device-type",
   },
 

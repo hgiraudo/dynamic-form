@@ -1,14 +1,20 @@
 import React from "react";
-import WizardForm from "./components/forms/WizardForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FormLoader from "./components/forms/FormLoader";
+import HomePage from "./components/HomePage";
+import CompanyPage from "./components/CompanyPage";
+import DocsPage from "./components/DocsPage";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 md:p-8">
-      <h1 className="hidden md:block text-3xl font-bold text-center text-brand-primary mb-8">
-        Persona Jurídica
-      </h1>
-      <WizardForm />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/:company" element={<CompanyPage />} />
+        <Route path="/:company/:form/docs" element={<DocsPage />} />
+        <Route path="/:company/:form" element={<FormLoader />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

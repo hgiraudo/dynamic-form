@@ -236,6 +236,28 @@ app.get(`${config.backend.applicationsEndpoint}/:id`, async (req, res) => {
   }
 });
 
+/* ============================================================
+   ENDPOINT: /api/prefill/:company/:form  (pre-completar formulario via API)
+============================================================ */
+app.post(`${config.backend.prefillEndpoint}/:company/:form`, async (req, res) => {
+  try {
+    const { company, form } = req.params;
+    const id = randomBytes(16).toString("hex");
+    await fs.promises.writeFile(
+      path.join(APPLICATIONS_DIR, `${id}.json`),
+      JSON.stringify(req.body)
+    );
+    const origin = req.headers.origin || `${req.protocol}://${req.get("host")}`;
+    res.json({
+      id,
+      url: `${origin}/${company}/${form}?app=${id}`,
+    });
+  } catch (err) {
+    console.error("❌ Error en /api/prefill:", err);
+    res.status(500).json({ error: "Error al guardar" });
+  }
+});
+
 app.get(config.backend.deviceTypeEndpoint, (req, res) => {
   const ua = req.headers["user-agent"] || "";
   const isMobile = /Mobile|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);

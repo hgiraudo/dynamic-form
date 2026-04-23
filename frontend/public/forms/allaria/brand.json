@@ -1,0 +1,9 @@
+{
+  "name": "Allaria",
+  "downloadFilename": "persona-juridica-allaria",
+  "logos": {
+    "white": "/forms/allaria/logo-white.svg",
+    "color": "/forms/allaria/logo-color.svg"
+  },
+  "favicon": "/img/favicon.png"
+}
