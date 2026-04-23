@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
+import PhoneInputField from "./PhoneInputField";
+import MaskedInputField from "./MaskedInputField";
+import DateInputField from "./DateInputField";
 function MobileReview({
   formData,
   getMappedFormData,
@@ -137,7 +140,57 @@ function MobileReview({
       );
     }
 
-    // text, email, tel, date
+    if (field.type === "date") {
+      return (
+        <div key={fIdx} className={`py-2 ${baseClass}`}>
+          <label className="block text-xs text-gray-400 mb-0.5">{field.label}</label>
+          <DateInputField
+            value={enabled ? value : ""}
+            onChange={(val) => handleChange(field.name, val)}
+            disabled={!enabled}
+            inputClassName="w-full text-sm text-gray-900 font-medium bg-transparent border-0 border-b-2 border-transparent focus-within:border-brand-primary py-0.5 transition-colors disabled:text-gray-400"
+            invalidClassName="!border-b-red-400"
+          />
+        </div>
+      );
+    }
+
+    if (field.mask) {
+      return (
+        <div key={fIdx} className={`py-2 ${baseClass}`}>
+          <label className="block text-xs text-gray-400 mb-0.5">{field.label}</label>
+          <MaskedInputField
+            value={enabled ? value : ""}
+            onChange={(val) => handleChange(field.name, val)}
+            mask={field.mask}
+            disabled={!enabled}
+            placeholder={field.placeholder}
+            className="w-full text-sm text-gray-900 font-medium bg-transparent border-0 border-b-2 border-transparent focus:border-brand-primary focus:outline-none py-0.5 transition-colors disabled:text-gray-400"
+            invalidClassName="!border-b-red-400"
+          />
+        </div>
+      );
+    }
+
+    if (field.type === "tel") {
+      return (
+        <div key={fIdx} className={`py-2 ${baseClass}`}>
+          <label className="block text-xs text-gray-400 mb-0.5">{field.label}</label>
+          <div className="border-b-2 border-transparent focus-within:border-brand-primary transition-colors">
+            <PhoneInputField
+              value={enabled ? value : ""}
+              onChange={(val) => handleChange(field.name, val)}
+              disabled={!enabled}
+              placeholder={field.placeholder}
+              inputClassName="text-sm text-gray-900 font-medium py-0.5 pb-0"
+              selectClassName="py-0.5 pl-0"
+            />
+          </div>
+        </div>
+      );
+    }
+
+    // text, email, date
     return (
       <div key={fIdx} className={`py-2 ${baseClass}`}>
         <label className="block text-xs text-gray-400 mb-0.5">{field.label}</label>

@@ -22,6 +22,9 @@ import { buildTransactionJson } from "../../utils/buildTransactionJson.js";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import MobileReview from "./MobileReview";
+import PhoneInputField from "./PhoneInputField";
+import MaskedInputField from "./MaskedInputField";
+import DateInputField from "./DateInputField";
 
 function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, form }) {
   const [formData, setFormData] = useState(() => {
@@ -31,7 +34,7 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, fo
         if (field.default !== undefined) {
           initialData[field.name] =
             field.default === "today" && field.type === "date"
-              ? new Date().toISOString().split("T")[0]
+              ? formatDateDDMMYYYY(new Date().toISOString().split("T")[0])
               : field.default ?? (field.type === "checkbox" ? false : "");
         } else if (field.type === "checkbox") {
           initialData[field.name] = false;
@@ -105,17 +108,9 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, fo
 
     formConfig.steps.forEach((step) => {
       step.fields.forEach((field) => {
-        // Si el campo es tipo "date", convertirlo a formato válido HTML5 (YYYY-MM-DD)
+        // Normalizar fechas a DD-MM-YYYY (compatible con datos viejos en YYYY-MM-DD)
         if (field.type === "date" && normalizedData[field.name]) {
-          const oldValue = normalizedData[field.name];
-          normalizedData[field.name] = parseDateDDMMYYYY(
-            normalizedData[field.name]
-          );
-          console.log(
-            `Campo date '${field.name}': '${oldValue}' → '${
-              normalizedData[field.name]
-            }'`
-          );
+          normalizedData[field.name] = parseDateDDMMYYYY(normalizedData[field.name]);
         }
 
         // Si es checkbox, convertir "/" → true y "" → false
@@ -157,9 +152,6 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, fo
           if (selectedIndex >= 0 && field.optionFields[selectedIndex]) {
             Object.assign(mappedData, field.optionFields[selectedIndex]); // setea solo la seleccionada
           }
-        } else if (field.type === "date" && mappedData[field.name]) {
-          // 🔹 Exportar fecha en formato DD-MM-YYYY
-          mappedData[field.name] = formatDateDDMMYYYY(mappedData[field.name]);
         } else if (field.type === "checkbox") {
           // 🔹 Exportar checkbox como "/" o ""
           mappedData[field.name] = mappedData[field.name] ? "/" : "";
@@ -236,7 +228,7 @@ const handleExport = () => {
       if (value === undefined) {
         value =
           field.default === "today" && field.type === "date"
-            ? new Date().toISOString().split("T")[0]
+            ? formatDateDDMMYYYY(new Date().toISOString().split("T")[0])
             : field.default ?? (field.type === "checkbox" ? false : "");
       }
     }
@@ -254,11 +246,71 @@ const handleExport = () => {
       }
     }
 
+    if (field.mask) {
+      return (
+        <div className="mb-2" key={field.name}>
+          <label className="block text-brand-secondary mb-1">{field.label}</label>
+          <MaskedInputField
+            value={isEnabled ? value : ""}
+            onChange={(val) => handleChange(field.name, val)}
+            mask={field.mask}
+            disabled={field.disabled || !isEnabled}
+            placeholder={field.placeholder}
+            className={`w-full p-3 border rounded focus:outline-none focus:ring-2 ${
+              field.disabled || !isEnabled
+                ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                : "bg-white border-gray-300 focus:ring-gray-300"
+            }`}
+            invalidClassName="!border-red-400 focus:ring-red-200"
+          />
+        </div>
+      );
+    }
+
     switch (field.type) {
-      case "email":
       case "date":
-      case "text":
+        return (
+          <div className="mb-2" key={field.name}>
+            <label className="block text-brand-secondary mb-1">{field.label}</label>
+            <DateInputField
+              value={isEnabled ? value : ""}
+              onChange={(val) => handleChange(field.name, val)}
+              disabled={field.disabled || !isEnabled}
+              inputClassName={`w-full p-3 border rounded focus:outline-none focus:ring-2 ${
+                field.disabled || !isEnabled
+                  ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                  : "bg-white border-gray-300 focus:ring-gray-300"
+              }`}
+              invalidClassName="!border-red-400 focus:ring-red-200"
+            />
+          </div>
+        );
+
       case "tel":
+        return (
+          <div className="mb-2" key={field.name}>
+            <label className="block text-brand-secondary mb-1">
+              {field.label}
+            </label>
+            <div className={`w-full border rounded focus-within:ring-2 focus-within:ring-gray-300 ${
+              field.disabled || !isEnabled
+                ? "bg-gray-100 border-gray-200"
+                : "bg-white border-gray-300"
+            }`}>
+              <PhoneInputField
+                value={isEnabled ? value : ""}
+                onChange={(val) => handleChange(field.name, val)}
+                disabled={field.disabled || !isEnabled}
+                placeholder={field.placeholder}
+                inputClassName="py-3 pr-3 text-sm"
+                selectClassName="pl-3 py-3"
+              />
+            </div>
+          </div>
+        );
+
+      case "email":
+      case "text":
         return (
           <div className="mb-2" key={field.name}>
             <label className="block text-brand-secondary mb-1">

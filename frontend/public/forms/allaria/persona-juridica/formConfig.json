@@ -9,7 +9,8 @@
           "name": "NumeroDeComitente",
           "label": "Número de Comitente",
           "type": "text",
-          "placeholder": "ej. 12345"
+          "placeholder": "ej. 123,456",
+          "formatter": "thousandsFormatter"
         },
         {
           "name": "TipoDeTramite",
@@ -64,7 +65,7 @@
           "label": "CUIT",
           "type": "text",
           "placeholder": "ej. 00-12345678-9",
-          "formatter": "cuitFormatter"
+          "mask": "##-########-#"
         },
         {
           "name": "FechaDeConstitucion",
@@ -109,8 +110,8 @@
         {
           "name": "Telefono",
           "label": "Teléfono",
-          "type": "text",
-          "placeholder": "ej. +54 11 4123-4567"
+          "type": "tel",
+          "placeholder": "11 4123-4567"
         },
         {
           "name": "CorreoElectronico1",
@@ -232,13 +233,14 @@
           "name": "RepresentanteCUIT1",
           "label": "CUIT / CUIL",
           "type": "text",
-          "placeholder": "ej. 20-12345678-9"
+          "placeholder": "ej. 20-12345678-9",
+          "mask": "##-########-#"
         },
         {
           "name": "RepresentanteTelefono1",
           "label": "Teléfono",
-          "type": "text",
-          "placeholder": "ej. +54 9 11 1234-5678"
+          "type": "tel",
+          "placeholder": "9 11 1234-5678"
         },
         {
           "name": "RepresentanteEmail1",
@@ -341,13 +343,14 @@
           "label": "CUIT / CUIL ",
           "type": "text",
           "placeholder": "ej. 27-23456789-4",
+          "mask": "##-########-#",
           "visibleIf": { "field": "tieneRep2", "value": true }
         },
         {
           "name": "RepresentanteTelefono2",
           "label": "Teléfono ",
-          "type": "text",
-          "placeholder": "ej. +54 9 11 9876-5432",
+          "type": "tel",
+          "placeholder": "9 11 9876-5432",
           "visibleIf": { "field": "tieneRep2", "value": true }
         },
         {
