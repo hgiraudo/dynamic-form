@@ -20,7 +20,7 @@ function fieldExample(field) {
   if (field.type === "checkbox")    return false;
   if (field.type === "date")        return "2024-01-15";
   if (field.type === "button-group" && field.options?.length) return field.options[0];
-  if (field.placeholder)            return field.placeholder;
+  if (field.placeholder)            return field.placeholder.replace(/^ej\.\s*/i, "");
   return "";
 }
 
