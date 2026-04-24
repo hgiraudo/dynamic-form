@@ -1,6 +1,16 @@
 import React, { useRef } from "react";
 import MaskedInputField from "./MaskedInputField";
 
+function isValidDate(ddmmyyyy) {
+  if (!ddmmyyyy) return false;
+  const parts = ddmmyyyy.split("/");
+  if (parts.length !== 3) return false;
+  const d = Number(parts[0]), m = Number(parts[1]), y = Number(parts[2]);
+  if (m < 1 || m > 12 || d < 1 || y < 1) return false;
+  const date = new Date(y, m - 1, d);
+  return date.getFullYear() === y && date.getMonth() === m - 1 && date.getDate() === d;
+}
+
 // "15/01/2024" or "15-01-2024" → "2024-01-15" (ISO for the hidden input)
 function toISO(ddmmyyyy) {
   if (!ddmmyyyy) return "";
@@ -38,6 +48,7 @@ export default function DateInputField({
         placeholder={placeholder || "DD/MM/AAAA"}
         className={`${inputClassName ?? ""} pr-10`}
         invalidClassName={invalidClassName}
+        validate={isValidDate}
       />
 
       {/* Calendar icon button — opens the native date picker via showPicker() */}

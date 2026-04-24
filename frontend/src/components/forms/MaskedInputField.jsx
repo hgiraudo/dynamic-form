@@ -21,6 +21,7 @@ export default function MaskedInputField({
   placeholder,
   className,
   invalidClassName,
+  validate,
 }) {
   const [invalid, setInvalid] = useState(false);
 
@@ -39,20 +40,28 @@ export default function MaskedInputField({
 
   const handleBlur = () => {
     const count = (value || "").replace(/\D/g, "").length;
-    setInvalid(count > 0 && count !== expectedDigits(mask));
+    if (count === 0) { setInvalid(false); return; }
+    const incomplete = count !== expectedDigits(mask);
+    const customInvalid = !incomplete && validate ? !validate(value) : false;
+    setInvalid(incomplete || customInvalid);
   };
 
   return (
-    <input
-      type="text"
-      inputMode="numeric"
-      value={value || ""}
-      onChange={handleChange}
-      onKeyDown={handleKeyDown}
-      onBlur={handleBlur}
-      disabled={disabled}
-      placeholder={placeholder || mask.replace(/#/g, "0")}
-      className={`${className ?? ""} ${invalid ? (invalidClassName ?? "") : ""}`}
-    />
+    <div>
+      <input
+        type="text"
+        inputMode="numeric"
+        value={value || ""}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        onBlur={handleBlur}
+        disabled={disabled}
+        placeholder={placeholder || mask.replace(/#/g, "0")}
+        className={`${className ?? ""} ${invalid ? (invalidClassName ?? "") : ""}`}
+      />
+      {invalid && (
+        <span className="text-xs text-red-500 mt-0.5 block">Valor inválido</span>
+      )}
+    </div>
   );
 }

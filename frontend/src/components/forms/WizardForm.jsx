@@ -26,7 +26,7 @@ import PhoneInputField from "./PhoneInputField";
 import MaskedInputField from "./MaskedInputField";
 import DateInputField from "./DateInputField";
 
-function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, form }) {
+function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, form, docsPath }) {
   const [formData, setFormData] = useState(() => {
     const initialData = {};
     formConfig.steps.forEach((step) => {
@@ -776,7 +776,7 @@ try {
           {/* Docs link */}
           <div className="group relative ml-1 pl-1 border-l border-gray-200">
             <Link
-              to={`/${company}/${form}/docs`}
+              to={docsPath ?? `/${company}/${form}/docs`}
               className="p-1.5 rounded-lg text-brand-primary hover:bg-blue-50 transition-colors flex items-center"
             >
               <CIcon icon={Icons.cilNotes} className="w-5 h-5" />

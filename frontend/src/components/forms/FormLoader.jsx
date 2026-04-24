@@ -59,6 +59,8 @@ function FormLoader({ companyOverride }) {
     );
   }
 
+  const docsPath = companyOverride ? `/${form}/docs` : `/${company}/${form}/docs`;
+
   return (
     <WizardForm
       formConfig={configs.formConfig}
@@ -67,6 +69,7 @@ function FormLoader({ companyOverride }) {
       brandConfig={configs.brandConfig}
       company={company}
       form={form}
+      docsPath={docsPath}
     />
   );
 }

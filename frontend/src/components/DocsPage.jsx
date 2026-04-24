@@ -141,7 +141,6 @@ function DocsPage({ companyOverride }) {
   const [error, setError] = useState(null);
 
   const endpoint = `${config.backend.prefillEndpoint}/${company}/${form}`;
-  const baseUrl   = config.backend.baseUrl;
   const formPath  = companyOverride ? `/${form}` : `/${company}/${form}`;
 
   useEffect(() => {
@@ -171,7 +170,7 @@ function DocsPage({ companyOverride }) {
   const { formConfig, pdfConfig, brand } = configs;
   const exampleBody   = buildExampleBody(formConfig);
   const exampleJson   = JSON.stringify(exampleBody, null, 2);
-  const fullEndpoint  = `${baseUrl}${endpoint}`;
+  const fullEndpoint  = `${window.location.origin}${endpoint}`;
   const curlExample   = `curl -X POST "${fullEndpoint}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(exampleBody)}'`;
   const responseExample = JSON.stringify(
     { id: "a3f2c1d4e5b6a7f8c9d0e1f2a3b4c5d6", url: `${window.location.origin}${formPath}?app=a3f2c1d4e5b6a7f8c9d0e1f2a3b4c5d6` },
