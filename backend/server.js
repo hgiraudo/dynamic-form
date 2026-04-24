@@ -247,10 +247,14 @@ app.post(`${config.backend.prefillEndpoint}/:company/:form`, async (req, res) =>
       path.join(APPLICATIONS_DIR, `${id}.json`),
       JSON.stringify(req.body)
     );
-    const origin = req.headers.origin || `${req.protocol}://${req.get("host")}`;
+    const proto  = req.get("x-forwarded-proto") || req.protocol;
+    const host   = req.get("host") || "";
+    const origin = `${proto}://${host}`;
+    const isSubdomain = host.toLowerCase().startsWith(`${company}.`);
+    const formPath = isSubdomain ? `/${form}` : `/${company}/${form}`;
     res.json({
       id,
-      url: `${origin}/${company}/${form}?app=${id}`,
+      url: `${origin}${formPath}?app=${id}`,
     });
   } catch (err) {
     console.error("❌ Error en /api/prefill:", err);
