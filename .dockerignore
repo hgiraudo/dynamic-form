@@ -2,11 +2,9 @@
 .git
 .gitignore
 
-# 🔹 Node
+# 🔹 Node (IMPORTANTE: en subcarpetas)
 node_modules
-npm-debug.log
-yarn.lock
-pnpm-lock.yaml
+**/node_modules
 
 # 🔹 Logs
 logs
@@ -16,28 +14,27 @@ logs
 .DS_Store
 Thumbs.db
 
-# 🔹 Env files (ajustar si necesitás alguno)
+# 🔹 Env files
 .env
 .env.*
 !.env.example
 
-# 🔹 Build outputs
+# 🔹 Build outputs (también en subcarpetas)
 dist
 build
+**/dist
+**/build
 
 # 🔹 Editor / IDE
 .vscode
 .idea
 
-# 🔹 Claude / tooling
-.claude
-
-# 🔹 Scripts locales (opcional)
+# 🔹 Scripts locales
 start-*.sh
 stop-*.sh
 
-# 🔹 Docker (evitar recursión rara)
+# 🔹 Docker
 docker-compose.yml
 
-# 🔹 Otros dirs que no usás en build
+# 🔹 Otros
 list-fields
