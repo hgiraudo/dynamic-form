@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import WizardForm from "./WizardForm";
 
-function FormLoader() {
-  const { company, form } = useParams();
+function FormLoader({ companyOverride }) {
+  const params = useParams();
+  const company = companyOverride ?? params.company;
+  const { form } = params;
   const [configs, setConfigs] = useState(null);
   const [error, setError] = useState(null);
 

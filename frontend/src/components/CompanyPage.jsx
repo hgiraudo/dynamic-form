@@ -4,8 +4,10 @@ import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
 import CompanySection from "./CompanySection";
 
-function CompanyPage() {
-  const { company: companyId } = useParams();
+function CompanyPage({ companyId: companyIdProp }) {
+  const { company: companyParam } = useParams();
+  const companyId = companyIdProp ?? companyParam;
+  const isSubdomain = !!companyIdProp;
   const [company, setCompany] = useState(null);
   const [notFound, setNotFound] = useState(false);
 
@@ -38,19 +40,21 @@ function CompanyPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Back link */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-brand-primary transition-colors mb-8"
-        >
-          <CIcon icon={Icons.cilArrowLeft} className="w-3.5 h-3.5" />
-          Todos los formularios
-        </Link>
+        {!isSubdomain && (
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-brand-primary transition-colors mb-8"
+          >
+            <CIcon icon={Icons.cilArrowLeft} className="w-3.5 h-3.5" />
+            Todos los formularios
+          </Link>
+        )}
 
         {!company && (
           <p className="text-center text-gray-400 text-sm">Cargando...</p>
         )}
 
-        {company && <CompanySection company={company} />}
+        {company && <CompanySection company={company} basePath={isSubdomain ? "" : undefined} />}
       </div>
     </div>
   );

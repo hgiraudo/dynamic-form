@@ -133,13 +133,16 @@ function StepSection({ step, stepIndex }) {
 
 /* ── main page ───────────────────────────────────────────────────── */
 
-function DocsPage() {
-  const { company, form } = useParams();
+function DocsPage({ companyOverride }) {
+  const params = useParams();
+  const company = companyOverride ?? params.company;
+  const { form } = params;
   const [configs, setConfigs] = useState(null);
   const [error, setError] = useState(null);
 
   const endpoint = `${config.backend.prefillEndpoint}/${company}/${form}`;
   const baseUrl   = config.backend.baseUrl;
+  const formPath  = companyOverride ? `/${form}` : `/${company}/${form}`;
 
   useEffect(() => {
     const formBase    = `/forms/${company}/${form}`;
@@ -171,7 +174,7 @@ function DocsPage() {
   const fullEndpoint  = `${baseUrl}${endpoint}`;
   const curlExample   = `curl -X POST "${fullEndpoint}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(exampleBody)}'`;
   const responseExample = JSON.stringify(
-    { id: "a3f2c1d4e5b6a7f8c9d0e1f2a3b4c5d6", url: `https://formularios.biz/${company}/${form}?app=a3f2c1d4e5b6a7f8c9d0e1f2a3b4c5d6` },
+    { id: "a3f2c1d4e5b6a7f8c9d0e1f2a3b4c5d6", url: `${window.location.origin}${formPath}?app=a3f2c1d4e5b6a7f8c9d0e1f2a3b4c5d6` },
     null, 2
   );
 
@@ -187,7 +190,7 @@ function DocsPage() {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
           <Link
-            to={`/${company}/${form}`}
+            to={formPath}
             className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-brand-primary transition-colors shrink-0"
           >
             <CIcon icon={Icons.cilArrowLeft} className="w-3.5 h-3.5" />

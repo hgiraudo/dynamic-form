@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
 
-function CompanySection({ company }) {
+function CompanySection({ company, basePath }) {
+  const prefix = basePath !== undefined ? basePath : `/${company.id}`;
   const [brand, setBrand] = useState(null);
 
   useEffect(() => {
@@ -24,13 +25,15 @@ function CompanySection({ company }) {
             className="h-8 object-contain"
           />
         )}
-        <Link
-          to={`/${company.id}`}
-          className="flex items-center gap-1 text-sm text-gray-400 hover:text-brand-primary transition-colors ml-auto"
-        >
-          Ver todos
-          <CIcon icon={Icons.cilArrowRight} className="w-3.5 h-3.5" />
-        </Link>
+        {basePath === undefined && (
+          <Link
+            to={`/${company.id}`}
+            className="flex items-center gap-1 text-sm text-gray-400 hover:text-brand-primary transition-colors ml-auto"
+          >
+            Ver todos
+            <CIcon icon={Icons.cilArrowRight} className="w-3.5 h-3.5" />
+          </Link>
+        )}
       </div>
 
       {/* Forms grid */}
@@ -38,7 +41,7 @@ function CompanySection({ company }) {
         {company.forms.map((form) => (
           <Link
             key={form.id}
-            to={`/${company.id}/${form.id}`}
+            to={`${prefix}/${form.id}`}
             className="group flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:border-brand-primary hover:shadow-md transition-all"
           >
             <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 group-hover:bg-brand-primary transition-colors shrink-0">

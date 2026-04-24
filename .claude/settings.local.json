@@ -24,7 +24,9 @@
       "PowerShell(New-Item *)",
       "PowerShell(Copy-Item *)",
       "WebFetch(domain:www.bancodeoccidente.hn)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(npm i *)",
+      "Bash(npm list *)"
     ],
     "deny": [],
     "ask": []
