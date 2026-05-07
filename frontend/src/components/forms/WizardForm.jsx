@@ -3,6 +3,7 @@ import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
 import * as fieldFormatters from "../../utils/fieldFormatters";
 import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "../../utils/utils";
+import { isFieldInvalid } from "../../utils/fieldValidators";
 import config from '@shared/config.general.js'
 
 /**
@@ -25,6 +26,7 @@ import MobileReview from "./MobileReview";
 import PhoneInputField from "./PhoneInputField";
 import MaskedInputField from "./MaskedInputField";
 import DateInputField from "./DateInputField";
+import EmailInputField from "./EmailInputField";
 
 function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, form, docsPath }) {
   const [formData, setFormData] = useState(() => {
@@ -310,6 +312,26 @@ const handleExport = () => {
         );
 
       case "email":
+        return (
+          <div className="mb-2" key={field.name}>
+            <label className="block text-brand-secondary mb-1">
+              {field.label}
+            </label>
+            <EmailInputField
+              value={isEnabled ? value : ""}
+              placeholder={field.placeholder || ""}
+              onChange={(val) => handleChangeWithFormatter(field, val)}
+              disabled={field.disabled || !isEnabled}
+              className={`w-full p-3 border rounded focus:outline-none focus:ring-2 ${
+                field.disabled || !isEnabled
+                  ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                  : "bg-white border-gray-300 focus:ring-gray-300"
+              }`}
+              invalidClassName="!border-red-400 focus:ring-red-200"
+            />
+          </div>
+        );
+
       case "text":
         return (
           <div className="mb-2" key={field.name}>
@@ -317,7 +339,7 @@ const handleExport = () => {
               {field.label}
             </label>
             <input
-              type={field.type}
+              type="text"
               value={isEnabled ? value : ""}
               placeholder={field.placeholder || ""}
               onChange={(e) => handleChangeWithFormatter(field, e.target.value)}
@@ -859,6 +881,7 @@ try {
                         if (field.type === "checkbox") {
                           displayValue = formData[field.name] ? "Sí" : "No";
                         }
+                        const fieldInvalid = isFieldInvalid(field, formData[field.name]);
 
                         return (
                           <div
@@ -868,8 +891,11 @@ try {
                             <span className="font-medium text-brand-primary text-right pr-4">
                               {field.label}
                             </span>
-                            <span className="text-gray-700 break-words">
+                            <span className={fieldInvalid ? "text-red-500 break-words" : "text-gray-700 break-words"}>
                               {displayValue}
+                              {fieldInvalid && (
+                                <span className="block text-xs font-normal">Valor inválido</span>
+                              )}
                             </span>
                           </div>
                         );

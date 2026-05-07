@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { isValidMask } from "../../utils/fieldValidators";
 
 function applyMask(input, mask) {
   const digits = input.replace(/\D/g, "");
@@ -22,12 +23,14 @@ export default function MaskedInputField({
   className,
   invalidClassName,
   validate,
+  isInvalid: isInvalidProp,
 }) {
-  const [invalid, setInvalid] = useState(false);
+  const [internalInvalid, setInternalInvalid] = useState(false);
+  const invalid = isInvalidProp !== undefined ? isInvalidProp : internalInvalid;
 
   const handleChange = (e) => {
     onChange(applyMask(e.target.value, mask));
-    if (invalid) setInvalid(false);
+    if (internalInvalid) setInternalInvalid(false);
   };
 
   const handleKeyDown = (e) => {
@@ -40,10 +43,10 @@ export default function MaskedInputField({
 
   const handleBlur = () => {
     const count = (value || "").replace(/\D/g, "").length;
-    if (count === 0) { setInvalid(false); return; }
-    const incomplete = count !== expectedDigits(mask);
+    if (count === 0) { setInternalInvalid(false); return; }
+    const incomplete = !isValidMask(value, mask);
     const customInvalid = !incomplete && validate ? !validate(value) : false;
-    setInvalid(incomplete || customInvalid);
+    setInternalInvalid(incomplete || customInvalid);
   };
 
   return (

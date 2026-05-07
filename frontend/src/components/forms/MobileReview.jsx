@@ -4,6 +4,8 @@ import * as Icons from "@coreui/icons";
 import PhoneInputField from "./PhoneInputField";
 import MaskedInputField from "./MaskedInputField";
 import DateInputField from "./DateInputField";
+import EmailInputField from "./EmailInputField";
+import { isFieldInvalid } from "../../utils/fieldValidators";
 function MobileReview({
   formData,
   getMappedFormData,
@@ -50,6 +52,7 @@ function MobileReview({
 
   const renderField = (field, fIdx) => {
     if (!isFieldVisible(field)) return null;
+    const fieldInvalid = isFieldInvalid(field, formData[field.name]);
 
     if (field.type === "group") {
       return (
@@ -150,6 +153,7 @@ function MobileReview({
             disabled={!enabled}
             inputClassName="w-full text-sm text-gray-900 font-medium bg-transparent border-0 border-b-2 border-transparent focus-within:border-brand-primary py-0.5 transition-colors disabled:text-gray-400"
             invalidClassName="!border-b-red-400"
+            isInvalid={fieldInvalid || undefined}
           />
         </div>
       );
@@ -167,6 +171,7 @@ function MobileReview({
             placeholder={field.placeholder}
             className="w-full text-sm text-gray-900 font-medium bg-transparent border-0 border-b-2 border-transparent focus:border-brand-primary focus:outline-none py-0.5 transition-colors disabled:text-gray-400"
             invalidClassName="!border-b-red-400"
+            isInvalid={fieldInvalid || undefined}
           />
         </div>
       );
@@ -190,12 +195,29 @@ function MobileReview({
       );
     }
 
-    // text, email, date
+    if (field.type === "email") {
+      return (
+        <div key={fIdx} className={`py-2 ${baseClass}`}>
+          <label className="block text-xs text-gray-400 mb-0.5">{field.label}</label>
+          <EmailInputField
+            value={enabled ? value : ""}
+            placeholder={field.placeholder || ""}
+            onChange={(val) => handleChangeWithFormatter(field, val)}
+            disabled={!enabled}
+            className="w-full text-sm text-gray-900 font-medium bg-transparent border-0 border-b-2 border-transparent focus:border-brand-primary focus:outline-none py-0.5 transition-colors disabled:text-gray-400"
+            invalidClassName="!border-b-red-400"
+            isInvalid={fieldInvalid || undefined}
+          />
+        </div>
+      );
+    }
+
+    // text
     return (
       <div key={fIdx} className={`py-2 ${baseClass}`}>
         <label className="block text-xs text-gray-400 mb-0.5">{field.label}</label>
         <input
-          type={field.type}
+          type="text"
           value={enabled ? value : ""}
           placeholder={field.placeholder || ""}
           onChange={e => handleChangeWithFormatter(field, e.target.value)}
