@@ -6,12 +6,10 @@ set -e
 
 ENV_FILE="frontend/.env"
 
-# Detectar Python disponible
-PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
-if [ -z "$PYTHON" ]; then
-    echo "❌ Python no encontrado"
-    exit 1
-fi
+# Verificar dependencias del sistema
+source "$(dirname "$0")/lib/check-deps.sh"
+require_python
+PYTHON="$PYTHON_CMD"
 
 if [ ! -f "$ENV_FILE" ]; then
     echo "❌ No se encontró $ENV_FILE"

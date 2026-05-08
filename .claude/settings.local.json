@@ -26,7 +26,12 @@
       "WebFetch(domain:www.bancodeoccidente.hn)",
       "Bash(python3 *)",
       "Bash(npm i *)",
-      "Bash(npm list *)"
+      "Bash(npm list *)",
+      "Bash(bash *)",
+      "Bash(grep -n \"source\\\\|require_\\\\|eval \\\\$\\(node\" /home/hernan/dynamic-form/start-development.sh /home/hernan/dynamic-form/start-backend-dev.sh /home/hernan/dynamic-form/stop-production.sh /home/hernan/dynamic-form/start-docker.sh /home/hernan/dynamic-form/set-apikey.sh)",
+      "Bash(grep -n \"source\\\\|require_\\\\|eval \\\\$\\(node\" /home/hernan/dynamic-form/start-development.sh)",
+      "Bash(grep -n \"eval \\\\$\\(node\" /home/hernan/dynamic-form/start-development.sh)",
+      "Bash(grep *)"
     ],
     "deny": [],
     "ask": []

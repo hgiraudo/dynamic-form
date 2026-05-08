@@ -25,6 +25,10 @@ stop_service() {
     fi
 }
 
+# Verificar dependencias del sistema
+source "$(dirname "$0")/lib/check-deps.sh"
+require_node
+
 # Leer configuración para obtener puertos
 eval $(node shared/get-config.js)
 

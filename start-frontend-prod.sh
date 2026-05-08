@@ -8,16 +8,20 @@ set -e  # Salir si hay error
 echo "🌐 Iniciando frontend en modo PRODUCCIÓN..."
 echo "⚙️  Usando configuración centralizada de shared/config.general.js"
 
+# Verificar dependencias del sistema
+source "$(dirname "$0")/lib/check-deps.sh"
+require_node
+
 # Leer configuración desde shared/config.general.js
 eval $(node shared/get-config.js)
 
 # Obtener las IPs de la instancia de Amazon EC2 usando IMDSv2
-TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
+TOKEN=$(curl -s --connect-timeout 2 -X PUT "http://169.254.169.254/latest/api/token" \
   -H "X-aws-ec2-metadata-token-ttl-seconds: 60" || echo "")
 
 if [ -n "$TOKEN" ]; then
     # IP pública para que el navegador del usuario pueda conectarse al backend
-    PUBLIC_IP=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+    PUBLIC_IP=$(curl -s --connect-timeout 2 -H "X-aws-ec2-metadata-token: $TOKEN" \
         http://169.254.169.254/latest/meta-data/public-ipv4 || echo "")
 else
     PUBLIC_IP=""

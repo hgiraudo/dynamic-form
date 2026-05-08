@@ -9,17 +9,22 @@ echo "🚀 Iniciando aplicación en modo DESARROLLO..."
 echo "⚙️  Usando configuración centralizada de shared/config.general.js"
 echo ""
 
+# Verificar dependencias del sistema
+source "$(dirname "$0")/lib/check-deps.sh"
+require_node
+require_pdfrw
+
 # Leer configuración desde shared/config.general.js
 eval $(node shared/get-config.js)
 
 # Obtener las IPs de la instancia de Amazon EC2 usando IMDSv2
-TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
+TOKEN=$(curl -s --connect-timeout 2 -X PUT "http://169.254.169.254/latest/api/token" \
   -H "X-aws-ec2-metadata-token-ttl-seconds: 60" || echo "")
 
 if [ -n "$TOKEN" ]; then
-    INTERNAL_IP=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+    INTERNAL_IP=$(curl -s --connect-timeout 2 -H "X-aws-ec2-metadata-token: $TOKEN" \
         http://169.254.169.254/latest/meta-data/local-ipv4 || echo "")
-    PUBLIC_IP=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+    PUBLIC_IP=$(curl -s --connect-timeout 2 -H "X-aws-ec2-metadata-token: $TOKEN" \
         http://169.254.169.254/latest/meta-data/public-ipv4 || echo "")
 else
     INTERNAL_IP=""
@@ -44,16 +49,21 @@ echo "   Frontend: http://$FRONTEND_URL:$FRONTEND_PORT"
 echo "   Backend URL para frontend: http://$BACKEND_URL:$BACKEND_PORT"
 echo ""
 
+# Crear directorio de logs antes de arrancar los servicios
+mkdir -p logs
+
 # ============================================================
 # 1. INICIAR BACKEND
 # ============================================================
 echo "🔧 [1/3] Iniciando backend..."
 cd backend
 
-# Verificar si node_modules existe
-if [ ! -d "node_modules" ]; then
+# Instalar dependencias si no existen o si cambió la versión de Node
+NODE_VER=$(node --version)
+if [ ! -d "node_modules" ] || [ "$(cat node_modules/.node_version 2>/dev/null)" != "$NODE_VER" ]; then
     echo "📦 Instalando dependencias del backend..."
     npm install
+    echo "$NODE_VER" > node_modules/.node_version
 fi
 
 # Crear/actualizar .env para backend
@@ -66,17 +76,6 @@ HOST=$INTERNAL_IP
 NODE_ENV=development
 EOF
     echo "✅ Archivo .env del backend creado"
-fi
-
-# Verificar Python y pdfrw
-if ! command -v python &> /dev/null; then
-    echo "❌ ERROR: Python no está instalado"
-    exit 1
-fi
-
-if ! python -c "import pdfrw" 2>/dev/null; then
-    echo "⚠️  Instalando pdfrw..."
-    pip install pdfrw
 fi
 
 # Iniciar backend en segundo plano
@@ -97,10 +96,12 @@ cd ..
 echo "🌐 [2/3] Iniciando frontend..."
 cd frontend
 
-# Verificar si node_modules existe
-if [ ! -d "node_modules" ]; then
+# Instalar dependencias si no existen o si cambió la versión de Node
+NODE_VER=$(node --version)
+if [ ! -d "node_modules" ] || [ "$(cat node_modules/.node_version 2>/dev/null)" != "$NODE_VER" ]; then
     echo "📦 Instalando dependencias del frontend..."
     npm install
+    echo "$NODE_VER" > node_modules/.node_version
 fi
 
 # Crear .env solo si no existe
@@ -132,7 +133,6 @@ echo ""
 cd ..
 
 # Guardar PIDs
-mkdir -p logs
 echo $BACKEND_PID > logs/backend-dev.pid
 echo $FRONTEND_PID > logs/frontend-dev.pid
 

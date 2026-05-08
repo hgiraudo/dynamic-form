@@ -8,16 +8,8 @@ set -e
 
 echo "🐳 Iniciando aplicación con Docker..."
 
-# Verificar que Docker esté disponible
-if ! command -v docker &> /dev/null; then
-    echo "❌ ERROR: Docker no está instalado"
-    exit 1
-fi
-
-if ! docker info &> /dev/null; then
-    echo "❌ ERROR: El daemon de Docker no está corriendo"
-    exit 1
-fi
+source "$(dirname "$0")/lib/check-deps.sh"
+require_docker
 
 # Parsear argumentos
 BUILD_FLAG=""

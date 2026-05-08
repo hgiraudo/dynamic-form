@@ -6,6 +6,9 @@
 
 echo "🛑 Deteniendo aplicación Docker..."
 
+source "$(dirname "$0")/lib/check-deps.sh"
+require_docker
+
 VOLUMES_FLAG=""
 if [[ "$1" == "--volumes" ]]; then
     VOLUMES_FLAG="--volumes"
