@@ -1,6 +1,338 @@
 {
   "steps": [
     {
+      "title": "Firmantes",
+      "description": "Firmantes",
+      "icon": "cilPeople",
+      "fields": [
+        {
+          "name": "NumeroFirmantes",
+          "label": "Cantidad de firmantes",
+          "type": "button-group",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "default": "1"
+        },
+        {
+          "type": "subtitle",
+          "name": "F1_Title",
+          "content": "Firmante 1"
+        },
+        {
+          "name": "Firmante1Apellido",
+          "label": "Apellido",
+          "type": "text"
+        },
+        {
+          "name": "Firmante1Nombre",
+          "label": "Nombre",
+          "type": "text"
+        },
+        {
+          "name": "Firmante1Email",
+          "label": "Correo",
+          "type": "email"
+        },
+        {
+          "name": "CertificadoRep1",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox"
+        },
+        {
+          "name": "VerificacionRep1",
+          "label": "Verificar identidad con documento y prueba de vida",
+          "type": "checkbox"
+        },
+        {
+          "name": "SmsRep1",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": {
+            "field": "SmsRep1",
+            "value": true
+          },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        },
+        {
+          "type": "subtitle",
+          "name": "F2_Title",
+          "content": "Firmante 2",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "2",
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "Firmante2Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "2",
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "Firmante2Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "2",
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "Firmante2Email",
+          "label": "Correo",
+          "type": "email",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "2",
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "CertificadoRep2",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "2",
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "VerificacionRep2",
+          "label": "Verificar identidad con documento y prueba de vida",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "2",
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "SmsRep2",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "2",
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "RepresentanteTelefono2",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": {
+            "field": "SmsRep2",
+            "value": true
+          },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        },
+        {
+          "type": "subtitle",
+          "name": "F3_Title",
+          "content": "Firmante 3",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "Firmante3Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "Firmante3Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "Firmante3Email",
+          "label": "Correo",
+          "type": "email",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "CertificadoRep3",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "VerificacionRep3",
+          "label": "Verificar identidad con documento y prueba de vida",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "SmsRep3",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": [
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "RepresentanteTelefono3",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": {
+            "field": "SmsRep3",
+            "value": true
+          },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        },
+        {
+          "type": "subtitle",
+          "name": "F4_Title",
+          "content": "Firmante 4",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "4"
+          }
+        },
+        {
+          "name": "Firmante4Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "4"
+          }
+        },
+        {
+          "name": "Firmante4Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "4"
+          }
+        },
+        {
+          "name": "Firmante4Email",
+          "label": "Correo",
+          "type": "email",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "4"
+          }
+        },
+        {
+          "name": "CertificadoRep4",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "4"
+          }
+        },
+        {
+          "name": "VerificacionRep4",
+          "label": "Verificar identidad con documento y prueba de vida",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "4"
+          }
+        },
+        {
+          "name": "SmsRep4",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "4"
+          }
+        },
+        {
+          "name": "RepresentanteTelefono4",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": {
+            "field": "SmsRep4",
+            "value": true
+          },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        }
+      ]
+    },
+    {
       "title": "Introducción",
       "description": "Introducción",
       "icon": "cilBolt",
@@ -16,12 +348,22 @@
           "name": "TipoDeTramite",
           "label": "Tipo de Trámite",
           "type": "button-group",
-          "options": ["Apertura", "Actualización", "Incorporación"],
+          "options": [
+            "Apertura",
+            "Actualización",
+            "Incorporación"
+          ],
           "default": "Apertura",
           "optionFields": [
-            { "TipoDeTramiteApertura": "/" },
-            { "TipoDeTramiteActualizacion": "/" },
-            { "TipoDeTramiteIncorporacion": "/" }
+            {
+              "TipoDeTramiteApertura": "/"
+            },
+            {
+              "TipoDeTramiteActualizacion": "/"
+            },
+            {
+              "TipoDeTramiteIncorporacion": "/"
+            }
           ]
         },
         {
@@ -40,11 +382,18 @@
           "name": "TipoFirma",
           "label": "Tipo de Firma",
           "type": "button-group",
-          "options": ["Indistinta", "Conjunta"],
+          "options": [
+            "Indistinta",
+            "Conjunta"
+          ],
           "default": "Indistinta",
           "optionFields": [
-            { "UsoDeFirmaIndistinta": "/" },
-            { "UsoDeFirmaConjunta": "/" }
+            {
+              "UsoDeFirmaIndistinta": "/"
+            },
+            {
+              "UsoDeFirmaConjunta": "/"
+            }
           ]
         }
       ]
@@ -135,8 +484,14 @@
           "type": "email",
           "placeholder": "ej. administracion@arroyito.com.ar",
           "derivedFields": [
-            { "name": "CorreoElectronico2usuario", "value": "email.split(\"@\")[0]" },
-            { "name": "CorreoElectronico2dominio", "value": "email.split(\"@\")[1]" }
+            {
+              "name": "CorreoElectronico2usuario",
+              "value": "email.split(\"@\")[0]"
+            },
+            {
+              "name": "CorreoElectronico2dominio",
+              "value": "email.split(\"@\")[1]"
+            }
           ]
         },
         {
@@ -145,8 +500,14 @@
           "type": "email",
           "placeholder": "ej. legal@arroyito.com.ar",
           "derivedFields": [
-            { "name": "CorreoElectronico3usuario", "value": "email.split(\"@\")[0]" },
-            { "name": "CorreoElectronico3dominio", "value": "email.split(\"@\")[1]" }
+            {
+              "name": "CorreoElectronico3usuario",
+              "value": "email.split(\"@\")[0]"
+            },
+            {
+              "name": "CorreoElectronico3dominio",
+              "value": "email.split(\"@\")[1]"
+            }
           ]
         },
         {
@@ -190,15 +551,13 @@
           "name": "RepresentanteApellido1",
           "label": "Apellido",
           "type": "text",
-          "placeholder": "ej. García",
-          "syncTo": "Firmante1Apellido"
+          "placeholder": "ej. García"
         },
         {
           "name": "RepresentanteNombre1",
           "label": "Nombre",
           "type": "text",
-          "placeholder": "ej. Juan Carlos",
-          "syncTo": "Firmante1Nombre"
+          "placeholder": "ej. Juan Carlos"
         },
         {
           "name": "RepresentanteDNI1",
@@ -246,8 +605,7 @@
           "name": "RepresentanteEmail1",
           "label": "Correo Electrónico",
           "type": "email",
-          "placeholder": "ej. jgarcia@arroyito.com.ar",
-          "syncTo": "Firmante1Email"
+          "placeholder": "ej. jgarcia@arroyito.com.ar"
         },
         {
           "name": "RepresentanteDomicilio1",
@@ -293,50 +651,69 @@
           "label": "Apellido ",
           "type": "text",
           "placeholder": "ej. López",
-          "visibleIf": { "field": "tieneRep2", "value": true },
-          "syncTo": "Firmante2Apellido"
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteNombre2",
           "label": "Nombre ",
           "type": "text",
           "placeholder": "ej. María Isabel",
-          "visibleIf": { "field": "tieneRep2", "value": true },
-          "syncTo": "Firmante2Nombre"
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteDNI2",
           "label": "DNI / LE / LC ",
           "type": "text",
           "placeholder": "ej. 23456789",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentantePasaporte2",
           "label": "Pasaporte / CI extranjeros ",
           "type": "text",
           "placeholder": "ej. AAC234567",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteNacionalidad2",
           "label": "Nacionalidad ",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteLugarDeNacimiento2",
           "label": "Lugar de Nacimiento ",
           "type": "text",
           "placeholder": "ej. Córdoba",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteFechaDeNacimiento2",
           "label": "Fecha de Nacimiento ",
           "type": "date",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteCUIT2",
@@ -344,62 +721,88 @@
           "type": "text",
           "placeholder": "ej. 27-23456789-4",
           "mask": "##-########-#",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteTelefono2",
           "label": "Teléfono ",
           "type": "tel",
           "placeholder": "9 11 9876-5432",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteEmail2",
           "label": "Correo Electrónico ",
           "type": "email",
           "placeholder": "ej. mlopez@arroyito.com.ar",
-          "visibleIf": { "field": "tieneRep2", "value": true },
-          "syncTo": "Firmante2Email"
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteDomicilio2",
           "label": "Domicilio ",
           "type": "text",
           "placeholder": "ej. Av. Callao 567, CABA",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteActividad2",
           "label": "Actividad / Profesión / Oficio / Industria ",
           "type": "text",
           "placeholder": "ej. Gerente General",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteEstadoCivil2",
           "label": "Estado Civil ",
           "type": "text",
           "placeholder": "ej. Soltera",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteCargo2",
           "label": "Cargo en la Sociedad ",
           "type": "text",
           "placeholder": "ej. Gerente",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteVencimiento2",
           "label": "Vencimiento en el Cargo ",
           "type": "date",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         },
         {
           "name": "RepresentanteNuevoVencimiento2",
           "label": "Nuevo Vencimiento en el Cargo ",
           "type": "date",
-          "visibleIf": { "field": "tieneRep2", "value": true }
+          "visibleIf": {
+            "field": "tieneRep2",
+            "value": true
+          }
         }
       ]
     },
@@ -425,99 +828,6 @@
           "label": "Administrador",
           "type": "text",
           "placeholder": "ej. Fernández Luis"
-        }
-      ]
-    },
-    {
-      "title": "Firmantes",
-      "description": "Firmantes",
-      "icon": "cilPeople",
-      "fields": [
-        {
-          "name": "Firmante1Apellido",
-          "label": "Apellido",
-          "type": "text",
-          "disabled": true
-        },
-        {
-          "name": "Firmante1Nombre",
-          "label": "Nombre",
-          "type": "text",
-          "disabled": true
-        },
-        {
-          "name": "Firmante1Email",
-          "label": "Correo",
-          "type": "email",
-          "disabled": true
-        },
-        {
-          "name": "CertificadoRep1",
-          "label": "Utiliza un certificado personal (Ley 27446)",
-          "type": "checkbox"
-        },
-        {
-          "name": "VerificacionRep1",
-          "label": "Verificar identidad con documento y prueba de vida",
-          "type": "checkbox"
-        },
-        {
-          "name": "SmsRep1",
-          "label": "Enviar código de autorización por SMS",
-          "type": "checkbox"
-        },
-        {
-          "name": "RepresentanteTelefono1",
-          "label": "Número de celular",
-          "type": "tel",
-          "visibleIf": { "field": "SmsRep1", "value": true },
-          "placeholder": "ej. +54 9 11 1234-5678"
-        },
-        {
-          "name": "Firmante2Apellido",
-          "label": "Apellido ",
-          "type": "text",
-          "disabled": true,
-          "visibleIf": { "field": "tieneRep2", "value": true }
-        },
-        {
-          "name": "Firmante2Nombre",
-          "label": "Nombre Completo ",
-          "type": "text",
-          "disabled": true,
-          "visibleIf": { "field": "tieneRep2", "value": true }
-        },
-        {
-          "name": "Firmante2Email",
-          "label": "Correo ",
-          "type": "email",
-          "disabled": true,
-          "visibleIf": { "field": "tieneRep2", "value": true }
-        },
-        {
-          "name": "CertificadoRep2",
-          "label": "Utiliza un certificado personal (Ley 27446)",
-          "type": "checkbox",
-          "visibleIf": { "field": "tieneRep2", "value": true }
-        },
-        {
-          "name": "VerificacionRep2",
-          "label": "Verificar identidad con documento y prueba de vida",
-          "type": "checkbox",
-          "visibleIf": { "field": "tieneRep2", "value": true }
-        },
-        {
-          "name": "SmsRep2",
-          "label": "Enviar código de autorización por SMS",
-          "type": "checkbox",
-          "visibleIf": { "field": "tieneRep2", "value": true }
-        },
-        {
-          "name": "RepresentanteTelefono2",
-          "label": "Número de celular",
-          "type": "tel",
-          "visibleIf": { "field": "SmsRep2", "value": true },
-          "placeholder": "ej. +54 9 11 1234-5678"
         }
       ]
     },
@@ -567,7 +877,11 @@
           "name": "PerfilRiesgo",
           "label": "Perfil de riesgo resultante",
           "type": "button-group",
-          "options": ["RB - Bajo", "RM - Medio", "RA - Alto"]
+          "options": [
+            "RB - Bajo",
+            "RM - Medio",
+            "RA - Alto"
+          ]
         },
         {
           "type": "info",
@@ -614,14 +928,20 @@
           "name": "PEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"]
+          "options": [
+            "Sí",
+            "No"
+          ]
         },
         {
           "name": "PEPMotivo",
           "label": "Motivo",
           "type": "text",
           "placeholder": "ej. Funcionario público nacional",
-          "enabledIf": { "field": "PEP", "value": "Sí" }
+          "enabledIf": {
+            "field": "PEP",
+            "value": "Sí"
+          }
         },
         {
           "name": "PEPDocumentoTipo",
@@ -805,7 +1125,10 @@
           "name": "EA_PEP1",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"]
+          "options": [
+            "Sí",
+            "No"
+          ]
         },
         {
           "name": "EstructuraAccionariaAccionista1PorcentajeParticipacion",
@@ -823,7 +1146,10 @@
           "type": "subtitle",
           "name": "EA2_Title",
           "content": "\n\nAccionista 2",
-          "visibleIf": { "field": "EA_Add2", "value": true },
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
@@ -831,103 +1157,151 @@
           "label": "Razón Social / Apellido y Nombre",
           "type": "text",
           "placeholder": "ej. López María",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Fecha",
           "label": "Fecha de Constitución / Nacimiento",
           "type": "date",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Lugar",
           "label": "Lugar de Constitución / Nacionalidad",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2DNI",
           "label": "Número de Inscripción / DNI - Pasaporte",
           "type": "text",
           "placeholder": "ej. 23456789",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Domicilio",
           "label": "Domicilio Real",
           "type": "text",
           "placeholder": "ej. Av. Callao 567, CABA",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2EstadoCivil",
           "label": "Estado Civil",
           "type": "text",
           "placeholder": "ej. Soltera",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Actividad",
           "label": "Actividad / Profesión",
           "type": "text",
           "placeholder": "ej. Contadora",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2PaisFiscal1",
           "label": "País de Residencia Fiscal",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2IdentificacionFiscal1",
           "label": "Número de Identificación Fiscal",
           "type": "text",
           "placeholder": "ej. 27-23456789-4",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2PaisFiscal2",
           "label": "País Residencia Fiscal 2",
           "type": "text",
           "placeholder": "ej. España",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2IdentificacionFiscal2",
           "label": "Número de Identificación Fiscal 2",
           "type": "text",
           "placeholder": "ej. X1234567B",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EA_PEP2",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2PorcentajeParticipacion",
           "label": "% Participación",
           "type": "text",
           "placeholder": "ej. 40",
-          "visibleIf": { "field": "EA_Add2", "value": true }
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          }
         },
         {
           "name": "EA_Add3",
           "label": "Agregar otro accionista",
           "type": "checkbox",
-          "visibleIf": { "field": "EA_Add2", "value": true },
+          "visibleIf": {
+            "field": "EA_Add2",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
           "type": "subtitle",
           "name": "EA3_Title",
           "content": "\n\nAccionista 3",
-          "visibleIf": { "field": "EA_Add3", "value": true },
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
@@ -935,90 +1309,132 @@
           "label": "Razón Social / Apellido y Nombre",
           "type": "text",
           "placeholder": "ej. Martínez Carlos",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Fecha",
           "label": "Fecha de Constitución / Nacimiento",
           "type": "date",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Lugar",
           "label": "Lugar de Constitución / Nacionalidad",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3DNI",
           "label": "Número de Inscripción / DNI - Pasaporte",
           "type": "text",
           "placeholder": "ej. 34567890",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Domicilio",
           "label": "Domicilio Real",
           "type": "text",
           "placeholder": "ej. Av. Las Heras 890, CABA",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3EstadoCivil",
           "label": "Estado Civil",
           "type": "text",
           "placeholder": "ej. Divorciado",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Actividad",
           "label": "Actividad / Profesión",
           "type": "text",
           "placeholder": "ej. Abogado",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3PaisFiscal1",
           "label": "País de Residencia Fiscal",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3IdentificacionFiscal1",
           "label": "Número de Identificación Fiscal",
           "type": "text",
           "placeholder": "ej. 20-34567890-3",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3PaisFiscal2",
           "label": "País Residencia Fiscal 2",
           "type": "text",
           "placeholder": "ej. Italia",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3IdentificacionFiscal3",
           "label": "Número de Identificación Fiscal 2",
           "type": "text",
           "placeholder": "ej. MRTCRL80A01H501A",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EA_PEP3",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3PorcentajeParticipacion",
           "label": "% Participación",
           "type": "text",
           "placeholder": "ej. 20",
-          "visibleIf": { "field": "EA_Add3", "value": true }
+          "visibleIf": {
+            "field": "EA_Add3",
+            "value": true
+          }
         }
       ]
     },
@@ -1102,7 +1518,10 @@
           "name": "BF_PEP1",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"]
+          "options": [
+            "Sí",
+            "No"
+          ]
         },
         {
           "name": "BeneficiarioFinal1PorcentajeDeParticipacion",
@@ -1120,7 +1539,10 @@
           "type": "subtitle",
           "name": "BF2_Title",
           "content": "\n\nBeneficiario Final 2",
-          "visibleIf": { "field": "BF_Add2", "value": true },
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
@@ -1128,103 +1550,151 @@
           "label": "Apellido y Nombre",
           "type": "text",
           "placeholder": "ej. López María Isabel",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2FechaDeNacimiento",
           "label": "Fecha de Nacimiento",
           "type": "date",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2Nacionalidad",
           "label": "Nacionalidad",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2DNIPasaporte",
           "label": "DNI / Pasaporte",
           "type": "text",
           "placeholder": "ej. 23456789",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2DomicilioReal",
           "label": "Domicilio Real",
           "type": "text",
           "placeholder": "ej. Av. Callao 567, CABA",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2EstadoCivil",
           "label": "Estado Civil",
           "type": "text",
           "placeholder": "ej. Soltera",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2ProfesionOcupacion",
           "label": "Profesión / Ocupación",
           "type": "text",
           "placeholder": "ej. Contadora",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2PaisDeResidenciaFiscal1",
           "label": "País de Residencia Fiscal",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2NumeroDeIdentificacionFiscal1",
           "label": "Número de Identificación Fiscal",
           "type": "text",
           "placeholder": "ej. 27-23456789-4",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2PaisDeResidenciaFiscal2",
           "label": "País Residencia Fiscal 2",
           "type": "text",
           "placeholder": "ej. España",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2NumeroDeIdentificacionFiscal2",
           "label": "Número de Identificación Fiscal 2",
           "type": "text",
           "placeholder": "ej. X1234567B",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BF_PEP2",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal2PorcentajeDeParticipacion",
           "label": "% Participación",
           "type": "text",
           "placeholder": "ej. 40",
-          "visibleIf": { "field": "BF_Add2", "value": true }
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          }
         },
         {
           "name": "BF_Add3",
           "label": "Agregar otro beneficiario",
           "type": "checkbox",
-          "visibleIf": { "field": "BF_Add2", "value": true },
+          "visibleIf": {
+            "field": "BF_Add2",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
           "type": "subtitle",
           "name": "BF3_Title",
           "content": "\n\nBeneficiario Final 3",
-          "visibleIf": { "field": "BF_Add3", "value": true },
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
@@ -1232,90 +1702,132 @@
           "label": "Apellido y Nombre",
           "type": "text",
           "placeholder": "ej. Martínez Carlos Alberto",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3FechaDeNacimiento",
           "label": "Fecha Nacimiento",
           "type": "date",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3Nacionalidad",
           "label": "Nacionalidad",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3DNIPasaporte",
           "label": "DNI / Pasaporte",
           "type": "text",
           "placeholder": "ej. 34567890",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3DomicilioReal",
           "label": "Domicilio Real",
           "type": "text",
           "placeholder": "ej. Av. Las Heras 890, CABA",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3EstadoCivil",
           "label": "Estado Civil",
           "type": "text",
           "placeholder": "ej. Divorciado",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3ProfesionOcupacion",
           "label": "Profesión / Ocupación",
           "type": "text",
           "placeholder": "ej. Abogado",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3PaisDeResidenciaFiscal1",
           "label": "País de Residencia Fiscal",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3NumeroDeIdentificacionFiscal1",
           "label": "Número de Identificación Fiscal",
           "type": "text",
           "placeholder": "ej. 20-34567890-3",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3PaisDeResidenciaFiscal2",
           "label": "País Residencia Fiscal 2",
           "type": "text",
           "placeholder": "ej. Italia",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3NumeroDeIdentificacionFiscal2",
           "label": "Número de Identificación Fiscal 2",
           "type": "text",
           "placeholder": "ej. MRTCRL80A01H501A",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BF_PEP3",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         },
         {
           "name": "BeneficiarioFinal3PorcentajeDeParticipacion",
           "label": "% Participación",
           "type": "text",
           "placeholder": "ej. 20",
-          "visibleIf": { "field": "BF_Add3", "value": true }
+          "visibleIf": {
+            "field": "BF_Add3",
+            "value": true
+          }
         }
       ]
     },
@@ -1364,7 +1876,10 @@
           "type": "subtitle",
           "name": "RF2_Title",
           "content": "\n\nResidencia Fiscal 2",
-          "visibleIf": { "field": "RF_Add2", "value": true },
+          "visibleIf": {
+            "field": "RF_Add2",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
@@ -1372,34 +1887,49 @@
           "label": "País",
           "type": "text",
           "placeholder": "ej. Estados Unidos",
-          "visibleIf": { "field": "RF_Add2", "value": true }
+          "visibleIf": {
+            "field": "RF_Add2",
+            "value": true
+          }
         },
         {
           "name": "OCDEFATCAResidenciaFiscal2Direccion",
           "label": "Dirección",
           "type": "text",
           "placeholder": "ej. 123 Main St, New York, NY",
-          "visibleIf": { "field": "RF_Add2", "value": true }
+          "visibleIf": {
+            "field": "RF_Add2",
+            "value": true
+          }
         },
         {
           "name": "OCDEFATCAResidenciaFiscal2NIT",
           "label": "NIT",
           "type": "text",
           "placeholder": "ej. 12-3456789",
-          "visibleIf": { "field": "RF_Add2", "value": true }
+          "visibleIf": {
+            "field": "RF_Add2",
+            "value": true
+          }
         },
         {
           "name": "RF_Add3",
           "label": "Agregar otro país",
           "type": "checkbox",
-          "visibleIf": { "field": "RF_Add2", "value": true },
+          "visibleIf": {
+            "field": "RF_Add2",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
           "type": "subtitle",
           "name": "RF3_Title",
           "content": "\n\nResidencia Fiscal 3",
-          "visibleIf": { "field": "RF_Add3", "value": true },
+          "visibleIf": {
+            "field": "RF_Add3",
+            "value": true
+          },
           "hideOnRevision": true
         },
         {
@@ -1407,21 +1937,30 @@
           "label": "País",
           "type": "text",
           "placeholder": "ej. España",
-          "visibleIf": { "field": "RF_Add3", "value": true }
+          "visibleIf": {
+            "field": "RF_Add3",
+            "value": true
+          }
         },
         {
           "name": "OCDEFATCAResidenciaFiscal3Direccion",
           "label": "Dirección",
           "type": "text",
           "placeholder": "ej. Calle Serrano 45, Madrid",
-          "visibleIf": { "field": "RF_Add3", "value": true }
+          "visibleIf": {
+            "field": "RF_Add3",
+            "value": true
+          }
         },
         {
           "name": "OCDEFATCAResidenciaFiscal3NIT",
           "label": "NIT",
           "type": "text",
           "placeholder": "ej. A12345678",
-          "visibleIf": { "field": "RF_Add3", "value": true }
+          "visibleIf": {
+            "field": "RF_Add3",
+            "value": true
+          }
         },
         {
           "type": "comment",
@@ -1452,35 +1991,50 @@
           "label": "Institución Financiera Extranjera Participante (PFFI)",
           "type": "text",
           "placeholder": "ej. XXXXXXXXX.XXXXX.LE.032",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
         },
         {
           "name": "OCDEFATCAInstitucionFinancieraGIIN2",
           "label": "Institución Financiera Extranjera en Cumplimiento - IGA (IGA FFI)",
           "type": "text",
           "placeholder": "ej. XXXXXXXXX.XXXXX.ME.032",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
         },
         {
           "name": "OCDEFATCAInstitucionFinancieraGIIN3",
           "label": "Institución Financiera Extranjera en Cumplimiento Registrada (RDCFFI)",
           "type": "text",
           "placeholder": "ej. XXXXXXXXX.XXXXX.SL.032",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
         },
         {
           "name": "OCDEFATCAInstitucionFinancieraGIIN4",
           "label": "Institución Financiera Extranjera en Cumplimiento Certificada (CDCFFI)",
           "type": "text",
           "placeholder": "ej. XXXXXXXXX.XXXXX.CE.032",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
         },
         {
           "name": "OCDEFATCAInstitucionFinancieraGIIN5",
           "label": "Institución Financiera Extranjera Propietario Documentado (ODFFI)",
           "type": "text",
           "placeholder": "ej. XXXXXXXXX.XXXXX.OD.032",
-          "visibleIf": { "field": "FATCA_InstitucionFinanciera", "value": true }
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
         },
         {
           "type": "checkbox",

@@ -1,27 +1,23 @@
 export const buildTransactionJson = (pdfBase64, formData) => {
-  const firstSignerName = formData.Firmante1Nombre || "Nombre";
-  const firstSignerLastName = formData.Firmante1Apellido || "Apellido";
-  const firstSignerEmail = formData.Firmante1Email || "email@example.com";
+  const count = parseInt(formData.NumeroFirmantes || "1", 10);
+
+  const signerData = [1, 2, 3, 4].slice(0, count).map(n => ({
+    id: `Signer${n}`,
+    type: "SIGNER",
+    index: n,
+    name: `Signer${n}`,
+    signers: [{
+      email:     formData[`Firmante${n}Email`]    || "email@example.com",
+      firstName: formData[`Firmante${n}Nombre`]   || "Nombre",
+      lastName:  formData[`Firmante${n}Apellido`] || "Apellido",
+    }],
+  }));
 
   return {
     status: "SENT",
     name: "Persona Juridica",
     description: "Alta Persona Juridica",
-    roles: [
-      {
-        id: "Signer1",
-        type: "SIGNER",
-        index: 1,
-        signers: [
-          {
-            email: firstSignerEmail,
-            firstName: firstSignerName,
-            lastName: firstSignerLastName,
-          },
-        ],
-        name: "Signer1",
-      },
-    ],
+    roles: signerData,
     documents: [
       {
         name: "Persona Juridica",
