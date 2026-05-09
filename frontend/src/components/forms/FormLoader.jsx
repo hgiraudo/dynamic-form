@@ -18,9 +18,10 @@ function FormLoader({ companyOverride }) {
       fetch(`${formBase}/pdfConfig.json`).then(r => r.ok ? r.json() : Promise.reject(`pdfConfig`)),
       fetch(`${formBase}/appConfig.json`).then(r => r.ok ? r.json() : Promise.reject(`appConfig`)),
       fetch(`${companyBase}/brand.json`).then(r => r.ok ? r.json() : Promise.reject(`brand`)),
+      fetch(`${formBase}/transactionConfig.json`).then(r => r.ok ? r.json() : null),
     ])
-      .then(([formConfig, pdfConfig, appConfig, brandConfig]) => {
-        setConfigs({ formConfig, pdfConfig, appConfig, brandConfig });
+      .then(([formConfig, pdfConfig, appConfig, brandConfig, transactionConfig]) => {
+        setConfigs({ formConfig, pdfConfig, appConfig, brandConfig, transactionConfig });
 
         // Título de pestaña
         document.title = `${brandConfig.name} — ${pdfConfig.title}`;
@@ -67,6 +68,7 @@ function FormLoader({ companyOverride }) {
       pdfConfig={configs.pdfConfig}
       appConfig={configs.appConfig}
       brandConfig={configs.brandConfig}
+      transactionConfig={configs.transactionConfig}
       company={company}
       form={form}
       docsPath={docsPath}

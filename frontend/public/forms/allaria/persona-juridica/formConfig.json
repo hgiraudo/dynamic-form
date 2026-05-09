@@ -1,4 +1,22 @@
 {
+  "syncPairs": [
+    [
+      "Firmante1Nombre",
+      "RepresentanteNombre1"
+    ],
+    [
+      "Firmante1Apellido",
+      "RepresentanteApellido1"
+    ],
+    [
+      "Firmante2Nombre",
+      "RepresentanteNombre2"
+    ],
+    [
+      "Firmante2Apellido",
+      "RepresentanteApellido2"
+    ]
+  ],
   "steps": [
     {
       "title": "Firmantes",
@@ -23,13 +41,13 @@
           "content": "Firmante 1"
         },
         {
-          "name": "Firmante1Apellido",
-          "label": "Apellido",
+          "name": "Firmante1Nombre",
+          "label": "Nombre",
           "type": "text"
         },
         {
-          "name": "Firmante1Nombre",
-          "label": "Nombre",
+          "name": "Firmante1Apellido",
+          "label": "Apellido",
           "type": "text"
         },
         {
@@ -76,8 +94,8 @@
           }
         },
         {
-          "name": "Firmante2Apellido",
-          "label": "Apellido",
+          "name": "Firmante2Nombre",
+          "label": "Nombre",
           "type": "text",
           "visibleIf": {
             "field": "NumeroFirmantes",
@@ -89,8 +107,8 @@
           }
         },
         {
-          "name": "Firmante2Nombre",
-          "label": "Nombre",
+          "name": "Firmante2Apellido",
+          "label": "Apellido",
           "type": "text",
           "visibleIf": {
             "field": "NumeroFirmantes",
@@ -176,8 +194,8 @@
           }
         },
         {
-          "name": "Firmante3Apellido",
-          "label": "Apellido",
+          "name": "Firmante3Nombre",
+          "label": "Nombre",
           "type": "text",
           "visibleIf": {
             "field": "NumeroFirmantes",
@@ -188,8 +206,8 @@
           }
         },
         {
-          "name": "Firmante3Nombre",
-          "label": "Nombre",
+          "name": "Firmante3Apellido",
+          "label": "Apellido",
           "type": "text",
           "visibleIf": {
             "field": "NumeroFirmantes",
@@ -267,8 +285,8 @@
           }
         },
         {
-          "name": "Firmante4Apellido",
-          "label": "Apellido",
+          "name": "Firmante4Nombre",
+          "label": "Nombre",
           "type": "text",
           "visibleIf": {
             "field": "NumeroFirmantes",
@@ -276,8 +294,8 @@
           }
         },
         {
-          "name": "Firmante4Nombre",
-          "label": "Nombre",
+          "name": "Firmante4Apellido",
+          "label": "Apellido",
           "type": "text",
           "visibleIf": {
             "field": "NumeroFirmantes",
@@ -333,8 +351,8 @@
       ]
     },
     {
-      "title": "Introducción",
-      "description": "Introducción",
+      "title": "Tipo de Trámite",
+      "description": "Tipo de Trámite",
       "icon": "cilBolt",
       "fields": [
         {
@@ -548,16 +566,31 @@
       "icon": "cilUser",
       "fields": [
         {
-          "name": "RepresentanteApellido1",
-          "label": "Apellido",
-          "type": "text",
-          "placeholder": "ej. García"
+          "name": "NumeroRepresentantes",
+          "label": "Cantidad de representantes",
+          "type": "button-group",
+          "options": [
+            "1",
+            "2"
+          ],
+          "default": "1"
+        },
+        {
+          "type": "subtitle",
+          "name": "R1_Title",
+          "content": "Representante 1"
         },
         {
           "name": "RepresentanteNombre1",
           "label": "Nombre",
           "type": "text",
           "placeholder": "ej. Juan Carlos"
+        },
+        {
+          "name": "RepresentanteApellido1",
+          "label": "Apellido",
+          "type": "text",
+          "placeholder": "ej. García"
         },
         {
           "name": "RepresentanteDNI1",
@@ -642,18 +675,12 @@
           "type": "date"
         },
         {
-          "name": "tieneRep2",
-          "label": "¿Agregar un segundo representante?",
-          "type": "checkbox"
-        },
-        {
-          "name": "RepresentanteApellido2",
-          "label": "Apellido ",
-          "type": "text",
-          "placeholder": "ej. López",
+          "type": "subtitle",
+          "name": "R2_Title",
+          "content": "Representante 2",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -662,8 +689,18 @@
           "type": "text",
           "placeholder": "ej. María Isabel",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
+          }
+        },
+        {
+          "name": "RepresentanteApellido2",
+          "label": "Apellido ",
+          "type": "text",
+          "placeholder": "ej. López",
+          "visibleIf": {
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -672,8 +709,8 @@
           "type": "text",
           "placeholder": "ej. 23456789",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -682,8 +719,8 @@
           "type": "text",
           "placeholder": "ej. AAC234567",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -692,8 +729,8 @@
           "type": "text",
           "placeholder": "ej. Argentina",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -702,8 +739,8 @@
           "type": "text",
           "placeholder": "ej. Córdoba",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -711,8 +748,8 @@
           "label": "Fecha de Nacimiento ",
           "type": "date",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -722,8 +759,8 @@
           "placeholder": "ej. 27-23456789-4",
           "mask": "##-########-#",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -732,8 +769,8 @@
           "type": "tel",
           "placeholder": "9 11 9876-5432",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -742,8 +779,8 @@
           "type": "email",
           "placeholder": "ej. mlopez@arroyito.com.ar",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -752,8 +789,8 @@
           "type": "text",
           "placeholder": "ej. Av. Callao 567, CABA",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -762,8 +799,8 @@
           "type": "text",
           "placeholder": "ej. Gerente General",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -772,8 +809,8 @@
           "type": "text",
           "placeholder": "ej. Soltera",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -782,8 +819,8 @@
           "type": "text",
           "placeholder": "ej. Gerente",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -791,8 +828,8 @@
           "label": "Vencimiento en el Cargo ",
           "type": "date",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         },
         {
@@ -800,8 +837,8 @@
           "label": "Nuevo Vencimiento en el Cargo ",
           "type": "date",
           "visibleIf": {
-            "field": "tieneRep2",
-            "value": true
+            "field": "NumeroRepresentantes",
+            "value": "2"
           }
         }
       ]

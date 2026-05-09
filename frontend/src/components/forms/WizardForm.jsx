@@ -29,7 +29,11 @@ import MaskedInputField from "./MaskedInputField";
 import DateInputField from "./DateInputField";
 import EmailInputField from "./EmailInputField";
 
-function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, form, docsPath }) {
+function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transactionConfig, company, form, docsPath }) {
+  const syncMap = Object.fromEntries(
+    (formConfig.syncPairs || []).flatMap(([a, b]) => [[a, b], [b, a]])
+  );
+
   const [formData, setFormData] = useState(() => {
     const initialData = {};
     formConfig.steps.forEach((step) => {
@@ -80,6 +84,7 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, fo
           })
         );
       }
+      if (syncMap[name] !== undefined) updated[syncMap[name]] = value;
       return updated;
     });
   };
@@ -90,10 +95,8 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, fo
       value = fieldFormatters[field.formatter](rawValue);
     }
     setFormData((prev) => {
-      let updated = { ...prev, [field.name]: value };
-      if (field.syncTo) {
-        updated[field.syncTo] = value;
-      }
+      const updated = { ...prev, [field.name]: value };
+      if (syncMap[field.name] !== undefined) updated[syncMap[field.name]] = value;
       if (field.derivedFields) {
         field.derivedFields.forEach(({ name, value: expr }) => {
           updated[name] = evalDerivedField(expr, value);
@@ -138,6 +141,12 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, fo
       });
     });
 
+    // Propagar syncPairs: si un lado tiene valor y el otro no, completar el otro
+    (formConfig.syncPairs || []).forEach(([a, b]) => {
+      if (normalizedData[a] && !normalizedData[b]) normalizedData[b] = normalizedData[a];
+      else if (normalizedData[b] && !normalizedData[a]) normalizedData[a] = normalizedData[b];
+    });
+
     console.log("Datos normalizados finales:", normalizedData);
     setFormData(normalizedData);
   };
@@ -147,10 +156,7 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, fo
 
     formConfig.steps.forEach((step) => {
       step.fields.forEach((field) => {
-        if (field.syncTo) {
-          // 🔹 Sincroniza el valor con otro campo
-          mappedData[field.syncTo] = mappedData[field.name];
-        } else if (field.derivedFields) {
+        if (field.derivedFields) {
           // 🔹 Calcula campos derivados a partir del valor del campo
           field.derivedFields.forEach(({ name, value: expr }) => {
             mappedData[name] = evalDerivedField(expr, mappedData[field.name]);
@@ -220,20 +226,17 @@ const handleExport = () => {
   }
 };
 
-  const renderField = (field) => {
-    if (field.visibleIf) {
-      const { field: depField, value } = field.visibleIf;
-      const depValue = formData[depField];
+  const isVisible = (field) => {
+    if (!field.visibleIf) return true;
+    const { field: depField, value } = field.visibleIf;
+    const depValue = formData[depField];
+    if (value === "") return !!depValue;
+    if (Array.isArray(value)) return value.includes(depValue);
+    return depValue === value;
+  };
 
-      // Si value es cadena vacía, interpretamos "mostrar si el otro campo NO está vacío"
-      if (value === "") {
-        if (!depValue) return null;
-      } else if (Array.isArray(value)) {
-        if (!value.includes(depValue)) return null;
-      } else {
-        if (depValue !== value) return null;
-      }
-    }
+  const renderField = (field) => {
+    if (!isVisible(field)) return null;
 
     // Solo calculamos value si el campo tiene "name"
     let value = undefined;
@@ -650,7 +653,7 @@ const handleExport = () => {
       });
       if (!fillResp.ok) throw new Error("Error al generar PDF");
       const fillData = await fillResp.json();
-      const transactionJson = buildTransactionJson(fillData.base64, formData);
+      const transactionJson = buildTransactionJson(fillData.base64, formData, transactionConfig);
 
 const signUrl = `${config.backend.baseUrl}${config.backend.signEndpoint}`;
 
@@ -863,22 +866,35 @@ try {
               <div className="rounded-lg overflow-hidden text-sm">
                 {formConfig.steps.slice(0, -1).map((step, stepIdx) => (
                   <div key={`${step.title}-${stepIdx}`} className="mb-6">
-                    <h3 className="text-lg font-semibold text-brand-primary mb-2 border-b pb-1 text-center">
+                    <h3 className="text-sm font-bold text-white bg-brand-primary px-4 py-2.5 text-center tracking-wide uppercase">
                       {step.title}
                     </h3>
 
                     {step.fields
-                      .filter((field) => !field.hideOnRevision)
+                      .filter((field) => !field.hideOnRevision && isVisible(field))
                       .map((field, idx) => {
-                        // zebra strip
-                        const rowBg = idx % 2 === 0 ? "bg-gray-50" : "bg-white";
+                        if (["info", "comment"].includes(field.type)) return null;
 
-                        // 🟦 Mostrar encabezado para los type=group
+                        // Subtítulo → encabezado de sección
+                        if (field.type === "subtitle") {
+                          return (
+                            <div
+                              key={`${step.title}-${field.name}-${idx}`}
+                              className="px-4 py-2 border-b border-gray-200 bg-white"
+                            >
+                              <h4 className="text-base font-semibold text-brand-primary text-center">
+                                {field.content}
+                              </h4>
+                            </div>
+                          );
+                        }
+
+                        // Encabezado de grupo
                         if (field.type === "group") {
                           return (
                             <div
                               key={`${step.title}-${field.label}-${idx}`}
-                              className={`px-4 py-2 ${rowBg}`}
+                              className="px-4 py-2 bg-gray-100"
                             >
                               <span className="font-semibold text-center w-full block text-gray-800">
                                 {field.label}
@@ -887,9 +903,9 @@ try {
                           );
                         }
 
-                        // 🔸 Campos normales
-                        let displayValue =
-                          getMappedFormData()[field.name] ?? "";
+                        // Campos normales
+                        const rowBg = idx % 2 === 0 ? "bg-gray-50" : "bg-white";
+                        let displayValue = getMappedFormData()[field.name] ?? "";
                         if (field.type === "checkbox") {
                           displayValue = formData[field.name] ? "Sí" : "No";
                         }

@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Forms — Documentación de Arquitectura</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:      #1e3a5f;
+      --brand-light:#2d5a8e;
+      --accent:     #3b82f6;
+      --bg:         #f1f5f9;
+      --card:       #ffffff;
+      --border:     #e2e8f0;
+      --text:       #1e293b;
+      --muted:      #64748b;
+      --nav-w:      240px;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--nav-w);
+      height: 100vh;
+      background: var(--brand);
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      z-index: 10;
+    }
+
+    .nav-header {
+      padding: 28px 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .nav-header p {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    nav ul { list-style: none; padding: 12px 0; flex: 1; }
+    nav ul li a {
+      display: block;
+      padding: 8px 20px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.07);
+      border-left-color: var(--accent);
+    }
+
+    nav ul .section-label {
+      padding: 16px 20px 4px;
+      font-size: 0.67rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .nav-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.7rem;
+      color: #475569;
+    }
+
+    /* ── Main ────────────────────────────────────────────────── */
+    main {
+      margin-left: var(--nav-w);
+      flex: 1;
+      padding: 40px 48px 80px;
+      max-width: 1100px;
+    }
+
+    /* ── Section ─────────────────────────────────────────────── */
+    section {
+      margin-bottom: 60px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--brand);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .section-header h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--brand);
+    }
+    .section-header .badge {
+      margin-left: auto;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    p.lead {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    /* ── Cards ───────────────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .card h3 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--brand);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Mermaid diagrams ────────────────────────────────────── */
+    .diagram-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .diagram-wrap .diagram-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ── Component grid ──────────────────────────────────────── */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .component-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .component-card .comp-icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .component-card h4 { font-size: 0.85rem; font-weight: 700; color: var(--brand); }
+    .component-card p { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+    .component-card code {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.7rem;
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #334155;
+    }
+
+    /* ── File table ──────────────────────────────────────────── */
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    thead tr { background: #f8fafc; }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fafc; }
+    td code {
+      font-size: 0.78rem;
+      background: #f1f5f9;
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: #334155;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+
+    /* ── Tags ────────────────────────────────────────────────── */
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .tag-blue   { background: #dbeafe; color: #1d4ed8; }
+    .tag-green  { background: #dcfce7; color: #15803d; }
+    .tag-purple { background: #ede9fe; color: #7c3aed; }
+    .tag-orange { background: #ffedd5; color: #c2410c; }
+    .tag-gray   { background: #f1f5f9; color: #475569; }
+
+    /* ── Step list ───────────────────────────────────────────── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .step-num {
+      counter-increment: step;
+      width: 28px; height: 28px;
+      background: var(--brand);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-num::before { content: counter(step); }
+    .step-body h4 { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .step-body p  { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+
+    /* ── Endpoint pill ───────────────────────────────────────── */
+    .endpoint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px 4px 6px;
+      border-radius: 6px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.78rem;
+      margin: 3px 0;
+    }
+    .method {
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .method-post { background: #16a34a; color: white; }
+    .method-get  { background: #2563eb; color: white; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ NAV -->
+<nav>
+  <div class="nav-header">
+    <h1>Smart Forms</h1>
+    <p>Documentación técnica</p>
+  </div>
+  <ul>
+    <li class="section-label">Arquitectura</li>
+    <li><a href="#overview">Visión General</a></li>
+    <li><a href="#components">Componentes</a></li>
+    <li><a href="#endpoints">API Backend</a></li>
+
+    <li class="section-label">Flujos</li>
+    <li><a href="#sign-flow">Flujo de Firma</a></li>
+    <li><a href="#data-pipeline">Pipeline de Datos</a></li>
+
+    <li class="section-label">Configuración</li>
+    <li><a href="#config-files">Archivos de Config</a></li>
+    <li><a href="#formconfig-anatomy">Anatomía de formConfig</a></li>
+    <li><a href="#multisigner">Multi-Firmantes</a></li>
+  </ul>
+  <div class="nav-footer">
+    Generado · 2026-05-09<br/>
+    Abrir en navegador — no requiere servidor
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════ MAIN -->
+<main>
+
+  <!-- ─────────────────────────────── 1. VISIÓN GENERAL -->
+  <section id="overview">
+    <div class="section-header">
+      <div class="section-icon">🏗</div>
+      <h2>Visión General</h2>
+      <span class="badge">Arquitectura</span>
+    </div>
+    <p class="lead">
+      Smart Forms es un sistema de formularios dinámicos para procesamiento de documentos legales.
+      El usuario completa un formulario web, el sistema genera un PDF relleno y crea una transacción
+      de firma electrónica en OneSpan.
+    </p>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Diagrama de sistema — componentes y comunicación</div>
+      <pre class="mermaid">
+flowchart TD
+    subgraph FE["🌐  Frontend — React + Vite  (puerto 3000)"]
+        direction LR
+        FL["FormLoader\n(carga configs)"]
+        WF["WizardForm\n(formulario multi-paso)"]
+        FL --> WF
+    end
+
+    subgraph BE["⚙️  Backend — Express  (puerto 4000)"]
+        direction TB
+        FP["POST /api/fill-pdf"]
+        SG["POST /api/sign"]
+        GU["POST /api/getSigningUrl"]
+        AP["POST/GET /api/applications"]
+        HE["GET /api/health"]
+        PY["🐍  fill.py\n(pdfrw)"]
+        DB[("🗄  SQLite\nborradores")]
+        FP -->|spawn| PY
+        AP --- DB
+    end
+
+    subgraph OS["☁️  OneSpan  (sandbox.esignlive.com)"]
+        PKG["/api/packages"]
+    end
+
+    Static["📁  public/forms/\n(configs + plantilla PDF)"]
+
+    FL -->|"fetch al cargar"| Static
+    WF -->|"PDF template + JSON"| FP
+    WF -->|"transactionJson\nX-OneSpan-API-Key"| SG
+    SG -->|"POST (auth API key)"| PKG
+    WF -->|"{ packageId }"| GU
+    GU -->|"GET signing URL"| PKG
+    WF -->|"guardar / cargar\nborradores"| AP
+    WF -->|"verificar disponibilidad"| HE
+
+    style FE fill:#eff6ff,stroke:#bfdbfe
+    style BE fill:#f0fdf4,stroke:#bbf7d0
+    style OS fill:#faf5ff,stroke:#e9d5ff
+      </pre>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── 2. COMPONENTES -->
+  <section id="components">
+    <div class="section-header">
+      <div class="section-icon">🧩</div>
+      <h2>Componentes Principales</h2>
+    </div>
+    <div class="component-grid">
+      <div class="component-card">
+        <div class="comp-icon">📋</div>
+        <h4>FormLoader</h4>
+        <p>Carga los 5 archivos de configuración y renderiza WizardForm con los props correctos.</p>
+        <code>components/forms/FormLoader.jsx</code>
+      </div>
+      <div class="component-card">
+        <div class="comp-icon">🧙</div>
+        <h4>WizardForm</h4>
+        <p>Formulario multi-paso. Maneja estado, validación, exportación, firma y borradores.</p>
+        <code>components/forms/WizardForm.jsx</code>
+      </div>
+      <div class="component-card">
+        <div class="comp-icon">📖</div>
+        <h4>DocsPage</h4>
+        <p>Documentación de la API de prefill generada dinámicamente desde formConfig.json.</p>
+        <code>components/DocsPage.jsx</code>
+      </div>
+      <div class="component-card">
+        <div class="comp-icon">🏷</div>
+        <h4>MaskedInputField</h4>
+        <p>Input con máscara de formato (CUIT, fechas). Valida dígitos y bloquea caracteres no numéricos.</p>
+        <code>components/forms/MaskedInputField.jsx</code>
+      </div>
+      <div class="component-card">
+        <div class="comp-icon">📧</div>
+        <h4>EmailInputField</h4>
+        <p>Input de email con validación visual. Genera derivedFields (usuario + dominio) automáticamente.</p>
+        <code>components/forms/EmailInputField.jsx</code>
+      </div>
+      <div class="component-card">
+        <div class="comp-icon">📅</div>
+        <h4>DateInputField</h4>
+        <p>Input de fecha con formato DD/MM/AAAA y validación de rango.</p>
+        <code>components/forms/DateInputField.jsx</code>
+      </div>
+      <div class="component-card">
+        <div class="comp-icon">🔧</div>
+        <h4>buildTransactionJson</h4>
+        <p>Construye el payload para OneSpan combinando datos del formulario con transactionConfig.json.</p>
+        <code>utils/buildTransactionJson.js</code>
+      </div>
+      <div class="component-card">
+        <div class="comp-icon">🗂</div>
+        <h4>fieldMappers</h4>
+        <p>Transforman formData antes de enviarlo al backend. Ej: split de email, mapeo de selecciones.</p>
+        <code>utils/fieldMappers.js</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── 3. ENDPOINTS -->
+  <section id="endpoints">
+    <div class="section-header">
+      <div class="section-icon">🔌</div>
+      <h2>API Backend</h2>
+    </div>
+    <p class="lead">El backend expone 5 endpoints. Los de OneSpan requieren el header <code>X-OneSpan-API-Key</code>.</p>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Método</th>
+            <th>Descripción</th>
+            <th>Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/api/health</code></td>
+            <td><span class="tag tag-blue">GET</span></td>
+            <td>Verifica que el servidor está activo</td>
+            <td>Se llama antes de cada firma</td>
+          </tr>
+          <tr>
+            <td><code>/api/fill-pdf</code></td>
+            <td><span class="tag tag-green">POST</span></td>
+            <td>Rellena el PDF con los datos del formulario vía Python/pdfrw</td>
+            <td>multipart/form-data: <code>pdf</code> + <code>json</code> + <code>responseType=base64</code></td>
+          </tr>
+          <tr>
+            <td><code>/api/sign</code></td>
+            <td><span class="tag tag-green">POST</span></td>
+            <td>Crea una transacción en OneSpan y devuelve el <code>packageId</code></td>
+            <td>Requiere <code>X-OneSpan-API-Key</code></td>
+          </tr>
+          <tr>
+            <td><code>/api/getSigningUrl</code></td>
+            <td><span class="tag tag-green">POST</span></td>
+            <td>Obtiene la URL de firma para redirigir al firmante</td>
+            <td>Requiere <code>X-OneSpan-API-Key</code></td>
+          </tr>
+          <tr>
+            <td><code>/api/applications</code></td>
+            <td><span class="tag tag-green">POST</span> <span class="tag tag-blue">GET</span></td>
+            <td>Guarda y recupera borradores de formulario</td>
+            <td>Devuelve URL con <code>?app={id}</code> para compartir</td>
+          </tr>
+          <tr>
+            <td><code>/api/prefill/:company/:form</code></td>
+            <td><span class="tag tag-green">POST</span></td>
+            <td>Pre-completa el formulario desde un sistema externo</td>
+            <td>Documentado en la ruta <code>/{form}/docs</code> de la app</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── 4. FLUJO DE FIRMA -->
+  <section id="sign-flow">
+    <div class="section-header">
+      <div class="section-icon">✍️</div>
+      <h2>Flujo de Firma</h2>
+      <span class="badge">Secuencia</span>
+    </div>
+    <p class="lead">
+      Al hacer click en "Firmar", WizardForm ejecuta 3 pasos en secuencia antes de redirigir al usuario a OneSpan.
+    </p>
+
+    <div class="steps" style="margin-bottom:24px">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h4>Generar PDF</h4>
+          <p>Envía la plantilla PDF + los datos del formulario al backend. Python (pdfrw) rellena los campos y devuelve el PDF en base64.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h4>Crear transacción OneSpan</h4>
+          <p>Construye el <code>transactionJson</code> (firmantes + posiciones de firma desde <code>transactionConfig.json</code>) y lo envía al backend, que lo reenvía a OneSpan. Devuelve un <code>packageId</code>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h4>Obtener URL de firma</h4>
+          <p>Con el <code>packageId</code>, solicita la URL de OneSpan donde el usuario puede firmar el documento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram-wrap">
+      <div class="diagram-title">Diagrama de secuencia — handleSign()</div>
+      <pre class="mermaid">
+sequenceDiagram
+    actor U as 👤 Usuario
+    participant F as WizardForm
+    participant B as Backend (Express)
+    participant P as fill.py (pdfrw)
+    participant O as OneSpan API
+
+    U->>F: Click "Firmar"
+    F->>B: GET /api/health
+    B-->>F: { status: "ok" }
+
+    rect rgb(239,246,255)
+        Note over F,P: Paso 1 — Generar PDF relleno
+        F->>B: POST /api/fill-pdf
+        Note right of F: multipart: PDF template + datos JSON
+        B->>P: spawn fill.py (normaliza texto, aplica pdfrw)
+        P-->>B: PDF relleno
+        B-->>F: { base64: "JVBERi0..." }
+    end
+
+    rect rgb(240,253,244)
+        Note over F,O: Paso 2 — Crear transacción
+        F->>B: POST /api/sign
+        Note right of F: transactionJson + X-OneSpan-API-Key
+        B->>O: POST /api/packages
+        O-->>B: { id: "packageId" }
+        B-->>F: { id: "packageId" }
+    end
+
+    rect rgb(250,245,255)
+        Note over F,O: Paso 3 — URL de firma
+        F->>B: POST /api/getSigningUrl  { packageId }
+        B->>O: GET signing URL para Signer1
+        O-->>B: { signingUrl: "https://..." }
+        B-->>F: { signingUrl }
+    end
+
+    F->>U: window.open(signingUrl, "_blank")
+      </pre>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── 5. PIPELINE DE DATOS -->
+  <section id="data-pipeline">
+    <div class="section-header">
+      <div class="section-icon">🔄</div>
+      <h2>Pipeline de Datos</h2>
+      <span class="badge">Transformación</span>
+    </div>
+    <p class="lead">
+      Los datos recorren distintas transformaciones desde que el usuario escribe hasta que llegan al PDF y a OneSpan.
+    </p>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Transformación de datos — del formulario al PDF y OneSpan</div>
+      <pre class="mermaid">
+flowchart LR
+    U["👤 Usuario\nllena campos"]
+
+    subgraph State["React State"]
+        FD["formData\nobject"]
+    end
+
+    subgraph Mappers["getMappedFormData()"]
+        DR["derivedFields\nCBU → 22 dígitos\nCUIT → 11 dígitos\nemail → user + domain"]
+        OP["optionFields\nPEP: Si/No → checkboxes PDF\nFATCA: tipo → checkbox"]
+        CB["checkboxes\ntrue/false → '/' o ''"]
+    end
+
+    subgraph Sign["buildTransactionJson()"]
+        SG["roles dinámicos\n1–4 firmantes"]
+        AP["approvals\n(posiciones de firma)\ndesde transactionConfig.json"]
+    end
+
+    JS["datos.json\ncampos del PDF"]
+    PDF["📄 PDF relleno\n(base64)"]
+    TX["transactionJson\npara OneSpan"]
+    OS["☁️ OneSpan\ntransacción creada"]
+
+    U -->|onChange| FD
+    FD -->|al firmar| DR
+    FD -->|al firmar| OP
+    FD -->|al firmar| CB
+    DR --> JS
+    OP --> JS
+    CB --> JS
+    JS -->|POST /api/fill-pdf| PDF
+    FD -->|NumeroFirmantes\nFirmanteN Nombre/Email/Apellido| SG
+    SG --> TX
+    AP --> TX
+    PDF -->|base64Content| TX
+    TX -->|POST /api/sign| OS
+
+    style State fill:#eff6ff,stroke:#bfdbfe
+    style Mappers fill:#f0fdf4,stroke:#bbf7d0
+    style Sign fill:#faf5ff,stroke:#e9d5ff
+      </pre>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── 6. CONFIG FILES -->
+  <section id="config-files">
+    <div class="section-header">
+      <div class="section-icon">📁</div>
+      <h2>Archivos de Configuración</h2>
+      <span class="badge">Config-Driven</span>
+    </div>
+    <p class="lead">
+      Toda la lógica de un formulario está declarada en archivos JSON dentro de
+      <code>public/forms/{company}/{form}/</code>. Agregar un nuevo formulario
+      no requiere tocar código React.
+    </p>
+
+    <div class="diagram-wrap">
+      <div class="diagram-title">Relaciones entre archivos de configuración y componentes</div>
+      <pre class="mermaid">
+flowchart TD
+    subgraph Public["📁 public/forms/"]
+        subgraph Co["📁 {company}/"]
+            Brand["brand.json\n· name, logos\n· favicon, colors"]
+            subgraph Fo["📁 {form}/"]
+                FC["formConfig.json\n· steps[]\n· fields (label, type, mask…)\n· visibleIf / enabledIf\n· derivedFields / optionFields"]
+                PC["pdfConfig.json\n· title\n· templatePdf"]
+                AC["appConfig.json\n· showJsonOnRevision"]
+                TC["transactionConfig.json\n· status, name, description\n· document { name, id }\n· approvals[] (posiciones PDF)"]
+                PDF["*.pdf\nPlantilla del documento"]
+            end
+        end
+    end
+
+    FL["FormLoader.jsx\nfetch al montar"]
+    WF["WizardForm.jsx"]
+    BTJ["buildTransactionJson.js"]
+
+    FC -->|formConfig| FL
+    PC -->|pdfConfig| FL
+    AC -->|appConfig| FL
+    TC -->|transactionConfig| FL
+    Brand -->|brandConfig| FL
+    FL -->|5 props| WF
+    WF -->|transactionConfig| BTJ
+    PDF -->|"fetch en handleSign()"| WF
+
+    style Public fill:#fffbeb,stroke:#fde68a
+    style FL fill:#eff6ff,stroke:#bfdbfe
+    style WF fill:#eff6ff,stroke:#bfdbfe
+      </pre>
+    </div>
+
+    <div class="card">
+      <h3>Descripción de cada archivo</h3>
+      <table>
+        <thead>
+          <tr><th>Archivo</th><th>Obligatorio</th><th>Contenido clave</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>formConfig.json</code></td>
+            <td><span class="tag tag-green">Sí</span></td>
+            <td>Define todos los pasos y campos del formulario. Es la fuente de verdad del formulario.</td>
+          </tr>
+          <tr>
+            <td><code>pdfConfig.json</code></td>
+            <td><span class="tag tag-green">Sí</span></td>
+            <td><code>title</code> (título de la página) y <code>templatePdf</code> (nombre del archivo PDF).</td>
+          </tr>
+          <tr>
+            <td><code>appConfig.json</code></td>
+            <td><span class="tag tag-green">Sí</span></td>
+            <td>Opciones de UI. <code>showJsonOnRevision: true</code> muestra el JSON en la pantalla de revisión.</td>
+          </tr>
+          <tr>
+            <td><code>transactionConfig.json</code></td>
+            <td><span class="tag tag-orange">Recom.</span></td>
+            <td>Configuración estática de la transacción OneSpan: metadata y posiciones de campos de firma en el PDF.</td>
+          </tr>
+          <tr>
+            <td><code>brand.json</code></td>
+            <td><span class="tag tag-green">Sí</span></td>
+            <td>Identidad visual de la empresa. Compartido entre todos los formularios de la misma empresa.</td>
+          </tr>
+          <tr>
+            <td><code>*.pdf</code></td>
+            <td><span class="tag tag-green">Sí</span></td>
+            <td>Plantilla PDF con campos rellenables. El nombre debe coincidir con <code>pdfConfig.templatePdf</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── 7. ANATOMÍA formConfig -->
+  <section id="formconfig-anatomy">
+    <div class="section-header">
+      <div class="section-icon">🔬</div>
+      <h2>Anatomía de formConfig</h2>
+      <span class="badge">Referencia</span>
+    </div>
+    <p class="lead">
+      Cada campo en <code>formConfig.json</code> puede tener propiedades que controlan su tipo,
+      validación, visibilidad y transformación de datos.
+    </p>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Propiedades disponibles en un campo de formConfig</div>
+      <pre class="mermaid">
+flowchart TD
+    Field["Campo\n{ ...propiedades }"]
+
+    Field --> ID["🔑  Identificación\nname: clave en formData y en el PDF\nlabel: texto visible al usuario"]
+
+    Field --> Type["🎨  Tipo de campo\ntext · textarea\ndate · email · tel\ncheckbox (radio si exclusiveGroup)\nbutton-group · info · subtitle · group"]
+
+    Field --> Validation["✅  Validación\nmask: '##-########-#'\n  → MaskedInputField (solo dígitos)\n  → valida longitud exacta\ndigits: 22\n  → valida dígitos sin formato\nrequired: true"]
+
+    Field --> Visibility["👁  Condicionales\nvisibleIf: { field, value }\n  value puede ser string o array\nenabledIf: { field, value }\nhideOnRevision: true"]
+
+    Field --> Transform["🔄  Transformación de datos\nformatter: 'cbuFormatter'\n  → se aplica en onChange y en importar JSON\nsyncTo: 'otroCampo'\n  → copia el valor a otro campo\nderivedFields: [{ name, value: expr }]\n  → evalúa expresión con el valor actual\n  → ej: split de CBU en 22 dígitos\noptionFields: [{ PDFfield: 'val' }]\n  → mapea opción seleccionada a campos PDF"]
+
+    Field --> OneSpan["✍️  OneSpan (button-group)\nexclusiveGroup: 'FATCA_tipos'\n  → radio-style: solo uno activo"]
+
+    style Field fill:#1e3a5f,color:#fff,stroke:#1e3a5f
+    style ID fill:#eff6ff,stroke:#bfdbfe
+    style Type fill:#f0fdf4,stroke:#bbf7d0
+    style Validation fill:#fff7ed,stroke:#fed7aa
+    style Visibility fill:#faf5ff,stroke:#e9d5ff
+    style Transform fill:#fef2f2,stroke:#fecaca
+    style OneSpan fill:#f0fdf4,stroke:#bbf7d0
+      </pre>
+    </div>
+
+    <div class="card">
+      <h3>Tipos de campo disponibles</h3>
+      <table>
+        <thead>
+          <tr><th>type</th><th>Componente</th><th>Notas</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>text</code></td><td>input[type=text]</td><td>Si tiene <code>mask</code>, usa MaskedInputField. Si tiene <code>formatter</code>, aplica en onChange.</td></tr>
+          <tr><td><code>date</code></td><td>DateInputField</td><td>Formato DD/MM/AAAA. Normaliza al importar JSON.</td></tr>
+          <tr><td><code>email</code></td><td>EmailInputField</td><td>Genera <code>derivedFields</code> con usuario y dominio automáticamente.</td></tr>
+          <tr><td><code>tel</code></td><td>PhoneInputField</td><td>Selector de código de país + número.</td></tr>
+          <tr><td><code>checkbox</code></td><td>input[type=checkbox]</td><td>Exporta como <code>"/"</code> (marcado) o <code>""</code> (vacío). Con <code>exclusiveGroup</code> actúa como radio.</td></tr>
+          <tr><td><code>button-group</code></td><td>botones</td><td>Selección de una opción de una lista. Usa <code>optionFields</code> para mapear a campos PDF.</td></tr>
+          <tr><td><code>textarea</code></td><td>textarea</td><td>Campo de texto libre multilínea.</td></tr>
+          <tr><td><code>info</code></td><td>div (solo lectura)</td><td>Muestra texto informativo. No genera datos.</td></tr>
+          <tr><td><code>subtitle</code></td><td>h4</td><td>Subtítulo de sección. No genera datos.</td></tr>
+          <tr><td><code>group</code></td><td>div destacado</td><td>Encabezado de grupo visual. No genera datos.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── 8. MULTI-FIRMANTES -->
+  <section id="multisigner">
+    <div class="section-header">
+      <div class="section-icon">👥</div>
+      <h2>Lógica Multi-Firmantes</h2>
+    </div>
+    <p class="lead">
+      El campo <code>NumeroFirmantes</code> controla cuántos firmantes se muestran en el formulario
+      y cuántos roles se incluyen en la transacción OneSpan.
+    </p>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Control de visibilidad y transacción según NumeroFirmantes</div>
+      <pre class="mermaid">
+flowchart LR
+    NF["NumeroFirmantes\n button-group: 1 · 2 · 3 · 4"]
+
+    subgraph Form["Formulario — visibleIf"]
+        F1["Firmante 1\nsiempre visible"]
+        F2["Firmante 2\nvisibleIf value: ['2','3','4']"]
+        F3["Firmante 3\nvisibleIf value: ['3','4']"]
+        F4["Firmante 4\nvisibleIf value: '4'"]
+    end
+
+    subgraph Transaction["buildTransactionJson()"]
+        R1["Signer1\nrole + signer"]
+        R2["Signer2\nrole + signer"]
+        R3["Signer3\nrole + signer"]
+        R4["Signer4\nrole + signer"]
+    end
+
+    subgraph TC["transactionConfig.json"]
+        AP["approvals[]\nposiciones de firma\nen el PDF por página"]
+    end
+
+    NF -->|"=1"| F1
+    NF -->|"=2"| F1
+    NF -->|"=2"| F2
+    NF -->|"=3"| F1
+    NF -->|"=3"| F2
+    NF -->|"=3"| F3
+    NF -->|"=4"| F1
+    NF -->|"=4"| F2
+    NF -->|"=4"| F3
+    NF -->|"=4"| F4
+
+    NF -->|"slice(0, count)"| R1
+    NF -->|"slice(0, count)"| R2
+    NF -->|"slice(0, count)"| R3
+    NF -->|"slice(0, count)"| R4
+
+    TC --> AP
+    AP -->|"approvals"| R1
+
+    style TC fill:#faf5ff,stroke:#e9d5ff
+      </pre>
+    </div>
+
+    <div class="card">
+      <h3>Datos de cada firmante</h3>
+      <table>
+        <thead>
+          <tr><th>Campo en formData</th><th>Rol en OneSpan</th><th>Descripción</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Firmante1Email</code></td><td>Signer1 · signers[0].email</td><td>Email del primer firmante</td></tr>
+          <tr><td><code>Firmante1Nombre</code></td><td>Signer1 · signers[0].firstName</td><td>Nombre del primer firmante</td></tr>
+          <tr><td><code>Firmante1Apellido</code></td><td>Signer1 · signers[0].lastName</td><td>Apellido del primer firmante</td></tr>
+          <tr><td><code>FirmanteNEmail</code></td><td>SignerN · signers[0].email</td><td>Misma estructura para firmantes 2, 3 y 4</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.78rem;color:#64748b;margin-top:12px">
+        ⚠️ Las posiciones de firma (<code>approvals</code>) en <code>transactionConfig.json</code> actualmente
+        solo definen ubicaciones para <strong>Signer1</strong>. Los firmantes 2–4 reciben el email de firma
+        pero no tienen campo de firma posicionado en el PDF.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor:       '#dbeafe',
+      primaryTextColor:   '#1e293b',
+      primaryBorderColor: '#93c5fd',
+      lineColor:          '#94a3b8',
+      secondaryColor:     '#f0fdf4',
+      tertiaryColor:      '#faf5ff',
+      fontSize:           '13px',
+    },
+    flowchart: { curve: 'basis', padding: 20 },
+    sequence:  { actorFontSize: 13, messageFontSize: 12, noteFontSize: 11 },
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const links    = document.querySelectorAll('nav a[href^="#"]');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          links.forEach((l) => l.classList.remove('active'));
+          const active = document.querySelector(`nav a[href="#${e.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    },
+    { rootMargin: '-20% 0px -70% 0px' }
+  );
+  sections.forEach((s) => observer.observe(s));
+</script>
+</body>
+</html>
