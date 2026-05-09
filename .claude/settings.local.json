@@ -31,7 +31,11 @@
       "Bash(grep -n \"source\\\\|require_\\\\|eval \\\\$\\(node\" /home/hernan/dynamic-form/start-development.sh /home/hernan/dynamic-form/start-backend-dev.sh /home/hernan/dynamic-form/stop-production.sh /home/hernan/dynamic-form/start-docker.sh /home/hernan/dynamic-form/set-apikey.sh)",
       "Bash(grep -n \"source\\\\|require_\\\\|eval \\\\$\\(node\" /home/hernan/dynamic-form/start-development.sh)",
       "Bash(grep -n \"eval \\\\$\\(node\" /home/hernan/dynamic-form/start-development.sh)",
-      "Bash(grep *)"
+      "Bash(grep *)",
+      "PowerShell(node -e \"try { JSON.parse\\(require\\('fs'\\).readFileSync\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/src/config/formConfig.json','utf8'\\)\\); console.log\\('JSON valido'\\); } catch\\(e\\) { console.error\\('ERROR:', e.message\\); }\")",
+      "PowerShell(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/src/test-data/persona-juridica-allaria.json','utf8'\\)\\); console.log\\('JSON valido'\\)\")",
+      "PowerShell(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/src/config/formConfig.json','utf8'\\)\\); console.log\\('JSON valido'\\)\")",
+      "PowerShell(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/public/forms/allaria/persona-juridica/formConfig.json','utf8'\\)\\); console.log\\('JSON valido'\\)\")"
     ],
     "deny": [],
     "ask": []

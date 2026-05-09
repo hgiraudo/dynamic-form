@@ -25,5 +25,6 @@ export function isFieldInvalid(field, value) {
   if (field.type === "email") return !isValidEmail(value);
   if (field.type === "date") return !isValidDate(value);
   if (field.mask) return !isValidMask(value, field.mask);
+  if (field.digits) return value.replace(/\D/g, "").length !== field.digits;
   return false;
 }

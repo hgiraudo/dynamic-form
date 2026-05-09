@@ -1,3 +1,19 @@
+export const applyMask = (input, mask) => {
+  const digits = (input || "").replace(/\D/g, "");
+  let result = "";
+  let di = 0;
+  for (let i = 0; i < mask.length && di < digits.length; i++) {
+    if (mask[i] === "#") result += digits[di++];
+    else result += mask[i];
+  }
+  return result;
+};
+
+export const cbuFormatter = (value) => {
+  if (!value) return "";
+  return value.replace(/\D/g, "").slice(0, 22);
+};
+
 export const cuitFormatter = (value) => {
   if (!value) return "";
   let val = value.replace(/\D/g, "");

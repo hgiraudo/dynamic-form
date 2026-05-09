@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import CIcon from "@coreui/icons-react";
 import * as Icons from "@coreui/icons";
 import * as fieldFormatters from "../../utils/fieldFormatters";
+import { applyMask } from "../../utils/fieldFormatters";
 import { formatDateDDMMYYYY, parseDateDDMMYYYY } from "../../utils/utils";
 import { isFieldInvalid } from "../../utils/fieldValidators";
 import config from '@shared/config.general.js'
@@ -125,6 +126,15 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, company, fo
             }`
           );
         }
+
+        // Aplicar mask o formatter al importar
+        if (normalizedData[field.name]) {
+          if (field.mask) {
+            normalizedData[field.name] = applyMask(normalizedData[field.name], field.mask);
+          } else if (field.formatter && fieldFormatters[field.formatter]) {
+            normalizedData[field.name] = fieldFormatters[field.formatter](normalizedData[field.name]);
+          }
+        }
       });
     });
 
@@ -218,6 +228,8 @@ const handleExport = () => {
       // Si value es cadena vacía, interpretamos "mostrar si el otro campo NO está vacío"
       if (value === "") {
         if (!depValue) return null;
+      } else if (Array.isArray(value)) {
+        if (!value.includes(depValue)) return null;
       } else {
         if (depValue !== value) return null;
       }

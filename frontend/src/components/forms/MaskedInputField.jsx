@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import { isValidMask } from "../../utils/fieldValidators";
-
-function applyMask(input, mask) {
-  const digits = input.replace(/\D/g, "");
-  let result = "";
-  let di = 0;
-  for (let i = 0; i < mask.length && di < digits.length; i++) {
-    if (mask[i] === "#") result += digits[di++];
-    else result += mask[i];
-  }
-  return result;
-}
+import { applyMask } from "../../utils/fieldFormatters";
 
 const expectedDigits = (mask) => mask.split("").filter((c) => c === "#").length;
 
