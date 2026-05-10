@@ -35,8 +35,18 @@ def extract_form_fields_and_labels(input_pdf):
                 annot = annot.get_object()
 
             field_name = annot.get("/T")
-            rect = annot.get("/Rect")
             field_type = annot.get("/FT")
+
+            # Radio buttons: el widget en /Annots no tiene /T; el nombre está en el campo padre
+            if not field_name and "/Parent" in annot:
+                parent = annot["/Parent"]
+                if isinstance(parent, IndirectObject):
+                    parent = parent.get_object()
+                field_name = parent.get("/T")
+                if not field_type:
+                    field_type = parent.get("/FT")
+
+            rect = annot.get("/Rect")
 
             # Obtener tab index
             tab_index = None
@@ -178,61 +188,82 @@ def verify_filled_fields(output_pdf, expected_values, log_file):
         print(f"[OK] Todos los campos se llenaron correctamente")
 
 
-def main():
-    # Parámetros opcionales
-    args = sys.argv[1:]
-    input_pdf = args[0] if len(args) > 0 else (
-        "input-fixed.pdf" if os.path.isfile("input-fixed.pdf") else DEFAULT_INPUT_PDF
-    )
-    combined_json = args[1] if len(args) > 1 else DEFAULT_COMBINED_JSON
-    fields_example_json = args[2] if len(args) > 2 else DEFAULT_FIELDS_EXAMPLE_JSON
-
-    if not os.path.isfile(input_pdf):
-        print(f"[ERROR] El archivo {input_pdf} no existe.")
-        sys.exit(1)
-
+def process_one(input_pdf, output_pdf, combined_json, fields_example_json, unfilled_log):
     print(f"[INFO] Procesando {input_pdf} ...")
 
     fields, labels, fields_example = extract_form_fields_and_labels(input_pdf)
 
-    # Guardar JSON de campos y etiquetas
     combined_data = {"fields": fields, "labels": labels}
     with open(combined_json, "w", encoding="utf-8") as f:
         json.dump(combined_data, f, indent=4, ensure_ascii=False)
-    print(f"[OK] JSON combinado exportado a {combined_json} (fields: {len(fields)}, labels: {len(labels)})")
+    print(f"[OK] JSON combinado  -> {combined_json} (fields: {len(fields)}, labels: {len(labels)})")
 
-    # Guardar JSON de valores de ejemplo de campos
     with open(fields_example_json, "w", encoding="utf-8") as f:
         json.dump(fields_example, f, indent=4, ensure_ascii=False)
-    print(f"[OK] JSON de ejemplo exportado a {fields_example_json} (campos: {len(fields_example)})")
+    print(f"[OK] JSON de ejemplo -> {fields_example_json} (campos: {len(fields_example)})")
 
-    # Generar PDF de salida con fill.py
-    print(f"\n[INFO] Generando PDF de salida con valores de ejemplo...")
+    print(f"[INFO] Generando PDF de salida ...")
     fill_script = os.path.join(os.path.dirname(__file__), "..", "backend", "fill.py")
 
     try:
         result = subprocess.run(
-            ["python", fill_script, input_pdf, fields_example_json, DEFAULT_OUTPUT_PDF],
+            ["python", fill_script, input_pdf, fields_example_json, output_pdf],
             capture_output=True,
             text=True,
             timeout=60
         )
-
         if result.returncode == 0:
-            print(f"[OK] PDF de salida generado: {DEFAULT_OUTPUT_PDF}")
-
-            # Verificar campos no llenados
-            print(f"\n[INFO] Verificando campos llenados...")
-            verify_filled_fields(DEFAULT_OUTPUT_PDF, fields_example, DEFAULT_UNFILLED_LOG)
+            print(f"[OK] PDF de salida     -> {output_pdf}")
+            print(f"[INFO] Verificando campos llenados ...")
+            verify_filled_fields(output_pdf, fields_example, unfilled_log)
         else:
             print(f"[ERROR] Error al generar PDF: {result.stderr}")
-
     except subprocess.TimeoutExpired:
         print(f"[ERROR] Timeout al generar PDF")
     except FileNotFoundError:
-        print(f"[ERROR] No se encontró el script fill.py en {fill_script}")
+        print(f"[ERROR] No se encontro el script fill.py en {fill_script}")
     except Exception as e:
         print(f"[ERROR] Error inesperado: {e}")
+
+
+def main():
+    args = sys.argv[1:]
+
+    if args:
+        # Modo archivo único
+        input_pdf = args[0]
+        if not os.path.isfile(input_pdf):
+            print(f"[ERROR] El archivo {input_pdf} no existe.")
+            sys.exit(1)
+        stem = os.path.splitext(input_pdf)[0]
+        process_one(
+            input_pdf,
+            output_pdf          = f"{stem}-output.pdf",
+            combined_json       = args[1] if len(args) > 1 else DEFAULT_COMBINED_JSON,
+            fields_example_json = args[2] if len(args) > 2 else DEFAULT_FIELDS_EXAMPLE_JSON,
+            unfilled_log        = DEFAULT_UNFILLED_LOG,
+        )
+    else:
+        # Modo batch: procesar todos los PDF del directorio (excepto los -output)
+        pdfs = sorted(
+            f for f in os.listdir(".")
+            if f.lower().endswith(".pdf") and not f.lower().endswith("-output.pdf")
+        )
+        if not pdfs:
+            print("[ERROR] No se encontraron archivos PDF en el directorio.")
+            sys.exit(1)
+        print(f"[INFO] {len(pdfs)} archivo(s) encontrado(s): {', '.join(pdfs)}\n")
+        for pdf in pdfs:
+            stem = os.path.splitext(pdf)[0]
+            print(f"{'=' * 60}")
+            process_one(
+                pdf,
+                output_pdf          = f"{stem}-output.pdf",
+                combined_json       = f"{stem}-fields_and_labels.json",
+                fields_example_json = f"{stem}-fields_example.json",
+                unfilled_log        = f"{stem}-unfilled.log",
+            )
+            print()
 
 
 if __name__ == "__main__":
