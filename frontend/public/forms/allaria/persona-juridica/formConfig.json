@@ -265,7 +265,7 @@
           }
         },
         {
-          "name": "CertificadoRep3",
+          "name": "CertificadoPersonalFirmante3",
           "label": "Utiliza un certificado personal (Ley 27446)",
           "type": "checkbox",
           "visibleIf": {
@@ -277,7 +277,7 @@
           }
         },
         {
-          "name": "SmsRep3",
+          "name": "SmsFirmante3",
           "label": "Enviar código de autorización por SMS",
           "type": "checkbox",
           "visibleIf": {
@@ -293,7 +293,7 @@
           "label": "Número de celular",
           "type": "tel",
           "visibleIf": {
-            "field": "SmsRep3",
+            "field": "SmsFirmante3",
             "value": true
           },
           "placeholder": "ej. +54 9 11 1234-5678"
@@ -343,7 +343,7 @@
           }
         },
         {
-          "name": "CertificadoRep4",
+          "name": "CertificadoPersonalFirmante4",
           "label": "Utiliza un certificado personal (Ley 27446)",
           "type": "checkbox",
           "visibleIf": {
@@ -352,7 +352,7 @@
           }
         },
         {
-          "name": "SmsRep4",
+          "name": "SmsFirmante4",
           "label": "Enviar código de autorización por SMS",
           "type": "checkbox",
           "visibleIf": {
@@ -365,7 +365,7 @@
           "label": "Número de celular",
           "type": "tel",
           "visibleIf": {
-            "field": "SmsRep4",
+            "field": "SmsFirmante4",
             "value": true
           },
           "placeholder": "ej. +54 9 11 1234-5678"
@@ -1180,7 +1180,7 @@
           "placeholder": "ej. 123-45-6789"
         },
         {
-          "name": "EA_PEP1",
+          "name": "EstructuraAccionariaAccionista1EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
           "options": [
@@ -1361,7 +1361,7 @@
           }
         },
         {
-          "name": "EA_PEP2",
+          "name": "EstructuraAccionariaAccionista2EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
           "options": [
@@ -1517,7 +1517,7 @@
           }
         },
         {
-          "name": "EA_PEP3",
+          "name": "EstructuraAccionariaAccionista3EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
           "options": [
@@ -1634,7 +1634,7 @@
           "placeholder": "ej. 123-45-6789"
         },
         {
-          "name": "BF_PEP1",
+          "name": "BeneficiarioFinal1EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
           "options": [
@@ -1815,7 +1815,7 @@
           }
         },
         {
-          "name": "BF_PEP2",
+          "name": "BeneficiarioFinal2EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
           "options": [
@@ -1971,7 +1971,7 @@
           }
         },
         {
-          "name": "BF_PEP3",
+          "name": "BeneficiarioFinal3EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
           "options": [
@@ -2031,7 +2031,7 @@
           "placeholder": "ej. 30-12345678-9"
         },
         {
-          "name": "RF_Add2",
+          "name": "AgregarPaisFiscal2",
           "label": "Agregar otro país",
           "type": "checkbox",
           "hideOnRevision": true
@@ -2041,7 +2041,7 @@
           "name": "RF2_Title",
           "content": "\n\nResidencia Fiscal 2",
           "visibleIf": {
-            "field": "RF_Add2",
+            "field": "AgregarPaisFiscal2",
             "value": true
           },
           "hideOnRevision": true
@@ -2052,7 +2052,7 @@
           "type": "text",
           "placeholder": "ej. Estados Unidos",
           "visibleIf": {
-            "field": "RF_Add2",
+            "field": "AgregarPaisFiscal2",
             "value": true
           }
         },
@@ -2062,7 +2062,7 @@
           "type": "text",
           "placeholder": "ej. 123 Main St, New York, NY",
           "visibleIf": {
-            "field": "RF_Add2",
+            "field": "AgregarPaisFiscal2",
             "value": true
           }
         },
@@ -2072,16 +2072,16 @@
           "type": "text",
           "placeholder": "ej. 12-3456789",
           "visibleIf": {
-            "field": "RF_Add2",
+            "field": "AgregarPaisFiscal2",
             "value": true
           }
         },
         {
-          "name": "RF_Add3",
+          "name": "AgregarPaisFiscal3",
           "label": "Agregar otro país",
           "type": "checkbox",
           "visibleIf": {
-            "field": "RF_Add2",
+            "field": "AgregarPaisFiscal2",
             "value": true
           },
           "hideOnRevision": true
@@ -2091,7 +2091,7 @@
           "name": "RF3_Title",
           "content": "\n\nResidencia Fiscal 3",
           "visibleIf": {
-            "field": "RF_Add3",
+            "field": "AgregarPaisFiscal3",
             "value": true
           },
           "hideOnRevision": true
@@ -2102,7 +2102,7 @@
           "type": "text",
           "placeholder": "ej. España",
           "visibleIf": {
-            "field": "RF_Add3",
+            "field": "AgregarPaisFiscal3",
             "value": true
           }
         },
@@ -2112,7 +2112,7 @@
           "type": "text",
           "placeholder": "ej. Calle Serrano 45, Madrid",
           "visibleIf": {
-            "field": "RF_Add3",
+            "field": "AgregarPaisFiscal3",
             "value": true
           }
         },
@@ -2122,7 +2122,7 @@
           "type": "text",
           "placeholder": "ej. A12345678",
           "visibleIf": {
-            "field": "RF_Add3",
+            "field": "AgregarPaisFiscal3",
             "value": true
           }
         },

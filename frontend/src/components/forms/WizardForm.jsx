@@ -119,15 +119,10 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transaction
           normalizedData[field.name] = parseDateDDMMYYYY(normalizedData[field.name]);
         }
 
-        // Si es checkbox, convertir "/" → true y "" → false
+        // Si es checkbox, normalizar "/" (formato viejo PDF) y boolean
         if (field.type === "checkbox") {
-          const oldValue = normalizedData[field.name];
-          normalizedData[field.name] = normalizedData[field.name] === "/";
-          console.log(
-            `Campo checkbox '${field.name}': '${oldValue}' → ${
-              normalizedData[field.name]
-            }`
-          );
+          const v = normalizedData[field.name];
+          normalizedData[field.name] = v === "/" || v === true;
         }
 
         // Aplicar mask o formatter al importar
@@ -189,6 +184,16 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transaction
     return mappedData;
   };
 
+  const getUserData = () => {
+    const knownFields = new Set();
+    formConfig.steps.forEach((step) => {
+      step.fields.forEach((field) => { if (field.name) knownFields.add(field.name); });
+    });
+    return Object.fromEntries(
+      Object.entries(formData).filter(([key]) => knownFields.has(key))
+    );
+  };
+
   const getPdfData = () => {
     const data = getMappedFormData();
 
@@ -207,11 +212,10 @@ const handleExport = () => {
   console.log("▶️ handleExport iniciado");
 
   try {
-    const mappedData = getMappedFormData();
-    console.log("🧩 getMappedFormData output:", mappedData);
+    const mappedData = getUserData();
 
     if (!mappedData) {
-      throw new Error("getMappedFormData devolvió null/undefined");
+      throw new Error("getUserData devolvió null/undefined");
     }
 
     const dataStr = JSON.stringify(mappedData, null, 2);
@@ -933,7 +937,7 @@ try {
 
                         // Campos normales
                         const rowBg = idx % 2 === 0 ? "bg-gray-50" : "bg-white";
-                        let displayValue = getMappedFormData()[field.name] ?? "";
+                        let displayValue = formData[field.name] ?? "";
                         if (field.type === "checkbox") {
                           displayValue = formData[field.name] ? "Sí" : "No";
                         }
@@ -962,7 +966,7 @@ try {
 
               {appConfig.showJsonOnRevision && (
                 <pre className="mt-6 p-4 bg-gray-100 border rounded overflow-x-auto text-xs">
-                  {JSON.stringify(getMappedFormData(), null, 2)}
+                  {JSON.stringify(getUserData(), null, 2)}
                 </pre>
               )}
 
