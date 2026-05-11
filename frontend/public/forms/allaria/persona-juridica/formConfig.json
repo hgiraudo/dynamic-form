@@ -43,22 +43,26 @@
         {
           "name": "Firmante1Nombre",
           "label": "Nombre",
-          "type": "text"
+          "type": "text",
+          "example": "Juan Carlos"
         },
         {
           "name": "Firmante1Apellido",
           "label": "Apellido",
-          "type": "text"
+          "type": "text",
+          "example": "García"
         },
         {
           "name": "Firmante1Email",
           "label": "Correo",
-          "type": "email"
+          "type": "email",
+          "example": "jgarcia@empresa.com.ar"
         },
         {
           "name": "RepresentanteCargo1",
           "label": "Cargo en la Sociedad",
-          "type": "text"
+          "type": "text",
+          "example": "Gerente General"
         },
         {
           "name": "CertificadoRep1",
@@ -109,6 +113,7 @@
           "name": "Firmante2Nombre",
           "label": "Nombre",
           "type": "text",
+          "example": "María Isabel",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": [
@@ -122,6 +127,7 @@
           "name": "Firmante2Apellido",
           "label": "Apellido",
           "type": "text",
+          "example": "López",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": [
@@ -135,6 +141,7 @@
           "name": "Firmante2Email",
           "label": "Correo",
           "type": "email",
+          "example": "mlopez@empresa.com.ar",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": [
@@ -148,6 +155,7 @@
           "name": "RepresentanteCargo2",
           "label": "Cargo en la Sociedad",
           "type": "text",
+          "example": "Directora",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": [
@@ -220,6 +228,7 @@
           "name": "Firmante3Nombre",
           "label": "Nombre",
           "type": "text",
+          "example": "Carlos Alberto",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": [
@@ -232,6 +241,7 @@
           "name": "Firmante3Apellido",
           "label": "Apellido",
           "type": "text",
+          "example": "Martínez",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": [
@@ -244,6 +254,7 @@
           "name": "Firmante3Email",
           "label": "Correo",
           "type": "email",
+          "example": "cmartinez@empresa.com.ar",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": [
@@ -307,6 +318,7 @@
           "name": "Firmante4Nombre",
           "label": "Nombre",
           "type": "text",
+          "example": "Ana Laura",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": "4"
@@ -316,6 +328,7 @@
           "name": "Firmante4Apellido",
           "label": "Apellido",
           "type": "text",
+          "example": "Fernández",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": "4"
@@ -325,6 +338,7 @@
           "name": "Firmante4Email",
           "label": "Correo",
           "type": "email",
+          "example": "afernandez@empresa.com.ar",
           "visibleIf": {
             "field": "NumeroFirmantes",
             "value": "4"
@@ -2190,22 +2204,26 @@
         {
           "name": "OCDEFATCAIntermediarioCalificadoGIIN",
           "label": "Intermediario Calificado (QIs)",
-          "type": "text"
+          "type": "text",
+          "example": "XXXXXXXXX.XXXXX.QI.032"
         },
         {
           "name": "OCDEFATCATrustExtranjeroGIIN",
           "label": "Trust Extranjero con Acuerdo de Retención",
-          "type": "text"
+          "type": "text",
+          "example": "XXXXXXXXX.XXXXX.WT.032"
         },
         {
           "name": "OCDEFATCASociedadExtranjera",
           "label": "Sociedad Extranjera con Acuerdo de Retención",
-          "type": "text"
+          "type": "text",
+          "example": "XXXXXXXXX.XXXXX.WP.032"
         },
         {
           "name": "OCDEFATCAEntidadExtranjeraNoFinanciera",
           "label": "Entidad Extranjera No Financiera de Reporte",
-          "type": "text"
+          "type": "text",
+          "example": "XXXXXXXXX.XXXXX.NF.032"
         }
       ]
     },

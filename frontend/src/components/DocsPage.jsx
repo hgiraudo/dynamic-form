@@ -16,9 +16,13 @@ function fieldType(field) {
   return { label: "string", color: "blue" };
 }
 
+const SKIP_TYPES = ["info", "comment", "subtitle", "group", "spacer"];
+
 function fieldExample(field) {
+  if (field.example !== undefined) return field.example;
   if (field.type === "checkbox")    return false;
-  if (field.type === "date")        return "2024-01-15";
+  if (field.type === "date")        return "15/01/2024";
+  if (field.type === "email")       return "usuario@dominio.com";
   if (field.type === "button-group" && field.options?.length) return field.options[0];
   if (field.placeholder)            return field.placeholder.replace(/^ej\.\s*/i, "");
   return "";
@@ -28,7 +32,7 @@ function buildExampleBody(formConfig) {
   const obj = {};
   formConfig.steps.forEach((step) => {
     step.fields.forEach((field) => {
-      if (!field.name || ["info", "comment", "subtitle", "group"].includes(field.type)) return;
+      if (!field.name || SKIP_TYPES.includes(field.type)) return;
       obj[field.name] = fieldExample(field);
     });
   });
@@ -65,7 +69,7 @@ function CopyButton({ text, label = "Copiar" }) {
 
 function StepSection({ step, stepIndex }) {
   const fields = step.fields.filter(
-    (f) => f.name && !["info", "comment", "subtitle", "group"].includes(f.type)
+    (f) => f.name && !SKIP_TYPES.includes(f.type)
   );
   if (!fields.length) return null;
 
@@ -113,7 +117,7 @@ function StepSection({ step, stepIndex }) {
                   </td>
                   <td className="px-4 py-3 text-gray-600 text-xs">{field.label}</td>
                   <td className="px-4 py-3">
-                    {fieldExample(field) !== "" && fieldExample(field) !== false ? (
+                    {fieldExample(field) !== "" ? (
                       <span className="text-xs font-mono text-gray-400 truncate block max-w-[160px]">
                         {String(fieldExample(field))}
                       </span>
