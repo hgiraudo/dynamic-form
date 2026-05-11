@@ -201,6 +201,19 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transaction
       data[name] = evalDerivedField(expr, data[source] ?? "");
     });
 
+    (pdfConfig.excludeGroups || []).forEach(({ controlField, groups }) => {
+      const count = parseInt(data[controlField] ?? "0", 10);
+      groups.forEach(({ minValue, prefixes }) => {
+        if (count < minValue) {
+          Object.keys(data).forEach(key => {
+            if (prefixes.some(prefix => key.startsWith(prefix))) {
+              delete data[key];
+            }
+          });
+        }
+      });
+    });
+
     (pdfConfig.globalDerivedFields || []).forEach(({ name, value: template }) => {
       data[name] = template.replace(/\{(\w+)\}/g, (_, key) => data[key] ?? "").trim();
     });

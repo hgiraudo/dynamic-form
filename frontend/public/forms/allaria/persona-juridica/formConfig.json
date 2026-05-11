@@ -1069,8 +1069,7 @@
         {
           "type": "subtitle",
           "name": "EA1_Title",
-          "content": "Accionista",
-          "hideOnRevision": true
+          "content": "Accionista 1"
         },
         {
           "name": "EstructuraAccionariaAccionista1Nombre",
@@ -1166,15 +1165,14 @@
         {
           "type": "subtitle",
           "name": "EA2_Title",
-          "content": "\n\nAccionista 2",
+          "content": "Accionista 2",
           "visibleIf": {
             "field": "NumeroAccionistas",
             "value": [
               "2",
               "3"
             ]
-          },
-          "hideOnRevision": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Nombre",
@@ -1358,12 +1356,11 @@
         {
           "type": "subtitle",
           "name": "EA3_Title",
-          "content": "\n\nAccionista 3",
+          "content": "Accionista 3",
           "visibleIf": {
             "field": "NumeroAccionistas",
             "value": "3"
-          },
-          "hideOnRevision": true
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Nombre",
@@ -1620,15 +1617,14 @@
         {
           "type": "subtitle",
           "name": "BF2_Title",
-          "content": "\n\nBeneficiario Final 2",
+          "content": "Beneficiario Final 2",
           "visibleIf": {
             "field": "NumeroBeneficiarios",
             "value": [
               "2",
               "3"
             ]
-          },
-          "hideOnRevision": true
+          }
         },
         {
           "name": "BeneficiarioFinal2Nombre",
@@ -1812,12 +1808,11 @@
         {
           "type": "subtitle",
           "name": "BF3_Title",
-          "content": "\n\nBeneficiario Final 3",
+          "content": "Beneficiario Final 3",
           "visibleIf": {
             "field": "NumeroBeneficiarios",
             "value": "3"
-          },
-          "hideOnRevision": true
+          }
         },
         {
           "name": "BeneficiarioFinal3Nombre",

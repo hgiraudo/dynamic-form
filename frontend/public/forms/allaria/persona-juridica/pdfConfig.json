@@ -86,6 +86,30 @@
     { "source": "InstructivoCUIT", "name": "InstructivoCUIT10", "value": "val.replace(/-/g,'')[9]||''" },
     { "source": "InstructivoCUIT", "name": "InstructivoCUIT11", "value": "val.replace(/-/g,'')[10]||''" }
   ],
+  "excludeGroups": [
+    {
+      "controlField": "NumeroFirmantes",
+      "groups": [
+        { "minValue": 2, "prefixes": ["Firmante2"] },
+        { "minValue": 3, "prefixes": ["Firmante3"] },
+        { "minValue": 4, "prefixes": ["Firmante4"] }
+      ]
+    },
+    {
+      "controlField": "NumeroAccionistas",
+      "groups": [
+        { "minValue": 2, "prefixes": ["EstructuraAccionariaAccionista2"] },
+        { "minValue": 3, "prefixes": ["EstructuraAccionariaAccionista3"] }
+      ]
+    },
+    {
+      "controlField": "NumeroBeneficiarios",
+      "groups": [
+        { "minValue": 2, "prefixes": ["BeneficiarioFinal2"] },
+        { "minValue": 3, "prefixes": ["BeneficiarioFinal3"] }
+      ]
+    }
+  ],
   "globalDerivedFields": [
     { "name": "PEPNombreYApellido",                 "value": "{Firmante1Nombre} {Firmante1Apellido}" },
     { "name": "InstructivoAclaracion",              "value": "{Firmante1Nombre} {Firmante1Apellido}" },
