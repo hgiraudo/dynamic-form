@@ -123,7 +123,16 @@ _install_pdfrw() {
 
 require_pdfrw() {
     require_python
+    # Check with the detected Python first, then try alternatives
+    # (pdfrw may be installed in a different interpreter than the one found first)
     if ! "$PYTHON_CMD" -c "import pdfrw" 2>/dev/null; then
+        for _alt in python python3 python3.13 python3.12 python3.11 python3.10; do
+            if command -v "$_alt" &>/dev/null && "$_alt" -c "import pdfrw" 2>/dev/null; then
+                PYTHON_CMD="$_alt"
+                export PYTHON_CMD
+                return 0
+            fi
+        done
         echo "⚠️  'pdfrw' no está instalado. Instalando..."
         _install_pdfrw
     fi

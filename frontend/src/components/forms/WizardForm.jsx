@@ -388,14 +388,13 @@ const handleExport = () => {
         if (field.exclusiveGroup) {
           return (
             <div className="mb-1" key={field.name}>
-              <label className="flex items-start gap-2.5 cursor-pointer group">
-                <input
-                  type="radio"
-                  name={field.exclusiveGroup}
-                  checked={!!value}
-                  onChange={() => handleChange(field.name, true, field)}
-                  className="mt-0.5 h-4 w-4 shrink-0 text-brand-primary border-gray-300 cursor-pointer accent-brand-primary"
-                />
+              <label
+                className="flex items-start gap-2.5 cursor-pointer group"
+                onClick={() => handleChange(field.name, !value, !value ? field : null)}
+              >
+                <span className={`mt-0.5 h-4 w-4 shrink-0 rounded-full border-2 flex items-center justify-center transition-colors ${value ? "border-brand-primary" : "border-gray-400 group-hover:border-brand-primary"}`}>
+                  {value && <span className="h-2 w-2 rounded-full bg-brand-primary" />}
+                </span>
                 <span className="text-sm text-gray-700 group-hover:text-brand-primary transition-colors leading-snug">
                   {field.label}
                 </span>
@@ -455,6 +454,11 @@ const handleExport = () => {
               ))}
             </div>
           </div>
+        );
+
+      case "spacer":
+        return (
+          <div key={field.name} className="mt-4 pt-2 border-t border-gray-200" />
         );
 
       case "subtitle":
@@ -608,6 +612,7 @@ const handleExport = () => {
       }
     };
     reader.readAsText(file);
+    e.target.value = "";
   };
 
   /* ============================================================

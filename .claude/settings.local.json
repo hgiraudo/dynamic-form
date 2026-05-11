@@ -42,7 +42,8 @@
       "PowerShell(git checkout *)",
       "PowerShell(node -e \"const c=JSON.parse\\(require\\('fs'\\).readFileSync\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/public/forms/allaria/persona-juridica/formConfig.json','utf8'\\)\\); console.log\\('JSON valido,', c.steps[0].fields.length, 'campos en Firmantes'\\)\")",
       "PowerShell(python -c \"import json; d=json.load\\(open\\('list-fields/fields_example.json'\\)\\); print\\([k for k in d if 'Perfil' in k]\\)\")",
-      "PowerShell(python -c \"import pdfrw; import inspect; src = inspect.getsource\\(pdfrw.PdfWriter.__init__\\); print\\(src[:2000]\\)\")"
+      "PowerShell(python -c \"import pdfrw; import inspect; src = inspect.getsource\\(pdfrw.PdfWriter.__init__\\); print\\(src[:2000]\\)\")",
+      "Bash(python -c ' *)"
     ],
     "deny": [],
     "ask": []
