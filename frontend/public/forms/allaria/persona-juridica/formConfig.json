@@ -58,13 +58,7 @@
         {
           "name": "RepresentanteCargo1",
           "label": "Cargo en la Sociedad",
-          "type": "text",
-          "derivedFields": [
-            {
-              "name": "OCDEFATCACargo1",
-              "value": "email"
-            }
-          ]
+          "type": "text"
         },
         {
           "name": "CertificadoRep1",
@@ -161,13 +155,7 @@
               "3",
               "4"
             ]
-          },
-          "derivedFields": [
-            {
-              "name": "OCDEFATCACargo2",
-              "value": "email"
-            }
-          ]
+          }
         },
         {
           "name": "CertificadoRep2",
@@ -506,49 +494,19 @@
           "name": "CorreoElectronico1",
           "label": "Correo electrónico 1",
           "type": "email",
-          "placeholder": "ej. contacto@arroyito.com.ar",
-          "derivedFields": [
-            {
-              "name": "CorreoElectronico1usuario",
-              "value": "email.split(\"@\")[0]"
-            },
-            {
-              "name": "CorreoElectronico1dominio",
-              "value": "email.split(\"@\")[1]"
-            }
-          ]
+          "placeholder": "ej. contacto@arroyito.com.ar"
         },
         {
           "name": "CorreoElectronico2",
           "label": "Correo electrónico 2",
           "type": "email",
-          "placeholder": "ej. administracion@arroyito.com.ar",
-          "derivedFields": [
-            {
-              "name": "CorreoElectronico2usuario",
-              "value": "email.split(\"@\")[0]"
-            },
-            {
-              "name": "CorreoElectronico2dominio",
-              "value": "email.split(\"@\")[1]"
-            }
-          ]
+          "placeholder": "ej. administracion@arroyito.com.ar"
         },
         {
           "name": "CorreoElectronico3",
           "label": "Correo electrónico 3",
           "type": "email",
-          "placeholder": "ej. legal@arroyito.com.ar",
-          "derivedFields": [
-            {
-              "name": "CorreoElectronico3usuario",
-              "value": "email.split(\"@\")[0]"
-            },
-            {
-              "name": "CorreoElectronico3dominio",
-              "value": "email.split(\"@\")[1]"
-            }
-          ]
+          "placeholder": "ej. legal@arroyito.com.ar"
         },
         {
           "name": "Accionistas",

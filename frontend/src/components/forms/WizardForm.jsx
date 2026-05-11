@@ -9,12 +9,12 @@ import config from '@shared/config.general.js'
 
 /**
  * Evalúa una expresión de derivedFields con el valor del campo.
- * La variable disponible en la expresión es `email` (valor del campo).
+ * La variable disponible en la expresión es `val` (valor del campo fuente).
  */
 function evalDerivedField(expr, fieldValue) {
   try {
     // eslint-disable-next-line no-new-func
-    return new Function("email", `"use strict"; return (${expr});`)(fieldValue) ?? "";
+    return new Function("val", `"use strict"; return (${expr});`)(fieldValue) ?? "";
   } catch {
     return "";
   } 
