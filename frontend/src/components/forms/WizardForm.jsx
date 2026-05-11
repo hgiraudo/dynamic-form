@@ -180,6 +180,20 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transaction
     return mappedData;
   };
 
+  const getPdfData = () => {
+    const data = getMappedFormData();
+
+    (pdfConfig.derivedFields || []).forEach(({ source, name, value: expr }) => {
+      data[name] = evalDerivedField(expr, data[source] ?? "");
+    });
+
+    (pdfConfig.globalDerivedFields || []).forEach(({ name, value: template }) => {
+      data[name] = template.replace(/\{(\w+)\}/g, (_, key) => data[key] ?? "").trim();
+    });
+
+    return data;
+  };
+
 const handleExport = () => {
   console.log("▶️ handleExport iniciado");
 
@@ -634,7 +648,7 @@ const handleExport = () => {
         throw new Error("Servidor no respondió correctamente");
 
       // 🔹 1. Generar PDF y transactionJson
-      const pdfJson = getMappedFormData();
+      const pdfJson = getPdfData();
       const pdfTemplate = pdfConfig.templatePdf;
       console.log("pdfTemplate:" + pdfTemplate);
       const pdfResp = await fetch(`/forms/${company}/${form}/${pdfTemplate}`);

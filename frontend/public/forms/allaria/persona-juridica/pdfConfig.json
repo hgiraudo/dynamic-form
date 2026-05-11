@@ -1,4 +1,41 @@
 {
   "title": "Persona Jurídica",
-  "templatePdf": "persona-juridica.pdf"
+  "templatePdf": "persona-juridica.pdf",
+  "derivedFields": [
+    { "source": "TramiteFecha", "name": "ConvenioAperturaDia", "value": "email.split(\"-\")[0]" },
+    { "source": "TramiteFecha", "name": "ConvenioAperturaMes", "value": "email.split(\"-\")[1]" },
+    { "source": "TramiteFecha", "name": "ConvenioAperturaAno", "value": "email.split(\"-\")[2]" },
+    { "source": "TramiteFecha", "name": "PerfilRiesgoDia",     "value": "email.split(\"-\")[0]" },
+    { "source": "TramiteFecha", "name": "PerfilRiesgoMes",     "value": "email.split(\"-\")[1]" },
+    { "source": "TramiteFecha", "name": "PerfilRiesgoAno",     "value": "email.split(\"-\")[2]" },
+    { "source": "TramiteFecha", "name": "InstructivoDia",      "value": "email.split(\"-\")[0]" },
+    { "source": "TramiteFecha", "name": "InstructivoMes",      "value": "email.split(\"-\")[1]" },
+    { "source": "TramiteFecha", "name": "InstructivoAno",      "value": "email.split(\"-\")[2]" },
+    { "source": "TramiteFecha", "name": "EstructuraAccionariaDia", "value": "email.split(\"-\")[0]" },
+    { "source": "TramiteFecha", "name": "BeneficiarioFinalFecha", "value": "email" },
+    { "source": "TramiteFecha", "name": "MandatoFecha",        "value": "email" },
+    { "source": "TramiteFecha", "name": "OCDEFATCAFecha1",     "value": "email" },
+    { "source": "TramiteFecha", "name": "OCDEFATCAFecha2",     "value": "email" },
+    { "source": "NumeroDeComitente", "name": "BeneficiarioFinalNumeroComitente",  "value": "email" },
+    { "source": "NumeroDeComitente", "name": "EstructuraAccionariaNumeroComitente", "value": "email" },
+    { "source": "NumeroDeComitente", "name": "InstructivoComitenteNumero",        "value": "email" },
+    { "source": "NumeroDeComitente", "name": "MandatoNumeroComitente",            "value": "email" },
+    { "source": "NumeroDeComitente", "name": "PerfilRiesgoNumeroComitente",       "value": "email" }
+  ],
+  "globalDerivedFields": [
+    { "name": "PEPNombreYApellido",                 "value": "{Firmante1Nombre} {Firmante1Apellido}" },
+    { "name": "InstructivoAclaracion",              "value": "{Firmante1Nombre} {Firmante1Apellido}" },
+    { "name": "MandatoAclaracion",                  "value": "{Firmante1Nombre} {Firmante1Apellido}" },
+    { "name": "PerfilRiesgoAclaracion",             "value": "{Firmante1Nombre} {Firmante1Apellido}" },
+    { "name": "OCDEFATCAAclaracion1",               "value": "{Firmante1Nombre} {Firmante1Apellido}" },
+    { "name": "ConvenioAperturaFirmante1Aclaracion","value": "{Firmante1Nombre} {Firmante1Apellido}" },
+    { "name": "ConvenioAperturaFirmante2Aclaracion","value": "{Firmante2Nombre} {Firmante2Apellido}" },
+    { "name": "ConvenioAperturaFirmante3Aclaracion","value": "{Firmante3Nombre} {Firmante3Apellido}" },
+    { "name": "ConvenioAperturaFirmante4Aclaracion","value": "{Firmante4Nombre} {Firmante4Apellido}" },
+    { "name": "OCDEFATCAAclaracion2",               "value": "{Firmante2Nombre} {Firmante2Apellido}" },
+    { "name": "BeneficiarioFinal1Aclaracion",       "value": "{BeneficiarioFinal1Nombre}" },
+    { "name": "BeneficaarioFinalAclaracion2",       "value": "{BeneficiarioFinal2Nombre}" },
+    { "name": "OCDEFATCARazonSocial",               "value": "{RazonSocial}" },
+    { "name": "EstructuraAccionariaDenominacion",   "value": "{RazonSocial}" }
+  ]
 }
