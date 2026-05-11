@@ -147,6 +147,15 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transaction
       else if (normalizedData[b] && !normalizedData[a]) normalizedData[a] = normalizedData[b];
     });
 
+    // Descartar campos que no pertenecen al formConfig (derived fields viejos, campos obsoletos)
+    const knownFields = new Set();
+    formConfig.steps.forEach((step) => {
+      step.fields.forEach((field) => { if (field.name) knownFields.add(field.name); });
+    });
+    normalizedData = Object.fromEntries(
+      Object.entries(normalizedData).filter(([key]) => knownFields.has(key))
+    );
+
     console.log("Datos normalizados finales:", normalizedData);
     setFormData(normalizedData);
   };
