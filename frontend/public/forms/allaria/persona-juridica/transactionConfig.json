@@ -42,17 +42,6 @@
       "id": "Signature2",
       "fields": [
         {
-          "height": 59.0,
-          "top": 796.0,
-          "left": 95.0,
-          "page": 4,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 265.0,
-          "value": "{signer.name}"
-        },
-        {
           "width": 265.0,
           "top": 726.0,
           "height": 59.0,
@@ -67,17 +56,6 @@
       "role": "Signer2",
       "id": "Signature2_S2",
       "fields": [
-        {
-          "height": 37.0,
-          "top": 802.0,
-          "left": 514.0,
-          "page": 4,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 164.0,
-          "value": "{signer.name}"
-        },
         {
           "width": 164.0,
           "top": 738.0,
@@ -94,17 +72,6 @@
       "id": "Signature2_S3",
       "fields": [
         {
-          "height": 37.0,
-          "top": 975.0,
-          "left": 144.0,
-          "page": 4,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 164.0,
-          "value": "{signer.name}"
-        },
-        {
           "width": 164.0,
           "top": 914.0,
           "height": 37.0,
@@ -119,17 +86,6 @@
       "role": "Signer4",
       "id": "Signature2_S4",
       "fields": [
-        {
-          "height": 37.0,
-          "top": 975.0,
-          "left": 514.0,
-          "page": 4,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 164.0,
-          "value": "{signer.name}"
-        },
         {
           "width": 164.0,
           "top": 914.0,
@@ -146,17 +102,6 @@
       "id": "Signature3",
       "fields": [
         {
-          "height": 30.0,
-          "top": 1034.0,
-          "left": 71.0,
-          "page": 5,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 265.0,
-          "value": "{signer.name}"
-        },
-        {
           "width": 265.0,
           "top": 976.0,
           "height": 59.0,
@@ -171,17 +116,6 @@
       "role": "Signer1",
       "id": "Signature4",
       "fields": [
-        {
-          "height": 30.0,
-          "top": 882.0,
-          "left": 197.0,
-          "page": 6,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 265.0,
-          "value": "{signer.name}"
-        },
         {
           "width": 265.0,
           "top": 815.0,
@@ -198,17 +132,6 @@
       "id": "Signature5",
       "fields": [
         {
-          "height": 30.0,
-          "top": 824.0,
-          "left": 144.0,
-          "page": 8,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 265.0,
-          "value": "{signer.name}"
-        },
-        {
           "width": 265.0,
           "top": 758.0,
           "height": 59.0,
@@ -223,17 +146,6 @@
       "role": "Signer1",
       "id": "Signature6",
       "fields": [
-        {
-          "height": 30.0,
-          "top": 891.0,
-          "left": 123.0,
-          "page": 10,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 265.0,
-          "value": "{signer.name}"
-        },
         {
           "width": 265.0,
           "top": 826.0,
@@ -250,17 +162,6 @@
       "id": "Signature6_S2",
       "fields": [
         {
-          "height": 37.0,
-          "top": 884.0,
-          "left": 454.0,
-          "page": 10,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 164.0,
-          "value": "{signer.name}"
-        },
-        {
           "width": 164.0,
           "top": 838.0,
           "height": 37.0,
@@ -276,17 +177,6 @@
       "id": "Signature7",
       "fields": [
         {
-          "height": 59.0,
-          "top": 699.0,
-          "left": 451.0,
-          "page": 12,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 265.0,
-          "value": "{signer.name}"
-        },
-        {
           "width": 265.0,
           "top": 701.0,
           "height": 59.0,
@@ -301,17 +191,6 @@
       "role": "Signer2",
       "id": "Signature7_S2",
       "fields": [
-        {
-          "height": 37.0,
-          "top": 872.0,
-          "left": 484.0,
-          "page": 12,
-          "binding": "{signer.name}",
-          "type": "INPUT",
-          "subtype": "LABEL",
-          "width": 164.0,
-          "value": "{signer.name}"
-        },
         {
           "width": 164.0,
           "top": 872.0,

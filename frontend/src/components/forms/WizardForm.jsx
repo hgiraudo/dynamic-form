@@ -9,15 +9,15 @@ import config from '@shared/config.general.js'
 
 /**
  * Evalúa una expresión de derivedFields con el valor del campo.
- * La variable disponible en la expresión es `val` (valor del campo fuente).
+ * Variables disponibles: `val` (valor del campo fuente), `data` (todos los campos del PDF).
  */
-function evalDerivedField(expr, fieldValue) {
+function evalDerivedField(expr, fieldValue, data = {}) {
   try {
     // eslint-disable-next-line no-new-func
-    return new Function("val", `"use strict"; return (${expr});`)(fieldValue) ?? "";
+    return new Function("val", "data", `"use strict"; return (${expr});`)(fieldValue, data) ?? "";
   } catch {
     return "";
-  } 
+  }
 }
 
 import { buildTransactionJson } from "../../utils/buildTransactionJson.js";
@@ -198,7 +198,7 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transaction
     const data = getMappedFormData();
 
     (pdfConfig.derivedFields || []).forEach(({ source, name, value: expr }) => {
-      data[name] = evalDerivedField(expr, data[source] ?? "");
+      data[name] = evalDerivedField(expr, data[source] ?? "", data);
     });
 
     (pdfConfig.excludeGroups || []).forEach(({ controlField, groups }) => {
