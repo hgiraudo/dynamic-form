@@ -1,0 +1,11 @@
+{
+  "title": "PEP",
+  "templatePdf": "pep.pdf",
+  "derivedFields": [
+    { "source": "PEP", "name": "PEPEsPEPSi", "value": "val === 'Sí' ? '/' : ''" },
+    { "source": "PEP", "name": "PEPEsPEPNo", "value": "val === 'No' ? '/' : ''" }
+  ],
+  "globalDerivedFields": [
+    { "name": "PEPNombreYApellido", "value": "{Firmante1Nombre} {Firmante1Apellido}" }
+  ]
+}

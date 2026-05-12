@@ -1,0 +1,10 @@
+{
+  "status": "SENT",
+  "name": "PEP",
+  "description": "Persona Expuesta Políticamente",
+  "document": {
+    "name": "PEP",
+    "id": "Document1"
+  },
+  "approvals": []
+}

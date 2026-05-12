@@ -18,7 +18,7 @@ function FormLoader({ companyOverride }) {
       fetch(`${formBase}/pdfConfig.json`).then(r => r.ok ? r.json() : Promise.reject(`pdfConfig`)),
       fetch(`${formBase}/appConfig.json`).then(r => r.ok ? r.json() : Promise.reject(`appConfig`)),
       fetch(`${companyBase}/brand.json`).then(r => r.ok ? r.json() : Promise.reject(`brand`)),
-      fetch(`${formBase}/transactionConfig.json`).then(r => r.ok ? r.json() : null),
+      fetch(`${formBase}/transactionConfig.json`).then(r => r.ok ? r.json() : null).catch(() => null),
     ])
       .then(([formConfig, pdfConfig, appConfig, brandConfig, transactionConfig]) => {
         setConfigs({ formConfig, pdfConfig, appConfig, brandConfig, transactionConfig });

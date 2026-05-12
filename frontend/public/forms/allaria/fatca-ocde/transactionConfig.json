@@ -1,0 +1,41 @@
+{
+  "status": "SENT",
+  "name": "FATCA OCDE",
+  "description": "FATCA / OCDE",
+  "document": {
+    "name": "FATCA OCDE",
+    "id": "Document1"
+  },
+  "approvals": [
+    {
+      "role": "Signer1",
+      "id": "Signature1",
+      "fields": [
+        {
+          "width": 265.0,
+          "top": 701.0,
+          "height": 59.0,
+          "left": 159.0,
+          "page": 1,
+          "type": "SIGNATURE",
+          "subtype": "FULLNAME"
+        }
+      ]
+    },
+    {
+      "role": "Signer2",
+      "id": "Signature1_S2",
+      "fields": [
+        {
+          "width": 164.0,
+          "top": 872.0,
+          "height": 37.0,
+          "left": 192.0,
+          "page": 1,
+          "type": "SIGNATURE",
+          "subtype": "FULLNAME"
+        }
+      ]
+    }
+  ]
+}

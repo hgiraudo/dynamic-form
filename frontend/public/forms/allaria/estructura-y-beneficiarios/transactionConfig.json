@@ -1,0 +1,41 @@
+{
+  "status": "SENT",
+  "name": "Estructura y Beneficiarios",
+  "description": "Estructura Accionaria y Beneficiarios Finales",
+  "document": {
+    "name": "Estructura y Beneficiarios",
+    "id": "Document1"
+  },
+  "approvals": [
+    {
+      "role": "Signer1",
+      "id": "Signature1",
+      "fields": [
+        {
+          "width": 265.0,
+          "top": 826.0,
+          "height": 59.0,
+          "left": 99.0,
+          "page": 1,
+          "type": "SIGNATURE",
+          "subtype": "FULLNAME"
+        }
+      ]
+    },
+    {
+      "role": "Signer2",
+      "id": "Signature1_S2",
+      "fields": [
+        {
+          "width": 164.0,
+          "top": 838.0,
+          "height": 37.0,
+          "left": 454.0,
+          "page": 1,
+          "type": "SIGNATURE",
+          "subtype": "FULLNAME"
+        }
+      ]
+    }
+  ]
+}

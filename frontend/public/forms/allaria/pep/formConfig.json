@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "title": "Firmante",
+      "description": "Firmante",
+      "icon": "cilPeople",
+      "fields": [
+        {
+          "name": "Firmante1Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "example": "Juan Carlos"
+        },
+        {
+          "name": "Firmante1Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "example": "García"
+        },
+        {
+          "name": "Firmante1Email",
+          "label": "Correo",
+          "type": "email",
+          "example": "jgarcia@empresa.com.ar"
+        },
+        {
+          "name": "CertificadoRep1",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox"
+        },
+        {
+          "name": "SmsRep1",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": { "field": "SmsRep1", "value": true },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        }
+      ]
+    },
+    {
+      "title": "PEP",
+      "description": "Persona Expuesta Políticamente",
+      "icon": "cilWarning",
+      "fields": [
+        {
+          "name": "PEP",
+          "label": "¿Es Persona Expuesta Políticamente?",
+          "type": "button-group",
+          "options": ["Sí", "No"]
+        },
+        {
+          "name": "PEPMotivo",
+          "label": "Motivo",
+          "type": "text",
+          "placeholder": "ej. Funcionario público nacional",
+          "enabledIf": { "field": "PEP", "value": "Sí" }
+        },
+        {
+          "name": "PEPDocumentoTipo",
+          "label": "Tipo de Documento",
+          "type": "text",
+          "placeholder": "ej. DNI"
+        },
+        {
+          "name": "PEPDocumentoNumero",
+          "label": "Número de Documento",
+          "type": "text",
+          "placeholder": "ej. 12345678"
+        },
+        {
+          "name": "PEPDocumentoPais",
+          "label": "País y Autoridad de emisión",
+          "type": "text",
+          "placeholder": "ej. Argentina, Registro Civil"
+        },
+        {
+          "name": "PEPCaracterInvocado",
+          "label": "Carácter invocado",
+          "type": "text",
+          "placeholder": "ej. Directamente expuesto"
+        },
+        {
+          "name": "PEPLugarYFecha",
+          "label": "Lugar y fecha",
+          "type": "text",
+          "placeholder": "ej. Buenos Aires, 01/01/2025"
+        },
+        {
+          "name": "PEPResolucion352023",
+          "label": "Declaro que he leído el contenido de las Resoluciones 35/2023 y 192/2024 de la Unidad de Información Financiera",
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "title": "Revisar y Firmar",
+      "icon": "cilTask",
+      "fields": []
+    }
+  ]
+}

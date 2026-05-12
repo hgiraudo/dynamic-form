@@ -1,0 +1,26 @@
+{
+  "status": "SENT",
+  "name": "Instructivo Bancario",
+  "description": "Instructivo Bancario Permanente",
+  "document": {
+    "name": "Instructivo Bancario",
+    "id": "Document1"
+  },
+  "approvals": [
+    {
+      "role": "Signer1",
+      "id": "Signature1",
+      "fields": [
+        {
+          "width": 265.0,
+          "top": 758.0,
+          "height": 59.0,
+          "left": 124.0,
+          "page": 0,
+          "type": "SIGNATURE",
+          "subtype": "FULLNAME"
+        }
+      ]
+    }
+  ]
+}

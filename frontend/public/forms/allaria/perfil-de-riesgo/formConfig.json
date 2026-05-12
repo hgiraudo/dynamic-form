@@ -1,0 +1,111 @@
+{
+  "steps": [
+    {
+      "title": "Firmante",
+      "description": "Firmante",
+      "icon": "cilPeople",
+      "fields": [
+        {
+          "name": "Firmante1Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "example": "Juan Carlos"
+        },
+        {
+          "name": "Firmante1Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "example": "García"
+        },
+        {
+          "name": "Firmante1Email",
+          "label": "Correo",
+          "type": "email",
+          "example": "jgarcia@empresa.com.ar"
+        },
+        {
+          "name": "CertificadoRep1",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox"
+        },
+        {
+          "name": "SmsRep1",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": { "field": "SmsRep1", "value": true },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        }
+      ]
+    },
+    {
+      "title": "Perfil de Riesgo",
+      "description": "Perfil de Riesgo del Inversor",
+      "icon": "cilChartLine",
+      "fields": [
+        {
+          "name": "NumeroDeComitente",
+          "label": "Número de Comitente",
+          "type": "text",
+          "placeholder": "ej. 123,456",
+          "formatter": "thousandsFormatter"
+        },
+        {
+          "name": "TramiteFecha",
+          "label": "Fecha",
+          "type": "date",
+          "default": "today"
+        },
+        {
+          "type": "comment",
+          "name": "PerfilRiesgoTexto0",
+          "content": "A fin de clarificar las diferentes alternativas de inversión y los riesgos que conllevan las mismas, enumeramos los instrumentos plausibles de ser operados a través de Allaria S.A. con un criterio de menor a mayor riesgo para el inversor",
+          "hideOnRevision": true
+        },
+        {
+          "type": "info",
+          "name": "PerfilRiesgoTexto1",
+          "content": "1. Compra y/o Venta de Títulos Públicos Nacionales, Provinciales y Municipales (incluye Letras y Bonos)\n2. Compra y/o Venta de Letras del Banco Central de la República Argentina\n3. Compra y/o Venta de Fideicomisos Financieros\n4. Compra y/o Venta de Obligaciones Negociables\n5. Colocaciones en Fondos Comunes de Inversión de Renta Fija\n6. Caución Colocadora\n7. Compra y/o Venta de Cheques de pago diferido\n8. Préstamo Colocador\n9. Compra y/o Venta de Acciones ordinarias y preferidas\n10. Colocaciones en Fondos Comunes de Inversión de Renta Variable\n11. Compra y/o Venta de Acciones en mercados del exterior\n12. Préstamo Tomador\n13. Compra y/o Venta de Futuros\n14. Compra y/o Venta de Opciones\n15. Caución Tomadora y compra con apalancamiento\n16. Préstamo Tomador con Venta en Corto\n17. Fondos Comunes de Inversión Cerrados",
+          "hideOnRevision": true
+        },
+        {
+          "type": "comment",
+          "name": "PerfilRiesgoTexto2",
+          "content": "RB: Riesgo Bajo (1 a 8)\nRM: Riesgo Medio (1 a 12)\nRA: Riesgo Alto (1 a 17)\n",
+          "hideOnRevision": true
+        },
+        {
+          "name": "PerfilRiesgo",
+          "label": "Perfil de riesgo resultante",
+          "type": "button-group",
+          "options": ["RB - Bajo", "RM - Medio", "RA - Alto"]
+        },
+        {
+          "type": "info",
+          "name": "PerfilRiesgoDisclaimer",
+          "content": "El perfil seleccionado no garantiza rendimientos ni protección del capital. Las inversiones están sujetas a fluctuaciones de mercado.",
+          "hideOnRevision": true
+        },
+        {
+          "name": "PerfilRiesgoInversorCalificado",
+          "label": "Declaro que soy Inversor Calificado",
+          "type": "checkbox"
+        },
+        {
+          "name": "InversorCalificadoInterno",
+          "label": "Uso interno - Cliente calificado",
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "title": "Revisar y Firmar",
+      "icon": "cilTask",
+      "fields": []
+    }
+  ]
+}

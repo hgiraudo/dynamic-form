@@ -4,7 +4,12 @@
       "id": "allaria",
       "name": "Allaria",
       "forms": [
-        { "id": "persona-juridica", "title": "Persona Jurídica" }
+        { "id": "persona-juridica", "title": "Persona Jurídica" },
+        { "id": "fatca-ocde", "title": "FATCA / OCDE" },
+        { "id": "instructivo-bancario", "title": "Instructivo Bancario" },
+        { "id": "perfil-de-riesgo", "title": "Perfil de Riesgo" },
+        { "id": "pep", "title": "PEP" },
+        { "id": "estructura-y-beneficiarios", "title": "Estructura Accionaria y Beneficiarios Finales" }
       ]
     },
     {

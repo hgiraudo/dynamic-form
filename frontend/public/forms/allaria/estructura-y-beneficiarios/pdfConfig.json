@@ -1,0 +1,49 @@
+{
+  "title": "Estructura Accionaria y Beneficiarios Finales",
+  "templatePdf": "estructura-y-beneficiarios.pdf",
+  "derivedFields": [
+    { "source": "TramiteFecha",      "name": "EstructuraAccionariaDia",             "value": "val" },
+    { "source": "TramiteFecha",      "name": "BeneficiarioFinalFecha",              "value": "val" },
+    { "source": "NumeroDeComitente", "name": "EstructuraAccionariaNumeroComitente", "value": "val" },
+    { "source": "NumeroDeComitente", "name": "BeneficiarioFinalNumeroComitente",    "value": "val" },
+    { "source": "EstructuraAccionariaAccionista1EsPEP", "name": "EstructuraAccionariaAccionista1PEPSi", "value": "val === 'Sí' ? '/' : ''" },
+    { "source": "EstructuraAccionariaAccionista1EsPEP", "name": "EstructuraAccionariaAccionista1PEPNo", "value": "val === 'No' ? '/' : ''" },
+    { "source": "EstructuraAccionariaAccionista2EsPEP", "name": "EstructuraAccionariaAccionista2PEPSi", "value": "val === 'Sí' ? '/' : ''" },
+    { "source": "EstructuraAccionariaAccionista2EsPEP", "name": "EstructuraAccionariaAccionista2PEPNo", "value": "val === 'No' ? '/' : ''" },
+    { "source": "EstructuraAccionariaAccionista3EsPEP", "name": "EstructuraAccionariaAccionista3PEPSi", "value": "val === 'Sí' ? '/' : ''" },
+    { "source": "EstructuraAccionariaAccionista3EsPEP", "name": "EstructuraAccionariaAccionista3PEPNo", "value": "val === 'No' ? '/' : ''" },
+    { "source": "BeneficiarioFinal1EsPEP", "name": "BeneficiarioFinal1EsPEPSSi", "value": "val === 'Sí' ? '/' : ''" },
+    { "source": "BeneficiarioFinal1EsPEP", "name": "BeneficiarioFinal1EsPEPSNo", "value": "val === 'No' ? '/' : ''" },
+    { "source": "BeneficiarioFinal2EsPEP", "name": "BeneficiarioFinal2EsPEPSSi", "value": "val === 'Sí' ? '/' : ''" },
+    { "source": "BeneficiarioFinal2EsPEP", "name": "BeneficiarioFinal2EsPEPSNo", "value": "val === 'No' ? '/' : ''" },
+    { "source": "BeneficiarioFinal3EsPEP", "name": "BeneficiarioFinal3EsPEPSSi", "value": "val === 'Sí' ? '/' : ''" },
+    { "source": "BeneficiarioFinal3EsPEP", "name": "BeneficiarioFinal3EsPEPSNo", "value": "val === 'No' ? '/' : ''" }
+  ],
+  "excludeGroups": [
+    {
+      "controlField": "NumeroFirmantes",
+      "groups": [
+        { "minValue": 2, "prefixes": ["Firmante2"] }
+      ]
+    },
+    {
+      "controlField": "NumeroAccionistas",
+      "groups": [
+        { "minValue": 2, "prefixes": ["EstructuraAccionariaAccionista2"] },
+        { "minValue": 3, "prefixes": ["EstructuraAccionariaAccionista3"] }
+      ]
+    },
+    {
+      "controlField": "NumeroBeneficiarios",
+      "groups": [
+        { "minValue": 2, "prefixes": ["BeneficiarioFinal2"] },
+        { "minValue": 3, "prefixes": ["BeneficiarioFinal3"] }
+      ]
+    }
+  ],
+  "globalDerivedFields": [
+    { "name": "EstructuraAccionariaDenominacion",  "value": "{RazonSocial}" },
+    { "name": "BeneficiarioFinal1Aclaracion",      "value": "{Firmante1Nombre} {Firmante1Apellido}" },
+    { "name": "BeneficaarioFinalAclaracion2",      "value": "{Firmante2Nombre} {Firmante2Apellido}" }
+  ]
+}

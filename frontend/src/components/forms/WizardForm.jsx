@@ -240,7 +240,7 @@ const handleExport = () => {
     const url = URL.createObjectURL(blob);
     console.log("🔗 URL generada:", url);
 
-    const filename = `${brandConfig.downloadFilename?.toLowerCase()}.json`;
+    const filename = `${appConfig.downloadFilename?.toLowerCase()}.json`;
     console.log("📁 Filename:", filename);
 
     if (!filename || filename === "undefined.json") {

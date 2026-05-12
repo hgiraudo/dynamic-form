@@ -1,0 +1,437 @@
+{
+  "steps": [
+    {
+      "title": "Firmantes",
+      "description": "Firmantes",
+      "icon": "cilPeople",
+      "fields": [
+        {
+          "name": "NumeroFirmantes",
+          "label": "Cantidad de firmantes",
+          "type": "button-group",
+          "options": [
+            "1",
+            "2"
+          ],
+          "default": "1"
+        },
+        {
+          "type": "subtitle",
+          "name": "F1_Title",
+          "content": "Firmante 1"
+        },
+        {
+          "name": "Firmante1Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "example": "Juan Carlos"
+        },
+        {
+          "name": "Firmante1Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "example": "García"
+        },
+        {
+          "name": "Firmante1Email",
+          "label": "Correo",
+          "type": "email",
+          "example": "jgarcia@empresa.com.ar"
+        },
+        {
+          "name": "RepresentanteCargo1",
+          "label": "Cargo en la Sociedad",
+          "type": "text",
+          "example": "Gerente General"
+        },
+        {
+          "name": "CertificadoRep1",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox"
+        },
+        {
+          "name": "SmsRep1",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": {
+            "field": "SmsRep1",
+            "value": true
+          },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        },
+        {
+          "type": "spacer",
+          "name": "spacer_F2",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
+        },
+        {
+          "type": "subtitle",
+          "name": "F2_Title",
+          "content": "Firmante 2",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
+        },
+        {
+          "name": "Firmante2Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "example": "María Isabel",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
+        },
+        {
+          "name": "Firmante2Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "example": "López",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
+        },
+        {
+          "name": "Firmante2Email",
+          "label": "Correo",
+          "type": "email",
+          "example": "mlopez@empresa.com.ar",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
+        },
+        {
+          "name": "RepresentanteCargo2",
+          "label": "Cargo en la Sociedad",
+          "type": "text",
+          "example": "Directora",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
+        },
+        {
+          "name": "CertificadoRep2",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
+        },
+        {
+          "name": "SmsRep2",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
+        },
+        {
+          "name": "RepresentanteTelefono2",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": {
+            "field": "SmsRep2",
+            "value": true
+          },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        }
+      ]
+    },
+    {
+      "title": "FATCA / OCDE",
+      "description": "FATCA / OCDE",
+      "icon": "cilGlobeAlt",
+      "fields": [
+        {
+          "name": "RazonSocial",
+          "label": "Razón Social",
+          "type": "text",
+          "placeholder": "ej. Arroyito S.A."
+        },
+        {
+          "name": "TramiteFecha",
+          "label": "Fecha de Trámite",
+          "type": "date",
+          "default": "today"
+        },
+        {
+          "type": "comment",
+          "name": "RF_Intro",
+          "content": "A los efectos del intercambio de información de cuentas financieras establecido por la Organización para la Cooperación y el Desarrollo Económico (OCDE) y la Resolución General Nº 4056/2017 de la AFIP y sus modificatorias, y en cumplimiento de la Ley Foreign Account Tax Compliance Act (FATCA) de los Estados Unidos (EEUU), el Cliente declara tener residencia fiscal en el (los) país(es) detallado(s) a continuación:",
+          "hideOnRevision": true
+        },
+        {
+          "type": "subtitle",
+          "name": "RF1_Title",
+          "content": "Residencia Fiscal",
+          "hideOnRevision": true
+        },
+        {
+          "name": "OCDEFATCAResidenciaFiscal1Pais",
+          "label": "País",
+          "type": "text",
+          "placeholder": "ej. Argentina"
+        },
+        {
+          "name": "ResidenciaFiscal1_Direccion",
+          "label": "Dirección",
+          "type": "text",
+          "placeholder": "ej. Av. Corrientes 1234, CABA"
+        },
+        {
+          "name": "OCDEFATCAResidenciaFiscal1NIT",
+          "label": "NIT",
+          "type": "text",
+          "placeholder": "ej. 30-12345678-9"
+        },
+        {
+          "name": "AgregarPaisFiscal2",
+          "label": "Agregar otro país",
+          "type": "checkbox",
+          "hideOnRevision": true
+        },
+        {
+          "type": "subtitle",
+          "name": "RF2_Title",
+          "content": "\n\nResidencia Fiscal 2",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal2",
+            "value": true
+          },
+          "hideOnRevision": true
+        },
+        {
+          "name": "OCDEFATCAResidenciaFiscal2Pais",
+          "label": "País",
+          "type": "text",
+          "placeholder": "ej. Estados Unidos",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal2",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAResidenciaFiscal2Direccion",
+          "label": "Dirección",
+          "type": "text",
+          "placeholder": "ej. 123 Main St, New York, NY",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal2",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAResidenciaFiscal2NIT",
+          "label": "NIT",
+          "type": "text",
+          "placeholder": "ej. 12-3456789",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal2",
+            "value": true
+          }
+        },
+        {
+          "name": "AgregarPaisFiscal3",
+          "label": "Agregar otro país",
+          "type": "checkbox",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal2",
+            "value": true
+          },
+          "hideOnRevision": true
+        },
+        {
+          "type": "subtitle",
+          "name": "RF3_Title",
+          "content": "\n\nResidencia Fiscal 3",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal3",
+            "value": true
+          },
+          "hideOnRevision": true
+        },
+        {
+          "name": "OCDEFATCAResidenciaFiscal3Pais",
+          "label": "País",
+          "type": "text",
+          "placeholder": "ej. España",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal3",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAResidenciaFiscal3Direccion",
+          "label": "Dirección",
+          "type": "text",
+          "placeholder": "ej. Calle Serrano 45, Madrid",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal3",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAResidenciaFiscal3NIT",
+          "label": "NIT",
+          "type": "text",
+          "placeholder": "ej. A12345678",
+          "visibleIf": {
+            "field": "AgregarPaisFiscal3",
+            "value": true
+          }
+        },
+        {
+          "type": "comment",
+          "name": "RF_NIT_Info",
+          "content": "NIT: Número de Identificación Tributaria. Por ejemplo, si tributa en Argentina sería CUIT y si tributa en EEUU sería Employer Identification Number (EIN).",
+          "hideOnRevision": true
+        },
+        {
+          "type": "subtitle",
+          "name": "FATCA_Title",
+          "content": "\n\nAsimismo, el Cliente declara y garantiza que es una Entidad del tipo seleccionado a continuación: marcar solo una de las 6 siguientes opciones",
+          "hideOnRevision": true
+        },
+        {
+          "type": "checkbox",
+          "name": "FATCA_InstitucionFinanciera",
+          "label": "Institución Financiera",
+          "exclusiveGroup": "FATCA_tipos"
+        },
+        {
+          "type": "comment",
+          "name": "FATCA_InstitucionFinanciera_desc",
+          "content": "Entidades depositarias, entidades de custodia, entidades de inversión y las compañías financieras que ofrecen productos que incluye activos financieros, con la excepción de entidades de inversión de países que no firmaron el Acuerdo OCDE.\n\n",
+          "hideOnRevision": true,
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAInstitucionFinancieraGIIN1",
+          "label": "Institución Financiera Extranjera Participante (PFFI)",
+          "type": "text",
+          "placeholder": "ej. XXXXXXXXX.XXXXX.LE.032",
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAInstitucionFinancieraGIIN2",
+          "label": "Institución Financiera Extranjera en Cumplimiento - IGA (IGA FFI)",
+          "type": "text",
+          "placeholder": "ej. XXXXXXXXX.XXXXX.ME.032",
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAInstitucionFinancieraGIIN3",
+          "label": "Institución Financiera Extranjera en Cumplimiento Registrada (RDCFFI)",
+          "type": "text",
+          "placeholder": "ej. XXXXXXXXX.XXXXX.SL.032",
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAInstitucionFinancieraGIIN4",
+          "label": "Institución Financiera Extranjera en Cumplimiento Certificada (CDCFFI)",
+          "type": "text",
+          "placeholder": "ej. XXXXXXXXX.XXXXX.CE.032",
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
+        },
+        {
+          "name": "OCDEFATCAInstitucionFinancieraGIIN5",
+          "label": "Institución Financiera Extranjera Propietario Documentado (ODFFI)",
+          "type": "text",
+          "placeholder": "ej. XXXXXXXXX.XXXXX.OD.032",
+          "visibleIf": {
+            "field": "FATCA_InstitucionFinanciera",
+            "value": true
+          }
+        },
+        {
+          "type": "checkbox",
+          "name": "FATCA_SinFinesDeLucro",
+          "label": "Entidad Sin Fines de Lucro",
+          "exclusiveGroup": "FATCA_tipos"
+        },
+        {
+          "type": "checkbox",
+          "name": "FATCA_BeneficiarioExento",
+          "label": "Beneficiario Final Exento",
+          "exclusiveGroup": "FATCA_tipos"
+        },
+        {
+          "type": "checkbox",
+          "name": "FATCA_CotizaBolsa",
+          "label": "Entidad que Cotiza en Bolsa y/o Afiliada",
+          "exclusiveGroup": "FATCA_tipos"
+        },
+        {
+          "type": "checkbox",
+          "name": "FATCA_NoFinanciera_SinExterior",
+          "label": "Entidad No Financiera SIN beneficiarios finales en el exterior",
+          "exclusiveGroup": "FATCA_tipos"
+        },
+        {
+          "type": "checkbox",
+          "name": "FATCA_NoFinanciera_ConExterior",
+          "label": "Entidad No Financiera CON beneficiarios finales en el exterior",
+          "exclusiveGroup": "FATCA_tipos"
+        },
+        {
+          "name": "OCDEFATCAIntermediarioCalificadoGIIN",
+          "label": "Intermediario Calificado (QIs)",
+          "type": "text",
+          "example": "XXXXXXXXX.XXXXX.QI.032"
+        },
+        {
+          "name": "OCDEFATCATrustExtranjeroGIIN",
+          "label": "Trust Extranjero con Acuerdo de Retención",
+          "type": "text",
+          "example": "XXXXXXXXX.XXXXX.WT.032"
+        },
+        {
+          "name": "OCDEFATCASociedadExtranjera",
+          "label": "Sociedad Extranjera con Acuerdo de Retención",
+          "type": "text",
+          "example": "XXXXXXXXX.XXXXX.WP.032"
+        },
+        {
+          "name": "OCDEFATCAEntidadExtranjeraNoFinanciera",
+          "label": "Entidad Extranjera No Financiera de Reporte",
+          "type": "text",
+          "example": "XXXXXXXXX.XXXXX.NF.032"
+        }
+      ]
+    },
+    {
+      "title": "Revisar y Firmar",
+      "icon": "cilTask",
+      "fields": []
+    }
+  ]
+}

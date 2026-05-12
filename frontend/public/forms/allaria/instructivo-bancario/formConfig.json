@@ -1,0 +1,143 @@
+{
+  "steps": [
+    {
+      "title": "Firmante",
+      "description": "Firmante",
+      "icon": "cilPeople",
+      "fields": [
+        {
+          "type": "subtitle",
+          "name": "F1_Title",
+          "content": "Firmante"
+        },
+        {
+          "name": "Firmante1Nombre",
+          "label": "Nombre",
+          "type": "text",
+          "example": "Juan Carlos"
+        },
+        {
+          "name": "Firmante1Apellido",
+          "label": "Apellido",
+          "type": "text",
+          "example": "García"
+        },
+        {
+          "name": "Firmante1Email",
+          "label": "Correo",
+          "type": "email",
+          "example": "jgarcia@empresa.com.ar"
+        },
+        {
+          "name": "RepresentanteDNI1",
+          "label": "DNI / LE / LC",
+          "type": "text",
+          "placeholder": "ej. 12345678"
+        },
+        {
+          "name": "RepresentantePasaporte1",
+          "label": "Pasaporte / CI extranjeros",
+          "type": "text",
+          "placeholder": "ej. AAB123456"
+        },
+        {
+          "name": "CertificadoRep1",
+          "label": "Utiliza un certificado personal (Ley 27446)",
+          "type": "checkbox"
+        },
+        {
+          "name": "SmsRep1",
+          "label": "Enviar código de autorización por SMS",
+          "type": "checkbox"
+        },
+        {
+          "name": "RepresentanteTelefono1",
+          "label": "Número de celular",
+          "type": "tel",
+          "visibleIf": {
+            "field": "SmsRep1",
+            "value": true
+          },
+          "placeholder": "ej. +54 9 11 1234-5678"
+        }
+      ]
+    },
+    {
+      "title": "Instructivo Bancario",
+      "description": "Instructivo Bancario Permanente",
+      "icon": "cilBank",
+      "fields": [
+        {
+          "name": "NumeroDeComitente",
+          "label": "Número de Comitente",
+          "type": "text",
+          "placeholder": "ej. 123,456",
+          "formatter": "thousandsFormatter"
+        },
+        {
+          "name": "TramiteFecha",
+          "label": "Fecha",
+          "type": "date",
+          "default": "today"
+        },
+        {
+          "type": "comment",
+          "content": "Señores\nAllaria S.A.\nPresente.",
+          "hideOnRevision": true
+        },
+        {
+          "type": "comment",
+          "content": "De mi consideración:",
+          "hideOnRevision": true
+        },
+        {
+          "type": "comment",
+          "content": "Por la presente solicito a Uds. tengan a bien transferir desde mi cuenta comitente cada vez que lo solicite, los fondos que estarán disponibles y según el monto requerido, mediante carta firmada o desde correo electrónico registrado a la cuenta que detallo a continuación:",
+          "hideOnRevision": true
+        },
+        {
+          "name": "InstructivoBanco",
+          "label": "Banco",
+          "type": "text",
+          "placeholder": "ej. Banco Nación Argentina"
+        },
+        {
+          "name": "InstructivoNumeroDeCuenta",
+          "label": "Número de cuenta",
+          "type": "text",
+          "placeholder": "ej. 0110482630048218080015",
+          "hideOnRevision": true
+        },
+        {
+          "name": "InstructivoMoneda",
+          "label": "Moneda",
+          "type": "text",
+          "placeholder": "ej. Pesos"
+        },
+        {
+          "name": "InstructivoTitular",
+          "label": "Titular",
+          "type": "text",
+          "placeholder": "ej. Arroyito S.A."
+        },
+        {
+          "name": "InstructivoCBU",
+          "label": "CBU/CVU",
+          "type": "text",
+          "placeholder": "ej. 0110482630048218080015"
+        },
+        {
+          "name": "InstructivoCUIT",
+          "label": "CUIT/CUIL",
+          "type": "text",
+          "placeholder": "ej. 30-12345678-9"
+        }
+      ]
+    },
+    {
+      "title": "Revisar y Firmar",
+      "icon": "cilTask",
+      "fields": []
+    }
+  ]
+}
