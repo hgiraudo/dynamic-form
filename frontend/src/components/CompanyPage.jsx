@@ -22,6 +22,27 @@ function CompanyPage({ companyId: companyIdProp }) {
       .catch(() => setNotFound(true));
   }, [companyId]);
 
+  useEffect(() => {
+    fetch(`/forms/${companyId}/brand.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((brand) => {
+        if (!brand) return;
+        const primary = brand.colors?.primary ?? '#0A2D5E';
+        const secondary = brand.colors?.secondary ?? '#154284';
+        document.documentElement.style.setProperty('--color-brand-primary', primary);
+        document.documentElement.style.setProperty('--color-brand-secondary', secondary);
+        if (brand.favicon) {
+          document.querySelectorAll("link[rel~='icon']").forEach(l => l.remove());
+          const link = document.createElement("link");
+          link.rel = "icon";
+          link.href = `${brand.favicon}?v=${Date.now()}`;
+          document.head.appendChild(link);
+        }
+        if (brand.name) document.title = brand.name;
+      })
+      .catch(() => {});
+  }, [companyId]);
+
   if (notFound) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">

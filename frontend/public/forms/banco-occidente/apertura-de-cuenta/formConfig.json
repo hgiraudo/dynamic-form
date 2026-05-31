@@ -1,59 +1,431 @@
 {
+  "title": "Apertura de Cuenta",
+  "templatePdf": "apertura-de-cuenta.pdf",
+  "showJsonOnRevision": false,
   "steps": [
     {
-      "title": "Datos personales",
-      "description": "Datos personales del solicitante",
-      "icon": "cilUser",
+      "title": "Datos de la Empresa",
+      "description": "Información general de la empresa",
+      "icon": "cilBuilding",
       "fields": [
-        { "name": "nombres",         "label": "Nombres",           "type": "text",  "placeholder": "Ej: Juan Carlos" },
-        { "name": "apellidos",       "label": "Apellidos",         "type": "text",  "placeholder": "Ej: García López" },
-        { "name": "tipoDocumento",   "label": "Tipo de documento", "type": "button-group", "options": ["DUI", "Pasaporte", "NIT"] },
-        { "name": "numeroDocumento", "label": "Número de documento","type": "text", "placeholder": "Ej: 01234567-8" },
-        { "name": "fechaNacimiento", "label": "Fecha de nacimiento","type": "date" },
-        { "name": "nacionalidad",    "label": "Nacionalidad",      "type": "text",  "placeholder": "Ej: Salvadoreña" },
-        { "name": "estadoCivil",     "label": "Estado civil",      "type": "button-group", "options": ["Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a"] }
+        {
+          "name": "Fecha de Solicitud",
+          "label": "Fecha de Solicitud",
+          "type": "date"
+        },
+        {
+          "name": "Nombre de la Empresa",
+          "label": "Nombre de la Empresa",
+          "type": "text",
+          "placeholder": "Ej: Empresa S.A. de C.V."
+        },
+        {
+          "name": "RTN de la Empresa",
+          "label": "RTN de la Empresa",
+          "type": "text",
+          "placeholder": "Ej: 0501-1990-000001"
+        },
+        {
+          "name": "Correo Electrónico",
+          "label": "Correo Electrónico",
+          "type": "email",
+          "placeholder": "Ej: empresa@correo.com"
+        },
+        {
+          "name": "Celular",
+          "label": "Celular",
+          "type": "tel",
+          "defaultCountry": "HN"
+        },
+        {
+          "name": "Dirección exacta",
+          "label": "Dirección exacta",
+          "type": "textarea",
+          "placeholder": "Colonia, calle, número..."
+        }
       ]
     },
     {
-      "title": "Contacto y domicilio",
-      "description": "Datos de contacto y domicilio",
-      "icon": "cilHome",
+      "title": "Actividad y Finanzas",
+      "description": "Actividad económica y situación financiera",
+      "icon": "cilChart",
       "fields": [
-        { "name": "telefono",        "label": "Teléfono celular",  "type": "tel",   "placeholder": "Ej: 7000-0000" },
-        { "name": "email",           "label": "Correo electrónico","type": "email", "placeholder": "Ej: juan@email.com" },
-        { "name": "departamento",    "label": "Departamento",      "type": "text",  "placeholder": "Ej: San Salvador" },
-        { "name": "municipio",       "label": "Municipio",         "type": "text",  "placeholder": "Ej: Santa Tecla" },
-        { "name": "direccion",       "label": "Dirección",         "type": "textarea", "placeholder": "Calle, colonia, número de casa..." }
+        {
+          "type": "subtitle",
+          "name": "subtitleOperaciones",
+          "content": "Departamentos, municipios y países donde opera la empresa"
+        },
+        {
+          "name": "1",
+          "label": "Zona de operación 1",
+          "type": "text",
+          "placeholder": "Ej: Francisco Morazán, Honduras"
+        },
+        {
+          "name": "2",
+          "label": "Zona de operación 2",
+          "type": "text",
+          "placeholder": "Ej: Cortés, Honduras"
+        },
+        {
+          "name": "3",
+          "label": "Zona de operación 3",
+          "type": "text"
+        },
+        {
+          "name": "4",
+          "label": "Zona de operación 4",
+          "type": "text"
+        },
+        {
+          "name": "5",
+          "label": "Zona de operación 5",
+          "type": "text"
+        },
+        {
+          "type": "spacer",
+          "name": "spacerFinanciero"
+        },
+        {
+          "name": "Monto del Total de Activos",
+          "label": "Monto del Total de Activos (L)",
+          "type": "text",
+          "placeholder": "Ej: 500000.00"
+        },
+        {
+          "name": "Ventas o Ingresos Anuales",
+          "label": "Ventas o Ingresos Anuales (L)",
+          "type": "text",
+          "placeholder": "Ej: 200000.00"
+        },
+        {
+          "type": "spacer",
+          "name": "spacerGrupos"
+        },
+        {
+          "name": "grupoFinanciero",
+          "label": "¿La empresa forma parte de un Grupo Financiero?",
+          "type": "button-group",
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "default": "No",
+          "optionFields": [
+            {
+              "Group1": "Opcion1"
+            },
+            {
+              "Group1": "Opcion2"
+            }
+          ]
+        },
+        {
+          "name": "Nombre del Grupo Financiero si aplica",
+          "label": "Nombre del Grupo Financiero",
+          "type": "text",
+          "placeholder": "Nombre del grupo financiero",
+          "visibleIf": {
+            "field": "grupoFinanciero",
+            "value": "Sí"
+          }
+        },
+        {
+          "name": "grupoEconomico",
+          "label": "¿La empresa forma parte de un Grupo Económico?",
+          "type": "button-group",
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "default": "No",
+          "optionFields": [
+            {
+              "Group2": "Opcion3"
+            },
+            {
+              "Group2": "Opcion4"
+            }
+          ]
+        },
+        {
+          "name": "Nombre del Grupo Económico  si aplica",
+          "label": "Nombre del Grupo Económico",
+          "type": "text",
+          "placeholder": "Nombre del grupo económico",
+          "visibleIf": {
+            "field": "grupoEconomico",
+            "value": "Sí"
+          }
+        }
       ]
     },
     {
-      "title": "Datos laborales",
-      "description": "Información laboral y fuente de ingresos",
-      "icon": "cilBriefcase",
+      "title": "Referencias y Proveedores",
+      "description": "Referencias comerciales y proveedores principales",
+      "icon": "cilPeople",
       "fields": [
-        { "name": "ocupacion",       "label": "Ocupación / Profesión", "type": "text", "placeholder": "Ej: Ingeniero Civil" },
-        { "name": "nombreEmpresa",   "label": "Nombre del empleador",  "type": "text", "placeholder": "Ej: Empresa S.A. de C.V." },
-        { "name": "telefonoEmpresa", "label": "Teléfono del empleador","type": "tel",  "placeholder": "Ej: 2200-0000" },
-        { "name": "ingresoMensual",  "label": "Ingreso mensual (USD)", "type": "text", "placeholder": "Ej: 1500.00" },
-        { "name": "otrasFuentes",    "label": "Otras fuentes de ingresos", "type": "textarea", "placeholder": "Describí brevemente si aplica..." }
+        {
+          "type": "subtitle",
+          "name": "subtitleReferencias",
+          "content": "Referencias Comerciales o Bancarias"
+        },
+        {
+          "name": "1_2",
+          "label": "Nombre de referencia 1",
+          "type": "text",
+          "placeholder": "Nombre completo o empresa"
+        },
+        {
+          "name": "Telefono o Celular",
+          "label": "Teléfono de referencia 1",
+          "type": "tel",
+          "defaultCountry": "HN"
+        },
+        {
+          "name": "2_2",
+          "label": "Nombre de referencia 2",
+          "type": "text",
+          "placeholder": "Nombre completo o empresa"
+        },
+        {
+          "name": "Telefono o Celular_2",
+          "label": "Teléfono de referencia 2",
+          "type": "tel",
+          "defaultCountry": "HN"
+        },
+        {
+          "type": "subtitle",
+          "name": "subtitleProveedores",
+          "content": "Proveedores Principales"
+        },
+        {
+          "name": "1_3",
+          "label": "Proveedor principal 1",
+          "type": "text",
+          "placeholder": "Nombre del proveedor"
+        },
+        {
+          "name": "2_3",
+          "label": "Proveedor principal 2",
+          "type": "text",
+          "placeholder": "Nombre del proveedor"
+        }
       ]
     },
     {
-      "title": "Tipo de cuenta",
-      "description": "Selección del producto bancario",
+      "title": "Datos de la Cuenta",
+      "description": "Características y uso de la cuenta",
       "icon": "cilCreditCard",
       "fields": [
-        { "name": "tipoCuenta",      "label": "Tipo de cuenta",    "type": "button-group", "options": ["Ahorro", "Corriente"] },
-        { "name": "moneda",          "label": "Moneda",            "type": "button-group", "options": ["USD", "Colones"] },
-        { "name": "tarjetaDebito",   "label": "Solicitar tarjeta de débito", "type": "checkbox" },
-        { "name": "bancaEnLinea",    "label": "Activar banca en línea",      "type": "checkbox" },
-        { "name": "observaciones",   "label": "Observaciones",     "type": "textarea", "placeholder": "Cualquier información adicional..." }
+        {
+          "name": "tipoCuenta",
+          "label": "Tipo de cuenta",
+          "type": "button-group",
+          "options": [
+            "Ahorro",
+            "Cheques"
+          ],
+          "default": "Ahorro",
+          "optionFields": [
+            {
+              "Group3": "Opcion1"
+            },
+            {
+              "Group3": "Opcion2"
+            }
+          ]
+        },
+        {
+          "name": "tipoMoneda",
+          "label": "Tipo de moneda",
+          "type": "button-group",
+          "options": [
+            "Lempiras (L)",
+            "Dólares ($)"
+          ],
+          "default": "Lempiras (L)",
+          "optionFields": [
+            {
+              "Group4": "Opcion3"
+            },
+            {
+              "Group4": "Opcion4"
+            }
+          ]
+        },
+        {
+          "name": "chequera",
+          "label": "Tipo de chequera",
+          "type": "button-group",
+          "options": [
+            "Escritorio",
+            "Bolsillo"
+          ],
+          "default": "Escritorio",
+          "visibleIf": {
+            "field": "tipoCuenta",
+            "value": "Cheques"
+          },
+          "optionFields": [
+            {
+              "Group5": "Opcion1"
+            },
+            {
+              "Group5": "Opcion2"
+            }
+          ]
+        },
+        {
+          "name": "Especificar la Procedencia de los Fondos que Ingresará a la Cuenta 1",
+          "label": "Procedencia de los Fondos",
+          "type": "textarea",
+          "placeholder": "Describa el origen de los fondos que ingresarán a la cuenta..."
+        },
+        {
+          "name": "Monto Mensual Estimado que Ingresará a la Cuenta",
+          "label": "Monto Mensual Estimado (L)",
+          "type": "text",
+          "placeholder": "Ej: 5000.00"
+        },
+        {
+          "name": "Propósito de la Cuenta 1",
+          "label": "Propósito de la Cuenta",
+          "type": "textarea",
+          "placeholder": "Describa el propósito principal de la cuenta..."
+        }
       ]
     },
     {
-      "title": "Revisión y firma",
-      "description": "Revisión y firma del formulario",
+      "title": "Características Mi PYME",
+      "description": "Clasificación y tamaño de la empresa",
+      "icon": "cilFactory",
+      "fields": [
+        {
+          "name": "tipoNegocio",
+          "label": "Tipo de Negocio",
+          "type": "button-group",
+          "options": [
+            "Físico",
+            "Digital",
+            "Físico y Digital"
+          ],
+          "default": "Físico",
+          "optionFields": [
+            {
+              "Group6": "Opcion3"
+            },
+            {
+              "Group6": "Opcion4"
+            },
+            {
+              "Group6": "Opcion5"
+            }
+          ]
+        },
+        {
+          "name": "undefined_4",
+          "label": "Número de Empleados",
+          "type": "text",
+          "placeholder": "Ej: 15"
+        }
+      ]
+    },
+    {
+      "title": "Firmantes",
+      "description": "Firmantes de la cuenta y condiciones",
       "icon": "cilPenNib",
+      "fields": [
+        {
+          "type": "subtitle",
+          "name": "subtitleFirmantes",
+          "content": "Firmantes de la Cuenta"
+        },
+        {
+          "name": "Nombre Completo",
+          "label": "Firmante 1",
+          "type": "text",
+          "placeholder": "Nombre completo"
+        },
+        {
+          "name": "Nombre Completo_2",
+          "label": "Firmante 2",
+          "type": "text",
+          "placeholder": "Nombre completo"
+        },
+        {
+          "name": "Nombre Completo_3",
+          "label": "Firmante 3",
+          "type": "text",
+          "placeholder": "Nombre completo"
+        },
+        {
+          "name": "Nombre Completo_4",
+          "label": "Firmante 4",
+          "type": "text",
+          "placeholder": "Nombre completo"
+        },
+        {
+          "name": "Nombre Completo_5",
+          "label": "Firmante 5",
+          "type": "text",
+          "placeholder": "Nombre completo"
+        },
+        {
+          "name": "Nombre Completo_6",
+          "label": "Firmante 6",
+          "type": "text",
+          "placeholder": "Nombre completo"
+        },
+        {
+          "name": "Nombre Completo_7",
+          "label": "Firmante 7",
+          "type": "text",
+          "placeholder": "Nombre completo"
+        },
+        {
+          "type": "subtitle",
+          "name": "subtitleCondiciones",
+          "content": "Condiciones de Firma"
+        },
+        {
+          "name": "condicionFirma",
+          "label": "Condición de firma",
+          "type": "button-group",
+          "options": [
+            "Mancomunada",
+            "Indistinta",
+            "Única"
+          ],
+          "default": "Indistinta",
+          "optionFields": [
+            {
+              "Group7": "Opcion1"
+            },
+            {
+              "Group7": "Opcion2"
+            },
+            {
+              "Group7": "Opcion6"
+            }
+          ]
+        },
+        {
+          "type": "spacer",
+          "name": "spacerObs"
+        },
+        {
+          "name": "OBSERVACIONES",
+          "label": "Observaciones",
+          "type": "textarea",
+          "placeholder": "Cualquier información adicional relevante..."
+        }
+      ]
+    },
+    {
+      "title": "Revisión y Firma",
+      "description": "Revisión y firma del formulario",
+      "icon": "cilCheck",
       "fields": []
     }
   ]

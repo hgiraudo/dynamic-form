@@ -1,4 +1,151 @@
 {
+  "title": "Estructura Accionaria y Beneficiarios Finales",
+  "templatePdf": "estructura-y-beneficiarios.pdf",
+  "derivedFields": [
+    {
+      "source": "TramiteFecha",
+      "name": "EstructuraAccionariaDia",
+      "value": "val"
+    },
+    {
+      "source": "TramiteFecha",
+      "name": "BeneficiarioFinalFecha",
+      "value": "val"
+    },
+    {
+      "source": "NumeroDeComitente",
+      "name": "EstructuraAccionariaNumeroComitente",
+      "value": "val"
+    },
+    {
+      "source": "NumeroDeComitente",
+      "name": "BeneficiarioFinalNumeroComitente",
+      "value": "val"
+    },
+    {
+      "source": "EstructuraAccionariaAccionista1EsPEP",
+      "name": "EstructuraAccionariaAccionista1PEPSi",
+      "value": "val === 'Sí' ? '/' : ''"
+    },
+    {
+      "source": "EstructuraAccionariaAccionista1EsPEP",
+      "name": "EstructuraAccionariaAccionista1PEPNo",
+      "value": "val === 'No' ? '/' : ''"
+    },
+    {
+      "source": "EstructuraAccionariaAccionista2EsPEP",
+      "name": "EstructuraAccionariaAccionista2PEPSi",
+      "value": "val === 'Sí' ? '/' : ''"
+    },
+    {
+      "source": "EstructuraAccionariaAccionista2EsPEP",
+      "name": "EstructuraAccionariaAccionista2PEPNo",
+      "value": "val === 'No' ? '/' : ''"
+    },
+    {
+      "source": "EstructuraAccionariaAccionista3EsPEP",
+      "name": "EstructuraAccionariaAccionista3PEPSi",
+      "value": "val === 'Sí' ? '/' : ''"
+    },
+    {
+      "source": "EstructuraAccionariaAccionista3EsPEP",
+      "name": "EstructuraAccionariaAccionista3PEPNo",
+      "value": "val === 'No' ? '/' : ''"
+    },
+    {
+      "source": "BeneficiarioFinal1EsPEP",
+      "name": "BeneficiarioFinal1EsPEPSSi",
+      "value": "val === 'Sí' ? '/' : ''"
+    },
+    {
+      "source": "BeneficiarioFinal1EsPEP",
+      "name": "BeneficiarioFinal1EsPEPSNo",
+      "value": "val === 'No' ? '/' : ''"
+    },
+    {
+      "source": "BeneficiarioFinal2EsPEP",
+      "name": "BeneficiarioFinal2EsPEPSSi",
+      "value": "val === 'Sí' ? '/' : ''"
+    },
+    {
+      "source": "BeneficiarioFinal2EsPEP",
+      "name": "BeneficiarioFinal2EsPEPSNo",
+      "value": "val === 'No' ? '/' : ''"
+    },
+    {
+      "source": "BeneficiarioFinal3EsPEP",
+      "name": "BeneficiarioFinal3EsPEPSSi",
+      "value": "val === 'Sí' ? '/' : ''"
+    },
+    {
+      "source": "BeneficiarioFinal3EsPEP",
+      "name": "BeneficiarioFinal3EsPEPSNo",
+      "value": "val === 'No' ? '/' : ''"
+    }
+  ],
+  "excludeGroups": [
+    {
+      "controlField": "NumeroFirmantes",
+      "groups": [
+        {
+          "minValue": 2,
+          "prefixes": [
+            "Firmante2"
+          ]
+        }
+      ]
+    },
+    {
+      "controlField": "NumeroAccionistas",
+      "groups": [
+        {
+          "minValue": 2,
+          "prefixes": [
+            "EstructuraAccionariaAccionista2"
+          ]
+        },
+        {
+          "minValue": 3,
+          "prefixes": [
+            "EstructuraAccionariaAccionista3"
+          ]
+        }
+      ]
+    },
+    {
+      "controlField": "NumeroBeneficiarios",
+      "groups": [
+        {
+          "minValue": 2,
+          "prefixes": [
+            "BeneficiarioFinal2"
+          ]
+        },
+        {
+          "minValue": 3,
+          "prefixes": [
+            "BeneficiarioFinal3"
+          ]
+        }
+      ]
+    }
+  ],
+  "globalDerivedFields": [
+    {
+      "name": "EstructuraAccionariaDenominacion",
+      "value": "{RazonSocial}"
+    },
+    {
+      "name": "BeneficiarioFinal1Aclaracion",
+      "value": "{Firmante1Nombre} {Firmante1Apellido}"
+    },
+    {
+      "name": "BeneficaarioFinalAclaracion2",
+      "value": "{Firmante2Nombre} {Firmante2Apellido}"
+    }
+  ],
+  "showJsonOnRevision": false,
+  "downloadFilename": "estructura-y-beneficiarios",
   "steps": [
     {
       "title": "Firmantes",
@@ -9,7 +156,10 @@
           "name": "NumeroFirmantes",
           "label": "Cantidad de firmantes",
           "type": "button-group",
-          "options": ["1", "2"],
+          "options": [
+            "1",
+            "2"
+          ],
           "default": "1"
         },
         {
@@ -72,58 +222,85 @@
           "name": "RepresentanteTelefono1",
           "label": "Número de celular",
           "type": "tel",
-          "visibleIf": { "field": "SmsRep1", "value": true },
+          "visibleIf": {
+            "field": "SmsRep1",
+            "value": true
+          },
           "placeholder": "ej. +54 9 11 1234-5678"
         },
         {
           "type": "spacer",
           "name": "spacer_F2",
-          "visibleIf": { "field": "NumeroFirmantes", "value": "2" }
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
         },
         {
           "type": "subtitle",
           "name": "F2_Title",
           "content": "Firmante 2",
-          "visibleIf": { "field": "NumeroFirmantes", "value": "2" }
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
         },
         {
           "name": "Firmante2Nombre",
           "label": "Nombre",
           "type": "text",
           "example": "María Isabel",
-          "visibleIf": { "field": "NumeroFirmantes", "value": "2" }
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
         },
         {
           "name": "Firmante2Apellido",
           "label": "Apellido",
           "type": "text",
           "example": "López",
-          "visibleIf": { "field": "NumeroFirmantes", "value": "2" }
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
         },
         {
           "name": "Firmante2Email",
           "label": "Correo",
           "type": "email",
           "example": "mlopez@empresa.com.ar",
-          "visibleIf": { "field": "NumeroFirmantes", "value": "2" }
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
         },
         {
           "name": "CertificadoRep2",
           "label": "Utiliza un certificado personal (Ley 27446)",
           "type": "checkbox",
-          "visibleIf": { "field": "NumeroFirmantes", "value": "2" }
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
         },
         {
           "name": "SmsRep2",
           "label": "Enviar código de autorización por SMS",
           "type": "checkbox",
-          "visibleIf": { "field": "NumeroFirmantes", "value": "2" }
+          "visibleIf": {
+            "field": "NumeroFirmantes",
+            "value": "2"
+          }
         },
         {
           "name": "RepresentanteTelefono2",
           "label": "Número de celular",
           "type": "tel",
-          "visibleIf": { "field": "SmsRep2", "value": true },
+          "visibleIf": {
+            "field": "SmsRep2",
+            "value": true
+          },
           "placeholder": "ej. +54 9 11 1234-5678"
         }
       ]
@@ -137,7 +314,11 @@
           "name": "NumeroAccionistas",
           "label": "Cantidad de accionistas",
           "type": "button-group",
-          "options": ["1", "2", "3"],
+          "options": [
+            "1",
+            "2",
+            "3"
+          ],
           "default": "1"
         },
         {
@@ -220,7 +401,10 @@
           "name": "EstructuraAccionariaAccionista1EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"]
+          "options": [
+            "Sí",
+            "No"
+          ]
         },
         {
           "name": "EstructuraAccionariaAccionista1PorcentajeParticipacion",
@@ -231,204 +415,345 @@
         {
           "type": "spacer",
           "name": "spacer_EA2",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "type": "subtitle",
           "name": "EA2_Title",
           "content": "Accionista 2",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Nombre",
           "label": "Razón Social / Apellido y Nombre",
           "type": "text",
           "placeholder": "ej. López María",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Fecha",
           "label": "Fecha de Constitución / Nacimiento",
           "type": "date",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Lugar",
           "label": "Lugar de Constitución / Nacionalidad",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2DNI",
           "label": "Número de Inscripción / DNI - Pasaporte",
           "type": "text",
           "placeholder": "ej. 23456789",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Domicilio",
           "label": "Domicilio Real",
           "type": "text",
           "placeholder": "ej. Av. Callao 567, CABA",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2EstadoCivil",
           "label": "Estado Civil",
           "type": "text",
           "placeholder": "ej. Soltera",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2Actividad",
           "label": "Actividad / Profesión",
           "type": "text",
           "placeholder": "ej. Contadora",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2PaisFiscal1",
           "label": "País de Residencia Fiscal",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2IdentificacionFiscal1",
           "label": "Número de Identificación Fiscal",
           "type": "text",
           "placeholder": "ej. 27-23456789-4",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2PaisFiscal2",
           "label": "País Residencia Fiscal 2",
           "type": "text",
           "placeholder": "ej. España",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2IdentificacionFiscal2",
           "label": "Número de Identificación Fiscal 2",
           "type": "text",
           "placeholder": "ej. X1234567B",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista2PorcentajeParticipacion",
           "label": "% Participación",
           "type": "text",
           "placeholder": "ej. 40",
-          "visibleIf": { "field": "NumeroAccionistas", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "type": "spacer",
           "name": "spacer_EA3",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "type": "subtitle",
           "name": "EA3_Title",
           "content": "Accionista 3",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Nombre",
           "label": "Razón Social / Apellido y Nombre",
           "type": "text",
           "placeholder": "ej. Martínez Carlos",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Fecha",
           "label": "Fecha de Constitución / Nacimiento",
           "type": "date",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Lugar",
           "label": "Lugar de Constitución / Nacionalidad",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3DNI",
           "label": "Número de Inscripción / DNI - Pasaporte",
           "type": "text",
           "placeholder": "ej. 34567890",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Domicilio",
           "label": "Domicilio Real",
           "type": "text",
           "placeholder": "ej. Av. Las Heras 890, CABA",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3EstadoCivil",
           "label": "Estado Civil",
           "type": "text",
           "placeholder": "ej. Divorciado",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3Actividad",
           "label": "Actividad / Profesión",
           "type": "text",
           "placeholder": "ej. Abogado",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3PaisFiscal1",
           "label": "País de Residencia Fiscal",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3IdentificacionFiscal1",
           "label": "Número de Identificación Fiscal",
           "type": "text",
           "placeholder": "ej. 20-34567890-3",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3PaisFiscal2",
           "label": "País Residencia Fiscal 2",
           "type": "text",
           "placeholder": "ej. Italia",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3IdentificacionFiscal3",
           "label": "Número de Identificación Fiscal 2",
           "type": "text",
           "placeholder": "ej. MRTCRL80A01H501A",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         },
         {
           "name": "EstructuraAccionariaAccionista3PorcentajeParticipacion",
           "label": "% Participación",
           "type": "text",
           "placeholder": "ej. 20",
-          "visibleIf": { "field": "NumeroAccionistas", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroAccionistas",
+            "value": "3"
+          }
         }
       ]
     },
@@ -441,7 +766,11 @@
           "name": "NumeroBeneficiarios",
           "label": "Cantidad de beneficiarios",
           "type": "button-group",
-          "options": ["1", "2", "3"],
+          "options": [
+            "1",
+            "2",
+            "3"
+          ],
           "default": "1"
         },
         {
@@ -524,7 +853,10 @@
           "name": "BeneficiarioFinal1EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"]
+          "options": [
+            "Sí",
+            "No"
+          ]
         },
         {
           "name": "BeneficiarioFinal1PorcentajeDeParticipacion",
@@ -535,204 +867,345 @@
         {
           "type": "spacer",
           "name": "spacer_BF2",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "type": "subtitle",
           "name": "BF2_Title",
           "content": "Beneficiario Final 2",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2Nombre",
           "label": "Apellido y Nombre",
           "type": "text",
           "placeholder": "ej. López María Isabel",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2FechaDeNacimiento",
           "label": "Fecha de Nacimiento",
           "type": "date",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2Nacionalidad",
           "label": "Nacionalidad",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2DNIPasaporte",
           "label": "DNI / Pasaporte",
           "type": "text",
           "placeholder": "ej. 23456789",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2DomicilioReal",
           "label": "Domicilio Real",
           "type": "text",
           "placeholder": "ej. Av. Callao 567, CABA",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2EstadoCivil",
           "label": "Estado Civil",
           "type": "text",
           "placeholder": "ej. Soltera",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2ProfesionOcupacion",
           "label": "Profesión / Ocupación",
           "type": "text",
           "placeholder": "ej. Contadora",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2PaisDeResidenciaFiscal1",
           "label": "País de Residencia Fiscal",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2NumeroDeIdentificacionFiscal1",
           "label": "Número de Identificación Fiscal",
           "type": "text",
           "placeholder": "ej. 27-23456789-4",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2PaisDeResidenciaFiscal2",
           "label": "País Residencia Fiscal 2",
           "type": "text",
           "placeholder": "ej. España",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2NumeroDeIdentificacionFiscal2",
           "label": "Número de Identificación Fiscal 2",
           "type": "text",
           "placeholder": "ej. X1234567B",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "name": "BeneficiarioFinal2PorcentajeDeParticipacion",
           "label": "% Participación",
           "type": "text",
           "placeholder": "ej. 40",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": ["2", "3"] }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": [
+              "2",
+              "3"
+            ]
+          }
         },
         {
           "type": "spacer",
           "name": "spacer_BF3",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "type": "subtitle",
           "name": "BF3_Title",
           "content": "Beneficiario Final 3",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3Nombre",
           "label": "Apellido y Nombre",
           "type": "text",
           "placeholder": "ej. Martínez Carlos Alberto",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3FechaDeNacimiento",
           "label": "Fecha Nacimiento",
           "type": "date",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3Nacionalidad",
           "label": "Nacionalidad",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3DNIPasaporte",
           "label": "DNI / Pasaporte",
           "type": "text",
           "placeholder": "ej. 34567890",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3DomicilioReal",
           "label": "Domicilio Real",
           "type": "text",
           "placeholder": "ej. Av. Las Heras 890, CABA",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3EstadoCivil",
           "label": "Estado Civil",
           "type": "text",
           "placeholder": "ej. Divorciado",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3ProfesionOcupacion",
           "label": "Profesión / Ocupación",
           "type": "text",
           "placeholder": "ej. Abogado",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3PaisDeResidenciaFiscal1",
           "label": "País de Residencia Fiscal",
           "type": "text",
           "placeholder": "ej. Argentina",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3NumeroDeIdentificacionFiscal1",
           "label": "Número de Identificación Fiscal",
           "type": "text",
           "placeholder": "ej. 20-34567890-3",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3PaisDeResidenciaFiscal2",
           "label": "País Residencia Fiscal 2",
           "type": "text",
           "placeholder": "ej. Italia",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3NumeroDeIdentificacionFiscal2",
           "label": "Número de Identificación Fiscal 2",
           "type": "text",
           "placeholder": "ej. MRTCRL80A01H501A",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3EsPEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"],
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "options": [
+            "Sí",
+            "No"
+          ],
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         },
         {
           "name": "BeneficiarioFinal3PorcentajeDeParticipacion",
           "label": "% Participación",
           "type": "text",
           "placeholder": "ej. 20",
-          "visibleIf": { "field": "NumeroBeneficiarios", "value": "3" }
+          "visibleIf": {
+            "field": "NumeroBeneficiarios",
+            "value": "3"
+          }
         }
       ]
     },

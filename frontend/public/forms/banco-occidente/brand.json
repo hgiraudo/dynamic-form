@@ -5,5 +5,9 @@
     "white": "/forms/banco-occidente/logo-white.svg",
     "color": "/forms/banco-occidente/logo-color.svg"
   },
-  "favicon": "/forms/banco-occidente/favicon.svg"
+  "favicon": "/forms/banco-occidente/favicon.svg",
+  "colors": {
+    "primary": "#055020",
+    "secondary": "#08732E"
+  }
 }

@@ -152,10 +152,9 @@ function DocsPage({ companyOverride }) {
     const companyBase = `/forms/${company}`;
     Promise.all([
       fetch(`${formBase}/formConfig.json`).then((r) => r.ok ? r.json() : Promise.reject()),
-      fetch(`${formBase}/pdfConfig.json`).then((r)  => r.ok ? r.json() : Promise.reject()),
       fetch(`${companyBase}/brand.json`).then((r)   => r.ok ? r.json() : null).catch(() => null),
     ])
-      .then(([formConfig, pdfConfig, brand]) => setConfigs({ formConfig, pdfConfig, brand }))
+      .then(([formConfig, brand]) => setConfigs({ formConfig, brand }))
       .catch(() => setError("Formulario no encontrado"));
   }, [company, form]);
 
@@ -171,7 +170,7 @@ function DocsPage({ companyOverride }) {
     </div>
   );
 
-  const { formConfig, pdfConfig, brand } = configs;
+  const { formConfig, brand } = configs;
   const exampleBody   = buildExampleBody(formConfig);
   const exampleJson   = JSON.stringify(exampleBody, null, 2);
   const fullEndpoint  = `${window.location.origin}${endpoint}`;
@@ -204,7 +203,7 @@ function DocsPage({ companyOverride }) {
           )}
         </div>
 
-        <h1 className="text-2xl font-bold text-brand-primary mb-1">{pdfConfig.title}</h1>
+        <h1 className="text-2xl font-bold text-brand-primary mb-1">{formConfig.title}</h1>
         <p className="text-gray-500 text-sm mb-8">Documentación de la API de pre-completado</p>
 
         {/* Endpoint card */}

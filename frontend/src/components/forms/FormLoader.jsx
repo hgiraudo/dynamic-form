@@ -15,26 +15,25 @@ function FormLoader({ companyOverride }) {
 
     Promise.all([
       fetch(`${formBase}/formConfig.json`).then(r => r.ok ? r.json() : Promise.reject(`formConfig`)),
-      fetch(`${formBase}/pdfConfig.json`).then(r => r.ok ? r.json() : Promise.reject(`pdfConfig`)),
-      fetch(`${formBase}/appConfig.json`).then(r => r.ok ? r.json() : Promise.reject(`appConfig`)),
       fetch(`${companyBase}/brand.json`).then(r => r.ok ? r.json() : Promise.reject(`brand`)),
       fetch(`${formBase}/transactionConfig.json`).then(r => r.ok ? r.json() : null).catch(() => null),
     ])
-      .then(([formConfig, pdfConfig, appConfig, brandConfig, transactionConfig]) => {
-        setConfigs({ formConfig, pdfConfig, appConfig, brandConfig, transactionConfig });
+      .then(([formConfig, brandConfig, transactionConfig]) => {
+        setConfigs({ formConfig, brandConfig, transactionConfig });
 
-        // Título de pestaña
-        document.title = `${brandConfig.name} — ${pdfConfig.title}`;
+        document.title = `${brandConfig.name} — ${formConfig.title}`;
 
-        // Favicon dinámico
+        const primary = brandConfig.colors?.primary ?? '#0A2D5E';
+        const secondary = brandConfig.colors?.secondary ?? '#154284';
+        document.documentElement.style.setProperty('--color-brand-primary', primary);
+        document.documentElement.style.setProperty('--color-brand-secondary', secondary);
+
         if (brandConfig.favicon) {
-          let link = document.querySelector("link[rel~='icon']");
-          if (!link) {
-            link = document.createElement("link");
-            link.rel = "icon";
-            document.head.appendChild(link);
-          }
-          link.href = brandConfig.favicon;
+          document.querySelectorAll("link[rel~='icon']").forEach(l => l.remove());
+          const link = document.createElement("link");
+          link.rel = "icon";
+          link.href = `${brandConfig.favicon}?v=${Date.now()}`;
+          document.head.appendChild(link);
         }
       })
       .catch((missing) => setError(`Formulario no encontrado (${missing})`));
@@ -65,8 +64,6 @@ function FormLoader({ companyOverride }) {
   return (
     <WizardForm
       formConfig={configs.formConfig}
-      pdfConfig={configs.pdfConfig}
-      appConfig={configs.appConfig}
       brandConfig={configs.brandConfig}
       transactionConfig={configs.transactionConfig}
       company={company}

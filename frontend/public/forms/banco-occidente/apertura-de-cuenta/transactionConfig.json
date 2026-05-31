@@ -1,0 +1,26 @@
+{
+  "status": "SENT",
+  "name": "Apertura de Cuenta",
+  "description": "Solicitud Apertura de Cuenta Persona Jurídica",
+  "document": {
+    "name": "Apertura de Cuenta",
+    "id": "Document1"
+  },
+  "approvals": [
+    {
+      "role": "Signer1",
+      "id": "Signature1",
+      "fields": [
+        {
+          "width": 265.0,
+          "top": 80.0,
+          "height": 59.0,
+          "left": 99.0,
+          "page": 0,
+          "type": "SIGNATURE",
+          "subtype": "FULLNAME"
+        }
+      ]
+    }
+  ]
+}

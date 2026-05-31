@@ -29,7 +29,7 @@ import MaskedInputField from "./MaskedInputField";
 import DateInputField from "./DateInputField";
 import EmailInputField from "./EmailInputField";
 
-function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transactionConfig, company, form, docsPath }) {
+function WizardForm({ formConfig, brandConfig, transactionConfig, company, form, docsPath }) {
   const syncMap = Object.fromEntries(
     (formConfig.syncPairs || []).flatMap(([a, b]) => [[a, b], [b, a]])
   );
@@ -197,11 +197,11 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transaction
   const getPdfData = () => {
     const data = getMappedFormData();
 
-    (pdfConfig.derivedFields || []).forEach(({ source, name, value: expr }) => {
+    (formConfig.derivedFields || []).forEach(({ source, name, value: expr }) => {
       data[name] = evalDerivedField(expr, data[source] ?? "", data);
     });
 
-    (pdfConfig.excludeGroups || []).forEach(({ controlField, groups }) => {
+    (formConfig.excludeGroups || []).forEach(({ controlField, groups }) => {
       const count = parseInt(data[controlField] ?? "0", 10);
       groups.forEach(({ minValue, prefixes }) => {
         if (count < minValue) {
@@ -214,7 +214,7 @@ function WizardForm({ formConfig, pdfConfig, appConfig, brandConfig, transaction
       });
     });
 
-    (pdfConfig.globalDerivedFields || []).forEach(({ name, value: template }) => {
+    (formConfig.globalDerivedFields || []).forEach(({ name, value: template }) => {
       data[name] = template.replace(/\{(\w+)\}/g, (_, key) => data[key] ?? "").trim();
     });
 
@@ -240,7 +240,7 @@ const handleExport = () => {
     const url = URL.createObjectURL(blob);
     console.log("🔗 URL generada:", url);
 
-    const filename = `${appConfig.downloadFilename?.toLowerCase()}.json`;
+    const filename = `${formConfig.downloadFilename?.toLowerCase()}.json`;
     console.log("📁 Filename:", filename);
 
     if (!filename || filename === "undefined.json") {
@@ -361,6 +361,7 @@ const handleExport = () => {
                 placeholder={field.placeholder}
                 inputClassName="py-3 pr-3 text-sm"
                 selectClassName="pl-3 py-3"
+                defaultCountry={field.defaultCountry}
               />
             </div>
           </div>
@@ -675,7 +676,7 @@ const handleExport = () => {
 
       // 🔹 1. Generar PDF y transactionJson
       const pdfJson = getPdfData();
-      const pdfTemplate = pdfConfig.templatePdf;
+      const pdfTemplate = formConfig.templatePdf;
       console.log("pdfTemplate:" + pdfTemplate);
       const pdfResp = await fetch(`/forms/${company}/${form}/${pdfTemplate}`);
       const pdfBlob = await pdfResp.blob();
@@ -793,7 +794,7 @@ try {
       ) : (
       <>
       <h1 className="text-3xl font-bold text-center text-brand-primary mt-8 mb-8">
-        {pdfConfig.title}
+        {formConfig.title}
       </h1>
       <div className="flex max-w-7xl mx-auto p-0 border rounded shadow-lg overflow-hidden h-[80vh]">
       {/* Sidebar */}
@@ -977,7 +978,7 @@ try {
                 ))}
               </div>
 
-              {appConfig.showJsonOnRevision && (
+              {formConfig.showJsonOnRevision && (
                 <pre className="mt-6 p-4 bg-gray-100 border rounded overflow-x-auto text-xs">
                   {JSON.stringify(getUserData(), null, 2)}
                 </pre>

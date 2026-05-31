@@ -1,4 +1,92 @@
 {
+  "title": "FATCA / OCDE",
+  "templatePdf": "fatca-ocde.pdf",
+  "derivedFields": [
+    {
+      "source": "TramiteFecha",
+      "name": "OCDEFATCAFecha1",
+      "value": "val"
+    },
+    {
+      "source": "TramiteFecha",
+      "name": "OCDEFATCAFecha2",
+      "value": "val"
+    },
+    {
+      "source": "RepresentanteCargo1",
+      "name": "OCDEFATCACargo1",
+      "value": "val"
+    },
+    {
+      "source": "RepresentanteCargo2",
+      "name": "OCDEFATCACargo2",
+      "value": "val"
+    },
+    {
+      "source": "FATCA_InstitucionFinanciera",
+      "name": "OCDEFATCAEsInstitucionFinanciera",
+      "value": "val"
+    },
+    {
+      "source": "FATCA_SinFinesDeLucro",
+      "name": "OCDEFATCAEsEntidadSinFinesDeLucro",
+      "value": "val"
+    },
+    {
+      "source": "FATCA_BeneficiarioExento",
+      "name": "OCDEFATCAEsBeneficiarioFinalExento",
+      "value": "val"
+    },
+    {
+      "source": "FATCA_CotizaBolsa",
+      "name": "OCDEFATCAEsEntidadQueCotizaEnBolsa",
+      "value": "val"
+    },
+    {
+      "source": "FATCA_NoFinanciera_SinExterior",
+      "name": "OCDEFATCAEsEntidadNoFinancieraSinControlantes",
+      "value": "val"
+    },
+    {
+      "source": "FATCA_NoFinanciera_ConExterior",
+      "name": "OCDEFATCAEsEntidadNoFinancieraConControlantes",
+      "value": "val"
+    },
+    {
+      "source": "ResidenciaFiscal1_Direccion",
+      "name": "OCDE",
+      "value": "val"
+    }
+  ],
+  "excludeGroups": [
+    {
+      "controlField": "NumeroFirmantes",
+      "groups": [
+        {
+          "minValue": 2,
+          "prefixes": [
+            "Firmante2"
+          ]
+        }
+      ]
+    }
+  ],
+  "globalDerivedFields": [
+    {
+      "name": "OCDEFATCAAclaracion1",
+      "value": "{Firmante1Nombre} {Firmante1Apellido}"
+    },
+    {
+      "name": "OCDEFATCAAclaracion2",
+      "value": "{Firmante2Nombre} {Firmante2Apellido}"
+    },
+    {
+      "name": "OCDEFATCARazonSocial",
+      "value": "{RazonSocial}"
+    }
+  ],
+  "showJsonOnRevision": false,
+  "downloadFilename": "fatca-ocde",
   "steps": [
     {
       "title": "Firmantes",

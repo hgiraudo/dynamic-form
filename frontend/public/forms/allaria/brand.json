@@ -5,5 +5,9 @@
     "white": "/forms/allaria/logo-white.svg",
     "color": "/forms/allaria/logo-color.svg"
   },
-  "favicon": "/img/favicon.png"
+  "favicon": "/img/favicon.png",
+  "colors": {
+    "primary": "#0A2D5E",
+    "secondary": "#154284"
+  }
 }

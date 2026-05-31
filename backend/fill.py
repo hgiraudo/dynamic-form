@@ -65,6 +65,67 @@ def generate_appearance(annot, value, field_type):
     annot.AP = PdfDict(N=appearance)
     annot.F = 4  # Bandera de impresión
 
+def fill_radio_groups(reader, data):
+    """Fill radio button groups via the AcroForm field tree."""
+    acroform = reader.Root.get('/AcroForm')
+    if not acroform:
+        return
+    fields = acroform.get('/Fields')
+    if not fields:
+        return
+
+    for field in fields:
+        ft = field.get('/FT')
+        ff_raw = field.get('/Ff')
+        t = field.get('/T')
+        if not (ft == '/Btn' and ff_raw and t):
+            continue
+
+        try:
+            ff = int(str(ff_raw))
+        except (ValueError, TypeError):
+            continue
+
+        # Bit 15 (0x4000) = Radio button flag
+        if not (ff & 0x4000):
+            continue
+
+        field_name = t[1:-1]
+        if field_name not in data:
+            continue
+
+        value_norm = normalize_text(str(data[field_name]))
+        kids = field.get('/Kids')
+        if not kids:
+            continue
+
+        matched = False
+        for kid in kids:
+            ap = kid.get('/AP')
+            if not ap:
+                continue
+            n = ap.get('/N')
+            if not n:
+                continue
+
+            opt_name = None
+            for key in n.keys():
+                clean = str(key).lstrip('/')
+                if clean.lower() != 'off':
+                    opt_name = clean
+                    break
+
+            if opt_name and normalize_text(opt_name) == value_norm:
+                kid.AS = PdfName(opt_name)
+                field.V = PdfName(opt_name)
+                matched = True
+            else:
+                kid.AS = PdfName.Off
+
+        if not matched:
+            field.V = PdfName.Off
+
+
 def fill_and_flatten_pdf(input_pdf, input_json, output_pdf, flatten=False):
     try:
         print(f"[DEBUG] PDF entrada: {os.path.abspath(input_pdf)}")
@@ -109,6 +170,9 @@ def fill_and_flatten_pdf(input_pdf, input_json, output_pdf, flatten=False):
                                 except AttributeError:
                                     pass
             writer.addpage(page)
+
+        # Fill radio button groups (not accessible via page.Annots directly)
+        fill_radio_groups(reader, data)
 
         if flatten and hasattr(reader, 'Root') and hasattr(reader.Root, 'AcroForm'):
             reader.Root.AcroForm = None

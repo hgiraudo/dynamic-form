@@ -1,4 +1,26 @@
 {
+  "title": "PEP",
+  "templatePdf": "pep.pdf",
+  "derivedFields": [
+    {
+      "source": "PEP",
+      "name": "PEPEsPEPSi",
+      "value": "val === 'Sí' ? '/' : ''"
+    },
+    {
+      "source": "PEP",
+      "name": "PEPEsPEPNo",
+      "value": "val === 'No' ? '/' : ''"
+    }
+  ],
+  "globalDerivedFields": [
+    {
+      "name": "PEPNombreYApellido",
+      "value": "{Firmante1Nombre} {Firmante1Apellido}"
+    }
+  ],
+  "showJsonOnRevision": false,
+  "downloadFilename": "pep",
   "steps": [
     {
       "title": "Firmante",
@@ -37,7 +59,10 @@
           "name": "RepresentanteTelefono1",
           "label": "Número de celular",
           "type": "tel",
-          "visibleIf": { "field": "SmsRep1", "value": true },
+          "visibleIf": {
+            "field": "SmsRep1",
+            "value": true
+          },
           "placeholder": "ej. +54 9 11 1234-5678"
         }
       ]
@@ -51,14 +76,20 @@
           "name": "PEP",
           "label": "¿Es Persona Expuesta Políticamente?",
           "type": "button-group",
-          "options": ["Sí", "No"]
+          "options": [
+            "Sí",
+            "No"
+          ]
         },
         {
           "name": "PEPMotivo",
           "label": "Motivo",
           "type": "text",
           "placeholder": "ej. Funcionario público nacional",
-          "enabledIf": { "field": "PEP", "value": "Sí" }
+          "enabledIf": {
+            "field": "PEP",
+            "value": "Sí"
+          }
         },
         {
           "name": "PEPDocumentoTipo",
