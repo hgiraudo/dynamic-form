@@ -932,6 +932,18 @@ try {
               Documentación API
             </div>
           </div>
+          {/* Powered by (opcional, definido en brand.json) */}
+          {brandConfig.poweredBy && (
+            <a
+              href={brandConfig.poweredBy.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={`Desarrollado por ${brandConfig.poweredBy.label}`}
+              className="ml-3 pl-3 border-l border-gray-200 opacity-50 hover:opacity-90 transition-opacity flex items-center"
+            >
+              <img src={brandConfig.poweredBy.logo} alt={brandConfig.poweredBy.label} className="h-4" />
+            </a>
+          )}
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">

@@ -8,5 +8,10 @@
   "colors": {
     "primary": "#055020",
     "secondary": "#08732E"
+  },
+  "poweredBy": {
+    "logo": "/img/snappybits-logo.png",
+    "url": "https://www.snappybits.com/",
+    "label": "SnappyBits"
   }
 }
