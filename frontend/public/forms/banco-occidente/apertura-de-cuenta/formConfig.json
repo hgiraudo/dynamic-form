@@ -103,13 +103,15 @@
           "name": "Monto del Total de Activos",
           "label": "Monto del Total de Activos (L)",
           "type": "text",
-          "placeholder": "Ej: 500000.00"
+          "placeholder": "Ej: 500,000",
+          "formatter": "thousandsFormatter"
         },
         {
           "name": "Ventas o Ingresos Anuales",
           "label": "Ventas o Ingresos Anuales (L)",
           "type": "text",
-          "placeholder": "Ej: 200000.00"
+          "placeholder": "Ej: 200,000",
+          "formatter": "thousandsFormatter"
         },
         {
           "type": "spacer",
@@ -299,7 +301,8 @@
           "name": "Monto Mensual Estimado que Ingresará a la Cuenta",
           "label": "Monto Mensual Estimado (L)",
           "type": "text",
-          "placeholder": "Ej: 5000.00"
+          "placeholder": "Ej: 5,000",
+          "formatter": "thousandsFormatter"
         },
         {
           "name": "Propósito de la Cuenta 1",
