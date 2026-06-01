@@ -43,10 +43,10 @@ tail -f logs/frontend.log
 **Development mode** (requires active terminal):
 ```bash
 # Terminal 1 - Backend
-./start-backend-dev.sh
+./scripts/start-backend-dev.sh
 
 # Terminal 2 - Frontend
-./start-frontend-dev.sh
+./scripts/start-frontend-dev.sh
 ```
 
 **Manual start**:
@@ -201,7 +201,7 @@ Key top-level properties:
 - `transactionSigners` — optional array that maps form fields to OneSpan signer data. Each entry: `{ "firstName": "FieldName", "lastName": "FieldName", "email": "FieldName" }`. `lastName` is optional — if omitted, the last word of the `firstName` field value is used as last name. When absent, `buildTransactionJson` falls back to the Allaria convention (`Firmante{n}Nombre` / `Firmante{n}Apellido` / `Firmante{n}Email` + `NumeroFirmantes`).
 
 Key step properties:
-- `type: "welcome"` — the step renders as an intro/welcome screen instead of a field list. It is excluded from the review page and from demo data generation. Has `fields: []`. Works on both desktop (WizardForm) and mobile (MobileReview). **Standard on all forms — always the first step.**
+- `type: "welcome"` — the step renders as an intro/welcome screen instead of a field list. It is excluded from the review page and from demo data generation. Has `fields: []`. Works on both desktop (WizardForm) and mobile (MobileReview). **Standard on all forms — always the first step.** The welcome screen content is fully dynamic: the document name comes from `formConfig.title` and the company name from `brandConfig.name` — nothing is hardcoded.
 
 Key field properties:
 - `optionFields` — for radio button groups in PDF: maps `{"AcroFormGroupName": "OptionValue"}`. Values are normalized (accents removed) before matching.
@@ -425,12 +425,16 @@ docker exec nginx nginx -T | grep server_name
 - Saves PIDs to `logs/backend.pid` and `logs/frontend.pid`
 - Services continue running after you close SSH session
 
-**Development Deployment** (`start-*-dev.sh`):
+**Development Deployment** (`scripts/start-*-dev.sh`):
 - Detects EC2 internal/public IP using IMDSv2 metadata service
 - Configures HOST and PORT environment variables from `shared/config.general.js`
 - Creates/updates .env files automatically
 - Installs dependencies if needed
 - Requires active terminal (process dies if terminal closes)
+
+### Scripts path convention
+
+All scripts in `scripts/` start with `cd "$(dirname "$0")/.."` (right after the `require_*` dependency checks) to ensure CWD is always the project root, regardless of where the script is invoked from. This is required because they use paths relative to the project root (`node shared/get-config.js`, `cd backend`, `cd frontend`, `logs/`, `backend/.env`). The `source "$(dirname "$0")/lib/check-deps.sh"` line is exempt — it uses `$0`-relative paths and does not depend on CWD. When adding a new script to `scripts/`, always follow this pattern.
 
 ## Multi-Company Architecture
 
