@@ -48,6 +48,12 @@
   "downloadFilename": "perfil-de-riesgo",
   "steps": [
     {
+      "type": "welcome",
+      "title": "Bienvenido",
+      "icon": "cilHome",
+      "fields": []
+    },
+    {
       "title": "Firmante",
       "description": "Firmante",
       "icon": "cilPeople",

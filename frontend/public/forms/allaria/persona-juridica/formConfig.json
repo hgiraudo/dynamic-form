@@ -562,6 +562,12 @@
   ],
   "steps": [
     {
+      "type": "welcome",
+      "title": "Bienvenido",
+      "icon": "cilHome",
+      "fields": []
+    },
+    {
       "title": "Firmantes",
       "description": "Firmantes",
       "icon": "cilPeople",
