@@ -1019,6 +1019,19 @@ try {
                 <CIcon icon={Icons.cilArrowRight} className="w-5 h-5" />
                 Comenzar
               </button>
+
+              {/* Footer SnappyBits */}
+              <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col items-center gap-1.5">
+                <span className="text-xs text-gray-400">Desarrollado por</span>
+                <a
+                  href="https://www.snappybits.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="opacity-60 hover:opacity-100 transition-opacity"
+                >
+                  <img src="/img/snappybits-logo.png" alt="SnappyBits" className="h-6" />
+                </a>
+              </div>
             </div>
           )}
 
