@@ -1048,51 +1048,52 @@ try {
               )}
 
               {/* Botones acciones */}
-              <div className="flex justify-between gap-4 pt-6">
-                <button
-                  type="button"
-                  onClick={handleExport}
-                  className="flex-1 flex items-center justify-center px-4 py-3 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary"
-                >
-                  <CIcon icon={Icons.cilCloudDownload} className="w-5 h-5 mr-2" />
-                  Descargar JSON
-                </button>
+              <div className="pt-8 space-y-3">
+                {/* Acciones secundarias */}
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={handleExport}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-sm border border-gray-200 text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700 transition-colors"
+                  >
+                    <CIcon icon={Icons.cilCloudDownload} className="w-4 h-4 shrink-0" />
+                    Descargar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current.click()}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-sm border border-gray-200 text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700 transition-colors"
+                  >
+                    <CIcon icon={Icons.cilCloudUpload} className="w-4 h-4 shrink-0" />
+                    Importar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handlePreview}
+                    disabled={previewLoading}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-sm border border-gray-200 text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700 transition-colors disabled:opacity-40"
+                  >
+                    <CIcon icon={Icons.cilSearch} className="w-4 h-4 shrink-0" />
+                    {previewLoading ? "Generando…" : "Vista previa"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleClear}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-sm border border-red-200 text-red-400 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors"
+                  >
+                    <CIcon icon={Icons.cilTrash} className="w-4 h-4 shrink-0" />
+                    Borrar
+                  </button>
+                </div>
 
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current.click()}
-                  className="flex-1 flex items-center justify-center px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-                >
-                  <CIcon icon={Icons.cilCloudUpload} className="w-5 h-5 mr-2" />
-                  Importar JSON
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleClear}
-                  className="flex-1 flex items-center justify-center px-4 py-3 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
-                >
-                  <CIcon icon={Icons.cilTrash} className="w-5 h-5 mr-2" />
-                  Borrar Todo
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handlePreview}
-                  disabled={previewLoading}
-                  className="flex-1 flex items-center justify-center px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-60"
-                >
-                  <CIcon icon={Icons.cilSearch} className="w-5 h-5 mr-2" />
-                  {previewLoading ? "Generando..." : "Vista previa"}
-                </button>
-
+                {/* Acción principal */}
                 <button
                   type="button"
                   onClick={handleSign}
-                  className="flex-1 flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                  className="w-full flex items-center justify-center gap-2 py-4 bg-brand-primary text-white rounded-xl text-base font-semibold hover:bg-brand-secondary transition-colors shadow-sm"
                 >
-                  <CIcon icon={Icons.cilPenNib} className="w-5 h-5 mr-2" />
-                  Firmar
+                  <CIcon icon={Icons.cilPenNib} className="w-5 h-5" />
+                  Firmar documento
                 </button>
               </div>
             </>

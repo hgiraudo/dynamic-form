@@ -1,15 +1,15 @@
 {
-  "Fecha de Solicitud": "15/03/2025",
-  "Nombre de la Empresa": "Distribuidora Centroamérica S.A. de C.V.",
-  "RTN de la Empresa": "0801-1998-014521",
-  "Correo Electrónico": "contacto@discentroamerica.hn",
-  "Celular": "+50498765432",
-  "Dirección exacta": "Colonia Palmira, Calle República de México, Edificio Torres del Bosque Piso 3, Tegucigalpa",
   "1": "Francisco Morazán, Honduras",
   "2": "Cortés, Honduras",
   "3": "Atlántida, Honduras",
   "4": "Yoro, Honduras",
   "5": "Comayagua, Honduras",
+  "Fecha de Solicitud": "31/03/2025",
+  "Nombre de la Empresa": "Distribuidora Centroamérica S.A. de C.V.",
+  "RTN de la Empresa": "0801-1998-014521",
+  "Correo Electrónico": "contacto@discentroamerica.hn",
+  "Celular": "+50498765432",
+  "Dirección exacta": "Colonia Palmira, Calle República de México, Edificio Torres del Bosque Piso 3, Tegucigalpa",
   "Monto del Total de Activos": "12500000.00",
   "Ventas o Ingresos Anuales": "8750000.00",
   "grupoFinanciero": "No",
@@ -24,7 +24,7 @@
   "2_3": "Distribuidora El Progreso Ltda.",
   "tipoCuenta": "Cheques",
   "tipoMoneda": "Lempiras (L)",
-  "chequera": "Escritorio",
+  "chequera": "Bolsillo",
   "Especificar la Procedencia de los Fondos que Ingresará a la Cuenta 1": "Ingresos provenientes de actividades comerciales de distribución mayorista de productos de consumo masivo.",
   "Monto Mensual Estimado que Ingresará a la Cuenta": "650000.00",
   "Propósito de la Cuenta 1": "Administración de pagos a proveedores, cobros a clientes y operaciones comerciales ordinarias.",
@@ -38,5 +38,5 @@
   "Nombre Completo_6": "Diana Paola Fúnez Castillo",
   "Nombre Completo_7": "Eduardo José Reyes Aguilera",
   "condicionFirma": "Mancomunada",
-  "OBSERVACIONES": ""
+  "OBSERVACIONES": "Por favor procesar con urgencia. Gracias!"
 }
