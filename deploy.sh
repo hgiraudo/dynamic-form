@@ -12,10 +12,8 @@ echo "📥 Pulling latest changes..."
 git pull origin main
 
 echo ""
-echo "🗑️  Limpiando imágenes y cache Docker no usadas..."
-docker container prune -f
-docker image prune -f
-docker builder prune -f
+echo "🗑️  Liberando espacio en disco..."
+bash "$(dirname "$0")/cleanup.sh"
 
 echo ""
 echo "🐳 Rebuilding and restarting containers..."
