@@ -11,6 +11,9 @@ echo "🐳 Iniciando aplicación con Docker..."
 source "$(dirname "$0")/lib/check-deps.sh"
 require_docker
 
+# Navegar al directorio raíz del proyecto
+cd "$(dirname "$0")/.."
+
 # Parsear argumentos
 BUILD_FLAG=""
 if [[ "$1" == "--build" ]]; then

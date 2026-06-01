@@ -9,6 +9,9 @@ echo "🛑 Deteniendo aplicación Docker..."
 source "$(dirname "$0")/lib/check-deps.sh"
 require_docker
 
+# Navegar al directorio raíz del proyecto
+cd "$(dirname "$0")/.."
+
 VOLUMES_FLAG=""
 if [[ "$1" == "--volumes" ]]; then
     VOLUMES_FLAG="--volumes"

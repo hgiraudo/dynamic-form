@@ -13,6 +13,9 @@ source "$(dirname "$0")/lib/check-deps.sh"
 require_node
 require_pdfrw
 
+# Navegar al directorio raíz del proyecto
+cd "$(dirname "$0")/.."
+
 # Leer configuración desde shared/config.general.js
 eval $(node shared/get-config.js)
 

@@ -45,7 +45,7 @@ echo "🗑️  Eliminando archivos temporales (/tmp)..."
 sudo rm -rf /tmp/*
 
 # ── PDFs generados por la app ─────────────────────────────────────────────────
-SAVED_DIR="$SCRIPT_DIR/backend/saved"
+SAVED_DIR="$SCRIPT_DIR/../backend/saved"
 if [ -d "$SAVED_DIR" ]; then
   PDF_COUNT=$(find "$SAVED_DIR" -name "*.pdf" | wc -l)
   echo "📄 Eliminando $PDF_COUNT PDFs en backend/saved/ (los JSON se conservan)..."

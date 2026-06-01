@@ -10,6 +10,9 @@ source "$(dirname "$0")/lib/check-deps.sh"
 require_python
 PYTHON="$PYTHON_CMD"
 
+# Navegar al directorio raíz del proyecto
+cd "$(dirname "$0")/.."
+
 if [ ! -f "$ENV_FILE" ]; then
     echo "❌ No se encontró $ENV_FILE"
     exit 1
