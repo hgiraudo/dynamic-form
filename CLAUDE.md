@@ -201,7 +201,7 @@ Key top-level properties:
 - `transactionSigners` — optional array that maps form fields to OneSpan signer data. Each entry: `{ "firstName": "FieldName", "lastName": "FieldName", "email": "FieldName" }`. `lastName` is optional — if omitted, the last word of the `firstName` field value is used as last name. When absent, `buildTransactionJson` falls back to the Allaria convention (`Firmante{n}Nombre` / `Firmante{n}Apellido` / `Firmante{n}Email` + `NumeroFirmantes`).
 
 Key step properties:
-- `type: "welcome"` — optional. When set, the step renders as an intro/welcome screen instead of a field list. It is excluded from the review page and from demo data generation. Has `fields: []`. Works on both desktop (WizardForm) and mobile (MobileReview).
+- `type: "welcome"` — the step renders as an intro/welcome screen instead of a field list. It is excluded from the review page and from demo data generation. Has `fields: []`. Works on both desktop (WizardForm) and mobile (MobileReview). **Standard on all forms — always the first step.**
 
 Key field properties:
 - `optionFields` — for radio button groups in PDF: maps `{"AcroFormGroupName": "OptionValue"}`. Values are normalized (accents removed) before matching.
@@ -266,7 +266,7 @@ Each page component applies brand at mount time:
 **Configuration-Driven Forms**:
 - Form fields are dynamically rendered based on `formConfig.json`
 - Supports: `text`, `date`, `email`, `tel`, `select`, `checkbox`, `button-group`, `textarea`, `info`, `comment`, `subtitle`, `spacer`
-- Step type `"welcome"` renders an intro screen (no fields); excluded from review and demo data
+- Step type `"welcome"` renders an intro screen (no fields); excluded from review and demo data. Standard on all forms — always first step.
 
 **Field Mapping System** (`frontend/src/utils/fieldMappers.js`):
 - Transforms form data before sending to backend/PDF
@@ -344,6 +344,7 @@ Three primary endpoints:
 
 1. Create directory: `frontend/public/forms/{company}/{form}/`
 2. Create `formConfig.json` with `title`, `templatePdf`, `showJsonOnRevision`, `downloadFilename`, and `steps`
+   - Always add a `{ "type": "welcome", "title": "Bienvenido", "icon": "cilHome", "fields": [] }` as the **first step** — it is standard on all forms
 3. Place PDF template in the same directory
 4. Optionally add `transactionConfig.json` for OneSpan signature placement
 5. Ensure `frontend/public/forms/{company}/brand.json` exists with `colors`
@@ -397,6 +398,16 @@ docker compose up -d --build
 ```
 
 `nginx/nginx.conf` is mounted as a **volume** — a `docker compose restart nginx` is enough to apply changes to it (no rebuild needed). Changes to frontend source or `frontend/nginx.conf` require `--build`.
+
+**What requires a rebuild vs. just `git pull`**:
+| Change | Action needed on server |
+|--------|------------------------|
+| `frontend/src/**` (React code) | `./deploy.sh` (full rebuild) |
+| `frontend/nginx.conf` | `./deploy.sh` (full rebuild) |
+| `nginx/nginx.conf` | `git pull && docker compose restart nginx` |
+| `frontend/public/forms/**` (JSON, PDF, images) | `git pull` only — served statically, no rebuild |
+| `backend/**` | `./deploy.sh` (full rebuild) |
+| `backend/.env` | `docker compose restart backend` |
 
 **Verify nginx config is loaded**:
 ```bash
