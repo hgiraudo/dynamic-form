@@ -961,7 +961,7 @@ try {
               </div>
 
               <p className="text-gray-700 text-center mb-8 leading-relaxed">
-                Lo ayudaremos a completar y firmar el documento de <strong>Apertura de Cuenta</strong> de Banco Occidente.
+                Lo ayudaremos a completar y firmar <strong>{formConfig.title}</strong> de {brandConfig.name}.
                 Complete los datos en cada sección y haga clic en <strong>Firmar documento</strong>.
                 Al terminar, será redirigido al portal de firma electrónica de {brandConfig.name}.
               </p>
@@ -971,7 +971,7 @@ try {
                 {[
                   { icon: Icons.cilPencil, step: "1", title: "Complete los datos", desc: "Rellene cada sección con la información de su empresa y firmantes." },
                   { icon: Icons.cilList,   step: "2", title: "Revise el formulario", desc: "En la última sección podrá verificar todos los datos antes de firmar." },
-                  { icon: Icons.cilPenNib, step: "3", title: "Firme electrónicamente", desc: "Será redirigido al portal de Banco Occidente para completar la firma." },
+                  { icon: Icons.cilPenNib, step: "3", title: "Firme electrónicamente", desc: `Será redirigido al portal de ${brandConfig.name} para completar la firma.` },
                 ].map(({ icon, step, title, desc }) => (
                   <div key={step} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl border border-gray-100">
                     <div className="w-9 h-9 rounded-full bg-brand-primary flex items-center justify-center mb-3">
