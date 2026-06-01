@@ -13,7 +13,7 @@ git pull origin main
 
 echo ""
 echo "🗑️  Liberando espacio en disco..."
-bash "$(dirname "$0")/cleanup.sh"
+bash "$(dirname "$0")/scripts/cleanup.sh"
 
 echo ""
 echo "🐳 Rebuilding and restarting containers..."

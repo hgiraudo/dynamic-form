@@ -16,12 +16,12 @@ This is a monorepo containing a dynamic form system for legal document processin
 - `backend/` - Express server with PDF processing
 - `shared/` - Shared configuration between frontend and backend
 - `logs/` - Log files for production processes (backend.log, frontend.log, PIDs)
-- `start-production.sh` - **Production deployment script** (nohup, survives SSH disconnection)
-- `stop-production.sh` - **Stop production services** script
-- `start-backend-dev.sh` - Development backend script
-- `start-frontend-dev.sh` - Development frontend script
-- `start-backend-prod.sh` - Production backend script (requires active terminal)
-- `start-frontend-prod.sh` - Production frontend script (requires active terminal)
+- `deploy.sh` - **Main deploy script**: git pull + cleanup + docker compose up --build
+- `scripts/` - All other shell scripts (startup, stop, set-apikey, cleanup, etc.)
+- `scripts/cleanup.sh` - Frees disk space (Docker, logs, /tmp, generated PDFs)
+- `scripts/set-apikey.sh` - Manage OneSpan API keys interactively
+- `scripts/start-production.sh` - Production deployment (nohup, survives SSH disconnection)
+- `scripts/stop-production.sh` - Stop production services
 
 ## Development Commands
 
@@ -30,10 +30,10 @@ This is a monorepo containing a dynamic form system for legal document processin
 **Production deployment** (recommended for AWS EC2 - survives SSH disconnection):
 ```bash
 # Detiene procesos existentes e inicia frontend y backend en producción
-./start-production.sh
+./scripts/start-production.sh
 
 # Detiene todos los servicios
-./stop-production.sh
+./scripts/stop-production.sh
 
 # Ver logs en tiempo real
 tail -f logs/backend.log
@@ -107,7 +107,7 @@ Frontend uses `frontend/.env`:
 
 **API key resolution** (`resolveApiKey` in `server.js`): the frontend sends an `X-Company` header with the company slug. The backend looks up `ONESPAN_API_KEY_{COMPANY}` first, then falls back to `ONESPAN_API_KEY_DEFAULT`. The key never leaves the server.
 
-**Managing keys**: use `./set-apikey.sh` to view and update keys interactively without editing `.env` manually.
+**Managing keys**: use `./scripts/set-apikey.sh` to view and update keys interactively without editing `.env` manually.
 
 ## Form Asset Structure
 
@@ -356,7 +356,7 @@ Three primary endpoints:
 2. Create `brand.json` with `name`, `logos`, `favicon`, and `colors`
 3. Place logo and favicon files in the directory
 4. Add the company and its forms to `frontend/public/forms/registry.json` (optionally with `"subdomain"`)
-5. Add the OneSpan API key to `backend/.env` as `ONESPAN_API_KEY_{COMPANY}` (run `./set-apikey.sh`)
+5. Add the OneSpan API key to `backend/.env` as `ONESPAN_API_KEY_{COMPANY}` (run `./scripts/set-apikey.sh`)
 6. If using a subdomain: add the subdomain entry to `SUBDOMAIN_MAP` in `frontend/src/utils/subdomain.js`, add it to `server_name` in `nginx/nginx.conf`, and create the DNS record in Cloudflare pointing to the same IP as the other subdomains
 
 ### Field Mappers
@@ -416,7 +416,7 @@ docker exec nginx nginx -T | grep server_name
 
 ### AWS EC2 Deployment (legacy / nohup)
 
-**Production Deployment** (`start-production.sh`):
+**Production Deployment** (`scripts/start-production.sh`):
 - Kills any existing frontend/backend processes on configured ports
 - Starts both services with `nohup` (survives SSH disconnection)
 - Detects EC2 IPs automatically (public IP for frontend → backend communication)
@@ -438,7 +438,7 @@ OneSpan API keys are stored per-company in `backend/.env` and never sent to the 
 
 **Adding a new company's key**:
 ```bash
-./set-apikey.sh   # interactive — select "Agregar nueva empresa"
+./scripts/set-apikey.sh   # interactive — select "Agregar nueva empresa"
 ```
 Or manually in `backend/.env`:
 ```
