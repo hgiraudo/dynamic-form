@@ -1032,18 +1032,6 @@ try {
                 Comenzar
               </button>
 
-              {/* Footer SnappyBits */}
-              <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col items-center gap-1.5">
-                <span className="text-xs text-gray-400">Desarrollado por</span>
-                <a
-                  href="https://www.snappybits.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="opacity-60 hover:opacity-100 transition-opacity"
-                >
-                  <img src="/img/snappybits-logo.png" alt="SnappyBits" className="h-6" />
-                </a>
-              </div>
             </div>
           )}
 
@@ -1215,6 +1203,21 @@ try {
           )}
         </div>
         </div>
+
+        {/* Footer "Powered by" — visible en todas las hojas */}
+        {brandConfig.poweredBy && (
+          <div className="shrink-0 flex items-center justify-center gap-2 py-2 border-t border-gray-100">
+            <span className="text-xs text-gray-400">Desarrollado por</span>
+            <a
+              href={brandConfig.poweredBy.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-50 hover:opacity-90 transition-opacity flex items-center"
+            >
+              <img src={brandConfig.poweredBy.logo} alt={brandConfig.poweredBy.label} className="h-4" />
+            </a>
+          </div>
+        )}
       </div>
       </div>
       </>
