@@ -136,11 +136,18 @@ frontend/public/forms/
   "colors": {
     "primary": "#055020",
     "secondary": "#08732E"
+  },
+  "poweredBy": {
+    "logo": "/img/snappybits-logo.png",
+    "url": "https://www.snappybits.com/",
+    "label": "SnappyBits"
   }
 }
 ```
 
 The `colors` object sets CSS variables `--color-brand-primary` and `--color-brand-secondary` at runtime via JavaScript. These drive all branded UI colors (header background, buttons, accents).
+
+`poweredBy` is optional. When present, a small logo link appears in the top-right action bar and as a footer strip at the bottom of every page of the form (desktop and mobile).
 
 **Note**: `downloadFilename` and OneSpan API keys are NOT in `brand.json`. `downloadFilename` lives in each `formConfig.json`; API keys live in `backend/.env`.
 
@@ -163,6 +170,12 @@ The `colors` object sets CSS variables `--color-brand-primary` and `--color-bran
   "syncPairs": [...],
   "steps": [
     {
+      "type": "welcome",
+      "title": "Bienvenido",
+      "icon": "cilHome",
+      "fields": []
+    },
+    {
       "title": "Step Title",
       "fields": [
         {
@@ -174,6 +187,7 @@ The `colors` object sets CSS variables `--color-brand-primary` and `--color-bran
           "default": "Default value",
           "defaultCountry": "HN",
           "mapper": "mapperFunctionName",
+          "formatter": "thousandsFormatter",
           "optionFields": [{"GroupName": "OptionValue"}, ...]
         }
       ]
@@ -186,11 +200,15 @@ Key top-level properties:
 - `downloadFilename` — base name for exported JSON files (without extension). Required per form.
 - `transactionSigners` — optional array that maps form fields to OneSpan signer data. Each entry: `{ "firstName": "FieldName", "lastName": "FieldName", "email": "FieldName" }`. `lastName` is optional — if omitted, the last word of the `firstName` field value is used as last name. When absent, `buildTransactionJson` falls back to the Allaria convention (`Firmante{n}Nombre` / `Firmante{n}Apellido` / `Firmante{n}Email` + `NumeroFirmantes`).
 
+Key step properties:
+- `type: "welcome"` — optional. When set, the step renders as an intro/welcome screen instead of a field list. It is excluded from the review page and from demo data generation. Has `fields: []`. Works on both desktop (WizardForm) and mobile (MobileReview).
+
 Key field properties:
 - `optionFields` — for radio button groups in PDF: maps `{"AcroFormGroupName": "OptionValue"}`. Values are normalized (accents removed) before matching.
 - `defaultCountry` — for `tel` fields: ISO country code for the default phone flag (e.g., `"HN"` for Honduras, `"AR"` for Argentina).
 - `default` — pre-selected value for `button-group` fields.
 - `mapper` — name of a function in `fieldMappers.js` to transform data before PDF generation.
+- `formatter` — name of a function in `fieldFormatters.js` applied on every keystroke (e.g. `thousandsFormatter` for integer amounts with comma separator).
 
 ### `transactionConfig.json` schema
 
@@ -219,17 +237,24 @@ Optional. Defines OneSpan signature placement:
 
 ### Frontend
 
+**Subdomain detection** (`frontend/src/utils/subdomain.js`):
+- `SUBDOMAIN_MAP` maps subdomain → company slug (e.g. `"allaria" → "allaria"`, `"banco-occidente" → "banco-occidente"`)
+- `getCompanyFromHostname` parses `window.location.hostname`; returns the company slug or `null`
+- When a subdomain is detected, `App.jsx` uses shorter routes (`/:form` instead of `/:company/:form`)
+- To add a new subdomain, add an entry to `SUBDOMAIN_MAP` and add it to `server_name` in `nginx/nginx.conf`
+
 **Routing** (`App.jsx`):
-- `/` — `HomePage`: OneSpan-branded landing with all available companies/forms
-- `/:company` — `CompanyPage`: Lists forms for one company (applies company brand)
-- `/:company/:form` — `FormLoader` → `WizardForm`: The form itself
-- `/:company/:form/docs` — `DocsPage`: API documentation for the prefill endpoint
+- On root domain (`formularios.biz`): `/` → `HomePage`, `/:company/:form` → `WizardForm`
+- On subdomain (`allaria.formularios.biz`): `/` → `CompanyPage`, `/:form` → `WizardForm`
+- `/:company/:form/docs` or `/:form/docs` — `DocsPage`: API documentation for the prefill endpoint
 
 **Main Components**:
 - `HomePage.jsx` — OneSpan-branded landing page; fetches `registry.json`; applies OneSpan colors (`#003F50`) and favicon
+- `CompanySection.jsx` — Renders one company's forms on the home/company page. If the company has a `subdomain` field in `registry.json` and the current host is not localhost, links point to `{subdomain}.{basedomain}` instead of `/{company}`.
 - `CompanyPage.jsx` — Per-company page; fetches `brand.json`; applies company colors/favicon
 - `FormLoader.jsx` — Fetches `formConfig.json`, `brand.json`, `transactionConfig.json`; applies brand; renders `WizardForm`
-- `WizardForm.jsx` — Multi-step form wizard (main form logic)
+- `WizardForm.jsx` — Multi-step form wizard (main form logic, desktop)
+- `MobileReview.jsx` — Accordion-based mobile UI. Renders all steps including welcome steps (which get a special intro layout instead of form fields).
 - `PdfPreviewModal.jsx` — Modal that renders a filled PDF using react-pdf (pdfjs). Triggered by the "Vista previa" button in the review step; calls `/api/fill-pdf` with `responseType=base64` and displays the result page by page.
 - `DocsPage.jsx` — Auto-generated API documentation from `formConfig.json`
 
@@ -241,6 +266,7 @@ Each page component applies brand at mount time:
 **Configuration-Driven Forms**:
 - Form fields are dynamically rendered based on `formConfig.json`
 - Supports: `text`, `date`, `email`, `tel`, `select`, `checkbox`, `button-group`, `textarea`, `info`, `comment`, `subtitle`, `spacer`
+- Step type `"welcome"` renders an intro screen (no fields); excluded from review and demo data
 
 **Field Mapping System** (`frontend/src/utils/fieldMappers.js`):
 - Transforms form data before sending to backend/PDF
@@ -248,11 +274,17 @@ Each page component applies brand at mount time:
 - Example: `emailMapper` splits email into username and domain parts
 - Mappers are referenced by name in `formConfig.json`
 
+**Field Formatters** (`frontend/src/utils/fieldFormatters.js`):
+- Applied on every keystroke via `formatter` field property
+- `thousandsFormatter` — strips non-digits and formats with comma separator (e.g. `1500000` → `1,500,000`). Used for integer money amounts in Lempiras.
+- `cbuFormatter`, `cuitFormatter` — Argentina-specific formats
+
 **Demo data easter egg**: triple-click on the sidebar company logo shows a modal that loads `demoData.json` from the form's public directory (`/forms/{company}/{form}/demoData.json`). Falls back to `buildDemoData(formConfig)` if the file doesn't exist.
 
 **Utilities**:
 - `buildTransactionJson.js` - Constructs OneSpan transaction payload. Supports `transactionSigners` mapping from `formConfig` or the legacy `Firmante{n}*` field convention.
-- `fieldFormatters.js` - Input field formatting helpers
+- `fieldFormatters.js` - Input field formatting helpers (`thousandsFormatter`, `cbuFormatter`, `cuitFormatter`)
+- `subdomain.js` - `SUBDOMAIN_MAP` and `getCompanyFromHostname()` for subdomain-based routing
 - `utils.js` - General utilities
 
 ### Backend
@@ -322,8 +354,9 @@ Three primary endpoints:
 1. Create directory: `frontend/public/forms/{company}/`
 2. Create `brand.json` with `name`, `logos`, `favicon`, and `colors`
 3. Place logo and favicon files in the directory
-4. Add the company and its forms to `frontend/public/forms/registry.json`
+4. Add the company and its forms to `frontend/public/forms/registry.json` (optionally with `"subdomain"`)
 5. Add the OneSpan API key to `backend/.env` as `ONESPAN_API_KEY_{COMPANY}` (run `./set-apikey.sh`)
+6. If using a subdomain: add the subdomain entry to `SUBDOMAIN_MAP` in `frontend/src/utils/subdomain.js`, add it to `server_name` in `nginx/nginx.conf`, and create the DNS record in Cloudflare pointing to the same IP as the other subdomains
 
 ### Field Mappers
 
@@ -340,7 +373,37 @@ PDFs with radio buttons (Ff=49152) require special handling:
 - Use `optionFields` in `formConfig.json` to map the group name to option values
 - Both sides (data value and PDF option name) are normalized before matching
 
-### AWS EC2 Deployment
+### Docker Deployment (production)
+
+The production environment runs with Docker Compose (three containers: `nginx`, `frontend`, `backend`).
+
+```
+nginx/nginx.conf        # Outer nginx: routes by Host header → frontend:80 or backend:4000
+frontend/Dockerfile     # Multi-stage: node:20-alpine builds dist/, nginx:alpine serves it
+frontend/nginx.conf     # Inner nginx: SPA fallback + correct MIME types (.mjs → application/javascript)
+backend/Dockerfile      # Node.js server
+docker-compose.yml      # Wires services together; backend/.env loaded via volume
+```
+
+**Typical deploy workflow** (SSH into server):
+```bash
+./deploy.sh   # git pull + docker compose up -d --build
+```
+
+Or manually:
+```bash
+git pull origin main
+docker compose up -d --build
+```
+
+`nginx/nginx.conf` is mounted as a **volume** — a `docker compose restart nginx` is enough to apply changes to it (no rebuild needed). Changes to frontend source or `frontend/nginx.conf` require `--build`.
+
+**Verify nginx config is loaded**:
+```bash
+docker exec nginx nginx -T | grep server_name
+```
+
+### AWS EC2 Deployment (legacy / nohup)
 
 **Production Deployment** (`start-production.sh`):
 - Kills any existing frontend/backend processes on configured ports
@@ -357,11 +420,6 @@ PDFs with radio buttons (Ff=49152) require special handling:
 - Creates/updates .env files automatically
 - Installs dependencies if needed
 - Requires active terminal (process dies if terminal closes)
-
-**Important**:
-- Use `start-production.sh` for persistent deployment on EC2
-- Use `start-*-dev.sh` for development with hot-reload
-- Always stop production services with `stop-production.sh` before redeploying
 
 ## Multi-Company Architecture
 
@@ -382,7 +440,10 @@ The key name must match the URL slug uppercased with hyphens replaced by undersc
 - PDF templates: `frontend/public/forms/{company}/{form}/template.pdf` (served statically)
 - Demo data: `frontend/public/forms/{company}/{form}/demoData.json` (loaded on triple-click of sidebar logo)
 - Generated PDFs: Saved to `backend/saved/` with timestamps
-- Static assets: `frontend/public/img/` (OneSpan logo, favicon, etc.)
+- Static assets: `frontend/public/img/` (OneSpan logo, favicon, SnappyBits logo, etc.)
+- Subdomain map: `frontend/src/utils/subdomain.js`
+- Outer nginx config: `nginx/nginx.conf` (server_name list, proxy rules)
+- Inner nginx config: `frontend/nginx.conf` (SPA fallback, MIME types)
 
 ## Important Notes
 
