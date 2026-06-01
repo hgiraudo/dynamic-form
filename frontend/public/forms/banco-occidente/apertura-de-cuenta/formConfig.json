@@ -11,6 +11,12 @@
   ],
   "steps": [
     {
+      "type": "welcome",
+      "title": "Bienvenido",
+      "icon": "cilHome",
+      "fields": []
+    },
+    {
       "title": "Datos de la Empresa",
       "description": "Información general de la empresa",
       "icon": "cilBuilding",

@@ -36,6 +36,7 @@ function buildDemoData(formConfig) {
   if (formConfig.demoData) return formConfig.demoData;
   const obj = {};
   formConfig.steps.forEach((step) => {
+    if (step.type === "welcome") return;
     step.fields.forEach((field) => {
       if (!field.name || DEMO_SKIP_TYPES.includes(field.type)) return;
       if (field.example !== undefined)                              { obj[field.name] = field.example; return; }
@@ -935,19 +936,108 @@ try {
 
         <div className="flex-1 overflow-y-auto p-4">
         <div className="p-8">
-          <h2 className="text-2xl font-semibold text-brand-primary mb-6">
-            {currentStep.description}
-          </h2>
+
+          {/* Paso de bienvenida */}
+          {currentStep.type === "welcome" && (
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 mb-4">
+                  <CIcon icon={Icons.cilDescription} className="w-8 h-8 text-brand-primary" />
+                </div>
+                <h1 className="text-3xl font-bold text-brand-primary mb-2">¡Bienvenido!</h1>
+                <p className="text-gray-500 text-sm">{brandConfig.name} &mdash; {formConfig.title}</p>
+              </div>
+
+              <p className="text-gray-700 text-center mb-8 leading-relaxed">
+                Lo ayudaremos a completar y firmar el documento de <strong>Apertura de Cuenta</strong> de Banco Occidente.
+                Complete los datos en cada sección y haga clic en <strong>Firmar documento</strong>.
+                Al terminar, será redirigido al portal de firma electrónica de Banco Occidente.
+              </p>
+
+              {/* Cómo funciona */}
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                {[
+                  { icon: Icons.cilPencil, step: "1", title: "Complete los datos", desc: "Rellene cada sección con la información de su empresa y firmantes." },
+                  { icon: Icons.cilList,   step: "2", title: "Revise el formulario", desc: "En la última sección podrá verificar todos los datos antes de firmar." },
+                  { icon: Icons.cilPenNib, step: "3", title: "Firme electrónicamente", desc: "Será redirigido al portal de Banco Occidente para completar la firma." },
+                ].map(({ icon, step, title, desc }) => (
+                  <div key={step} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl border border-gray-100">
+                    <div className="w-9 h-9 rounded-full bg-brand-primary flex items-center justify-center mb-3">
+                      <CIcon icon={icon} className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-xs font-bold text-brand-primary uppercase tracking-wide mb-1">Paso {step}</span>
+                    <h3 className="text-sm font-semibold text-gray-800 mb-1">{title}</h3>
+                    <p className="text-xs text-gray-500 leading-snug">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Iconos de la barra de herramientas */}
+              <div className="bg-gray-50 border border-gray-100 rounded-xl p-5 mb-6">
+                <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                  <CIcon icon={Icons.cilSettings} className="w-4 h-4 text-brand-primary" />
+                  Herramientas disponibles en la barra superior
+                </h3>
+                <div className="space-y-2.5">
+                  {[
+                    { icon: Icons.cilSave,          label: "Guardar en la nube",   desc: "Guarda el progreso y genera una URL única. Puede volver a completarlo más tarde desde cualquier dispositivo." },
+                    { icon: Icons.cilCloudDownload, label: "Descargar JSON",        desc: "Descarga los datos del formulario como archivo para guardar o compartir." },
+                    { icon: Icons.cilCloudUpload,   label: "Importar JSON",         desc: "Carga datos previamente guardados para continuar donde lo dejó." },
+                    { icon: Icons.cilSearch,        label: "Vista previa PDF",      desc: "Genera y muestra el PDF completo con todos sus datos antes de enviarlo a firma." },
+                    { icon: Icons.cilTrash,         label: "Borrar formulario",     desc: "Limpia todos los campos del formulario para comenzar de nuevo." },
+                    { icon: Icons.cilPenNib,        label: "Firmar documento",      desc: "Envía el formulario a OneSpan y lo redirige al portal de firma electrónica." },
+                  ].map(({ icon, label, desc }) => (
+                    <div key={label} className="flex items-start gap-3">
+                      <div className="shrink-0 w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
+                        <CIcon icon={icon} className="w-3.5 h-3.5 text-brand-primary" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-semibold text-gray-700">{label}</span>
+                        <span className="text-xs text-gray-500"> — {desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Compartir por WhatsApp */}
+              <div className="flex items-start gap-3 bg-green-50 border border-green-100 rounded-xl p-4 mb-8">
+                <CIcon icon={Icons.cilShare} className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-semibold text-green-800 mb-0.5">Comparta el formulario por WhatsApp</p>
+                  <p className="text-xs text-green-700 leading-snug">
+                    Use el botón <strong>Guardar en la nube</strong> para obtener una URL única con los datos del formulario.
+                    Copie esa URL y compártala por WhatsApp u otro medio para que otros completen o revisen los datos desde cualquier dispositivo.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setStepIndex(1)}
+                className="w-full flex items-center justify-center gap-2 py-4 bg-brand-primary text-white rounded-xl text-base font-semibold hover:bg-brand-secondary transition-colors shadow-sm"
+              >
+                <CIcon icon={Icons.cilArrowRight} className="w-5 h-5" />
+                Comenzar
+              </button>
+            </div>
+          )}
+
+          {/* Título del paso (solo pasos normales) */}
+          {currentStep.type !== "welcome" && (
+            <h2 className="text-2xl font-semibold text-brand-primary mb-6">
+              {currentStep.description}
+            </h2>
+          )}
 
           {/* Render dinámico de campos */}
-          {stepIndex !== formConfig.steps.length - 1 && (
+          {currentStep.type !== "welcome" && stepIndex !== formConfig.steps.length - 1 && (
             <div className="space-y-4">
               {currentStep.fields.map((field) => renderField(field))}
             </div>
           )}
 
           {/* Botones navegación */}
-          {stepIndex !== formConfig.steps.length - 1 && (
+          {currentStep.type !== "welcome" && stepIndex !== formConfig.steps.length - 1 && (
             <div className="flex justify-between mt-6">
               <button
                 onClick={() => setStepIndex(Math.max(stepIndex - 1, 0))}
@@ -973,7 +1063,7 @@ try {
           {stepIndex === formConfig.steps.length - 1 && (
             <>
               <div className="rounded-lg overflow-hidden text-sm">
-                {formConfig.steps.slice(0, -1).map((step, stepIdx) => (
+                {formConfig.steps.slice(0, -1).filter(s => s.type !== "welcome").map((step, stepIdx) => (
                   <div key={`${step.title}-${stepIdx}`} className="mb-6">
                     <h3 className="text-sm font-bold text-white bg-brand-primary px-4 py-2.5 text-center tracking-wide uppercase">
                       {step.title}
