@@ -94,21 +94,20 @@ The Python script location is configured in `shared/config.general.js` (currentl
 
 Node.js script that reads `config.general.js` and exports values in bash-compatible format. Used by all startup scripts to ensure consistency.
 
-### Private Configuration (`backend/config.private.js`)
-
-**DEPRECATED**: This file is no longer used for OneSpan API keys. OneSpan API keys are now managed in the frontend.
-
 ### Environment Variables
 
-Backend uses `.env` file:
+Backend uses `backend/.env`:
 - `PORT` - Server port (default: 4000)
 - `HOST` - Server host (default: 0.0.0.0 or EC2 internal IP)
+- `ONESPAN_API_KEY_DEFAULT` - Fallback OneSpan API key used when no company-specific key is found
+- `ONESPAN_API_KEY_{COMPANY}` - Per-company key (e.g. `ONESPAN_API_KEY_ALLARIA`, `ONESPAN_API_KEY_BANCO_OCCIDENTE`). The company name comes from the URL slug, uppercased with hyphens replaced by underscores.
 
-Frontend uses `.env` file:
+Frontend uses `frontend/.env`:
 - `VITE_BACKEND_URL` - Backend API URL (required for API calls)
-- `VITE_ONESPAN_API_KEY` - OneSpan API authorization key (passed to backend in request headers)
 
-**Important**: The OneSpan API key is now configured in the frontend and passed to the backend via the `X-OneSpan-API-Key` header. This allows multiple frontend instances to share a single backend while using different API keys.
+**API key resolution** (`resolveApiKey` in `server.js`): the frontend sends an `X-Company` header with the company slug. The backend looks up `ONESPAN_API_KEY_{COMPANY}` first, then falls back to `ONESPAN_API_KEY_DEFAULT`. The key never leaves the server.
+
+**Managing keys**: use `./set-apikey.sh` to view and update keys interactively without editing `.env` manually.
 
 ## Form Asset Structure
 
@@ -143,6 +142,8 @@ frontend/public/forms/
 
 The `colors` object sets CSS variables `--color-brand-primary` and `--color-brand-secondary` at runtime via JavaScript. These drive all branded UI colors (header background, buttons, accents).
 
+**Note**: `downloadFilename` and OneSpan API keys are NOT in `brand.json`. `downloadFilename` lives in each `formConfig.json`; API keys live in `backend/.env`.
+
 ### `formConfig.json` schema
 
 `formConfig.json` is the **single source of truth** for each form. It previously was split across three files (`formConfig.json` + `pdfConfig.json` + `appConfig.json`) — those have been merged. The combined structure:
@@ -152,7 +153,10 @@ The `colors` object sets CSS variables `--color-brand-primary` and `--color-bran
   "title": "Form Title",
   "templatePdf": "/forms/{company}/{form}/template.pdf",
   "showJsonOnRevision": false,
-  "downloadFilename": "output.pdf",
+  "downloadFilename": "output-filename",
+  "transactionSigners": [
+    { "firstName": "FormFieldName", "lastName": "FormFieldName", "email": "FormFieldName" }
+  ],
   "derivedFields": [...],
   "excludeGroups": [...],
   "globalDerivedFields": [...],
@@ -177,6 +181,10 @@ The `colors` object sets CSS variables `--color-brand-primary` and `--color-bran
   ]
 }
 ```
+
+Key top-level properties:
+- `downloadFilename` — base name for exported JSON files (without extension). Required per form.
+- `transactionSigners` — optional array that maps form fields to OneSpan signer data. Each entry: `{ "firstName": "FieldName", "lastName": "FieldName", "email": "FieldName" }`. `lastName` is optional — if omitted, the last word of the `firstName` field value is used as last name. When absent, `buildTransactionJson` falls back to the Allaria convention (`Firmante{n}Nombre` / `Firmante{n}Apellido` / `Firmante{n}Email` + `NumeroFirmantes`).
 
 Key field properties:
 - `optionFields` — for radio button groups in PDF: maps `{"AcroFormGroupName": "OptionValue"}`. Values are normalized (accents removed) before matching.
@@ -222,6 +230,7 @@ Optional. Defines OneSpan signature placement:
 - `CompanyPage.jsx` — Per-company page; fetches `brand.json`; applies company colors/favicon
 - `FormLoader.jsx` — Fetches `formConfig.json`, `brand.json`, `transactionConfig.json`; applies brand; renders `WizardForm`
 - `WizardForm.jsx` — Multi-step form wizard (main form logic)
+- `PdfPreviewModal.jsx` — Modal that renders a filled PDF using react-pdf (pdfjs). Triggered by the "Vista previa" button in the review step; calls `/api/fill-pdf` with `responseType=base64` and displays the result page by page.
 - `DocsPage.jsx` — Auto-generated API documentation from `formConfig.json`
 
 **Dynamic Branding**:
@@ -239,8 +248,10 @@ Each page component applies brand at mount time:
 - Example: `emailMapper` splits email into username and domain parts
 - Mappers are referenced by name in `formConfig.json`
 
+**Demo data easter egg**: triple-click on the sidebar company logo shows a modal that loads `demoData.json` from the form's public directory (`/forms/{company}/{form}/demoData.json`). Falls back to `buildDemoData(formConfig)` if the file doesn't exist.
+
 **Utilities**:
-- `buildTransactionJson.js` - Constructs OneSpan transaction payload
+- `buildTransactionJson.js` - Constructs OneSpan transaction payload. Supports `transactionSigners` mapping from `formConfig` or the legacy `Firmante{n}*` field convention.
 - `fieldFormatters.js` - Input field formatting helpers
 - `utils.js` - General utilities
 
@@ -258,13 +269,13 @@ Three primary endpoints:
 
 2. `POST /api/sign` - Create OneSpan signature transaction
    - Forwards transaction JSON to OneSpan API
-   - Requires `X-OneSpan-API-Key` header (provided by frontend)
-   - Returns 401 if API key header is missing
+   - Reads company from `X-Company` header; resolves API key from `backend/.env` via `resolveApiKey()`
+   - Returns 401 if no key is configured for the company
 
 3. `POST /api/getSigningUrl` - Get signing URL for a package
    - Fetches signing URL from OneSpan for specific packageId
-   - Requires `X-OneSpan-API-Key` header (provided by frontend)
-   - Returns 401 if API key header is missing
+   - Reads company from `X-Company` header; resolves API key from `backend/.env`
+   - Returns 401 if no key is configured for the company
    - Returns URL for signer to access signature interface
 
 4. `GET /api/health` - Health check endpoint
@@ -276,6 +287,7 @@ Three primary endpoints:
 - Normalizes text (removes accents, replaces ñ) — both field data and radio option names are normalized before matching
 - Generates appearance streams for form fields
 - Supports flatten mode (makes fields non-editable)
+- **Font sizing**: `min(9, max(6, height * 0.5))`. For fields taller than 20pt (textarea-like), text is anchored near the top (`y = height - font_size - 3`) to avoid overlapping horizontal lines drawn mid-field in the PDF template. For shorter fields, text is vertically centered.
 
 **Radio button filling** (`fill_radio_groups` in `fill.py`):
 - Traverses `reader.Root./AcroForm./Fields` to find button groups (`FT=/Btn` and `Ff & 0x4000`)
@@ -289,9 +301,9 @@ Three primary endpoints:
 3. Frontend sends PDF template + JSON data to `/api/fill-pdf`
 4. Backend spawns Python script to fill PDF (text fields + radio groups)
 5. Filled PDF returned to frontend
-6. Frontend sends transaction data + OneSpan API key to `/api/sign` (via `X-OneSpan-API-Key` header)
-7. Backend forwards request to OneSpan and receives packageId
-8. Frontend requests signing URL via `/api/getSigningUrl` (with API key in header)
+6. Frontend sends transaction data + `X-Company` header to `/api/sign`
+7. Backend resolves the OneSpan API key from `backend/.env` and forwards request to OneSpan; receives packageId
+8. Frontend requests signing URL via `/api/getSigningUrl` (with `X-Company` header)
 9. User redirected to OneSpan signing interface
 
 ## Key Technical Patterns
@@ -311,6 +323,7 @@ Three primary endpoints:
 2. Create `brand.json` with `name`, `logos`, `favicon`, and `colors`
 3. Place logo and favicon files in the directory
 4. Add the company and its forms to `frontend/public/forms/registry.json`
+5. Add the OneSpan API key to `backend/.env` as `ONESPAN_API_KEY_{COMPANY}` (run `./set-apikey.sh`)
 
 ### Field Mappers
 
@@ -350,25 +363,25 @@ PDFs with radio buttons (Ff=49152) require special handling:
 - Use `start-*-dev.sh` for development with hot-reload
 - Always stop production services with `stop-production.sh` before redeploying
 
-## Multi-Frontend Architecture
+## Multi-Company Architecture
 
-This application supports multiple frontend instances sharing a single backend server. Each frontend can use a different OneSpan API key.
+OneSpan API keys are stored per-company in `backend/.env` and never sent to the browser. The frontend identifies the company via the URL slug (`/:company/...`) and sends it as the `X-Company` header; the backend resolves the key internally.
 
-**Setup**:
-1. Deploy one backend instance using `start-backend-prod.sh` or `start-production.sh`
-2. Deploy multiple frontend instances in different directories
-3. Each frontend should:
-   - Configure `VITE_BACKEND_URL` to point to the shared backend
-   - Configure `VITE_ONESPAN_API_KEY` with their specific API key
-   - Be built/started using `start-frontend-prod.sh` or similar
-
-**Security Note**: Each frontend passes its API key to the backend via the `X-OneSpan-API-Key` header. The backend validates that the header is present before forwarding requests to OneSpan.
+**Adding a new company's key**:
+```bash
+./set-apikey.sh   # interactive — select "Agregar nueva empresa"
+```
+Or manually in `backend/.env`:
+```
+ONESPAN_API_KEY_NUEVA_EMPRESA="Basic <token>"
+```
+The key name must match the URL slug uppercased with hyphens replaced by underscores (`nueva-empresa` → `NUEVA_EMPRESA`).
 
 ## File Locations
 
 - PDF templates: `frontend/public/forms/{company}/{form}/template.pdf` (served statically)
+- Demo data: `frontend/public/forms/{company}/{form}/demoData.json` (loaded on triple-click of sidebar logo)
 - Generated PDFs: Saved to `backend/saved/` with timestamps
-- Test data: `frontend/src/test-data/`
 - Static assets: `frontend/public/img/` (OneSpan logo, favicon, etc.)
 
 ## Important Notes

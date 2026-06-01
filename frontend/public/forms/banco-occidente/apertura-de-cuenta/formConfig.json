@@ -1,6 +1,7 @@
 {
   "title": "Apertura de Cuenta",
   "templatePdf": "apertura-de-cuenta.pdf",
+  "downloadFilename": "apertura-de-cuenta-banco-occidente",
   "showJsonOnRevision": false,
   "transactionSigners": [
     {

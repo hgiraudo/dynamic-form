@@ -109,23 +109,28 @@ app.post(
   }
 );
 
+function resolveApiKey(company) {
+  if (company) {
+    const envKey = `ONESPAN_API_KEY_${company.toUpperCase().replace(/-/g, "_")}`;
+    if (process.env[envKey]) return process.env[envKey];
+  }
+  return process.env.ONESPAN_API_KEY_DEFAULT || null;
+}
+
 /* ============================================================
    ENDPOINT: /api/sign  (OneSpan)
 ============================================================ */
 app.post(config.backend.signEndpoint, async (req, res) => {
   try {
     const transactionJson = req.body;
-    const apiKey = req.headers["x-onespan-api-key"];
+    const apiKey = resolveApiKey(req.headers["x-company"]);
 
     if (!apiKey) {
-      return res
-        .status(401)
-        .json({ error: "X-OneSpan-API-Key header is required" });
+      return res.status(401).json({ error: "API key no configurada para esta empresa" });
     }
 
     console.log("📨 JSON recibido en /api/sign:", transactionJson);
 
-    // ⚠️ Usar URL absoluta de OneSpan desde config
     const response = await fetch(config.esignlive.url, {
       method: "POST",
       headers: {
@@ -151,18 +156,15 @@ app.post(config.backend.signEndpoint, async (req, res) => {
 app.post(config.backend.getSigningUrlEndpoint, async (req, res) => {
   try {
     const { packageId } = req.body;
-    const apiKey = req.headers["x-onespan-api-key"];
+    const apiKey = resolveApiKey(req.headers["x-company"]);
 
     if (!apiKey) {
-      return res
-        .status(401)
-        .json({ error: "X-OneSpan-API-Key header is required" });
+      return res.status(401).json({ error: "API key no configurada para esta empresa" });
     }
 
     if (!packageId)
       return res.status(400).json({ error: "packageId is required" });
 
-    // ⚠️ URL de OneSpan
     const url = `${config.esignlive.url}/${packageId}/roles/Signer1/signingUrl`;
 
     const response = await fetch(url, {

@@ -774,20 +774,13 @@ const signUrl = `${config.backend.baseUrl}${config.backend.signEndpoint}`;
 console.log("🌐 URL:", signUrl);
 console.log("📦 transactionJson:", transactionJson);
 
-// 👇 DEBUG de API KEY
-console.log("🔑 VITE_ONESPAN_API_KEY (raw):", import.meta.env.VITE_ONESPAN_API_KEY);
-
-if (!import.meta.env.VITE_ONESPAN_API_KEY) {
-  console.warn("⚠️ API KEY no definida en import.meta.env");
-}
-
   let signData;
 try {
   const signResp = await fetch(signUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY || "",
+      "X-Company": company,
     },
     body: JSON.stringify(transactionJson),
   });
@@ -821,7 +814,7 @@ try {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-OneSpan-API-Key": import.meta.env.VITE_ONESPAN_API_KEY,
+          "X-Company": company,
         },
         body: JSON.stringify({ packageId: signData.id }),
       });
