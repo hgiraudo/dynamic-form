@@ -316,8 +316,84 @@ function MobileReview({
                 />
               </button>
 
-              {/* Campos editables */}
-              {isOpen && (
+              {/* Contenido de bienvenida */}
+              {isOpen && step.type === "welcome" && (
+                <div className="px-4 pb-5 pt-3 border-t border-gray-100 space-y-4">
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Lo ayudaremos a completar y firmar el documento de{" "}
+                    <strong className="text-gray-800">{formConfig.title}</strong> de {brandConfig.name}.
+                    Complete los datos en cada sección y toque <strong className="text-gray-800">Firmar</strong>{" "}
+                    cuando esté listo. Será redirigido al portal de firma electrónica.
+                  </p>
+
+                  {/* Pasos */}
+                  <div className="space-y-2">
+                    {[
+                      { icon: Icons.cilPencil, label: "Complete los datos en cada sección" },
+                      { icon: Icons.cilList,   label: "Revise la información antes de firmar" },
+                      { icon: Icons.cilPenNib, label: "Firme electrónicamente con un clic" },
+                    ].map(({ icon, label }, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <span className="shrink-0 w-7 h-7 rounded-full bg-brand-primary flex items-center justify-center">
+                          <CIcon icon={icon} className="w-3.5 h-3.5 text-white" />
+                        </span>
+                        <span className="text-sm text-gray-600">{label}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Iconos de la barra */}
+                  <div className="bg-gray-50 rounded-xl p-3 space-y-2">
+                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Acciones disponibles</p>
+                    {[
+                      { icon: Icons.cilSave,          label: "Guardar en la nube",  desc: "Genera una URL única para continuar luego o compartir" },
+                      { icon: Icons.cilTrash,         label: "Borrar formulario",   desc: "Limpia todos los campos" },
+                      { icon: Icons.cilPenNib,        label: "Firmar documento",    desc: "Envía a firma electrónica" },
+                      { icon: Icons.cilLink,          label: "Copiar URL",          desc: "Copia el link al portapapeles" },
+                    ].map(({ icon, label, desc }) => (
+                      <div key={label} className="flex items-start gap-2.5">
+                        <span className="shrink-0 w-6 h-6 rounded-md bg-white border border-gray-200 flex items-center justify-center">
+                          <CIcon icon={icon} className="w-3 h-3 text-brand-primary" />
+                        </span>
+                        <div className="text-xs leading-snug">
+                          <span className="font-semibold text-gray-700">{label}</span>
+                          <span className="text-gray-400"> — {desc}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* WhatsApp tip */}
+                  <div className="flex items-start gap-2.5 bg-green-50 rounded-xl p-3 border border-green-100">
+                    <CIcon icon={Icons.cilShare} className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                    <p className="text-xs text-green-700 leading-snug">
+                      <strong>Comparta por WhatsApp:</strong> guarde el formulario en la nube y comparta la URL generada para que otros accedan desde cualquier dispositivo.
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setOpenStep(1)}
+                    className="w-full flex items-center justify-center gap-2 py-3 bg-brand-primary text-white rounded-xl text-sm font-semibold active:bg-brand-secondary transition-colors"
+                  >
+                    <CIcon icon={Icons.cilArrowRight} className="w-4 h-4" />
+                    Comenzar
+                  </button>
+
+                  {/* Powered by */}
+                  {brandConfig.poweredBy && (
+                    <div className="flex items-center justify-center gap-2 pt-1">
+                      <span className="text-xs text-gray-400">Desarrollado por</span>
+                      <a href={brandConfig.poweredBy.url} target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-90 transition-opacity">
+                        <img src={brandConfig.poweredBy.logo} alt={brandConfig.poweredBy.label} className="h-3.5" />
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Campos editables (pasos normales) */}
+              {isOpen && step.type !== "welcome" && (
                 <div className="px-4 pb-2 border-t border-gray-100">
                   {editableFields.map((field, fIdx) => renderField(field, fIdx))}
                 </div>
