@@ -54,7 +54,9 @@
       "PowerShell(git *)",
       "PowerShell(Get-Content *)",
       "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('dependencies',{}\\).get\\('react-pdf','NOT FOUND'\\)\\)\")",
-      "Bash(sort -t= -k1 -rn)"
+      "Bash(sort -t= -k1 -rn)",
+      "Bash(docker compose up *)",
+      "Bash(docker compose ps *)"
     ],
     "deny": [],
     "ask": []
