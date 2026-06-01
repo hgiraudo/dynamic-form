@@ -963,7 +963,7 @@ try {
               <p className="text-gray-700 text-center mb-8 leading-relaxed">
                 Lo ayudaremos a completar y firmar el documento de <strong>Apertura de Cuenta</strong> de Banco Occidente.
                 Complete los datos en cada sección y haga clic en <strong>Firmar documento</strong>.
-                Al terminar, será redirigido al portal de firma electrónica de Banco Occidente.
+                Al terminar, será redirigido al portal de firma electrónica de {brandConfig.name}.
               </p>
 
               {/* Cómo funciona */}
