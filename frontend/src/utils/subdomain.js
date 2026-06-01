@@ -1,6 +1,6 @@
 const SUBDOMAIN_MAP = {
-  allaria:   "allaria",
-  bancocci:  "banco-occidente",
+  allaria:          "allaria",
+  "banco-occidente": "banco-occidente",
 };
 
 export function getCompanyFromHostname(hostname) {
