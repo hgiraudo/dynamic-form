@@ -13,12 +13,12 @@
       "fields": [
         {
           "width": 265.0,
-          "top": 80.0,
+          "top": 907.0,
           "height": 59.0,
-          "left": 99.0,
+          "left": 281.0,
           "page": 0,
           "type": "SIGNATURE",
-          "subtype": "FULLNAME"
+          "subtype": "CAPTURE"
         }
       ]
     }

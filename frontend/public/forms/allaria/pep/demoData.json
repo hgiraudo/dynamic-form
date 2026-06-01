@@ -1,0 +1,15 @@
+{
+  "Firmante1Nombre": "Juan Carlos",
+  "Firmante1Apellido": "García",
+  "Firmante1Email": "jgarcia@arroyito.com.ar",
+  "CertificadoRep1": false,
+  "SmsRep1": false,
+  "PEP": "No",
+  "PEPMotivo": "",
+  "PEPDocumentoTipo": "DNI",
+  "PEPDocumentoNumero": "12345678",
+  "PEPDocumentoPais": "Argentina, Registro Civil",
+  "PEPCaracterInvocado": "No aplica",
+  "PEPLugarYFecha": "Buenos Aires, 15/03/2025",
+  "PEPResolucion352023": true
+}

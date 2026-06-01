@@ -53,8 +53,12 @@ def generate_appearance(annot, value, field_type):
             annot.V = PdfName.Off
             appearance.stream = b"q Q"
     else:  # Campo de texto
-        font_size = min(12, max(8, height * 0.6))
-        y_pos = (height - font_size) / 2
+        font_size = min(9, max(6, height * 0.5))
+        # tall fields (textarea): anchor near top so text doesn't land on mid-field lines
+        if height > 20:
+            y_pos = height - font_size - 3
+        else:
+            y_pos = (height - font_size) / 2
         value_norm = normalize_text(value)
         escaped_value = str(value_norm).replace('(', r'\(').replace(')', r'\)').replace('\\', r'\\')
         stream = f"q 0 0 0 rg BT /F1 {font_size} Tf 2 {y_pos} Td ({escaped_value}) Tj ET Q".encode()

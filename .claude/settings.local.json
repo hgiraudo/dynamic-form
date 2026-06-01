@@ -43,7 +43,18 @@
       "PowerShell(node -e \"const c=JSON.parse\\(require\\('fs'\\).readFileSync\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/public/forms/allaria/persona-juridica/formConfig.json','utf8'\\)\\); console.log\\('JSON valido,', c.steps[0].fields.length, 'campos en Firmantes'\\)\")",
       "PowerShell(python -c \"import json; d=json.load\\(open\\('list-fields/fields_example.json'\\)\\); print\\([k for k in d if 'Perfil' in k]\\)\")",
       "PowerShell(python -c \"import pdfrw; import inspect; src = inspect.getsource\\(pdfrw.PdfWriter.__init__\\); print\\(src[:2000]\\)\")",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "PowerShell(py *)",
+      "PowerShell(python -c \"import pdfrw; pdf = pdfrw.PdfReader\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/public/forms/banco-occidente/apertura-de-cuenta/apertura-de-cuenta.pdf'\\); print\\('Pages:', len\\(pdf.pages\\)\\)\")",
+      "PowerShell(head *)",
+      "PowerShell(python 2>&1 -c \"import pdfrw; pdf = pdfrw.PdfReader\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/public/forms/banco-occidente/apertura-de-cuenta/apertura-de-cuenta.pdf'\\); [print\\(repr\\(a.T[1:-1]\\)\\) for pg in pdf.pages for a in \\(pg.Annots or []\\) if a.T and 'lectro' in str\\(a.T\\)]\")",
+      "PowerShell(python -c \"import pdfrw; pdf = pdfrw.PdfReader\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/public/forms/banco-occidente/apertura-de-cuenta/apertura-de-cuenta.pdf'\\); pg=pdf.pages[0]; [print\\(a.T[1:-1].encode\\('utf-8', errors='replace'\\).hex\\(\\), '|', a.T[1:-1].encode\\('latin-1', errors='replace'\\).hex\\(\\)\\) for a in pg.Annots if a.T and 'lectro' in str\\(a.T\\)]\" 2>&1)",
+      "PowerShell(python -c \"import json; data = json.load\\(open\\('C:/Users/girauhe1/smart-forms/dynamic-form/frontend/public/forms/banco-occidente/apertura-de-cuenta/formConfig.json', encoding='utf-8'\\)\\); print\\('JSON válido, pasos:', len\\(data['steps']\\)\\); [print\\(f'  Paso {i+1}: {s[\\\\\"title\\\\\"]} \\({len\\(s[\\\\\"fields\\\\\"]\\)} campos\\)'\\) for i, s in enumerate\\(data['steps']\\)]\")",
+      "PowerShell(Set-Content *)",
+      "PowerShell(git *)",
+      "PowerShell(Get-Content *)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('dependencies',{}\\).get\\('react-pdf','NOT FOUND'\\)\\)\")",
+      "Bash(sort -t= -k1 -rn)"
     ],
     "deny": [],
     "ask": []

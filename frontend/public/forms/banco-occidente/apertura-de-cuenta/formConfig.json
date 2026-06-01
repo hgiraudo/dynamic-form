@@ -2,6 +2,12 @@
   "title": "Apertura de Cuenta",
   "templatePdf": "apertura-de-cuenta.pdf",
   "showJsonOnRevision": false,
+  "transactionSigners": [
+    {
+      "firstName": "Nombre Completo",
+      "email": "Correo Electrónico"
+    }
+  ],
   "steps": [
     {
       "title": "Datos de la Empresa",

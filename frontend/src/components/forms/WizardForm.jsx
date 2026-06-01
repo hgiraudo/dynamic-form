@@ -28,6 +28,28 @@ import PhoneInputField from "./PhoneInputField";
 import MaskedInputField from "./MaskedInputField";
 import DateInputField from "./DateInputField";
 import EmailInputField from "./EmailInputField";
+import PdfPreviewModal from "./PdfPreviewModal";
+
+const DEMO_SKIP_TYPES = ["info", "comment", "subtitle", "group", "spacer"];
+
+function buildDemoData(formConfig) {
+  if (formConfig.demoData) return formConfig.demoData;
+  const obj = {};
+  formConfig.steps.forEach((step) => {
+    step.fields.forEach((field) => {
+      if (!field.name || DEMO_SKIP_TYPES.includes(field.type)) return;
+      if (field.example !== undefined)                              { obj[field.name] = field.example; return; }
+      if (field.type === "checkbox")                                { obj[field.name] = false; return; }
+      if (field.type === "date")                                    { obj[field.name] = "15/01/2024"; return; }
+      if (field.type === "email")                                   { obj[field.name] = "demo@ejemplo.com"; return; }
+      if (field.type === "tel")                                     { obj[field.name] = "55512345678"; return; }
+      if (field.type === "button-group" && field.options?.length)   { obj[field.name] = field.options[0]; return; }
+      if (field.placeholder)                                        { obj[field.name] = field.placeholder.replace(/^ej\.\s*/i, ""); return; }
+      obj[field.name] = "Demo";
+    });
+  });
+  return obj;
+}
 
 function WizardForm({ formConfig, brandConfig, transactionConfig, company, form, docsPath }) {
   const syncMap = Object.fromEntries(
@@ -64,10 +86,26 @@ function WizardForm({ formConfig, brandConfig, transactionConfig, company, form,
   const [loadError, setLoadError] = useState(null);
   const [urlCopied, setUrlCopied] = useState(false);
   const [saveConfirmPending, setSaveConfirmPending] = useState(false);
+  const [showDemoModal, setShowDemoModal] = useState(false);
+  const [previewPdf, setPreviewPdf] = useState(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== "undefined" && window.innerWidth < 768
   );
   const fileInputRef = useRef(null);
+  const logoClickCountRef = useRef(0);
+  const logoClickTimerRef = useRef(null);
+
+  const handleLogoClick = () => {
+    logoClickCountRef.current += 1;
+    if (logoClickTimerRef.current) clearTimeout(logoClickTimerRef.current);
+    if (logoClickCountRef.current >= 3) {
+      logoClickCountRef.current = 0;
+      setShowDemoModal(true);
+    } else {
+      logoClickTimerRef.current = setTimeout(() => { logoClickCountRef.current = 0; }, 500);
+    }
+  };
   const currentStep = formConfig.steps[stepIndex];
 
   /* ============================================================
@@ -657,6 +695,36 @@ const handleExport = () => {
   };
 
   /* ============================================================
+     HANDLE PREVIEW PDF
+  ============================================================ */
+  const handlePreview = async () => {
+    try {
+      setPreviewLoading(true);
+      const pdfJson = getPdfData();
+      const pdfTemplate = formConfig.templatePdf;
+      const pdfResp = await fetch(`/forms/${company}/${form}/${pdfTemplate}`);
+      const pdfBlob = await pdfResp.blob();
+      const pdfFile = new File([pdfBlob], pdfTemplate, { type: "application/pdf" });
+      const jsonFile = new File([JSON.stringify(pdfJson)], "datos.json", { type: "application/json" });
+
+      const formDataUpload = new FormData();
+      formDataUpload.append("pdf", pdfFile);
+      formDataUpload.append("json", jsonFile);
+      formDataUpload.append("responseType", "base64");
+
+      const fillPdfUrl = `${config.backend.baseUrl}${config.backend.fillPdfEndpoint}`;
+      const fillResp = await fetch(fillPdfUrl, { method: "POST", body: formDataUpload });
+      if (!fillResp.ok) throw new Error("Error al generar PDF");
+      const fillData = await fillResp.json();
+      setPreviewPdf(fillData.base64);
+    } catch (err) {
+      alert(`No se pudo generar la vista previa: ${err.message}`);
+    } finally {
+      setPreviewLoading(false);
+    }
+  };
+
+  /* ============================================================
      HANDLE SIGN
   ============================================================ */
   const handleSign = async () => {
@@ -699,7 +767,7 @@ const handleExport = () => {
       });
       if (!fillResp.ok) throw new Error("Error al generar PDF");
       const fillData = await fillResp.json();
-      const transactionJson = buildTransactionJson(fillData.base64, formData, transactionConfig);
+      const transactionJson = buildTransactionJson(fillData.base64, formData, transactionConfig, formConfig);
 
 const signUrl = `${config.backend.baseUrl}${config.backend.signEndpoint}`;
 
@@ -803,7 +871,8 @@ try {
           <img
             src={brandConfig.logos.white}
             alt={`${brandConfig.name} Logo`}
-            className="h-12 mx-auto"
+            className="h-12 mx-auto select-none cursor-pointer"
+            onClick={handleLogoClick}
           />
         </div>
         <div className="mt-6 flex-1 overflow-y-auto">
@@ -841,6 +910,7 @@ try {
             { icon: Icons.cilCloudDownload,label: "Descargar JSON",     action: handleExport },
             { icon: Icons.cilCloudUpload,  label: "Importar JSON",      action: () => fileInputRef.current.click() },
             { icon: Icons.cilTrash,       label: "Borrar formulario",  action: handleClear },
+            { icon: Icons.cilSearch,      label: "Vista previa PDF",   action: handlePreview },
             { icon: Icons.cilPenNib,      label: "Firmar",             action: handleSign },
           ].map(({ icon, label, action }) => (
             <div key={label} className="group relative">
@@ -919,7 +989,7 @@ try {
                     {step.fields
                       .filter((field) => !field.hideOnRevision && isVisible(field))
                       .map((field, idx) => {
-                        if (["info", "comment"].includes(field.type)) return null;
+                        if (["info", "comment", "spacer"].includes(field.type)) return null;
 
                         // Subtítulo → encabezado de sección
                         if (field.type === "subtitle") {
@@ -984,103 +1054,6 @@ try {
                 </pre>
               )}
 
-              {/* Panel: Guardar / Cargar borrador */}
-              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <h3 className="text-sm font-semibold text-brand-secondary mb-3 flex items-center gap-2">
-                  <CIcon icon={Icons.cilCloud} className="w-4 h-4" />
-                  Guardar progreso
-                </h3>
-
-                {applicationId ? (
-                  <div className="space-y-2">
-                    <p className="text-xs text-gray-500">ID de solicitud:</p>
-                    <div className="flex items-center gap-2">
-                      <code className="flex-1 truncate text-xs font-mono bg-white border border-gray-200 px-2 py-1 rounded">
-                        {applicationId}
-                      </code>
-                      <button
-                        type="button"
-                        onClick={handleCopyUrl}
-                        className="shrink-0 px-3 py-1 text-xs bg-brand-primary text-white rounded hover:bg-brand-secondary"
-                      >
-                        {urlCopied ? "¡Copiada!" : "Copiar URL"}
-                      </button>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleSave}
-                      disabled={saveStatus === "saving"}
-                      className={`w-full py-2 text-sm rounded text-white disabled:opacity-50 ${
-                        saveStatus === "saved"
-                          ? "bg-green-600"
-                          : saveStatus === "error"
-                          ? "bg-red-600"
-                          : "bg-brand-primary hover:bg-brand-secondary"
-                      }`}
-                    >
-                      {saveStatus === "saving"
-                        ? "Guardando..."
-                        : saveStatus === "saved"
-                        ? "Actualizado"
-                        : saveStatus === "error"
-                        ? "Error al guardar"
-                        : "Actualizar datos guardados"}
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={handleSave}
-                    disabled={saveStatus === "saving"}
-                    className={`w-full py-2 text-sm rounded text-white disabled:opacity-50 ${
-                      saveStatus === "saved"
-                        ? "bg-green-600"
-                        : saveStatus === "error"
-                        ? "bg-red-600"
-                        : "bg-brand-primary hover:bg-brand-secondary"
-                    }`}
-                  >
-                    <CIcon icon={Icons.cilSave} className="w-4 h-4 inline mr-2" />
-                    {saveStatus === "saving"
-                      ? "Guardando..."
-                      : saveStatus === "saved"
-                      ? "Guardado"
-                      : saveStatus === "error"
-                      ? "Error al guardar"
-                      : "Guardar en la nube"}
-                  </button>
-                )}
-
-                <div className="mt-3 pt-3 border-t border-blue-200">
-                  <p className="text-xs text-gray-500 mb-2">Cargar solicitud guardada:</p>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={loadIdInput}
-                      onChange={(e) => setLoadIdInput(e.target.value)}
-                      placeholder="Pegá el ID aquí..."
-                      className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-300"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const id = loadIdInput.trim();
-                        if (!id) return;
-                        setApplicationId(id);
-                        updateUrl(id);
-                        loadApplicationById(id);
-                      }}
-                      className="shrink-0 px-3 py-1.5 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
-                    >
-                      Cargar
-                    </button>
-                  </div>
-                  {loadError && (
-                    <p className="text-xs text-red-500 mt-1">{loadError}</p>
-                  )}
-                </div>
-              </div>
-
               {/* Botones acciones */}
               <div className="flex justify-between gap-4 pt-6">
                 <button
@@ -1112,6 +1085,16 @@ try {
 
                 <button
                   type="button"
+                  onClick={handlePreview}
+                  disabled={previewLoading}
+                  className="flex-1 flex items-center justify-center px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-60"
+                >
+                  <CIcon icon={Icons.cilSearch} className="w-5 h-5 mr-2" />
+                  {previewLoading ? "Generando..." : "Vista previa"}
+                </button>
+
+                <button
+                  type="button"
                   onClick={handleSign}
                   className="flex-1 flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
                 >
@@ -1136,6 +1119,49 @@ try {
         accept="application/json"
         className="hidden"
       />
+
+      {/* Modal: vista previa PDF */}
+      {previewPdf && (
+        <PdfPreviewModal base64Pdf={previewPdf} onClose={() => setPreviewPdf(null)} />
+      )}
+
+      {/* Modal: cargar datos de demo */}
+      {showDemoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl p-6 w-80 text-center shadow-lg">
+            <div className="text-3xl mb-3">🧪</div>
+            <h3 className="text-lg font-semibold text-brand-primary mb-2">Cargar datos de demo</h3>
+            <p className="text-sm text-gray-500 mb-5">
+              ¿Querés sobrescribir todos los campos del formulario con datos de demo?
+            </p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={async () => {
+                  setShowDemoModal(false);
+                  try {
+                    const resp = await fetch(`/forms/${company}/${form}/demoData.json`);
+                    const data = resp.ok ? await resp.json() : buildDemoData(formConfig);
+                    handleImport(data);
+                  } catch {
+                    handleImport(buildDemoData(formConfig));
+                  }
+                }}
+                className="flex-1 py-2 bg-brand-primary text-white rounded-lg text-sm font-medium hover:bg-brand-secondary"
+              >
+                Sí, cargar
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowDemoModal(false)}
+                className="flex-1 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Modal: confirmar sobrescribir o crear nuevo */}
       {saveConfirmPending && (

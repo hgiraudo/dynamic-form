@@ -1,0 +1,17 @@
+{
+  "Firmante1Nombre": "Juan Carlos",
+  "Firmante1Apellido": "García",
+  "Firmante1Email": "jgarcia@arroyito.com.ar",
+  "RepresentanteDNI1": "12345678",
+  "RepresentantePasaporte1": "",
+  "CertificadoRep1": false,
+  "SmsRep1": false,
+  "NumeroDeComitente": "123456",
+  "TramiteFecha": "15/03/2025",
+  "InstructivoBanco": "Banco Nación Argentina",
+  "InstructivoNumeroDeCuenta": "0110482630048218080015",
+  "InstructivoMoneda": "Pesos",
+  "InstructivoTitular": "Arroyito S.A.",
+  "InstructivoCBU": "0110482630048218080015",
+  "InstructivoCUIT": "30-71234567-8"
+}

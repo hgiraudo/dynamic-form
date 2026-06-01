@@ -1,0 +1,12 @@
+{
+  "Firmante1Nombre": "Juan Carlos",
+  "Firmante1Apellido": "García",
+  "Firmante1Email": "jgarcia@arroyito.com.ar",
+  "CertificadoRep1": false,
+  "SmsRep1": false,
+  "NumeroDeComitente": "123456",
+  "TramiteFecha": "15/03/2025",
+  "PerfilRiesgo": "RM - Medio",
+  "PerfilRiesgoInversorCalificado": false,
+  "InversorCalificadoInterno": false
+}
