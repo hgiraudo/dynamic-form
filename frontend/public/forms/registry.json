@@ -3,6 +3,7 @@
     {
       "id": "allaria",
       "name": "Allaria",
+      "subdomain": "allaria",
       "forms": [
         { "id": "persona-juridica", "title": "Persona Jurídica" },
         { "id": "fatca-ocde", "title": "FATCA / OCDE" },
@@ -15,6 +16,7 @@
     {
       "id": "banco-occidente",
       "name": "Banco Occidente",
+      "subdomain": "banco-occidente",
       "forms": [
         { "id": "apertura-de-cuenta", "title": "Apertura de Cuenta" }
       ]
