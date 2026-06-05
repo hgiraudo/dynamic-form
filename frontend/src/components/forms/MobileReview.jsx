@@ -212,6 +212,27 @@ function MobileReview({
       );
     }
 
+    if (field.type === "select") {
+      return (
+        <div key={fIdx} className={`py-2 ${baseClass}`}>
+          <label className="block text-xs text-gray-400 mb-0.5">{field.label}</label>
+          <select
+            value={enabled ? (value ?? "") : ""}
+            onChange={e => handleChange(field.name, e.target.value)}
+            disabled={!enabled}
+            className="w-full text-sm text-gray-900 font-medium bg-transparent border-0 border-b-2 border-transparent focus:border-brand-primary focus:outline-none py-0.5 transition-colors disabled:text-gray-400"
+          >
+            {(field.default === undefined) && (
+              <option value="">{field.placeholder || "Seleccione..."}</option>
+            )}
+            {field.options.map(opt => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+      );
+    }
+
     // text
     return (
       <div key={fIdx} className={`py-2 ${baseClass}`}>

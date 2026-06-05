@@ -20,6 +20,13 @@
       "forms": [
         { "id": "apertura-de-cuenta", "title": "Apertura de Cuenta" }
       ]
+    },
+    {
+      "id": "kontac",
+      "name": "Kontac Digital Solutions",
+      "forms": [
+        { "id": "solicitud-empleo", "title": "Formulario de Aplicante" }
+      ]
     }
   ]
 }

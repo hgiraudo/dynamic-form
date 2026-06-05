@@ -45,6 +45,7 @@ function buildDemoData(formConfig) {
       if (field.type === "email")                                   { obj[field.name] = "demo@ejemplo.com"; return; }
       if (field.type === "tel")                                     { obj[field.name] = "55512345678"; return; }
       if (field.type === "button-group" && field.options?.length)   { obj[field.name] = field.options[0]; return; }
+      if (field.type === "select" && field.options?.length)         { obj[field.name] = field.default ?? field.options[0]; return; }
       if (field.placeholder)                                        { obj[field.name] = field.placeholder.replace(/^ej\.\s*/i, ""); return; }
       obj[field.name] = "Demo";
     });
@@ -533,6 +534,34 @@ const handleExport = () => {
                 </button>
               ))}
             </div>
+          </div>
+        );
+
+      case "select":
+        return (
+          <div className="mb-2" key={field.name}>
+            <label className="block text-brand-secondary mb-1">
+              {field.label}
+            </label>
+            <select
+              value={isEnabled ? (value ?? "") : ""}
+              onChange={(e) => handleChange(field.name, e.target.value)}
+              disabled={field.disabled || !isEnabled}
+              className={`w-full p-3 border rounded focus:outline-none focus:ring-2 ${
+                field.disabled || !isEnabled
+                  ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                  : "bg-white border-gray-300 focus:ring-gray-300"
+              }`}
+            >
+              {(field.default === undefined) && (
+                <option value="">{field.placeholder || "Seleccione..."}</option>
+              )}
+              {field.options.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
           </div>
         );
 

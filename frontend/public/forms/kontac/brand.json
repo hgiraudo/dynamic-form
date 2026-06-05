@@ -1,0 +1,17 @@
+{
+  "name": "Kontac Digital Solutions",
+  "logos": {
+    "white": "/forms/kontac/logo-white.png",
+    "color": "/forms/kontac/logo-color.png"
+  },
+  "favicon": "/forms/kontac/favicon.ico",
+  "colors": {
+    "primary": "#087D77",
+    "secondary": "#10B5AC"
+  },
+  "poweredBy": {
+    "logo": "/img/snappybits-logo.png",
+    "url": "https://www.snappybits.com/",
+    "label": "SnappyBits"
+  }
+}

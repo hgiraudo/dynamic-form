@@ -1,0 +1,19 @@
+{
+  "Cedula": "112340567",
+  "Nombre completo": "María José Rodríguez Castro",
+  "Telefono": "+50688887777",
+  "Correo": "maria.rodriguez@ejemplo.com",
+  "Pais": "Costa Rica",
+  "Provincia": "San José",
+  "Canton": "Acosta",
+  "Disponibilidad": "Inmediata",
+  "Aspiracion salarial": "600,000",
+  "Nivel de ingles": "Avanzado",
+  "Sede": "San José, Zapote",
+  "Word": true,
+  "Power Point": true,
+  "Excel": true,
+  "Outlook": false,
+  "Otros": "Power BI, SQL",
+  "Consentimiento": true
+}

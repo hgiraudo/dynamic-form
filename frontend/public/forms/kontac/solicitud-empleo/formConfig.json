@@ -1,0 +1,182 @@
+{
+  "title": "Formulario de Aplicante",
+  "templatePdf": "template.pdf",
+  "downloadFilename": "formulario-aplicante-kontac",
+  "showJsonOnRevision": false,
+  "transactionSigners": [
+    {
+      "firstName": "Nombre completo",
+      "email": "Correo"
+    }
+  ],
+  "steps": [
+    {
+      "type": "welcome",
+      "title": "Bienvenido",
+      "icon": "cilHome",
+      "fields": []
+    },
+    {
+      "title": "Datos personales",
+      "description": "Información de contacto del aplicante",
+      "icon": "cilUser",
+      "fields": [
+        {
+          "name": "Cedula",
+          "label": "Cédula",
+          "type": "text",
+          "required": true,
+          "placeholder": "Formato (#########)"
+        },
+        {
+          "name": "Nombre completo",
+          "label": "Nombre completo",
+          "type": "text",
+          "required": true,
+          "placeholder": "Nombre completo"
+        },
+        {
+          "name": "Telefono",
+          "label": "Número de teléfono",
+          "type": "tel",
+          "required": true,
+          "defaultCountry": "CR"
+        },
+        {
+          "name": "Correo",
+          "label": "Correo electrónico",
+          "type": "email",
+          "required": true,
+          "placeholder": "correo@ejemplo.com"
+        },
+        {
+          "name": "Pais",
+          "label": "País",
+          "type": "text",
+          "default": "Costa Rica"
+        }
+      ]
+    },
+    {
+      "title": "Ubicación y preferencias",
+      "description": "Ubicación, disponibilidad y aspiraciones",
+      "icon": "cilLocationPin",
+      "fields": [
+        {
+          "name": "Provincia",
+          "label": "Provincia",
+          "type": "select",
+          "required": true,
+          "default": "San José",
+          "options": [
+            "San José",
+            "Alajuela",
+            "Cartago",
+            "Heredia",
+            "Guanacaste",
+            "Puntarenas",
+            "Limón"
+          ]
+        },
+        {
+          "name": "Canton",
+          "label": "Cantón",
+          "type": "text",
+          "required": true,
+          "placeholder": "Ej: Acosta"
+        },
+        {
+          "name": "Disponibilidad",
+          "label": "Disponibilidad",
+          "type": "select",
+          "default": "Inmediata",
+          "options": [
+            "Inmediata",
+            "1 a 2 semanas",
+            "2 a 4 semanas",
+            "Más de un mes"
+          ]
+        },
+        {
+          "name": "Aspiracion salarial",
+          "label": "Aspiración salarial (₡)",
+          "type": "text",
+          "placeholder": "Digite solo números",
+          "formatter": "thousandsFormatter"
+        },
+        {
+          "name": "Nivel de ingles",
+          "label": "Nivel de inglés",
+          "type": "select",
+          "default": "Bajo",
+          "options": [
+            "Bajo",
+            "Intermedio",
+            "Avanzado",
+            "Nativo / Bilingüe"
+          ]
+        },
+        {
+          "name": "Sede",
+          "label": "¿En cuál de nuestras sedes prefieres trabajar?",
+          "type": "select",
+          "default": "San José, Zapote",
+          "options": [
+            "San José, Zapote"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Conocimientos de Office",
+      "description": "Herramientas de Office que maneja",
+      "icon": "cilLaptop",
+      "fields": [
+        {
+          "type": "subtitle",
+          "name": "subtitleOffice",
+          "content": "Maneja alguna de las siguientes herramientas de Office"
+        },
+        { "name": "Word", "label": "Word", "type": "checkbox" },
+        { "name": "Power Point", "label": "Power Point", "type": "checkbox" },
+        { "name": "Excel", "label": "Excel", "type": "checkbox" },
+        { "name": "Outlook", "label": "Outlook", "type": "checkbox" },
+        {
+          "type": "spacer",
+          "name": "spacerOtros"
+        },
+        {
+          "name": "Otros",
+          "label": "Otros",
+          "type": "text",
+          "placeholder": "Otras herramientas o conocimientos"
+        }
+      ]
+    },
+    {
+      "title": "Consentimiento",
+      "description": "Tratamiento de datos personales",
+      "icon": "cilShieldAlt",
+      "fields": [
+        {
+          "type": "info",
+          "name": "infoConsentimiento",
+          "label": "Cláusula de consentimiento de tratamiento de datos",
+          "content": "De conformidad con la Ley N.° 8968, Ley de Protección de la Persona frente al Tratamiento de sus Datos Personales y su reglamento, autorizo de manera libre, expresa, informada e inequívoca a Kontac Digital Solutions para recopilar, almacenar, utilizar y tratar mis datos personales suministrados mediante el presente formulario, exclusivamente para fines relacionados con procesos administrativos, laborales, de gestión interna y cualquier otro derivado de la relación laboral. Asimismo, declaro conocer que podré ejercer mis derechos de acceso, rectificación, actualización o eliminación de mis datos personales conforme a la normativa vigente en Costa Rica."
+        },
+        {
+          "name": "Consentimiento",
+          "label": "Acepto la cláusula de consentimiento de tratamiento de datos.",
+          "type": "checkbox",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Revisión y Firma",
+      "description": "Revisión y firma del formulario",
+      "icon": "cilCheck",
+      "fields": []
+    }
+  ]
+}

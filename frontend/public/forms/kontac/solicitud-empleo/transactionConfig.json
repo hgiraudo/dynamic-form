@@ -1,0 +1,26 @@
+{
+  "status": "SENT",
+  "name": "Formulario de Aplicante",
+  "description": "Solicitud de empleo - Kontac Digital Solutions",
+  "document": {
+    "name": "Formulario de Aplicante",
+    "id": "Document1"
+  },
+  "approvals": [
+    {
+      "role": "Signer1",
+      "id": "Signature1",
+      "fields": [
+        {
+          "width": 230.0,
+          "top": 656.0,
+          "height": 46.0,
+          "left": 48.0,
+          "page": 0,
+          "type": "SIGNATURE",
+          "subtype": "CAPTURE"
+        }
+      ]
+    }
+  ]
+}
