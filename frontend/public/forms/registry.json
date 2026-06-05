@@ -27,6 +27,13 @@
       "forms": [
         { "id": "solicitud-empleo", "title": "Formulario de Aplicante" }
       ]
+    },
+    {
+      "id": "uh",
+      "name": "Universidad Hispanoamericana",
+      "forms": [
+        { "id": "inscripcion", "title": "Formulario de Inscripción" }
+      ]
     }
   ]
 }

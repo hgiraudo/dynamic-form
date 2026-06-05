@@ -1,0 +1,17 @@
+{
+  "name": "Universidad Hispanoamericana",
+  "logos": {
+    "white": "/forms/uh/logo-white.png",
+    "color": "/forms/uh/logo-color.png"
+  },
+  "favicon": "/forms/uh/favicon.ico",
+  "colors": {
+    "primary": "#0373D3",
+    "secondary": "#1957A6"
+  },
+  "poweredBy": {
+    "logo": "/img/snappybits-logo.png",
+    "url": "https://www.snappybits.com/",
+    "label": "SnappyBits"
+  }
+}

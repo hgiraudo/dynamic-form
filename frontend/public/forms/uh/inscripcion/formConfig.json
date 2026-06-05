@@ -1,0 +1,215 @@
+{
+  "title": "Formulario de Inscripción",
+  "templatePdf": "template.pdf",
+  "downloadFilename": "inscripcion-universidad-hispanoamericana",
+  "showJsonOnRevision": false,
+  "transactionSigners": [
+    {
+      "firstName": "Nombre completo",
+      "email": "Correo"
+    }
+  ],
+  "steps": [
+    {
+      "type": "welcome",
+      "title": "Bienvenido",
+      "icon": "cilHome",
+      "fields": []
+    },
+    {
+      "title": "Datos personales",
+      "description": "Información personal del estudiante",
+      "icon": "cilUser",
+      "fields": [
+        {
+          "name": "Nombre completo",
+          "label": "Nombre completo",
+          "type": "text",
+          "required": true,
+          "placeholder": "Nombre y apellidos"
+        },
+        {
+          "name": "Identificacion",
+          "label": "Cédula / Identificación",
+          "type": "text",
+          "required": true,
+          "placeholder": "Cédula, DIMEX o pasaporte"
+        },
+        {
+          "name": "Fecha de nacimiento",
+          "label": "Fecha de nacimiento",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Nacionalidad",
+          "label": "Nacionalidad",
+          "type": "text",
+          "default": "Costarricense"
+        },
+        {
+          "name": "Sexo",
+          "label": "Sexo",
+          "type": "button-group",
+          "options": ["Femenino", "Masculino"],
+          "default": "Femenino"
+        },
+        {
+          "name": "Estado civil",
+          "label": "Estado civil",
+          "type": "select",
+          "default": "Soltero/a",
+          "options": ["Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a", "Unión libre"]
+        }
+      ]
+    },
+    {
+      "title": "Datos de contacto",
+      "description": "Cómo contactarte",
+      "icon": "cilEnvelopeClosed",
+      "fields": [
+        {
+          "name": "Correo",
+          "label": "Correo electrónico",
+          "type": "email",
+          "required": true,
+          "placeholder": "correo@ejemplo.com"
+        },
+        {
+          "name": "Telefono",
+          "label": "Número de teléfono",
+          "type": "tel",
+          "required": true,
+          "defaultCountry": "CR"
+        },
+        {
+          "name": "Provincia",
+          "label": "Provincia",
+          "type": "select",
+          "required": true,
+          "default": "San José",
+          "options": ["San José", "Alajuela", "Cartago", "Heredia", "Guanacaste", "Puntarenas", "Limón"]
+        },
+        {
+          "name": "Canton",
+          "label": "Cantón",
+          "type": "text",
+          "placeholder": "Ej: Central"
+        },
+        {
+          "name": "Direccion",
+          "label": "Dirección exacta",
+          "type": "textarea",
+          "placeholder": "Provincia, cantón, distrito, señas..."
+        }
+      ]
+    },
+    {
+      "title": "Datos académicos",
+      "description": "Programa y sede de interés",
+      "icon": "cilEducation",
+      "fields": [
+        {
+          "name": "Nivel",
+          "label": "Nivel / Programa",
+          "type": "select",
+          "required": true,
+          "default": "Bachillerato Universitario",
+          "options": [
+            "Bachillerato Universitario",
+            "Licenciatura",
+            "Maestría",
+            "Técnico",
+            "Idiomas",
+            "Certificación",
+            "Curso Libre"
+          ]
+        },
+        {
+          "name": "Carrera",
+          "label": "Carrera de interés",
+          "type": "select",
+          "required": true,
+          "default": "Medicina y Cirugía",
+          "options": [
+            "Medicina y Cirugía",
+            "Enfermería",
+            "Farmacia",
+            "Administración de Empresas",
+            "Contaduría Pública",
+            "Derecho",
+            "Psicología",
+            "Ingeniería Industrial",
+            "Ingeniería Informática",
+            "Ingeniería en Ciencia de Datos",
+            "Ingeniería en Sistemas de Información",
+            "Ingeniería Mecatrónica",
+            "Ingeniería de Calidad",
+            "Docencia",
+            "Andragogía",
+            "Otra"
+          ]
+        },
+        {
+          "name": "Sede",
+          "label": "Sede",
+          "type": "select",
+          "required": true,
+          "default": "Aranjuez",
+          "options": ["Aranjuez", "Escalante", "Heredia", "Puntarenas", "Tibás", "Zona UH Grecia"]
+        },
+        {
+          "name": "Modalidad",
+          "label": "Modalidad",
+          "type": "button-group",
+          "options": ["Presencial", "Virtual"],
+          "default": "Presencial"
+        },
+        {
+          "name": "Periodo de ingreso",
+          "label": "Periodo de ingreso",
+          "type": "select",
+          "default": "I Cuatrimestre",
+          "options": ["I Cuatrimestre", "II Cuatrimestre", "III Cuatrimestre"]
+        },
+        {
+          "name": "Colegio de procedencia",
+          "label": "Colegio de procedencia",
+          "type": "text",
+          "placeholder": "Nombre del colegio"
+        },
+        {
+          "name": "Ano de egreso",
+          "label": "Año de egreso del colegio",
+          "type": "text",
+          "placeholder": "Ej: 2023"
+        }
+      ]
+    },
+    {
+      "title": "Consentimiento",
+      "description": "Tratamiento de datos personales",
+      "icon": "cilShieldAlt",
+      "fields": [
+        {
+          "type": "info",
+          "name": "infoConsentimiento",
+          "label": "Consentimiento de tratamiento de datos",
+          "content": "De conformidad con la Ley N.° 8968, Ley de Protección de la Persona frente al Tratamiento de sus Datos Personales y su reglamento, autorizo de manera libre, expresa e informada a la Universidad Hispanoamericana a recopilar, almacenar y tratar mis datos personales suministrados en este formulario, con el fin exclusivo de gestionar mi proceso de admisión, matrícula y demás trámites académicos y administrativos derivados de mi condición de estudiante. Declaro conocer que podré ejercer mis derechos de acceso, rectificación, actualización y eliminación conforme a la normativa vigente en Costa Rica."
+        },
+        {
+          "name": "Consentimiento",
+          "label": "Acepto el consentimiento de tratamiento de datos personales.",
+          "type": "checkbox",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Revisión y Firma",
+      "description": "Revisión y firma del formulario",
+      "icon": "cilCheck",
+      "fields": []
+    }
+  ]
+}

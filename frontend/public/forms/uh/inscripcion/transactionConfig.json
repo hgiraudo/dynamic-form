@@ -1,0 +1,26 @@
+{
+  "status": "SENT",
+  "name": "Formulario de Inscripción",
+  "description": "Inscripción de estudiante - Universidad Hispanoamericana",
+  "document": {
+    "name": "Formulario de Inscripción",
+    "id": "Document1"
+  },
+  "approvals": [
+    {
+      "role": "Signer1",
+      "id": "Signature1",
+      "fields": [
+        {
+          "width": 230.0,
+          "top": 656.0,
+          "height": 44.0,
+          "left": 48.0,
+          "page": 1,
+          "type": "SIGNATURE",
+          "subtype": "CAPTURE"
+        }
+      ]
+    }
+  ]
+}
