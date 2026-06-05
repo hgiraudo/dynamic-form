@@ -168,14 +168,18 @@ c.drawString(LEFT + 20, y - 9.5, "Acepto la clausula de consentimiento de tratam
 y -= 40
 
 # ---------------- Signature area ----------------
-sig_box_h = 46
-sig_top = y                      # reportlab y of top of signature zone
+# Bajado para que el cuadro de firma de OneSpan quede justo arriba del rótulo
+# "Firma del aplicante". El cuadro (transactionConfig.json) se apoya sobre la
+# línea de firma; el rótulo va debajo de la línea.
+SIG_BOX_W = 230
+SIG_BOX_H = 44
+SIG_LINE_Y = 66                  # reportlab y de la línea de firma (más abajo)
 c.setStrokeColor(GRAY_LINE)
 c.setLineWidth(1)
-c.line(LEFT, y - sig_box_h, LEFT + 230, y - sig_box_h)
+c.line(LEFT, SIG_LINE_Y, LEFT + SIG_BOX_W, SIG_LINE_Y)
 c.setFont("Helvetica", 8)
 c.setFillColor(GRAY_TEXT)
-c.drawString(LEFT, y - sig_box_h - 11, "Firma del aplicante")
+c.drawString(LEFT, SIG_LINE_Y - 11, "Firma del aplicante")
 
 # footer
 c.setFont("Helvetica", 6.5)
@@ -183,7 +187,11 @@ c.setFillColor(GRAY_LINE)
 c.drawCentredString(W / 2, 28, "Kontac Digital Solutions  -  Costa Rica")
 
 c.save()
+
+# Coordenadas del cuadro de firma para transactionConfig.json (origen arriba-izq)
+onespan_left = LEFT
+onespan_top = H - (SIG_LINE_Y + SIG_BOX_H)   # borde superior del cuadro
 print("PDF generado:", OUT)
-print("Signature zone reportlab top y =", round(sig_top, 1),
-      "=> OneSpan top =", round(H - sig_top, 1))
+print("transactionConfig signature box => left=%g top=%g width=%g height=%g"
+      % (onespan_left, onespan_top, SIG_BOX_W, SIG_BOX_H))
 print("Lowest content y (footer) = 28")
