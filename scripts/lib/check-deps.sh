@@ -70,17 +70,25 @@ require_node() {
 }
 
 require_python() {
-    if command -v python3 &>/dev/null; then
-        PYTHON_CMD="python3"
-    elif command -v python &>/dev/null; then
-        PYTHON_CMD="python"
-    else
-        echo "❌ ERROR: Python no está instalado"
-        echo "   Instalá Python con:"
-        _python_hint
-        exit 1
-    fi
-    export PYTHON_CMD
+    # Probar cada candidato de forma funcional (ejecutándolo), no solo con
+    # 'command -v'. En Windows, 'python'/'python3' suelen resolver a los stubs
+    # de alias de ejecución de la Microsoft Store, que no son intérpretes reales:
+    # solo imprimen un mensaje y salen con error. El chequeo funcional los descarta.
+    local _cmd
+    for _cmd in python3 python py python3.13 python3.12 python3.11 python3.10; do
+        if command -v "$_cmd" &>/dev/null && "$_cmd" -c "import sys" &>/dev/null; then
+            PYTHON_CMD="$_cmd"
+            export PYTHON_CMD
+            return 0
+        fi
+    done
+    echo "❌ ERROR: Python no está instalado o no es funcional"
+    echo "   (en Windows, deshabilitá los alias de ejecución de 'python'/'python3'"
+    echo "    en Configuración › Aplicaciones › Alias de ejecución de aplicaciones,"
+    echo "    o instalá Python desde https://www.python.org)"
+    echo "   Instalá Python con:"
+    _python_hint
+    exit 1
 }
 
 _install_pdfrw() {

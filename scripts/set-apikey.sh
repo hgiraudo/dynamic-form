@@ -18,23 +18,79 @@ if [ ! -f "$ENV_FILE" ]; then
     exit 1
 fi
 
-# ── Mostrar claves actuales ──────────────────────────────────────────────────
+# ── Recolectar claves existentes en backend/.env ─────────────────────────────
 
-echo ""
-echo "═══════════════════════════════════════════════════════════"
-echo "  API Keys de OneSpan — estado actual (backend/.env)"
-echo "═══════════════════════════════════════════════════════════"
-echo ""
-
-NAMES=()
-idx=1
+declare -A ENV_TOKENS   # name -> token (sin 'Basic ')
+declare -A ENV_HAS      # name -> 1 si existe en .env
+ENV_ORDER=()            # nombres en el orden en que aparecen en .env
 
 while IFS= read -r line; do
-    if [[ "$line" =~ ^ONESPAN_API_KEY_([A-Z_]+)= ]]; then
+    if [[ "$line" =~ ^ONESPAN_API_KEY_([A-Z0-9_]+)= ]]; then
         name="${BASH_REMATCH[1]}"
         raw_value=$(echo "$line" | sed "s/^ONESPAN_API_KEY_${name}=//; s/^\"//; s/\"$//")
         raw_token=$(echo "$raw_value" | sed 's/^Basic //')
+        ENV_TOKENS["$name"]="$raw_token"
+        ENV_HAS["$name"]=1
+        ENV_ORDER+=("$name")
+    fi
+done < "$ENV_FILE"
 
+# ── Empresas declaradas en el registry del frontend ──────────────────────────
+
+REGISTRY_FILE="frontend/public/forms/registry.json"
+REGISTRY_NAMES=()
+if [ -f "$REGISTRY_FILE" ]; then
+    while IFS= read -r rname; do
+        rname="${rname%$'\r'}"   # quitar CR si Python imprimió CRLF en Windows
+        [ -n "$rname" ] && REGISTRY_NAMES+=("$rname")
+    done < <("$PYTHON" - "$REGISTRY_FILE" << 'PYEOF'
+import sys, json
+try:
+    data = json.load(open(sys.argv[1], encoding="utf-8"))
+except Exception:
+    sys.exit(0)
+for c in data.get("companies", []):
+    cid = c.get("id")
+    if cid:
+        print(cid.upper().replace("-", "_"))
+PYEOF
+)
+fi
+
+# ── Lista ordenada: DEFAULT, empresas del registry, y claves huérfanas ───────
+
+NAMES=()
+_add_name() {
+    local n="$1" e
+    for e in "${NAMES[@]}"; do [ "$e" = "$n" ] && return; done
+    NAMES+=("$n")
+}
+_add_name "DEFAULT"
+for name in "${REGISTRY_NAMES[@]}"; do _add_name "$name"; done
+for name in "${ENV_ORDER[@]}"; do
+    [ "$name" = "DEFAULT" ] && continue
+    _add_name "$name"   # claves agregadas a mano que no están en el registry
+done
+
+# ── Mostrar ──────────────────────────────────────────────────────────────────
+
+echo ""
+echo "═══════════════════════════════════════════════════════════"
+echo "  API Keys de OneSpan — empresas y estado (backend/.env)"
+echo "═══════════════════════════════════════════════════════════"
+echo ""
+
+idx=1
+for name in "${NAMES[@]}"; do
+    if [ "$name" = "DEFAULT" ]; then
+        label="DEFAULT  (fallback para empresas sin clave propia)"
+    else
+        label=$(echo "$name" | tr '_' '-' | tr '[:upper:]' '[:lower:]')
+    fi
+
+    echo "  [$idx] $label"
+    if [ -n "${ENV_HAS[$name]:-}" ]; then
+        raw_token="${ENV_TOKENS[$name]}"
         if [ -z "$raw_token" ]; then
             display="(vacía)"
         elif [ ${#raw_token} -gt 30 ]; then
@@ -42,45 +98,45 @@ while IFS= read -r line; do
         else
             display="$raw_token"
         fi
-
-        if [ "$name" = "DEFAULT" ]; then
-            label="DEFAULT  (fallback para empresas sin clave propia)"
-        else
-            label=$(echo "$name" | tr '_' '-' | tr '[:upper:]' '[:lower:]')
-        fi
-
-        echo "  [$idx] $label"
         echo "       🔑 $display"
-        echo ""
-        NAMES+=("$name")
-        idx=$((idx + 1))
+    else
+        echo "       ⚠️  sin clave propia — usa DEFAULT  (seleccioná para agregarla)"
     fi
-done < "$ENV_FILE"
+    echo ""
+    idx=$((idx + 1))
+done
 
 NEW_IDX=$idx
-echo "  [$NEW_IDX] Agregar clave para una nueva empresa"
+echo "  [$NEW_IDX] Agregar otra empresa (no listada arriba)"
 echo ""
 
 # ── Selección ────────────────────────────────────────────────────────────────
 
-read -p "Seleccioná qué clave actualizar [1-$NEW_IDX]: " SELECTION
+read -p "Seleccioná qué empresa configurar [1-$NEW_IDX]: " SELECTION
+SELECTION="${SELECTION%$'\r'}"   # tolerar CR en terminales Windows
 
 if ! [[ "$SELECTION" =~ ^[0-9]+$ ]] || [ "$SELECTION" -lt 1 ] || [ "$SELECTION" -gt "$NEW_IDX" ]; then
     echo "❌ Selección inválida."
     exit 1
 fi
 
-IS_NEW=false
 if [ "$SELECTION" -eq "$NEW_IDX" ]; then
     read -p "Nombre de la empresa (ej: nuevo-banco): " COMPANY_INPUT
+    COMPANY_INPUT="${COMPANY_INPUT%$'\r'}"
     if [ -z "$COMPANY_INPUT" ]; then
         echo "❌ El nombre no puede estar vacío."
         exit 1
     fi
     TARGET_NAME=$(echo "$COMPANY_INPUT" | tr '-' '_' | tr '[:lower:]' '[:upper:]')
-    IS_NEW=true
 else
     TARGET_NAME="${NAMES[$((SELECTION - 1))]}"
+fi
+
+# Es "nueva" (append) si todavía no existe en .env; si existe, se actualiza
+if [ -n "${ENV_HAS[$TARGET_NAME]:-}" ]; then
+    IS_NEW=false
+else
+    IS_NEW=true
 fi
 
 # Leer valor actual (solo el token, sin "Basic ")
@@ -105,6 +161,7 @@ if [ -n "$CURRENT_TOKEN" ]; then
 fi
 echo ""
 read -p "Nueva API Key (sin 'Basic '): " NEW_KEY_RAW
+NEW_KEY_RAW="${NEW_KEY_RAW%$'\r'}"
 
 if [ -z "$NEW_KEY_RAW" ]; then
     if [ -n "$CURRENT_TOKEN" ]; then
