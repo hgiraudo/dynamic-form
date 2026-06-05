@@ -79,7 +79,15 @@
       "PowerShell(python -m pip install pymupdf --quiet 2>&1 | Select-Object -Last 2; Write-Output \"exit=$LASTEXITCODE\")",
       "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\_tmp_test_fill.py\")",
       "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\_tmp_test_onespan.py\")",
-      "PowerShell(npm *)"
+      "PowerShell(npm *)",
+      "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\_tmp_verify_sig.py\")",
+      "WebFetch(domain:uh.ac.cr)",
+      "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\_tmp_uh_view.py\")",
+      "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\_tmp_uh_colors.py\")",
+      "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\_tmp_uh_colors2.py\")",
+      "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\_tmp_uh_assets.py\")",
+      "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\generate-uh-template.py\")",
+      "PowerShell(python \"C:\\\\Users\\\\girauhe1\\\\smart-forms\\\\dynamic-form\\\\scripts\\\\_tmp_uh_test.py\")"
     ],
     "deny": [],
     "ask": []
